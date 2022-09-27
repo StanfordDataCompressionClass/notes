@@ -7,8 +7,6 @@ NOTE: If you find a resource which you found useful and is not listed here, plea
 A great way to learn about data compression is to play around with the compression algorithms themselves. 
 1. [Stanford compression Library](https://github.com/kedartatwawadi/stanford_compression_library): A library of compression algorithms implemented in native python for accessibility and educational purpose. Take a look at the tutorials (in progress)  to get started! We will also be using the library as a basis for the course assignments.
 2. [Audio Compression code/book](https://ccrma.stanford.edu/events/python-programs-and-book-building-audio-coder-and-deep-learning-audio) A python based implementation of audio compression, in form of tutorials. 
-3. []
-
 
 ## 2. Video Resources
 Interested in data compression? Here are some nice youtube videos to watch to get an introduction. Most of them are beginner-friendly and are useful to get a sense of the data compression. 
@@ -27,12 +25,9 @@ Although there are no textbooks which exactly correspond to the course material,
 1. [Elements of Information Theory](http://staff.ustc.edu.cn/~cgong821/Wiley.Interscience.Elements.of.Information.Theory.Jul.2006.eBook-DDU.pdf): Classic textbook on Information Theory
 2. [Introduction to Data Compression, Guy E. Blelloch](https://www.cs.cmu.edu/~guyb/realworld/compression.pdf): Set of lecture notes/book on Data Compression by Guy E. Blelloch, CMU 2013
 
-
 ## 4. Blogs/websites
 The web is filled with great engineers and researchers writing blogs related to Data Compression. We list a few below:
 
 1. [Christopher Olah's Blog](https://colah.github.io/posts/2015-09-Visual-Information/): A fun visual introduction to Information Theory.
 2. [Yann Collet's Blog](http://fastcompression.blogspot.com/): Great blog by Yann Collet on implemeting fast and efficient data compression algorithms
 3. [Fabian Giesen's blog](https://fgiesen.wordpress.com/category/compression/): Blog by Fabian Giesen. (The parts related to rANS implementation are particularly great!)
-
-[TODO -> Add more links]
