@@ -130,16 +130,16 @@
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="ee274-data-compression-course-notes"><a class="header" href="#ee274-data-compression-course-notes">EE274: Data Compression, course notes</a></h1>
-<p>Welcome! This e-book serves as lecture notes for the Stanford EE course, <strong>EE274: Data Compression</strong>. </p>
+<p>Welcome! This e-book serves as lecture notes for the Stanford EE course, <strong>EE274: Data Compression</strong>. This set of lecture notes is WIP, so please file an issue at https://github.com/stanfordDataCompressionClass/notes if you find any typo/mistake. </p>
 <h2 id="contents"><a class="header" href="#contents">Contents</a></h2>
 <ol>
 <li><a href="./lossless_iid/intro.html">Lossless Compression: Basics</a>
-<ol>
-<li><a href="./lossless_iid/intro.html">Introduction</a></li>
+1.1 <a href="./lossless_iid/intro.html">Introduction</a></li>
 </ol>
-</li>
+<hr />
+<ol start="2">
+<li><a href="./resources.html">Resources</a></li>
 </ol>
-<p>E. <a href="./resources.html">Resources</a></p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="lossless-data-compression"><a class="header" href="#lossless-data-compression">Lossless data compression</a></h1>
 <p>The first part of the lecture notes pertain with lossless data compression</p>
@@ -405,16 +405,17 @@ algorithm, which we can implement in practice</p>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="resources"><a class="header" href="#resources">Resources</a></h1>
-<p>Interested in data compression? Great! We list a few resources (apart from the lecture notes) which might be useful to take a look</p>
-<h2 id="11-software"><a class="header" href="#11-software">[1.1] Software</a></h2>
+<p>Interested in data compression? Great! We list a few resources (apart from the lecture notes) which might be useful to take a look. </p>
+<p>NOTE: If you find a resource which you found useful and is not listed here, please file an github issue at https://github.com/stanfordDataCompressionClass/notes.</p>
+<h2 id="1-software"><a class="header" href="#1-software">1. Software</a></h2>
 <p>A great way to learn about data compression is to play around with the compression algorithms themselves. </p>
 <ol>
 <li><a href="https://github.com/kedartatwawadi/stanford_compression_library">Stanford compression Library</a>: A library of compression algorithms implemented in native python for accessibility and educational purpose. Take a look at the tutorials (in progress)  to get started! We will also be using the library as a basis for the course assignments.</li>
-<li></li>
+<li><a href="https://ccrma.stanford.edu/events/python-programs-and-book-building-audio-coder-and-deep-learning-audio">Audio Compression code/book</a> A python based implementation of audio compression, in form of tutorials. </li>
+<li>[]</li>
 </ol>
-<h2 id="12-video-resources"><a class="header" href="#12-video-resources">[1.2] Video Resources</a></h2>
-<p>Interested in data compression? HEre are some nice youtube videos to watch to get an introduction. Most of them are beginner-friendly and are useful to get a sense of the data compression. Some of the videos in the <strong>Detailed videos</strong> section are a bit more detailed, and should be perused slowly! </p>
-<p>If you find a video not listed here, please file an issue!</p>
+<h2 id="2-video-resources"><a class="header" href="#2-video-resources">2. Video Resources</a></h2>
+<p>Interested in data compression? Here are some nice youtube videos to watch to get an introduction. Most of them are beginner-friendly and are useful to get a sense of the data compression. </p>
 <p>Here are a set of videos to watch at leisure to get an intuition for compression:</p>
 <ol>
 <li><a href="https://www.youtube.com/watch?v=Eb7rzMxHyOk&amp;list=PLOU2XLYxmsIJGErt5rrCqaSGTMyyqNt2H&amp;ab_channel=GoogleDevelopers">Compressor Head playlist</a>: This is a series of short talks by a google engineer. Very good introductory videos</li>
@@ -424,13 +425,20 @@ algorithm, which we can implement in practice</p>
 <li><a href="https://youtu.be/0me3guauqOU">JPEG compression</a>: A bit more detailed video on JPEG compression</li>
 <li><a href="https://youtube.com/playlist?list=PLE125425EC837021F">Arithmetic coding series</a>: Great sequence of lectures Information theory in general and particularly on Arithmetic coding. One of the best I found on this subject</li>
 </ol>
-<h2 id="13-textbooks-research-papers"><a class="header" href="#13-textbooks-research-papers">[1.3] Textbooks, research papers</a></h2>
+<h2 id="3-textbooks-research-papers"><a class="header" href="#3-textbooks-research-papers">3. Textbooks, research papers</a></h2>
 <p>Although there are no textbooks which exactly correspond to the course material, but here are few books which might be relevant. </p>
-<h2 id="15-blogswebsites"><a class="header" href="#15-blogswebsites">[1.5] Blogs/websites</a></h2>
+<ol>
+<li><a href="http://staff.ustc.edu.cn/%7Ecgong821/Wiley.Interscience.Elements.of.Information.Theory.Jul.2006.eBook-DDU.pdf">Elements of Information Theory</a>: Classic textbook on Information Theory</li>
+<li><a href="https://www.cs.cmu.edu/%7Eguyb/realworld/compression.pdf">Introduction to Data Compression, Guy E. Blelloch</a>: Set of lecture notes/book on Data Compression by Guy E. Blelloch, CMU 2013</li>
+</ol>
+<h2 id="4-blogswebsites"><a class="header" href="#4-blogswebsites">4. Blogs/websites</a></h2>
 <p>The web is filled with great engineers and researchers writing blogs related to Data Compression. We list a few below:</p>
 <ol>
 <li><a href="https://colah.github.io/posts/2015-09-Visual-Information/">Christopher Olah's Blog</a>: A fun visual introduction to Information Theory.</li>
+<li><a href="http://fastcompression.blogspot.com/">Yann Collet's Blog</a>: Great blog by Yann Collet on implemeting fast and efficient data compression algorithms</li>
+<li><a href="https://fgiesen.wordpress.com/category/compression/">Fabian Giesen's blog</a>: Blog by Fabian Giesen. (The parts related to rANS implementation are particularly great!)</li>
 </ol>
+<p>[TODO -&gt; Add more links]</p>
 
                     </main>
 
