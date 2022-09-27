@@ -1,0 +1,36 @@
+
+name: github pages
+permissions:
+  contents: write
+on:
+  push:
+    branches:
+      - main
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: 'latest'
+      - run: |
+          cargo install mdbook-admonish #for the example, note, quiz kind of blocks
+          cargo install mdbook-mermaid # for the diagrams
+          cargo install --git "https://github.com/lzanini/mdbook-katex"
+          mdbook build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book/html
