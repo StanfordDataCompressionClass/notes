@@ -26,7 +26,6 @@ jobs:
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
           cargo install mdbook-mermaid # for the diagrams
           cargo install --git "https://github.com/lzanini/mdbook-katex"
-          cd EE274_course_notes
           mdbook build
 
       - name: Deploy
@@ -34,4 +33,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./EE274_course_notes/book/html
+          publish_dir: ./book/html
