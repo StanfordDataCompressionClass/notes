@@ -9,4 +9,4 @@ Welcome! This e-book serves as lecture notes for the Stanford EE course, **EE274
 ---
 2. [Resources](./resources.md)
 
-<img width="476" alt="image" src="https://user-images.githubusercontent.com/1708665/192588397-c7187b8d-3e0d-437f-8bd5-b3ca8a82a6b6.png">
+![image](https://user-images.githubusercontent.com/1708665/192588464-1950fbc0-50cc-406d-af7f-0f03da3274fb.png)
