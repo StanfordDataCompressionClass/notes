@@ -1,34 +1,11 @@
-# instructions
+# EE274: Data Compression, course notes
 
-This book uses mdbook to create static files. 
-- Source files are in ./src
-- the html is in ./book
+Welcome! This e-book serves as lecture notes for the Stanford EE course, [**EE274: Data Compression**](https://stanforddatacompressionclass.github.io/Fall22/). This set of lecture notes is WIP, so please file an issue at https://github.com/stanfordDataCompressionClass/notes/issues if you find any typo/mistake. 
 
+## Contents
+1. [Lossless Compression: Basics](./lossless_iid/intro.md)
+    1.1 [Introduction](./lossless_iid/intro.md)
 
-# Installation
+---
+2. [Resources](./resources.md)
 
-## install rust
-## on mac/linux the following works:
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-## install mdbook packages using cargo
-## NOTE: a new shell might need to be started
-```
-cargo install mdbook
-```
-
-## install additional packages
-```
-cargo install mdbook-admonish #for the example, note, quiz kind of blocks
-cargo install mdbook-mermaid # for the diagrams
-cargo install --git "https://github.com/lzanini/mdbook-katex"
-```
-
-# Getting started
-## make any changes to the source files in ./src
-## to view the changes + create html run the following
-```
-mdbook watch --open
-```
