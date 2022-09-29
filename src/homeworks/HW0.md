@@ -52,7 +52,7 @@ Usually it is more convenient and safer to install python packages in a *virtual
 
 5. To use the library, we need to add the dir of the library to the `PYTHONPATH`. You can do that using the command below:
     ```sh
-    export PYTHONPATH=$PYTHONPATH:$(pwd)
+    export PYTHONPATH=$PYTHONPATH:\$(pwd)
     ```
     Once that is done, let us ensure the library is installed correctly by running unit tests. **Submit the output of this command in gradescope for credit.**
     ```sh
