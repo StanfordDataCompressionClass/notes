@@ -4,7 +4,8 @@ Welcome! This e-book serves as lecture notes for the Stanford EE course, [**EE27
 
 ## Contents
 1. [Lossless Compression: Basics](./lossless_iid/intro.md)
-    1. [Introduction](./lossless_iid/intro.md)
+    1. [Introduction](./lossless_iid/intro.md
+    2. [Prefix Free Codes](./lossless_iid/prefix_free_codes.md)
 
 ---
 2. [Resources](./resources.md)
