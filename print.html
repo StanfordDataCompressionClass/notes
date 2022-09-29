@@ -496,7 +496,7 @@ cd stanford_compression_library
 </li>
 <li>
 <p>To use the library, we need to add the dir of the library to the <code>PYTHONPATH</code>. You can do that using the command below:</p>
-<pre><code class="language-sh">export PYTHONPATH=&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.6833em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.13889em;&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.22222em;&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.13889em;&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.08125em;&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.13889em;&quot;&gt;ONP&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.13889em;&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.08125em;&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2778em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mrel&quot;&gt;:&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;(pwd)
+<pre><code class="language-sh">export PYTHONPATH=PYTHONPATH:$(pwd)
 </code></pre>
 <p>Once that is done, let us ensure the library is installed correctly by running unit tests. <strong>Submit the output of this command in gradescope for credit.</strong></p>
 <pre><code class="language-sh">find . -name &quot;*.py&quot; -exec py.test -s -v {} +
@@ -514,7 +514,7 @@ cd stanford_compression_library
 </li>
 </ol>
 <h3 id="2-probability-and-coin-toss-20-points"><a class="header" href="#2-probability-and-coin-toss-20-points">2. Probability and Coin Toss (<em>20 points</em>)</a></h3>
-<p>Kedar is a big <a href="https://en.wikipedia.org/wiki/Cricket">Cricket</a> fan. In cricket (like many other sports), there is a coin toss in the beginning to determine which team gets the first chance to bat. However, Kedar thinks that the coin being used is <em>biased</em> and lands as <em>Heads</em> (<code>H</code>) much more often than <em>tails</em> (<code>T</code>). Let the probability of the coin landing on <code>H</code> be <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span>.</p>
+<p>Kedar is a big <a href="https://en.wikipedia.org/wiki/Cricket">Cricket</a> fan. In cricket (like many other sports), there is a coin toss in the beginning to determine which team gets the first chance to bat. However, Kedar thinks that the coin being used is <em>biased</em> and lands as <em>Heads</em> (<code>H</code>) much more often than <em>tails</em> (<code>T</code>). Let the probability of the coin landing on <code>H</code> be p.</p>
 <p>Shubham suggests to Kedar that this problem can be solved (i.e we can get a <em>fair</em> coin) by tossing the coin twice! If we get a <code>H,T</code>sequence in the two tosses, then we mark it as a heads, while if we get a <code>T,H</code> sequence we can mark this as a tails. If we get a <code>H,H</code> or <code>T,T</code> then discard the result and start over!</p>
 <ol>
 <li>
