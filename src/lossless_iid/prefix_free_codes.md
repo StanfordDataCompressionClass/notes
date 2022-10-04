@@ -153,7 +153,7 @@ p(A) = p(B) = 0.3 \\ p(C) = p(D) = 0.2
 \end{aligned} $$
 as in this case the average codelength is `2.1 bits/symbol` (which is even higher than *Fixed Bitwidth code*!).
 
-This problem, (and much more) was definitively analyzed in the brilliant work by Claude Shannon in his 1958 paper [A Mathematical theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf). Shannon's work laid the theoretical foundations of not just the field of data compression, but more so of the area of
+This problem, (and much more) was definitively analyzed in the brilliant work by Claude Shannon in his 1948 paper [A Mathematical theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf). Shannon's work laid the theoretical foundations of not just the field of data compression, but more so of the area of
 error-free data communication. (The paper remains surprisingly accessible and short for its legendary nature. Do take a look!)
 
 We will definitely come back in the future lectures to understand the work in more detail, but here is another thumb rule from Shannon's work for the optimal code-lengths:
