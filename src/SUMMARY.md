@@ -5,6 +5,7 @@
     - [Introduction](./lossless_iid/intro.md)
     - [Prefix Free Codes](./lossless_iid/prefix_free_codes.md)
     - [Kraft Inequality](./lossless_iid/kraft_ineq_and_optimality.md)
+    - [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
 
 ---
 - [Resources](./resources.md)
