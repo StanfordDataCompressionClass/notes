@@ -49,7 +49,6 @@ graph TD
   n1 -->|11| n2(.)
   n2 --> |110| C:::endnode
   n2 --> |111| D:::endnode
-  n2 --> |111| D:::endnode
   classDef fake fill:#ddd;
 ```
 
