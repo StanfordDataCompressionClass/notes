@@ -7,7 +7,7 @@ Information theory is the *science of information*, and is an area which tries t
 Rather than talking about information in philosophical terms, we are going to understand information theory mathematically. We are going to first define some quantities and properties central to information theory. As we will see, understanding the mathematical properties of these quantities is what will lead us to the *intuition* and understanding of information theory. 
 
 ## Entropy
-So, lets get started: the first property, or *information-theoretic measure* we are going to define is the *Entropy*. The entropy, although a term overloaded with lot of meaning in the (math/science) pop culture, has a precise definition in information theory. 
+So, lets get started: the first property, or *information-theoretic measure* we are going to define is the *Entropy*. The entropy, although a term overloaded with a lot of meaning in the (math/science) pop culture, has a precise definition in information theory. 
 
 ~~~admonish note title="Entropy"
 Let $X$ be a random variable, with alphabet $\{1, 2, \ldots, k\}$ and discrete probability distribution $P = \{ p_1, p_2, \ldots, p_k\}$. i.e. one can imagine the samples generate by the random variable $X$ to be independent and identically distributed as per distribution $P$. 
