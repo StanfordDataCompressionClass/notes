@@ -328,7 +328,7 @@ The discussion, although a bit hand-wavy is quite fundamental. Due to this, we s
 
 For example, here are a few scenarios, for which the answer is related to $H(X)$. Try to solve them for fun!
 
-**1. Simulating non-uniform random variables:** Lets say you want to simulate a random variable $X$ over $\{1, 2, \ldots k\}]$ with distribution $P = \{ p_1, p_2, \ldots, p_k \}$. To simulate the random variable, you are only allowed to use fair coin tosses. In that case, what is fundamental limit on the average number of coins you would have to toss to simulate $X$? 
+**1. Simulating non-uniform random variables:** Lets say you want to simulate a random variable $X$ over $\{1, 2, \ldots k\}$ with distribution $P = \{ p_1, p_2, \ldots, p_k \}$. To simulate the random variable, you are only allowed to use fair coin tosses. In that case, what is fundamental limit on the average number of coins you would have to toss to simulate $X$? 
 
 **2. Simulating a fair coin using a biased coin:** Lets now say you have a biased coin with probability of `H/T` to be $p, 1-p$ respectively. The goal is to use this coin to simulate a fair coin. One simple way to do this is to toss the coin twice, and associate `(H,T)` as heads, and `(T,H)` as tails. If we get `(H,H), (T,T)`, then we discard the result and toss again. Is this the optimal strategy though? Can you do better? What is the fundamental limit on the average number of biased coins you would have to toss do to obtain a fair coin?
 
