@@ -100,7 +100,7 @@ We will use [Stanford Compression Library](https://github.com/kedartatwawadi/sta
 
 Take a look at [intro to SCL wiki article](https://github.com/kedartatwawadi/stanford_compression_library/wiki/Introduction-to-the-Stanford-Compression-Library) to familiarize yourself with the library. We will use a simple compressor `compressors/universal_uint_coder.py` as an example. 
 
-1. [5 points] First let's get familiarized with how to use an encoder/decoder. The file `test_universal_uint_encode_decode` shows a simple way to do so. In the example, we encode and decode a list of unsigned integers `[0, 0, 1, 3, 4, 100]`. Modify the test to encode `[23, 30, 100012]` and report the length of the `encoded_bitarray`.
+1. [5 points] First let's get familiarized with how to use an encoder/decoder. The function `test_universal_uint_encode_decode` shows a simple way to do so. In the example, we encode and decode a list of unsigned integers `[0, 0, 1, 3, 4, 100]`. Modify the test to encode `[23, 30, 100012]` and report the length of the `encoded_bitarray`.
 
 2. [5 points] Let's now try to understand how the `compressors/universal_uint_coder.py` works. Given an unsigned integer `u`, what is the length of the code output by `encode_symbol`? 
 
