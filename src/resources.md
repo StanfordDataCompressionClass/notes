@@ -31,3 +31,4 @@ The web is filled with great engineers and researchers writing blogs related to 
 1. [Christopher Olah's Blog](https://colah.github.io/posts/2015-09-Visual-Information/): A fun visual introduction to Information Theory.
 2. [Yann Collet's Blog](http://fastcompression.blogspot.com/): Great blog by Yann Collet on implemeting fast and efficient data compression algorithms
 3. [Fabian Giesen's blog](https://fgiesen.wordpress.com/category/compression/): Blog by Fabian Giesen. (The parts related to rANS implementation are particularly great!)
+4. [On understanding zlib](https://www.euccas.me/zlib/): Introduction to zlib by Euccas Chen.
