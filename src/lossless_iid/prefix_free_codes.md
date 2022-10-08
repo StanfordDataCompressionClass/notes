@@ -267,7 +267,11 @@ Notice that the leaf node corresponding to `111` was not linked to any symbol. T
 that we could have squeezed in another symbol here with length `3`, and points to the slight inefficiency in using the
 approximation $ l(symbol) = \left\lceil \log_2 \frac{1}{p(symbol)} \right\rceil $.
 
-The procedure we followed seems general enough that we can follow it for any distribution. We still need to argue the
+The procedure we followed seems general enough that we can follow it for any distribution:
+1. Sort the distribution in descending order and compute codelengths as $ l(symbol) = \left\lceil \log_2 \frac{1}{p(symbol)} \right\rceil $
+2. Assign the first lexicographically available codeword to the next symbol which is not a prefix of the previous ones and is of the stipulated length.
+
+We still need to argue the
 correctness of the procedure and that it will work in all cases! For example, how can we be sure that we will not run
 out of nodes?
 
