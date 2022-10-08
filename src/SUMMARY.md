@@ -13,4 +13,5 @@
 ---
 - [Homeworks](./homeworks/coverpage.md)
     - [HW0](./homeworks/HW0.md)
+    - [HW0 solution](./homeworks/HW0_sol.md)
     - [HW1](./homeworks/HW1.md)

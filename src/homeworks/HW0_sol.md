@@ -89,20 +89,20 @@ Shubham suggests to Kedar that this problem can be solved (i.e we can get a *fai
    **Solution**
 
    Shubham's solution is right. Scheme only terminates when `H,T` or `T,H` sequences are received, which because of IID (independent and identically distributed) nature of our coin tosses and symmetry have the same probability.  In fact, the iterative scheme can be thought of as a Geometric Random variable. After every two tosses, the scheme terminates with probability of $p_{success}=2p(1-p)$ (getting either a `H,T` or `T,H` sequence) and we are back to initial state with a probability of $p_{failure}=\left(p^2 + (1-p)^2\right)$ (getting `H,H` or `T,T` sequence). If the scheme terminates after n sequences of these two tosses, we declare it heads or tails with the same probability of 
-    ```math
+   
     $$ \begin{aligned}
     p_{shubham-head} &= p_{failure}^{n-1} * p(H)*P(T) \\ &= p_{failure}^{n-1} * p(T)*P(H) \\ &= p_{shubham-tail}
     \end{aligned} $$
-    ```
+   
 
 2. [5 points] What is the expected number of coin flips needed to get one `H` or `T` outcome using Shubham's method?
    
    **Solution**
 
    Using the fact that Shubham's solution is a Geometric Random variable with $p_{success}=2p(1-p)$ and involves two coin tosses per iteration, the expected number of coin flips needed to get one `H` or `T` outcome using Shubham's method is 
-   ```math
+   $$
    \mathbb{E}(tosses) = 2 * 1/p_{success} = 1/p(1-p)
-   ```
+   $$
 
 3. [5 points] Kedar is still not convinced and thinks that we should really implement this idea to see if it works. Please help out Shubham by implementing the function `shubhams_fair_coin_generator()` in the file `HWs/HW0/hw0_p2.py`. 
 NOTE: please run all of this in the `(ee274_env)` environment which you created and that you are in the correct branch of the `SCL` repo (`EE274/HWs`). Ensure that the tests except those in `HWs` folder pass before you start implementing the function.
