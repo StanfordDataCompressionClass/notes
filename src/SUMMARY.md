@@ -6,6 +6,7 @@
     - [Prefix Free Codes](./lossless_iid/prefix_free_codes.md)
     - [Kraft Inequality](./lossless_iid/kraft_ineq_and_optimality.md)
     - [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
+    - [Huffman coding](./lossless_iid/huffman.md)
 
 ---
 - [Resources](./resources.md)
