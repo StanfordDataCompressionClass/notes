@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resources.html"><strong aria-hidden="true">2.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="homeworks/coverpage.html"><strong aria-hidden="true">3.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="homeworks/HW0.html"><strong aria-hidden="true">3.1.</strong> HW0</a></li><li class="chapter-item expanded "><a href="homeworks/HW1.html"><strong aria-hidden="true">3.2.</strong> HW1</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resources.html"><strong aria-hidden="true">2.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="homeworks/coverpage.html"><strong aria-hidden="true">3.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="homeworks/HW0.html"><strong aria-hidden="true">3.1.</strong> HW0</a></li><li class="chapter-item expanded "><a href="homeworks/HW0_sol.html"><strong aria-hidden="true">3.2.</strong> HW0 solution</a></li><li class="chapter-item expanded "><a href="homeworks/HW1.html"><strong aria-hidden="true">3.3.</strong> HW1</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1158,6 +1158,269 @@ zip -r HW0.zip HW0
 </li>
 </ul>
 <p><strong>Before submitting the programming part on Gradescope, we strongly recommend ensuring that the code runs correctly locally.</strong></p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="ee274-homework-0-solutions"><a class="header" href="#ee274-homework-0-solutions">EE274: Homework-0 Solutions</a></h1>
+<ul>
+<li><strong>Focus area:</strong> Preliminaries</li>
+<li><strong>Due Date:</strong> Oct 6</li>
+<li><strong>Weightage:</strong> 5%</li>
+<li><strong>Total Points:</strong> 50</li>
+</ul>
+<h3 id="1-python-scl-setup-10-points-1"><a class="header" href="#1-python-scl-setup-10-points-1">1. Python, SCL setup (<em>10 points</em>)</a></h3>
+<ol>
+<li>
+<p><strong>Output of Command in 1.2</strong></p>
+<p>Your output to the command </p>
+<pre><code class="language-sh">python --version
+</code></pre>
+<p>should look something like</p>
+<pre><code class="language-sh"> Python 3.8.13
+</code></pre>
+</li>
+<li>
+<p><strong>Output of Command in 1.5</strong></p>
+<p>Your output to the command </p>
+<pre><code class="language-sh">find . -name &quot;*.py&quot; -exec py.test -s -v {} +
+</code></pre>
+<p>should look something like</p>
+<pre><code class="language-sh"> ============================================================================================= test session starts ==============================================================================================
+platform darwin -- Python 3.8.13, pytest-6.2.5, py-1.10.0, pluggy-1.0.0 -- /Users/pulkittandon/miniforge3/envs/SCL/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/pulkittandon/PycharmProjects/stanford_compression_library
+collected 31 items                                                                                                                                                                                             
+
+core/encoded_stream.py::test_padder PASSED
+core/encoded_stream.py::test_header PASSED
+core/encoded_stream.py::test_encoded_block_reader_writer PASSED
+core/prob_dist.py::ProbabilityDistTest::test_creation_entropy PASSED
+core/prob_dist.py::ProbabilityDistTest::test_prob_creation_and_validation PASSED
+core/prob_dist.py::ProbabilityDistTest::test_sorted_prob_dist PASSED
+core/prob_dist.py::ProbabilityDistTest::test_validation_failure XFAIL
+core/data_stream.py::test_list_data_stream PASSED
+core/data_stream.py::test_file_data_stream PASSED
+core/data_stream.py::test_uint8_file_data_stream PASSED
+core/data_block.py::test_data_block_basic_ops PASSED
+utils/bitarray_utils.py::test_get_bit_width PASSED
+utils/bitarray_utils.py::test_bitarray_to_int PASSED
+utils/bitarray_utils.py::test_float_to_bitarrays PASSED
+compressors/golomb_coder.py::test_golomb_encode_decode PASSED
+compressors/shannon_coder.py::test_shannon_coding PASSED
+compressors/universal_uint_coder.py::test_universal_uint_encode_decode PASSED
+compressors/universal_uint_coder.py::test_universal_uint_encode PASSED
+compressors/shannon_fano_elias_coder.py::test_shannon_fano_elias_coding PASSED
+compressors/tANS.py::test_generated_lookup_tables PASSED
+compressors/tANS.py::test_check_encoded_bitarray PASSED
+compressors/tANS.py::test_tANS_coding tANS coding: avg_log_prob=1.499, tANS codelen: 1.502
+tANS coding: avg_log_prob=0.815, tANS codelen: 0.819
+tANS coding: avg_log_prob=1.422, tANS codelen: 1.427
+PASSED
+compressors/fano_coder.py::test_fano_coding PASSED
+compressors/baseline_compressors.py::test_alphabet_encode_decode PASSED
+compressors/baseline_compressors.py::test_fixed_bitwidth_encode_decode PASSED
+compressors/baseline_compressors.py::test_fixed_bitwidth_file_encode_decode PASSED
+compressors/rANS.py::test_check_encoded_bitarray PASSED
+compressors/rANS.py::test_rANS_coding rANS coding: avg_log_prob=1.499, rANS codelen: 1.504
+rANS coding: avg_log_prob=1.484, rANS codelen: 1.489
+rANS coding: avg_log_prob=1.430, rANS codelen: 1.435
+rANS coding: avg_log_prob=2.585, rANS codelen: 2.590
+rANS coding: avg_log_prob=0.815, rANS codelen: 0.819
+PASSED
+compressors/huffman_coder.py::test_huffman_coding_dyadic 
+Avg Bits: 1.0, optimal codelen: 1.0, Entropy: 1.0
+Avg Bits: 1.527, optimal codelen: 1.527, Entropy: 1.5
+Avg Bits: 1.794, optimal codelen: 1.794, Entropy: 1.75
+PASSED
+external_compressors/zlib_external.py::test_zlib_encode_decode PASSED
+external_compressors/zlib_external.py::test_zlib_file_encode_decode PASSED
+
+======================================================================================== 30 passed, 1 xfailed in 8.94s =========================================================================================
+</code></pre>
+</li>
+</ol>
+<h3 id="2-probability-and-coin-toss-20-points-1"><a class="header" href="#2-probability-and-coin-toss-20-points-1">2. Probability and Coin Toss (<em>20 points</em>)</a></h3>
+<p>Kedar is a big <a href="https://en.wikipedia.org/wiki/Cricket">Cricket</a> fan. In cricket (like many other sports), there is a coin toss in the beginning to determine which team gets the first chance to bat. However, Kedar thinks that the coin being used is <em>biased</em> and lands as <em>Heads</em> (<code>H</code>) much more often than <em>tails</em> (<code>T</code>). Let the probability of the coin landing on <code>H</code> be <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span>.</p>
+<p>Shubham suggests to Kedar that this problem can be solved (i.e we can get a <em>fair</em> coin) by tossing the coin twice! If we get a <code>H,T</code>sequence in the two tosses, then we mark it as a heads, while if we get a <code>T,H</code> sequence we can mark this as a tails. If we get a <code>H,H</code> or <code>T,T</code> then discard the result and start over!</p>
+<ol>
+<li>
+<p>[5 points] Do you think Shubham's solution is right? Please justify.</p>
+<p><strong>Solution</strong></p>
+<p>Shubham's solution is right. Scheme only terminates when <code>H,T</code> or <code>T,H</code> sequences are received, which because of IID (independent and identically distributed) nature of our coin tosses and symmetry have the same probability.  In fact, the iterative scheme can be thought of as a Geometric Random variable. After every two tosses, the scheme terminates with probability of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">ccess</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span> (getting either a <code>H,T</code> or <code>T,H</code> sequence) and we are back to initial state with a probability of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight">ai</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">re</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span> (getting <code>H,H</code> or <code>T,T</code> sequence). If the scheme terminates after n sequences of these two tosses, we declare it heads or tails with the same probability of </p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.6833em;vertical-align:-2.0917em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5917em;"><span style="top:-4.7275em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">bham</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.1359em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.5683em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.0917em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5917em;"><span style="top:-4.7275em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-2.4086em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight">ai</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">re</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4275em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span><span style="top:-3.1359em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-2.4086em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight">ai</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">re</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4275em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-1.5683em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">bham</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">ai</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.0917em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>[5 points] What is the expected number of coin flips needed to get one <code>H</code> or <code>T</code> outcome using Shubham's method?</p>
+<p><strong>Solution</strong></p>
+<p>Using the fact that Shubham's solution is a Geometric Random variable with <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">ccess</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span> and involves two coin tosses per iteration, the expected number of coin flips needed to get one <code>H</code> or <code>T</code> outcome using Shubham's method is 
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mord mathnormal">osses</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">ccess</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span></span></p>
+</li>
+<li>
+<p>[5 points] Kedar is still not convinced and thinks that we should really implement this idea to see if it works. Please help out Shubham by implementing the function <code>shubhams_fair_coin_generator()</code> in the file <code>HWs/HW0/hw0_p2.py</code>. 
+NOTE: please run all of this in the <code>(ee274_env)</code> environment which you created and that you are in the correct branch of the <code>SCL</code> repo (<code>EE274/HWs</code>). Ensure that the tests except those in <code>HWs</code> folder pass before you start implementing the function.</p>
+<p><strong>Solution</strong></p>
+<pre><code class="language-python">def shubhams_fair_coin_generator():
+     &quot;&quot;&quot;
+     TODO:
+     use the biased_coin_generator() function above to implement the fair coin generator
+
+     Outputs:
+         toss (str): H, T
+         num_biased_tosses (int): number of times the biased_coin_generator() was called to generate the output
+     &quot;&quot;&quot;
+     toss = None
+     num_biased_tosses = 0
+
+     ##############################
+     # ADD CODE HERE
+     # raise NotImplementedError
+     while True:
+         toss1, toss2 = biased_coin_generator(), biased_coin_generator()
+         num_biased_tosses += 2
+         if toss1 != toss2:
+             toss = toss1
+             break
+     ##############################
+
+     return toss, num_biased_tosses
+</code></pre>
+</li>
+<li>
+<p>[5 points] It is always a good practice to write tests to ensure the implementation is correct (even if you think theoretically it is alright :)). Please implement <code>test_shubhams_fair_coin_generator()</code> function in <code>HWs/HW0/hw0_p2.py</code>. You can test your code by running:</p>
+<pre><code class="language-sh">py.test -s -v HWs/HW0/hw0_p2.py
+</code></pre>
+<p><strong>Solution</strong></p>
+<pre><code class="language-python">def test_shubhams_fair_coin_generator():
+     &quot;&quot;&quot;
+     TODO:
+     write a test to check whether the shubhams_fair_coin_generator() is really generating fair coin tosses
+
+     Also, check if the num_biased_tosses matches the answer which you computed in part 2.
+     &quot;&quot;&quot;
+
+     # perform the experiment
+     # feel free to reduce this when you are testing
+     num_trials = 10000
+     tosses = []
+     num_biased_tosses_list = []
+     for _ in range(num_trials):
+         toss, num_biased_tosses = shubhams_fair_coin_generator()
+
+         # check if the output is indeed in H,T
+         assert toss in [&quot;H&quot;, &quot;T&quot;]
+         tosses.append(toss)
+         num_biased_tosses_list.append(num_biased_tosses)
+
+     # NOTE: We are using the DataBlock object from SCL.
+     # Take a look at `core/data_block.py` to understand more about the class
+     # the get_empirical_distribution() outputs a ProbDist class. Take a look at
+     # `core/prob_dist.py` to understand this object better
+     tosses_db = DataBlock(tosses)
+     empirical_dist_tosses = tosses_db.get_empirical_distribution()
+
+     #############################################
+     # ADD CODE HERE
+     # 1. add test here to check if empirical_dist_tosses is close to being fair
+     # 2. add test to check if avg value of num_biased_tosses matches what you expect
+     # (both within a reasonable error range)
+     # You can use np.testing.assert_almost_equal() to check if two numbers are close to some error margin
+     # raise NotImplementedError
+     np.testing.assert_almost_equal(
+         empirical_dist_tosses.probability(&quot;H&quot;), 0.5, decimal=1,  err_msg=&quot;Probability of H is not 0.5&quot;,
+     )
+     np.testing.assert_almost_equal(
+         empirical_dist_tosses.probability(&quot;T&quot;), 0.5, decimal=1, err_msg=&quot;Probability of T is not 0.5&quot;,
+     )
+
+     expected_num_biased_tosses = sum(num_biased_tosses_list) / len(num_biased_tosses_list)
+     np.testing.assert_almost_equal(
+         expected_num_biased_tosses, 1/(0.8*0.2), decimal=1,
+         err_msg=&quot;Expected Number of biased tosses is not 1/(p*(1-p))&quot;,
+     )
+     #############################################
+</code></pre>
+</li>
+<li>
+<p>(NOT GRADED, THINK FOR FUN!): Do you think Shubham's solution is <em>optimal</em>? For example, Shubham is using at least <code>2</code> biased coin tosses to generate <code>1</code> fair coin toss. This seems wasteful in some cases (for example, if the coin is almost unbiased). Can you improve upon the <em>average</em> number of biased coin tosses needed to generate one fair coin toss?</p>
+<p><strong>Solution</strong></p>
+<p>Yes, Shubham's solution is not optimal. We can improve upon the <em>average</em> number of biased coin tosses by carefully utilizing the cases of <code>H,H</code> and <code>T,T</code> sequences instead of throwing them away. For those of you who are aware of entropy, this problem has close relationship to the entropy! <a href="http://www.eecs.harvard.edu/%7Emichaelm/coinflipext.pdf">Here</a> is a detailed analysis of this problem by Michael Mitzenmacher. </p>
+</li>
+</ol>
+<h3 id="3-universal-integer-compression-20-points-1"><a class="header" href="#3-universal-integer-compression-20-points-1">3. Universal Integer Compression (<em>20 points</em>)</a></h3>
+<p>We will use <a href="https://github.com/kedartatwawadi/stanford_compression_library">Stanford Compression Library</a> throughout the course. In this problem, we will familiarize ourselves a bit with the data structures in SCL. </p>
+<p>Take a look at <a href="https://github.com/kedartatwawadi/stanford_compression_library/wiki/Introduction-to-the-Stanford-Compression-Library">intro to SCL wiki article</a> to familiarize yourself with the library. We will use a simple compressor <code>compressors/universal_uint_coder.py</code> as an example. </p>
+<ol>
+<li>
+<p>[5 points] First let's get familiarized with how to use an encoder/decoder. The file <code>test_universal_uint_encode_decode</code> shows a simple way to do so. In the example, we encode and decode a list of unsigned integers <code>[0, 0, 1, 3, 4, 100]</code>. Modify the test to encode <code>[23, 30, 100012]</code> and report the length of the <code>encoded_bitarray</code>.</p>
+<p><strong>Solution</strong></p>
+<p>The length of the encoded bitarray with symbols <code>[23, 30, 100012]</code> is <code>54</code>.</p>
+</li>
+<li>
+<p>[5 points] Let's now try to understand how the <code>compressors/universal_uint_coder.py</code> works. Given an unsigned integer <code>u</code>, what is the length of the code output by <code>encode_symbol</code>? </p>
+<p><strong>Solution</strong></p>
+<p>We need <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)⌋</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> bits to represent an unsigned integer <code>u</code> in it's binary form (for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>, we need 1 bit) and again <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)⌋</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> bits to encode the length in the unary as described in <code>compressors/universal_uint_coder.py</code> (again for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>, we need 1 bit for this). Therefore, we need <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(⌊</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)⌋</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> bits to encode an unsigned integer <code>u</code> (and 2 bits if <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>).</p>
+</li>
+<li>
+<p>[5 points] Briefly explain how the <code>decode_symbol</code> function works, and how is it able to decode the input losslessly. </p>
+<p><strong>Solution</strong></p>
+<p>The <code>decode_symbol</code> function first finds the number of bits in the binary encoding of the symbol by utilizing the unary coding. In unary coding (as used by <code>compressors/universal_uint_coder.py</code>), if the length of the symbol is <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>, it is encoded as <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> <code>1</code>s followed by one <code>0</code>. So in the first part of the code, decoder goes through the bits till it finds a <code>0</code> to find the length of the binary encoding.</p>
+<pre><code class="language-python">     # initialize num_bits_consumed
+     num_bits_consumed = 0
+
+     # get the symbol length
+     while True:
+         bit = encoded_bitarray[num_bits_consumed]
+         num_bits_consumed += 1
+         if bit == 0:
+             break
+     num_ones = num_bits_consumed
+</code></pre>
+<p>Next, it uses the knowledge of number of bits (say <code>num_ones</code>) in the binary representation of the unsigned integer to read the next <code>num_ones</code> bits and convert it to an unsigned integer. </p>
+<pre><code class="language-python">     # decode the symbol
+     symbol = bitarray_to_uint(
+         encoded_bitarray[num_bits_consumed: num_bits_consumed + num_ones]
+     )
+     num_bits_consumed += num_ones
+</code></pre>
+</li>
+<li>
+<p>[5 points] The <code>compressors/universal_uint_coder.py</code> unfortunately only encodes unsigned integers. How will you extend the uint coder to create an encoder/decoder which handles signed integers? Add you code in the file <code>HWs/HW0/hw0_p3.py</code>. NOTE: you mainly have to implement <code>encode_symbol</code> and <code>decode_symbol</code> functions. At the end, the test as present in the file (<code>test_universal_integer_encode_decode</code>) should pass. Report the length of the <code>encoded_bitarray</code> output by the test on Gradescope.</p>
+<p><strong>Solution</strong></p>
+<p>One way of implementing a <code>universal_interger_coder</code> by utilizing the <code>universal_uint_coder</code> coder is by doing a mapping of negative integers to positive integers. There are multiple possible way to do so and we accept all of them as a solution. One simple way to do the same is by mapping negative integers to positive integers in a zig-zag fashion as follows:</p>
+<pre><code> 0 -&gt; 0
++1 -&gt; 1
+-1 -&gt; 2
++2 -&gt; 3
+-2 -&gt; 4
+.
+.
+.
+</code></pre>
+<p>The <code>encode_symbol</code> for <code>universal_interger_coder</code> can be implemented as follows:</p>
+<pre><code class="language-python">def encode_symbol(self, x: int):
+     assert isinstance(x, int)
+
+     #########################
+     # ADD CODE HERE
+     # Use the self.uint_encoder here
+     # raise NotImplementedError
+     if x &lt;= 0:
+         return self.uint_encoder.encode_symbol(2*(-x))
+     else:
+         return self.uint_encoder.encode_symbol(2*x - 1)
+     ########################
+</code></pre>
+<p>The <code>decode_symbol</code> for <code>universal_interger_coder</code> can be implemented as follows:</p>
+<pre><code class="language-python">def decode_symbol(self, encoded_bitarray):
+     #########################
+     # ADD CODE HERE
+     # Use the self.uint_decoder here
+     # raise NotImplementedError
+     x, num_bits = self.uint_decoder.decode_symbol(encoded_bitarray)
+     return (-x//2, num_bits) if x % 2 == 0 else ((x+1)//2, num_bits)
+     ########################
+</code></pre>
+<p>The length of the <code>encoded_bitarray</code> output using our implementation is <code>66</code>.</p>
+</li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="ee274-homework-1"><a class="header" href="#ee274-homework-1">EE274: Homework-1</a></h1>
 <ul>
