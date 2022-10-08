@@ -127,7 +127,7 @@ Verify that your implementation is correct by running
 
 3. [5 points] Now run gzip on the file (command: `gzip < HWs/HW1/sherlock.txt > HWs/HW1/sherlock.txt.gz`) and report the size of the gzip file (`sherlock.txt.gz`). What happens if you run our Huffman compressor on the gzipped file above? Do you see any further reduction in size? Why/why not?
 
-You will observe that gzip does significantly better than the Huffman coding, even if we ignore the overhead from part 3. One of the reasons for this is because gzip compresses data in blocks instead of at the level of single-symbol like we implemented problem. This is because gzip uses a more sophisticated algorithm called LZ77. LZ77 is a lossless compression algorithm that is based on the observation that many files contain repeated patterns. LZ77 uses a sliding window to find repeated patterns and replaces them with a pointer to the location of the pattern. This is a very powerful technique that is used in many compression algorithms. We will study LZ77 in more detail in future class and next homework.
+You will observe that gzip does significantly better than the Huffman coding, even if we ignore the overhead from part 3. One of the reasons for this is because gzip compresses data in blocks instead of at the level of single-symbol like we implemented in the problem. This is because gzip uses a more sophisticated algorithm called LZ77. LZ77 is a lossless compression algorithm that is based on the observation that many files contain repeated patterns. LZ77 uses a sliding window to find repeated patterns and replaces them with a pointer to the location of the pattern. This is a very powerful technique that is used in many compression algorithms. We will study LZ77 in more detail in future class and next homework.
 
 ### Q4: Shannon Code(s) (*30 points*)
 
@@ -200,7 +200,7 @@ Please answer the following questions, so that we can adjust the difficulty/natu
 
 1. How much time did you spent on the HW in total?
 2. Which question(s) did you enjoy the most? 
-3. Is the programming components in the HWs helping you understand the concepts better?
+3. Are the programming components in the HWs helping you understand the concepts better?
 4. Did the HW1 questions complement the lectures?
 5. Any other comments?
 
