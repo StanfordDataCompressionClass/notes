@@ -8,6 +8,7 @@ Welcome! This e-book serves as lecture notes for the Stanford EE course, [**EE27
     2. [Prefix Free Codes](./lossless_iid/prefix_free_codes.md)
     3. [Kraft Inequality](./lossless_iid/kraft_ineq_and_optimality.md)
     4. [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
+    5. [Huffman coding](./lossless_iid/huffman.md)
 
 ---
 2. [Resources](./resources.md)
