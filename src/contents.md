@@ -9,6 +9,7 @@ Welcome! This e-book serves as lecture notes for the Stanford EE course, [**EE27
     3. [Kraft Inequality](./lossless_iid/kraft_ineq_and_optimality.md)
     4. [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
     5. [Huffman coding](./lossless_iid/huffman.md)
+    6. [Asymptotic Equipartition Property](./lossless_iid/aep.md)
 
 ---
 2. [Resources](./resources.md)

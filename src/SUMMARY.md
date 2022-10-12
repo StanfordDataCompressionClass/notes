@@ -7,6 +7,7 @@
     - [Kraft Inequality](./lossless_iid/kraft_ineq_and_optimality.md)
     - [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
     - [Huffman coding](./lossless_iid/huffman.md)
+    - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
 
 ---
 - [Resources](./resources.md)
