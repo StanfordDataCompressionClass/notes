@@ -8,6 +8,8 @@
     - [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
     - [Huffman coding](./lossless_iid/huffman.md)
     - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
+    - [Arithmetic Numeral Systems](./lossless_iid/ans.md)
+[//]: # (    - [Arithmetic coding]&#40;./lossless_iid/arithmetic_coding.md&#41;)
 
 ---
 - [Resources](./resources.md)
@@ -17,3 +19,5 @@
     - [HW0](./homeworks/HW0.md)
     - [HW0 solution](./homeworks/HW0_sol.md)
     - [HW1](./homeworks/HW1.md)
+
+[//]: # (    - [HW1 solution]&#40;./homeworks/HW1_sol.md&#41;)
