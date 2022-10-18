@@ -1,0 +1,1215 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arithmetic Numeral Systems</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../././mdbook-admonish.css">
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html" class="active"><strong aria-hidden="true">1.7.</strong> Arithmetic Numeral Systems</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">2.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">3.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW0.html"><strong aria-hidden="true">3.1.</strong> HW0</a></li><li class="chapter-item expanded "><a href="../homeworks/HW0_sol.html"><strong aria-hidden="true">3.2.</strong> HW0 solution</a></li><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">3.3.</strong> HW1</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="asymmetric-numeral-systems"><a class="header" href="#asymmetric-numeral-systems">Asymmetric Numeral Systems</a></h1>
+<p><strong>NOTE:</strong> trying out a <em>new</em> format (actually  really old, from the days of Galileo, see <em>Systema cosmicum</em>).
+This is a dialogue between three friends <em>Brahma, Vishnu and Mahesh</em> who are trying to understand asymmetric numeral systems </p>
+<hr />
+<h2 id="the-pre-intro"><a class="header" href="#the-pre-intro">The Pre-intro</a></h2>
+<p><strong>Vishnu:</strong> I have been trying to read the paper <a href="https://arxiv.org/abs/0902.0271">Asymmetric Numeral Systems</a> (ANS) by Jarek Duda, but have not made any progress. Have either of you made any progress? </p>
+<p><strong>Mahesh:</strong> Yeah, it is driving me nuts, only if someone could tell me the TL;DR. </p>
+<p><strong>Brahma:</strong> Well, I did read it. In fact I have been trying to understand it on-and-off since the past 4-5 years. Seems like I finally understood it. I have still not understood the original paper, but here are some blogs by some fantastic researchers in the area of compression. I found their blogs to be the most useful. 
+Here are links to their write-ups on ANS</p>
+<ol>
+<li>Fabian Giesen: https://fgiesen.wordpress.com/2014/02/02/rans-notes/</li>
+<li>Charles Bloom: https://cbloomrants.blogspot.com/2014/02/02-18-14-understanding-ans-conclusion.html</li>
+<li>Yann Collet: http://fastcompression.blogspot.com/2013/12/finite-state-entropy-new-breed-of.html</li>
+</ol>
+<p>I would recommend starting with Fabian's blog. He talks specifically about <code>rANS</code>, which is one of the many variants of compressors introduced by Jarek. I found the specificity simpler to start with. 
+All the best! I have to now go and <em>meditate</em>. </p>
+<p><strong>Mahesh:</strong> Well hold on! I will look at these links in detail, but can you maybe give a short intro?</p>
+<p><strong>Brahma:</strong> Hmm, alright! The ANS paper introduces a set of new compression algorithms, namely the <code>rANS</code> (range-ANS) and <code>tANS</code> (table-ANS) compression algorithm. To be more precise <code>rANS</code> and <code>tANS</code> are actually a family of compression methods which provide a good tradeoff between compression and speed. </p>
+<p>I found it is easier to start with <code>rANS</code> and then develop <code>tANS</code> as a consequence of optimizations under certain parameter regimes. This is in-fact the path which Fabian and Charles choose in their blogs, Yann chooses the reverse path of directly tackling <code>tANS</code>, which is also interesting in itself!</p>
+<p><strong>Vishnu:</strong> Sounds good! But even before we go there, can you explain why the name of the paper: <em>Asymmetric Numeral Systems</em>?</p>
+<hr />
+<h2 id="the-introduction"><a class="header" href="#the-introduction">The Introduction</a></h2>
+<p><strong>Brahma:</strong> Okay, lets start the story from the beginning:
+Lets say the problem is that we are given a sequence of digits in <code>[0,9]</code>, and we want to represent them with a single number <code>x</code>. 
+Lets say we are given the sequence <code>3,2,4,1,5</code>. Then how can we form a single number representing them? </p>
+<p><strong>Vishnu:</strong> Umm, isn't this trivial? If we are given digits <code>3,2,4,1,5</code>, I can just form the number <code>x = 32415</code>
+<strong>Brahma:</strong> Thats right! this is what we do everyday in our lives. Lets however try to understand what we just did in a different way. What we are actually doing is the following: We are starting with the <em>state</em> <code>x = 0</code>, and then updating it as we see each symbol: </p>
+<pre><code class="language-python">x = 0  # &lt;-- initial state
+x = x*10 + 3 # x = 3
+x = x*10 + 2 # x = 32
+...
+x = x*10 + 5 # x = 32415
+</code></pre>
+<p>Thus, during the <em>encoding</em> we are start with state <code>x=0</code>, and then it increases as <code>x = 0, 3, 32, 324, 3214, 32145</code> as we <em>encode</em> the symbols. 
+Can either of you tell me how would you decode back the sequence if I give you the final state <code>32145</code>? </p>
+<p><strong>Mahesh:</strong> Sure, the we can decode the sequence as: </p>
+<pre><code class="language-python">symbols = []
+x = 32145 # &lt;- final state
+
+# repeat 5 times
+s, x = x%10, x//10  # s,x = 5, 3214
+symbols.append(s) 
+
+</code></pre>
+<p>at the end, you would get <code>symbols = [5,4,1,2,3]</code>.. which would need to be reversed to get your input sequence. </p>
+<p><strong>Brahma:</strong> Precisely! Notice that during the decoding, we are just reversing the operations, i.e: the <code>encode_step</code> and <code>decode_step</code> are exact inverses of each other. Thus, the state sequence we see is <code>32145, 3214, 321, ..., 3</code> is the same as during encoding, but in the reverse order. </p>
+<pre><code class="language-python">def encode_step(x,s):
+   x = x*10 + s
+   return x
+
+def decode_step(x)
+   s = x%10 # &lt;- decode symbol
+   x = x//10 # &lt;- retrieve the previous state
+   return (s,x)
+</code></pre>
+<p>We have until now spoken about representing an input sequence of digits using a single state <code>x</code>. But how can we turn this into a compressor? We need a way to represent the final state <code>x</code> using bits.</p>
+<p><strong>Mahesh:</strong> That is again quite simple: we can just represent <code>x</code> in binary using <code>ceil(log_2[x]))</code> bits. For example in this case:
+<code>32145 = 111110110010001</code>. Our &quot;encoder/decoder&quot; can be written as: </p>
+<pre><code class="language-python">
+## Encoding
+def encode_step(x,s):
+   x = x*10 + s
+   return x
+
+def encode(symbols):
+    x = 0 # initial state
+    for s in symbols:
+        x = encode_step(x,s)
+    
+    return to_binary(x)    
+
+## Decoding
+
+def decode_step(x):
+   s = x%10 # &lt;- decode symbol
+   x = x//10 # &lt;- retrieve the previous state
+   return (s,x)
+
+def decode(bits, num_symbols):
+   x = to_uint(bits) # convert bits to final state
+
+   # main decoding loop
+   symbols = []
+   for _ in range(num_symbols):
+       s, x = decode_step(x)
+       symbols.append(s)
+   return reverse(symbols) # need to reverse to get original sequence
+</code></pre>
+<p><strong>Brahma:</strong> Thats right Mahesh! Can you also comment on how well your &quot;compressor&quot; is compressing data?</p>
+<p><strong>Mahesh:</strong>: Let me see: if we look at the <code>encode_step</code>, we are increasing it by a factor of 10 <code>x_next &lt;- 10*x</code>. There is the small added symbol <code>s</code>, but it is quite small, compared to the state <code>x</code> after some time. As we use <code>~ log_2(x)</code> bits to represent the state. Increasing it 10 times, we are using <code>~log_2(10)</code> bits per symbol. </p>
+<p><strong>Vishnu:</strong> I see! So, we are effectively using around <code>log_2(10)</code> bits per symbol. I think that is <em>optimal</em> if all our digits <code>[0,9]</code> are equiprobable and have probability <code>1/10</code> each. But, what if the symbols are not equi-probable? I think in that case this &quot;compressor&quot; might do a bad job.</p>
+<p><strong>Brahma:</strong> Good observation Vishnu! That is precisely correct. One thumb-rule we know from Information theory is that if a symbol occurs more frequently, it should use less bits than the symbol which occurs less frequently. In fact, we know that on average a symbol <code>s</code> with probability <code>prob[s]</code> should <em>optimally</em> use <code>log_2 (1/prob[s])</code> bits. 
+Let me even put this thumb-rule in a box to emphasize:</p>
+<pre><code>avg. optimal bits for a symbol s = log_2 (1/prob[s])
+</code></pre>
+<p>Notice that our compressor is using <code>log_2(10) = log_2(1/10)</code>, which validates the fact that our compressor is optimal if our symbols have probability <code>1/10</code>, but otherwise it is not. </p>
+<p><strong>Vishnu:</strong> Thats a very useful thumb rule. I think our compressor will be &quot;fixed&quot; if the <code>encode_step</code> increases the state <code>x</code> as:
+<code>x_next ~ x* (1/prob[s])</code>. In that case, effectively our symbol s is using <code>log_2(1/prob[s])</code> bits. </p>
+<p><strong>Brahma:</strong> Very good Vishnu! You have got the correct intuition here. In fact this is the core idea behind <code>rANS</code> encoding. Ohh, to answer Mahesh's question: what we were doing with our &quot;compressor&quot; was our usual <code>Symmetric Numeral System</code>, where the probability of all symbols is the same. We will now be discussing the <code>Asymmetric Numeral Systems</code> which will handle the case where the digits don't have the same probability. </p>
+<p><strong>Mahesh:</strong> Ahh, cool! I now understand the title of the paper :)</p>
+<hr />
+<h2 id="theoretical-rans"><a class="header" href="#theoretical-rans">Theoretical rANS</a></h2>
+<p><strong>Brahma:</strong> Okay, before we go into the details of <code>rANS</code>, lets define some notation: as <code>x</code> is an integer, lets represent <code>prob[s]</code> using rational numbers:</p>
+<pre><code class="language-python">prob[s] = freq[s]/M
+</code></pre>
+<p>where <code>M = freq[0] + freq[1] + ... + freq[9]</code>, i.e. the sum of frequencies of all symbols (also called as Range Factor). Here <code>freq[s]</code> is also called the &quot;Frequency&quot; of symbol <code>s</code>. Lets also define <code>cumul[s]</code>, the cumulative frequency. i.e: </p>
+<pre><code class="language-python">cumul[0] = 0
+cumul[1] = freq[0]
+cumul[2] = freq[0] + freq[1]
+...
+cumul[9] = freq[0] + freq[1] + ... + freq[8]
+</code></pre>
+<p>For example:  if we limit ourselves to only the digits <code>{0,1,2}</code>:</p>
+<pre><code class="language-python">freq -&gt; [3,3,2], M = 8
+cumul -&gt; [0,3,6]
+prob -&gt; [3/8, 3/8, 2/8]
+</code></pre>
+<p>Is this setting clear? </p>
+<p><strong>Vishnu:</strong> Yes, yes, basically you are just representing everything with integers. Lets go ahead! 
+<strong>Brahma:</strong> Haha allright! Okay, so the <code>rANS</code> encoding follows the exact same pattern we saw earlier. i.e.
+We still start from state <code>x=0</code> and then update the state every time we see a new symbol. The main difference is that our <code>encode_step</code> doesn't just do <code>x*10 + s</code>; we do something slightly more intricate here: </p>
+<pre><code class="language-python">
+## Encoding
+def rans_base_encode_step(x,s):
+   # add details here
+   return x
+
+def encode(symbols):
+    x = 0 # initial state
+    for s in symbols:
+        x = rans_base_encode_step(x,s)
+    
+    return to_binary(x)    
+</code></pre>
+<p>Any guesses on what the <code>rans_base_encode_step(x,s)</code> should be? </p>
+<p><strong>Mahesh:</strong> I think based on our discussion earlier, for <em>optimal</em> compression we want the state <code>x</code> to roughly increase as <code>x_next &lt;- x/prob[s]</code>. Thus, in the notation you defined, I would say there has to be a term something similar to: </p>
+<pre><code class="language-python">x_next ~ (x//freq[s])*M
+</code></pre>
+<p><strong>Brahma:</strong> Very good Mahesh! In fact the true <code>rans_base_encode_step</code> is quite close to what you suggested, and is as follows:</p>
+<pre><code class="language-python">
+## Encoding
+def rans_base_encode_step(x,s):
+   x_next = (x//freq[s])*M + cumul[s] + x%freq[s]
+   return x_next
+</code></pre>
+<p>Lets take a concrete example: If we consider our example distribution:</p>
+<pre><code class="language-python">symbols = [0,1,2]
+freq -&gt; [3,3,2], M = 8
+cumul -&gt; [0,3,6]
+</code></pre>
+<p>and the sample input as <code>[1,0,2,1]</code>, then the encoding proceeds as follows:</p>
+<pre><code class="language-python">step 0: x = 0
+step 1: s = 1 -&gt; x = (0//3)*8 + 3 + (0%3) = 3
+step 2: s = 0 -&gt; x = (3//3)*8 + 0 + (3%3) = 8
+step 3: s = 2 -&gt; x = (8//2)*8 + 6 + (8%2) = 38
+step 4: s = 1 -&gt; x = (38//3)*8 + 3 + (38%3) = 101
+</code></pre>
+<p>Any observations?</p>
+<p><strong>Vishnu:</strong> One thing I noticed is that, if we choose the uniform probability scenario where <code>prob[s] = 1/10, for s in [0,9]</code> i.e. <code>freq[s] = 1, M = 10</code>, then we reduce to the symmetric numeral system formula!</p>
+<pre><code class="language-python"># rANS state update
+x_next = (x//freq[s])*M + cumul[s] +  x%freq[s]
+
+# substitute freq[s] = 1, M = 10
+x_next = x*10 + s
+</code></pre>
+<p><strong>Brahma:</strong> Indeed! We reduce to the symmetric numeral system, if all the probabilities are equal; which is good news! </p>
+<p>Okay, now that we have understood the encoding, lets try to understand the decoding. The decoding also proceeds in a similar fashion: we start with the final state <code>x</code> and in each step try to decode the symbol and the previous state. </p>
+<pre><code class="language-python">def rans_base_decode_step(x):
+   # perform decoding
+   
+   return (s,x_prev)
+
+def decode(bits, num_symbols):
+   x = to_uint(bits) # convert bits to final state
+
+   # main decoding loop
+   symbols = []
+   for _ in range(num_symbols):
+       s, x = rans_base_decode_step(x)
+       symbols.append(s)
+   return reverse(symbols) # need to reverse to get original sequence
+</code></pre>
+<p>Any thoughts on how the decoding might proceed?</p>
+<p><strong>Mahesh:</strong> Let me give it a shot: Essentially we just want to find the inverse of the <code>rans_base_encode_step</code> right? 
+So let me start by writing that down:</p>
+<pre><code class="language-python">x = (x_prev//freq[s])*M + cumul[s] + (x_prev % freq[s])
+</code></pre>
+<p>Given <code>x</code> we want to retrieve the symbol <code>s</code> and <code>x_prev</code>... but, I am not sure how to make progress (:-|)</p>
+<p><strong>Brahma:</strong> Good start Mahesh. Let me give you a hint, we can write the encoding step as follows: </p>
+<pre><code class="language-python">block_id = x_prev//freq[s]
+slot = cumul[s] + (x_prev % freq[s])
+x = block_id*M + slot
+</code></pre>
+<p>One thing to notice is that <code>0 &lt;= slot &lt; M</code>, as:</p>
+<pre><code class="language-python">slot = cumul[s] + (x_prev % freq[s])
+     &lt; cumul[s] + freq[s]
+     &lt;= M
+</code></pre>
+<p>Does this help? </p>
+<p><strong>Mahesh:</strong> Aha! yes, I think as <code>0 &lt;= slot &lt; M</code>, one can think of it as the remainder on dividing <code>x</code> with <code>M</code>. So, I can retrieve the <code>block_id</code> and <code>slot</code> as:</p>
+<pre><code class="language-python"># encode step 
+x = block_id*M + slot
+
+# decode step:
+block_id = (x//M)
+slot = (x%M)
+</code></pre>
+<p><strong>Brahma:</strong> Good job Mahesh! That is a good first step. Vishnu, can you go ahead and retrieve <code>s, x_prev</code> from <code>slot, block_id</code>? </p>
+<p><strong>Vishnu:</strong> We know that <code>0 &lt;= slot &lt; M</code>. But we know a bit more about the slot: </p>
+<pre><code class="language-python">slot = cumul[s] + (x_prev % freq[s])
+     &lt; cumul[s] +  freq[s]
+     = cumul[s+1]
+
+i.e.
+cumul[s] &lt;= slot &lt; cumul[s+1]
+</code></pre>
+<p>So, once we obtain the <code>slot</code>, we can just do a linear/binary search over the list <code>[cumul[0], cumul[1], ... cumul[9], M]</code> to decode <code>s</code>. 
+Once we have decoded the symbol <code>s</code>, we know <code>freq[s], cumul[s]</code>. So, we can decode <code>x_prev</code> as:</p>
+<pre><code class="language-python">x_prev = block_id*freq[s] + slot - cumul[s]
+</code></pre>
+<p>Thus, the decoding can be described as follows:</p>
+<pre><code class="language-python">def rans_base_decode_step(x):
+   # Step I: find block_id, slot
+   block_id = x//M
+   slot = x%M
+   
+   # Step II: Find symbol s
+   s = find_bin(cumul_array, slot) 
+   
+   # Step III: retrieve x_prev
+   x_prev = block_id*freq[s] + slot - cumul[s]
+
+   return (s,x_prev)
+</code></pre>
+<p><strong>Brahma:</strong> Absolutely correct Vishnu! That is very precise. So that we all are on the same page, lets again go through our example: </p>
+<pre><code class="language-python">symbols = [0,1,2]
+freq -&gt; [3,3,2], M = 8
+cumul -&gt; [0,3,6]
+</code></pre>
+<p>and the sample input as <code>[1,0,2,1]</code> -&gt; final state <code>x = 101</code></p>
+<p>Lets see how the decoding goes:</p>
+<pre><code class="language-python">x = 101
+
+# Step I
+block_id = 101//8 = 12
+slot = 101%8 = 5
+
+# Step II
+cumul_array = [0, 3, 6, 8]
+as 3 &lt;= slot &lt; 6, the decoded symbol s=1
+
+# Step III
+x_prev = 12*3 + 5 - 3
+x_prev = 38
+</code></pre>
+<p>Voila! we have thus decoded <code>s=1, x_prev=38</code>. We can now continue to decode other symbols. To summarize, here are our full encode decode functions: </p>
+<pre><code class="language-python">
+####### Encoding ###########
+
+def rans_base_encode_step(x,s):
+   x_next = (x//freq[s])*M + cumul[s] + x%freq[s]
+   return x_next
+
+def encode(symbols):
+    x = 0 # initial state
+    for s in symbols:
+        x = rans_base_encode_step(x,s)
+    
+    return to_binary(x) 
+
+####### Decoding ###########
+def rans_base_decode_step(x):
+   # Step I: find block_id, slot
+   block_id = x//M
+   slot = x%M
+   
+   # Step II: Find symbol s
+   s = find_bin(cumul_array, slot) 
+   
+   # Step III: retrieve x_prev
+   x_prev = block_id*freq[s] + slot - cumul[s]
+
+   return (s,x_prev)
+
+def decode(bits, num_symbols):
+   x = to_uint(bits) # convert bits to final state
+
+   # main decoding loop
+   symbols = []
+   for _ in range(num_symbols):
+       s, x = rans_base_decode_step(x)
+       symbols.append(s)
+   return reverse(symbols) # need to reverse to get original sequence
+
+</code></pre>
+<p><strong>Mahesh:</strong> Great! I think, I now understand the <code>rANS</code> base encoding and decoding step quite well. Essentially, we are increasing the state by approximately <code>x_next ~ x/prob[s]</code> as needed to be <em>optimal</em>, but we are doing it in a smart way, so that we can follow our steps backwards and retrieve the encoded symbols and state. </p>
+<p>One think I noticed is that, as the state is growing by a factor of <code>~ 1/prob[s]</code> at every step.. it is growing exponentially, and practically would surpass the 64-bit (or 32-bit) limit on computers. So, I think that is the reason you are calling this <em>theoretical rANS</em>. I think there is still some work left to make this algorithm practical. </p>
+<p><strong>Brahma:</strong> Yes, that is correct Mahesh; the state <code>x</code> does increase exponentially. For example, in our example it increases as <code>0, 3, 8, 38, 101, ...</code>. Thus we need to somehow limit the state from growing beyond a certain limit. That is however a story for some other day. Let me leave you both here to re-think the base <code>rANS</code> steps! </p>
+<p><strong>Mahesh, Vishnu:</strong> Thank you Brahma! See you next time!</p>
+<hr />
+<h2 id="streaming-rans"><a class="header" href="#streaming-rans">Streaming rANS</a></h2>
+<p><strong>Brahma:</strong> Okay, hope you guys had time to revise on the base <code>rANS</code> step. Lets now talk about how to make it practical. As you recall, every time we call the the <code>x = rans_base_encode_step(x,s)</code>, we are typically increasing the state <code>x</code> exponentially. Thus, we need some way to limit this growth.</p>
+<p>The methodology employed by Jarek Duda in his paper is ingenious, but at the same time quite simple. The goal is to limit the state <code>x</code> to always lie in a pre-defined range <code>[L,H]</code>. </p>
+<p><strong>Mahesh</strong>: Even before we go into the details, I have a fundamental question: as a final step of <code>rANS</code>, we represent state <code>x</code> using <code>ceil(log_2(x))</code> bits. However, if <code>x</code> is always going to lie in the range <code>[L,H]</code>, we can at maximum transmit <code>ceil(log_2(H))</code> bits of information, which doesn't seem much. </p>
+<p><strong>Brahma:</strong> Sharp observation Mahesh. In the theoretical <code>rANS</code> discussion, the only bits we write out are at the end, and are equal to <code>ceil(log_2(x))</code>. It is clear that this is not going to work if <code>x</code> is not growing. So, in the <code>streaming rANS</code> case, along with writing out the final state at the end, we stream out a few bits after we encode every symbol. Thus, the new encoding structure looks like this: </p>
+<pre><code class="language-python">def encode_step(x,s):
+    # update state + output a few bits
+    return x_next, out_bits
+
+def encode(symbols):
+    x = L # initial state
+    encoded_bitarray = BitArray()
+    for s in symbols:
+        x, out_bits = encode_step(x,s)
+
+        # note that after the encode step, x lies in the interval [L,H]
+        assert x in Interval[L,H]
+        
+        # add out_bits to output
+        encoded_bitarray.prepend(out_bits)
+    
+    # add the final state at the beginning
+    num_state_bits = ceil(log2(H))
+    encoded_bitarray.prepend(to_binary(x, num_state_bits))
+    return encoded_bitarray
+</code></pre>
+<p>As you can see, the new <code>encode_step</code> doesn't just update the state <code>x</code>, but it also outputs a few bits. </p>
+<p><strong>Vishnu:</strong> Cool! That makes sense. I have a couple of observations:</p>
+<ol>
+<li>
+<p>I see that the initial state in <code>streaming rANS</code> is <code>x = L</code> and not <code>x = 0</code>. I also see you have an <code> assert x in Interval[L,H]</code> after the <code>encode_step</code>. So, it seems that the input state to <code>encode_step</code> and its output always lie in <code>Interval[L,H]</code>. </p>
+</li>
+<li>
+<p>Another interesting I noticed is that you prepend <code>out_bits</code> to the final <code>encoded_bitarray</code>. I am guessing this is because the <code>rANS</code> decoding decodes symbols in the reverse order right? </p>
+</li>
+</ol>
+<p><strong>Brahma:</strong> That is right Vishnu! similar to <code>rANS</code> decoding, the <code>streaming rANS</code> decoder also proceeds in the reverse direction, and hence needs to access the bits in the reversed order. (NOTE: prepending could be a bit tricky and slow, due to repeated memory allocations.. but lets worry about the speed later!)</p>
+<p>Lets now take a look at the decoder structure in case of <code>streaming rANS</code>: </p>
+<pre><code class="language-python">def decode_step(x, enc_bitarray):
+    # decode s, retrieve prev state
+    # also return the number of bits read from enc
+    return s, x_prev, num_bits_step
+
+def decode(encoded_bitarray, num_symbols):
+    # initialize counter of bits read from the encoded_bitarray
+    num_bits_read = 0
+
+    # read the final state 
+    num_state_bits = ceil(log2(H))
+    x = to_uint(encoded_bitarray[:num_state_bits])
+    num_bits_read += num_state_bits
+
+    # main decoding loop
+    symbols = []
+    for _ in range(num_symbols):
+        # decoding step
+        s, x, num_bits_step = decode_step(x, encoded_bitarray[num_bits_read:])
+        symbols.append(s)
+
+        # update num_bits_read counter
+        num_bits_read += num_bits_step
+    return reverse(symbols) # need to reverse to get original sequence
+</code></pre>
+<p>The decoder starts by retrieving the final state by reading <code>num_state_bits</code> bits from the <code>encoded_bitarray</code>. Once it has retrieved the final state <code>x</code>, we call the <code>decode_step</code> function in a loop until we have decoded all the symbols, as in case of <code>rANS</code>. The difference now is that the <code>decode_step</code> function also consumes a few bits (<code>num_bits_step</code>). As you can imagine, these <code>num_bits_step</code> correspond to the length of the <code>out_bits</code> from the <code>encode_step</code>. </p>
+<p><strong>Mahesh:</strong> I see! This makes sense. So, now the missing component in our algorithms are the <code>encode_step</code> and <code>decode_step</code> functions, which need to be perfect inverses of each other, but at the same time need to ensure that the state <code>x</code> lies in the <code>Interval[L,H]</code>. </p>
+<p><strong>Brahma:</strong> Thats right Mahesh! Lets think about the <code>encode_step</code> first. Let me start by writing its structure, so that we understand how we are modifying the basic <code>rans_base_encode_step</code>: </p>
+<pre><code class="language-python">
+def shrink_state(x,s):
+    # TODO
+    # reduce the state x -&gt; x_shrunk
+   return x_shrunk, out_bits
+
+def encode_step(x,s):
+   # shrink state x before calling base encode
+   x_shrunk, out_bits = shrink_state(x, s)
+
+   # perform the base encoding step
+   x_next = rans_base_encode_step(x_shrunk,s)
+   
+   return x_next, out_bits
+</code></pre>
+<p>Any thoughts Vishnu?</p>
+<p><strong>Vishnu:</strong> Hmm, lets look at the <code>encode_step</code> function. We still have the <code>rans_base_encode_step(x_shrunk,s)</code> call as before; but before this base encode step, we seem to modify the state <code>x -&gt; x_shrunk</code> using the <code>shrink_state(x,s)</code> function call, which as the name suggests is probably making the state smaller. </p>
+<p>I think I understand intuitively what is happening: We know that the input state <code>x</code> to <code>encode_step</code> lies in the range <code>[L,H]</code>. We also know that typically <code>rans_base_encode_step</code> increases the state; Thus, to ensure <code>x_next</code> lies in <code>[L,H]</code>, we shrink <code>x -&gt; x_shrunk</code> beforehand.</p>
+<p><strong>Brahma:</strong> Thats right! The main function of <code>shrink_state</code> is indeed to reduce the state <code>x -&gt; x_shrunk</code>, so that <em>after</em> encoding symbol <code>s</code> using the <code>rans_base_encode_step</code>, the output state, <code>x_next</code> lies in <code>[L,H]</code>. </p>
+<p>One more thing to note is that, as we are performing lossless compression, the &quot;information&quot; content should be retained at every step. If we look at the <code>encode_step</code> function, and the two sub-steps:</p>
+<ul>
+<li>We know that <code>rans_base_encode_step(x_shrunk,s)</code> encodes the information of the state <code>s</code> and state <code>x_shrunk</code> into a single state <code>x_next</code>, and that no information is lost. </li>
+<li>Thus, the first step <code>shrink_state</code> also needs to also ensure that state <code>x</code> is retrievable from <code>x_shrunk</code> and <code>out_bits</code>. </li>
+</ul>
+<p>As we will see, the <code>shrink_state</code> function basically tries to do this, in the simplest possible way: </p>
+<pre><code class="language-python">def shrink_state(x,s):
+   # initialize the output bitarray
+   out_bits = BitArray()
+
+   # shrink state until we are sure the encoded state will lie in the correct interval
+   while rans_base_encode_step(x,s) not in Interval[L,H]:
+       out_bits.prepend(x%2)
+       x = x//2
+   x_shrunk = x
+   return x_shrunk, out_bits
+</code></pre>
+<p>The <code>shrink_state</code> function shrinks the state by streaming out the lower bits of the state <code>x</code>. For example, if state <code>x = 22 = 10110b</code>, then then <code>shrink_state</code> could output: </p>
+<pre><code class="language-python"># input state 
+x = 21 = 10110b
+
+# output options: 
+x_shrunk = 10110b = 22, out_bits = &quot;&quot;
+x_shrunk = 1011b = 11, out_bits = &quot;0&quot;
+x_shrunk = 101b = 5, out_bits = &quot;10&quot;
+x_shrunk = 10b = 2, out_bits = &quot;110&quot;
+...
+</code></pre>
+<p>The question is now: <em><strong>how many bits to stream out from <code>x</code>?</strong></em></p>
+<p>the answer is quite simple; as we want to ensure that
+<code>rans_base_encode_step(x,s) lies in Interval[L,H]</code>, we keep streaming out bits until this condition is satisfied! It is quite simple in the hindsight. </p>
+<p>Any thoughts Vishnu?</p>
+<p><strong>Vishnu:</strong> Yes, I think it is quite simple and intuitive. I however think that we have to choose the Interval <code>[L,H]</code> carefully, as otherwise it might be possible that there is no state <code>x_shrunk</code> for which <code>rans_base_encode_step(x_shrunk,s)</code> is in that interval.</p>
+<p><strong>Brahma:</strong> That is right Vishnu, the range will have to be chosen carefully and precisely. We will also see that we can simplify the comparison step <code>while rans_base_encode_step(x,s) not in Interval[L,H]</code>, so that we don't need to call the <code>base_encode_step</code> multiple times. But, before that, lets see if we can understand how the <code>decode_step</code> might work. Any thoughts on the same Mahesh? </p>
+<p><strong>Mahesh:</strong> Let me start by thinking about the overall <code>decode_step</code> structure first. I think as the <code>decode_step</code> has to be an inverse of <code>encode_step</code>, we need to have <code>expand_state</code> step which is an inverse of the <code>shrink_state</code> step. Also, as the decoding proceeds in a reverse order: so, we first perform the <code>rans_base_decode_step</code> and then call the <code>expand_state</code> function.</p>
+<pre><code class="language-python">def expand_state(x_shrunk, enc_bitarray):
+    # TODO
+    # read in bits to expand x_shrunk -&gt; x
+   return x, num_bits_step
+
+def decode_step(x, enc_bitarray):
+    # decode s, retrieve prev state
+    s, x_shrunk = rans_base_decode_step(x)
+
+    # expand back x_shrunk to lie in Interval[L,H]
+    x_prev, num_bits_step = expand_state(x_shrunk, enc_bitarray)
+    return s, x_prev, num_bits_step
+</code></pre>
+<p><strong>Brahma:</strong> Thats good Mahesh! Another way to intuitively think about <code>expand_state</code> is that: typically  <code>rans_base_decode_step</code> reduces the state value, so we need to expand it back using <code>expand_state</code> function so that it lies back in the range <code>[L,H]</code>. Any thoughts on the specifics of <code>expand_state</code> function? </p>
+<p><strong>Mahesh:</strong> Sure, let me think! We basically want to do the inverse of what we do in the <code>shrink_state</code> function. </p>
+<p>We know that the input state <code>x</code> to the <code>shrink_state(x,s)</code> lies in <code>x in Interval[L,H]</code>, so in the <code>expand_state(x_shrunk, enc_bitarray)</code>, we can read in the bits into the state <code>x_shrunk</code>, until it lies in <code>Interval[L,H]</code>. Thus, the <code>expand_state</code> function might look like:</p>
+<pre><code class="language-python">def expand_state(x_shrunk, enc_bitarray):
+    # init
+    num_bits_step = 0
+
+    # read in bits to expand x_shrunk -&gt; x
+    x = x_shrunk
+    while x not in Interval[L,H]:
+        x = x*2 + enc_bitarray[num_bits_step]
+        num_bits_step += 1
+    return x, num_bits_step
+</code></pre>
+<p><strong>Brahma:</strong> Good job Mahesh, your <code>expand_state</code> function is very precise! However, as Vishnu said in case of <code>encode_step</code>, one thing to note even in case of the decoding is that, we need to choose the <code>L</code> and <code>H</code> values carefully. </p>
+<p>For example: we need to make sure that while we expand the state as: <code>x = x*2 + enc_bitarray[num_bits_step]</code>, there is a unique <code>x</code> which lies in the <code>Interval[L,H]</code>, as otherwise there is no guarantee that the the state <code>x</code> we obtain from <code>expand_state</code> function is the same as the one which the <code>shrink_state</code> function used as input. </p>
+<hr />
+<h3 id="choosing-the-intervallh"><a class="header" href="#choosing-the-intervallh">Choosing the <code>Interval[L,H]</code></a></h3>
+<p><strong>Brahma:</strong> Okay, lets try to answer the final piece of the streaming rANS puzzle: the choice of the values <code>L, H</code>. Instead of trying to derive all possible values for <code>L,H</code>, I am going to straightaway present the solution given by Duda in his paper, and we will try to understand why that works: </p>
+<p>The acceptable values for <code>L, H</code> for streaming rANS are:</p>
+<pre><code class="language-python">L = M*t
+H = 2*M*t - 1
+</code></pre>
+<p>where <code>M = freq[0] + freq[1] + ... + freq[9]</code> (sum of frequencies), and <code>t</code> is an arbitrary unsigned integer. Any thoughts?</p>
+<p><strong>Vishnu:</strong> Okay, lets see: Based on the previous discussions, the two conditions we need the <code>Interval[L,H]</code> to satisfy are: </p>
+<p><em>1: encode-step-constraint</em>: The <code>shrink_state</code> function can be understood in terms of the shrinking operation: </p>
+<pre><code class="language-python">start -&gt; x_0 in Interval[L,H]
+shrink_op -&gt; x_i = x_{i-1}//2
+</code></pre>
+<p>Then, <code>Interval[L,H]</code> should be large enough so that for all <code>x_0 in Interval[L,H]</code>, there is at least one <code>i</code> such that <code>rans_base_encode_step(x_i,s) in Interval[L,H]</code> for all symbols <code>s</code></p>
+<p><em>2: decode-step-constraint</em>: During the <code>expand_state</code> we repeatedly perform the state expansion operation:</p>
+<pre><code class="language-python">start -&gt; x_0
+expand_op -&gt; x_i = 2*x_{i-1} + bit
+</code></pre>
+<p>The <code>Interval[L,H]</code> should be small enough so that there is at max a single <code>i</code> for which <code>x_i in Interval[L,H]</code>. </p>
+<p>I think it is easy to see that the second constraint, i.e. <em>decode-step-constraint</em> will be satisfied if we choose <code>L, H </code>as: <code>L, H &lt;= 2L - 1</code>. The idea is simple.. Lets assume that <code>x_{i-1} in interval[L,H</code>, i.e <code>x_{i-1} &gt;= L</code>. Then <code>x_i = 2*x_{i-1} + bit &gt;= 2*L &gt; H</code>. Thus, if <code>x_{i-1}</code> is in the <code>Interval[L,H]</code>, then <code>x_{i}</code> cannot. Thus if <code>H &lt;= 2L - 1</code>, then the <em>decode-step-constraint</em> is satisfied. </p>
+<p>I am not sure how to ensure the first constraint is satisfied. </p>
+<p><strong>Brahma:</strong> Good job Vishnu with the second constraint. As for the first constraint, the <em>encode-step-constraint</em>: lets start by writing down <code>rans_base_encode_step</code>:</p>
+<pre><code class="language-python">def rans_base_encode_step(x,s):
+   x_next = (x//freq[s])*M + cumul[s] + x%freq[s]
+   return x_next
+</code></pre>
+<p>Now, for any given symbol <code>s</code>, it is clear that <code>rans_base_encode_step(x, s)</code> is monotonically increasing in <code>x</code>. If not, I will leave it as an exercise for you to verify! </p>
+<p>Now, lets see what range of values of <code>x_shrunk</code> map to in the <code>Interval[L,H]</code>, where <code>L = M*t, H = 2*M*t - 1</code>: </p>
+<pre><code class="language-python">M*t = rans_base_encode_step(freq[s]*t,s)
+2*M*t = rans_base_encode_step(2*freq[s]*t,s)
+</code></pre>
+<p>Thus, as <code>rans_base_encode_step(x_shrunk, s)</code> is monotically increasing, if <code>freq[s]*t &lt;= x_shrunk &lt;= (2*freq[s] - 1)</code>, only then 
+<code>rans_base_encode_step(x_shrunk, s) in Interval[L,H]</code>. </p>
+<p>So, to satisfy the  <em>encode-step-constraint</em>, we need to argue that, as we remove bits from <code>x_shrunk</code>, it will always end up in the <code>Interval[freq[s]*t, 2*freq[s]*t - 1]</code>. This is again true for a similar argument as to what we discussed for <em>decode-step-constraint</em>. (I will again keep it an exercise for you to prove this!). </p>
+<p>So, we can conclude that:</p>
+<blockquote>
+<p>For streaming rANS: L=M<em>t, H=2</em>M*t - 1</p>
+</blockquote>
+<p><strong>Vishnu:</strong> Wow, that was a bit involved, but I now understand how the <code>L, H</code> values were chosen by Duda! Essentially everything revolves around the interval of type <code>[l, 2*l-1]</code>. These intervals play well with the shrinking op (i.e <code>x -&gt; x//2</code>) or the expand op (<code>x -&gt; x*2 + bit</code>), and guarantee uniqueness. </p>
+<p><strong>Mahesh:</strong> Yeah, that was quite innovative of Duda! Another thing which I noticed from Brahma's arguments is that: </p>
+<p>we can basically replace the check <code>while rans_base_encode_step(x,s) not in Interval[L,H]</code> with <code>while x not in Interval[freq[s]*t, 2*freq[s]*t - 1]</code>. That way, we don't need to call the <code>rans_base_encode_step</code> again and again, and this should increase our encoding efficiency. </p>
+<p><strong>Brahma:</strong> Good observation Mahesh! And, in fact that was the last thing we needed to complete our streaming rANS. To summarise here are our full encoder and decoder: </p>
+<pre><code class="language-python">########################### Global variables ############################
+freq[s]  # frequencies of symbols 
+cumul[s] # cumulative frequencies of symbols
+M = freq[0] + freq[1] + ... + freq[9] # sum of all frequencies
+
+## streaming params
+t = 1 # can be any uint
+L = M*t
+H = 2*M*t - 1
+
+
+########################### Streaming rANS Encoder ###########################
+def rans_base_encode_step(x,s):
+   x_next = (x//freq[s])*M + cumul[s] + x%freq[s]
+   return x_next
+
+def shrink_state(x,s):
+   # initialize the output bitarray
+   out_bits = BitArray()
+
+   # shrink state until we are sure the encoded state will lie in the correct interval
+   while rans_base_encode_step(x,s) not in Interval[freq[s]*t,2*freq[s]*t - 1]:
+       out_bits.prepend(x%2)
+       x = x//2
+   x_shrunk = x
+   return x_shrunk, out_bits
+
+def encode_step(x,s):
+   # shrink state x before calling base encode
+   x_shrunk, out_bits = shrink_state(x, s)
+
+   # perform the base encoding step
+   x_next = rans_base_encode_step(x_shrunk,s)
+   
+   return x_next, out_bits
+
+def encode(symbols):
+    x = L # initial state
+    encoded_bitarray = BitArray()
+    for s in symbols:
+        x, out_bits = encode_step(x,s)
+
+        # note that after the encode step, x lies in the interval [L,H]
+        assert x in Interval[L,H]
+        
+        # add out_bits to output
+        encoded_bitarray.prepend(out_bits)
+    
+    # add the final state at the beginning
+    num_state_bits = ceil(log2(H))
+    encoded_bitarray.prepend(to_binary(x, num_state_bits))
+    return encoded_bitarray
+
+########################### Streaming rANS Decoder ###########################
+def rans_base_decode_step(x):
+   # Step I: find block_id, slot
+   block_id = x//M
+   slot = x%M
+   
+   # Step II: Find symbol s
+   s = find_bin(cumul_array, slot) 
+   
+   # Step III: retrieve x_prev
+   x_prev = block_id*freq[s] + slot - cumul[s]
+
+   return (s,x_prev)
+
+def expand_state(x_shrunk, enc_bitarray):
+    # init
+    num_bits_step = 0
+
+    # read in bits to expand x_shrunk -&gt; x
+    x = x_shrunk
+    while x not in Interval[L,H]:
+        x = x*2 + enc_bitarray[num_bits_step]
+        num_bits_step += 1
+    return x, num_bits_step
+
+def decode_step(x, enc_bitarray):
+    # decode s, retrieve prev state
+    s, x_shrunk = rans_base_decode_step(x)
+
+    # expand back x_shrunk to lie in Interval[L,H]
+    x_prev, num_bits_step = expand_state(x_shrunk, enc_bitarray)
+    return s, x_prev, num_bits_step
+
+def decode(encoded_bitarray, num_symbols):
+    # initialize counter of bits read from the encoded_bitarray
+    num_bits_read = 0
+
+    # read the final state 
+    num_state_bits = ceil(log2(H))
+    x = to_uint(encoded_bitarray[:num_state_bits])
+    num_bits_read += num_state_bits
+
+    # main decoding loop
+    symbols = []
+    for _ in range(num_symbols):
+        # decoding step
+        s, x, num_bits_step = decode_step(x, encoded_bitarray[:num_bits_read])
+        symbols.append(s)
+
+        # update num_bits_read counter
+        num_bits_read += num_bits_step
+    return reverse(symbols) # need to reverse to get original sequence
+</code></pre>
+<p>Whoosh! That concludes our discussion of making rANS practical. You should now be able to take this pseudocode and implement a working rANS compressor. There are some optimizations + parameter choices we can perform on streaming rANS, to make it even better. However, I will leave that discussion for some other time. Now I have to go back to meditating! The Asymmetric Numeral Systems story is not over yet...!</p>
+<p><strong>Vishnu, Mahesh:</strong> Thanks Brahma! That was a great discussion. Lets take a few days to ruminate over this.. we will be back to finish the story!</p>
+<hr />
+<h2 id="rans-in-practice"><a class="header" href="#rans-in-practice">rANS in practice</a></h2>
+<p><strong>Brahma:</strong> Allright! Now that we have understood the <code>Streaming rANS</code> algorithm, lets try to understand the speed of the algorithm, and see what all modifications we can do to make the encoding/decoding faster. </p>
+<p>Lets start with the parameter choices. One of the most fundamental parameters is <code>M = sum of freqs</code>. As a reminder, given the input probability distribution, <code>prob[s]</code>, we chose the values <code>freq[s]</code> and <code>M</code> so that: </p>
+<pre><code>prob[s] ~ freq[s]/M
+</code></pre>
+<p>Any thoughts on how the choice of <code>M</code> impacts the <code>rANS</code> algorithm?</p>
+<p><strong>Vishnu:</strong> I think as for the compression performance is concerned, we probably want <code>M</code> as high as possible so that the approximation <code>prob[s] ~ freq[s]/M</code> is good. As for speed: lets' take a re-look at <code>rans_base_encode_step</code> and <code>rans_base_decode_step</code>:</p>
+<pre><code class="language-python">def rans_base_encode_step(x,s):
+   x_next = (x//freq[s])*M + cumul[s] + x%freq[s]
+   return x_next
+
+def rans_base_decode_step(x):
+   # Step I: find block_id, slot
+   block_id = x//M
+   slot = x%M
+   
+   # Step II: Find symbol s
+   s = find_bin(cumul_array, slot) 
+   
+   # Step III: retrieve x_prev
+   x_prev = block_id*freq[s] + slot - cumul[s]
+
+   return (s,x_prev)
+
+</code></pre>
+<p>If we look at the <code>rans_base_encode_step</code>, we have a multiplication with <code>M</code> (<code> x_next = (x//freq[s])*M + ...</code>). Choosing <code>M</code> to be a power of <code>2</code> will make this multiplication a bit-shift and slightly speed up the encoding. </p>
+<p>Also, if we look at the <code>rans_base_decode_step</code>, we have operations such as </p>
+<pre><code class="language-python"># Step I: find block_id, slot
+block_id = x//M
+slot = x%M
+</code></pre>
+<p>I think both of these operations should be faster if <code>M = 2^r</code> for some <code>r</code>. </p>
+<p><strong>Brahma:</strong> Thats a good observation Vishnu. Indeed in practice, <code>M</code> is chosen to be of the form <code>M=2^r</code>, typically <code>M = 2^{16}</code> or higher for sufficient precision. </p>
+<blockquote>
+<p><strong>M = 2^r</strong> i.e. M is typically chosen to be a power of 2</p>
+</blockquote>
+<p><strong>Vishnu:</strong> I however noticed that even after the <code>M=2^r</code> change, the <code>rans_base_encode_step</code> is still probably slow because of the division by <code>freq[s]</code> (<code>x_next = (x//freq[s])*M + ...</code>). </p>
+<p>Also, <code>rans_base_decode_step</code> seems to be dominated by the binary search over the <code>cumul[s]</code> array:</p>
+<pre><code class="language-python"># Step II: Find symbol s
+s = find_bin(cumul_array, slot) 
+</code></pre>
+<p>Any idea if we can speed this up?</p>
+<p><strong>Brahma:</strong> Good observations Vishnu! Indeed we need to address these bottlenecks. As far as the <code>rans_base_encode_step</code> is concerned the division by <code>freq[s]</code> can be sped up a bit by pre-processing reciprocals <code>1/freq[s]</code> and multiplying by them. Check out the <a href="https://fgiesen.wordpress.com/2014/02/18/rans-with-static-probability-distributions/">nice blog</a> by Fabian Giesen on the same:  on the same. </p>
+<p>As far as the <code>find_bin</code> step is concerned, unfortunately there is no simple way to make it fast, without changing the <code>rANS</code> algorithm itself! This is again mentioned in the <a href="https://fgiesen.wordpress.com/2014/02/18/rans-with-static-probability-distributions/">blog</a> link by Fabian, in a modification which he refers to as the <em>alias method</em>. </p>
+<p>I will leave it as an exercise for you to look through the details of the <em>alias method</em>. The end result is however that instead of taking <code>log(alphabet size)</code> comparisons for the binary search, we now only need a single comparison during the base decoding. This however leads to making the base encoding a bit slower, essentially shifting the compute from encoding to decoding! </p>
+<p><strong>Vishnu:</strong> Wow! definitely sounds interesting. </p>
+<p><strong>Mahesh:</strong> Thanks Brahma! It is nice to see tricks to speed up the <code>rans_base_encoding/decoding steps</code>. I however wonder if we have been giving too much emphasis on speeding the base steps. The encoding for example also includes the <code>shrink_state</code> state, which we haven't thought about. Maybe we should look into how to speed those up?</p>
+<p><strong>Brahma:</strong> That is right Mahesh, we can do a few things to speed up <code>shrink_state</code> and <code>expand_state</code> functions. Let me start by writing them down again: </p>
+<pre><code class="language-python">
+# [L,H] -&gt;  range in which the state lies
+L = M*t
+H = 2*L - 1
+
+
+def shrink_state(x,s):
+   # initialize the output bitarray
+   out_bits = BitArray()
+
+   # shrink state until we are sure the encoded state will lie in the correct interval
+   while rans_base_encode_step(x,s) not in Interval[freq[s]*t,2*freq[s]*t - 1]:
+       out_bits.prepend(x%2)
+       x = x//2
+   x_shrunk = x
+   return x_shrunk, out_bits
+
+
+def expand_state(x_shrunk, enc_bitarray):
+    # init
+    num_bits_step = 0
+
+    # read in bits to expand x_shrunk -&gt; x
+    x = x_shrunk
+    while x not in Interval[L,H]:
+        x = x*2 + enc_bitarray[num_bits_step]
+    return x, num_bits_step
+
+</code></pre>
+<p>If you notice, in both  <code>shrink_state</code> and <code>expand_state</code>, we are streaming out/in 1 bit at a time. Due to the memory layout on modern computer architectures where the memoery unit is of size 32-bits/64-bits, this might be slower than say accessing a byte at a time. </p>
+<p>Any thoughts on how we can modify the algorithm to read/write more than one bit at a time?</p>
+<p><strong>Mahesh:</strong> I think i got this! If you recall, our choice of range <code>H=2*L - 1</code>, was chosen mainly because we are reading in/out one bit at a time. If we choose, <code>H = 256*L - 1</code> for example, I think we should be able to write <code>8</code> bits at a time, and still guarantee everything works out fine. </p>
+<p>The new <code>shrink_state</code> and <code>expand_state</code> would then be: </p>
+<pre><code class="language-python">
+# [L,H] -&gt;  range in which the state lies
+b = 8 # for example
+b_factor = (1 &lt;&lt; NUM_OUT_BITS) # 2^NUM_OUT_BITS
+L = M*t
+H = b_factor*L - 1 
+
+
+def shrink_state(x,s):
+   # initialize the output bitarray
+   out_bits = BitArray()
+
+   # shrink state until we are sure the encoded state will lie in the correct interval
+    x_shrunk = x
+
+   while rans_base_encode_step(x,s) not in Interval[freq[s]*t,b_factor*freq[s]*t - 1]:
+       out_bits.prepend(x%b_factor)
+       x = x//b_factor
+   x_shrunk = x
+   return x_shrunk, out_bits
+
+
+def expand_state(x_shrunk, enc_bitarray):
+    # init
+    num_bits_step = 0
+
+    # read in bits to expand x_shrunk -&gt; x
+    x = x_shrunk
+    while x not in Interval[L,H]:
+        x = x*b_factor + to_uint(enc_bitarray[num_bits_step:num_bits_step+b])
+        num_bits_step += b
+    return x, num_bits_step
+
+</code></pre>
+<p>I think that should satisfy the constraints we had laid out for the <code>strink_state</code> and <code>expand_state</code> functions, but allow us to stream out <code>b</code> bits at a time. </p>
+<p><strong>Brahma:</strong> Very good Mahesh! The code indeed gets a bit complicated, but this does lead to a significant speed-up! In practice, <code>b</code> is typically chosen as <code>b=8, 16</code> (byte, word), or even <code>b=32</code> if the architecture supports it. </p>
+<p>Although we have been mainly talking in terms of psuedo-code, we can look at the encode/decode times, thanks to <a href="https://github.com/rygorous/ryg_rans">implementations</a> provided by Fabian Giesen.</p>
+<pre><code class="language-python"># reading/writing one byte at a time
+rANS encode:
+9277880 clocks, 12.1 clocks/symbol (299.6MiB/s)
+9276952 clocks, 12.1 clocks/symbol (299.7MiB/s)
+...
+rANS: 435113 bytes
+14754012 clocks, 19.2 clocks/symbol (188.4MiB/s)
+14723258 clocks, 19.2 clocks/symbol (188.8MiB/s)
+...
+decode ok!
+
+
+# reading/writing 32 bits at a time:
+rANS encode:
+7726256 clocks, 10.1 clocks/symbol (359.8MiB/s)
+7261792 clocks, 9.4 clocks/symbol (382.8MiB/s)
+...
+rANS: 435116 bytes
+12159778 clocks, 15.8 clocks/symbol (228.6MiB/s)
+12186790 clocks, 15.9 clocks/symbol (228.1MiB/s)
+...
+decode ok!
+
+</code></pre>
+<p>As you can see the speed up from going from <code>b=8</code> to <code>b=32</code> is quite significant! Note that getting such fast encoders/decoders is no mean feat. You should definitely take a look at the <a href="https://github.com/rygorous/ryg_rans">source code</a>, to see how he implements this!</p>
+<p><strong>Vishnu:</strong> Wow, those numbers are quite incredible! I glanced through the github page, and noticed that these are some interlaced/SIMD rANS encoder/decoders there. What are these?</p>
+<p><strong>Brahma:</strong> Ahh! One thing you might note is that even though we have been able to significantly speed up the <code>rANS</code> encoders/decoders, they are still inherently sequential. This is a pity, considering the modern computer architectures have bumped up their compute through parallelization features such as: instruction level parallelism (ILP), multiple cores, SIMD cores (single instruction multiple data) and even GPUs. In a way, inspite of having SIMD cores, GPUs etc. our encoder is only currently using a core to run the encoder/decoder. </p>
+<p>Any idea how we can parallelize our encoders/decoders? </p>
+<p><strong>Vishnu:</strong> Yes, I think we could cut the data into multiple chunks and encode/decode each chunk independently in parallel. </p>
+<p><strong>Brahma:</strong> Thats right Vishnu. Typically there are some threading overheads to doing things in this manner. One can however be a bit more smarter about it, and avoid any significant overheads. Fabian in his <a href="https://arxiv.org/abs/1402.3392">paper</a>,  explains how to achieve good performance with this parallelization, without incurring significant overheads. I myself have not read it yet, so would be great if either of you could do that for me! </p>
+<p>What however struct me even more is that we can interleave two encoders/decoders together and eveen using a single core, thanks to instruction level parallelism, one can achieve some speed up. This is explained well in the blog and <a href="https://fgiesen.wordpress.com/2015/12/21/rans-in-practice/">blog</a>. We can also run the <code>interleaved rANS</code> variant, and compare the numbers for ourselves: </p>
+<pre><code class="language-python">
+# rANS decoding 
+8421148 clocks, 11.0 clocks/symbol (330.1MiB/s)
+8673588 clocks, 11.3 clocks/symbol (320.5MiB/s)
+...
+
+# interleaved rANS decoding
+5912562 clocks, 7.7 clocks/symbol (470.2MB/s)
+5775046 clocks, 7.5 clocks/symbol (481.4MB/s)
+....
+
+# interleaved SIMD rANS decoding:
+3898854 clocks, 5.1 clocks/symbol (713.0MB/s)
+3722360 clocks, 4.8 clocks/symbol (746.8MB/s)
+...
+
+</code></pre>
+<p><strong>Mahesh:</strong> Thanks Brahma for all the useful references! It is great to see the incredible speedups after system optimizations. </p>
+<p>I am wondering if it is possible to take an entire different approach to speeding up the <code>rANS</code> encoding/decoding algorithms, which is <em>caching</em>. Considering our state is always limited to <code>[L,H]</code>, in a way one can think of the encoding for example as a mapping from: <code>[L,H]</code> and the <code>alphabet set</code> to <code>[L,H]</code>. Thus, we just need to fill in these tables once and then it is just a matter of looking at the table for  Would that work out? </p>
+<pre><code class="language-python"># rANS encode_step function
+encode_step(x, s) -&gt; x_next, bits
+
+## cached encoding:
+# pre-process and cache the output of encode_step into a lookup table
+encode_lookup_table[x, s] -&gt; x_next, bits
+</code></pre>
+<p><strong>Brahma:</strong> Good observation Mahesh! That is yet another way to speed up <code>rANS</code>, and is in fact a good segue to the <code>tANS</code> i.e. the <code>table ANS</code> variant. I will however leave the <code>tANS</code> discussion for some other day! </p>
+<hr />
+<h2 id="table-ans-tans"><a class="header" href="#table-ans-tans">Table ANS (tANS)</a></h2>
+<p><strong>Brahma:</strong> Even before we get started on <em>caching</em> our rANS encoder/decoders, lets take a minute to understand what is caching and what are the caveats which come with it. </p>
+<p>Well, the idea of caching is quite simple: if there is some operation which you are doing repeatedly, you might as well just do it once as a part of pre-processing, (or even better during compile time) and then store this result in a lookup table. Now, when we need to perform this computation again, we can just look at our lookup table and retrieve the result. No need to repeat the computation! </p>
+<p>This surely must be faster than doing the computation? Well, to answer this question, we need to ask another question: </p>
+<blockquote>
+<p>How much time it takes to retrieve a value stored in a lookup table?</p>
+</blockquote>
+<p>Unfortunately, the answer to this question is not as straightforward, due to the complex memory structure (for good reasons!) we have in modern computer architectures. But the thumb rule is that, if the lookup table is small, it is going to be fast, if it is large then it will probably not be worth it. </p>
+<p>To be more specific: if the table is small (typically smaller than a few MBs) then it resides in the L1/L2 or L3 cache (also known as LLC -&gt; Last Level cache). The L1/L2/L3 get progressively slower, but take about <code> &lt; 10 cycles</code> which is quite fast. But, if your lookup table size is larger, then the lookup table resides on the <code>RAM</code> (i.e. the main memory), which is much slower with reading times <code>~100 cycles</code>. </p>
+<p>Here is a screenshot on the memory layout from the excellent <a href="https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/">MIT OCW lecture series</a></p>
+<img width="1090" alt="image" src="https://user-images.githubusercontent.com/1708665/167315248-0c5bcb46-0c01-4498-99d6-41c7644c38a2.png">
+<p>So, the thumb-rule we need to keep in mind while designing <em>caching</em> based methods is to keep the tables small. The larger the table, the more likely it is that we are going to get <em>cache-misses</em> (i.e. accessing data from the RAM), which is quite slow. </p>
+<p>This thumb-rule should suffice for our discussion, but if you are interested in reading more on this, feel free to look at the following references:</p>
+<ol>
+<li>https://arstechnica.com/gadgets/2002/07/caching/</li>
+<li>https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/</li>
+</ol>
+<p><strong>Brahma:</strong> Okay, now that we have a memory model as a reference, lets think about how we can go about <em>caching</em> rANS.  For simplicity lets assume the following: </p>
+<pre><code class="language-python">M = 2^r
+L = M
+H = 2M - 1
+A -&gt; alphabet size
+</code></pre>
+<p>i.e. we are choosing <code>t=1</code> and <code>M</code> to be a power of <code>2</code>. Lets try to think of what the decoding will look like first. Mahesh any thoughts?</p>
+<p><strong>Mahesh:</strong> Hmm, let me start by writing the <code>decode_step</code> function:</p>
+<pre><code class="language-python">def decode_step(x, enc_bitarray):
+    # decode s, retrieve prev state
+    s, x_shrunk = rans_base_decode_step(x)
+
+    # expand back x_shrunk to lie in Interval[L,H]
+    x_prev, num_bits_step = expand_state(x_shrunk, enc_bitarray)
+    return s, x_prev, num_bits_step
+</code></pre>
+<p>I don't think there is a direct way to <em>cache</em> the entire <code>decode_step</code> function into a lookup table, as the <code>enc_bitarray</code> input is not finite in size, but we could probably cache the functions <code>rans_base_decode_step</code> and <code>expand_state</code> into individual lookup tables. </p>
+<p>Let me start by thiking about <code>rans_base_decode_step(x)</code> first. This is just a mapping from <code>x in [L,H]</code> to <code>x_shrunk, s</code>. So the lookup table has <code>M</code> rows, each row consisting of the decoded symbol <code>s</code> and <code>x_shrunk</code>. </p>
+<p>As for the <code>expand_state(x_shrunk, enc_bitarray)</code> function, it is a bit confusing as one of the inputs is <code>enc_bitarray</code>, so it is not obvious to me how to cache this function. </p>
+<p><strong>Brahma:</strong> Good start Mahesh! You are right that the <code>expand_state(x_shrunk, enc_bitarray)</code> in the current form is not amenable to caching. But, we can modify the <code>expand_state</code> function appropriately to make it cachable!</p>
+<p>It is easiest to think about this in the binary alphabet. 
+Lets say <code>r=5, i.e. M = 2^5</code>, then</p>
+<pre><code class="language-python">L =    M = 100000b
+H = 2L-1 = 111111b
+</code></pre>
+<p>and so the state <code>x</code> always looks like <code>1zzzzzb</code> where <code>z</code> is any bit. Does this give any hints? </p>
+<p><strong>Vishnu:</strong> Ahh! I see, so after choosing <code>M=2^r</code> and looking in the binary alphabet, it is quite easy to imagine what <code>expand_state</code> is doing. For example: if <code>x_shrunk = 101</code> then, the expanded state <code>x</code> will look like <code>101zzzb</code> where <code>z</code> are the bits we read from the encoded bitstream. </p>
+<p>Thus, we can simplify the <code>expand_state</code> function as:</p>
+<pre><code class="language-python">
+M = 2^r
+L = M
+H = 2L - 1
+
+####### Original expand_state func ############
+def expand_state(x_shrunk, enc_bitarray):
+    # init
+    num_bits_step = 0
+
+    # read in bits to expand x_shrunk -&gt; x
+    x = x_shrunk
+    while x not in Interval[L,H]:
+        x = x*b_factor + to_uint(enc_bitarray[num_bits_step:num_bits_step+b])
+        num_bits_step += b
+    return x, num_bits_step
+
+######## New expand_state func #################
+def expand_state(x_shrunk, enc_bitarray):
+    # if x_shrunk = 101, num_bits_step = (5+1) - 3
+    num_bits_step = (r+1) - ceil(log2(x_shrunk+1))
+
+    # get the new state:
+    x = (x_shrunk &lt;&lt; num_bits_step) + to_uint(enc_bitarray[:num_bits_step])
+
+    return x, num_bits_step
+</code></pre>
+<p>Given the new <code>expand_state</code> function, we can convert it into a lookup table which outputs <code>num_bits_step</code>. </p>
+<pre><code class="language-python">num_bits_step = expand_state_num_bits_table[x_shrunk]
+</code></pre>
+<p>As <code>x_shrunk</code> lies in <code>Interval[freq[s], 2*freq[s] - 1]</code>, the <code>expand_state_num_bits_table</code> lookup table will at most have <code>M</code> rows. </p>
+<p><strong>Brahma:</strong> Great job Vishnu! That is indeed the correct way to go about things. Notice how our simplified <code>expand_state</code> function for <code>M=2^r</code> can also be used in non-cached <code>rANS</code>. </p>
+<p>To summarise the here is how the new rans cached decoding will look like: </p>
+<pre><code class="language-python">M = 2^r
+L = M
+H = 2L - 1
+
+def rans_base_decode_step(x):
+   ...
+   return (s,x_prev)
+
+def get_expand_state_num_bits(x_shrunk):
+    # if x_shrunk = 101, num_bits_step = (5+1) - 3
+    num_bits_step = (r+1) - ceil(log2(x_shrunk+1))
+
+    return num_bits_step
+
+### build the tables ###
+# NOTE: this is a one time thing which can be done at the beginning of decoding
+# or at compile time
+
+# define the tables
+rans_base_decode_table_s = {} # stores s
+rans_base_decode_table_x_shrunk = {} # stores x_shrunk
+expand_state_num_bits = {} # stores num_bits to read from bitstream
+
+# fill the tables
+for x in Interval[L,H]:
+    s, x_shrunk = rans_base_decode_step(x)
+    rans_base_decode_table_s[x] = s
+    rans_base_decode_table_x_shrunk[x] = x_shrunk
+
+for s in Alphabet:
+    for x_shrunk in Interval[freq[s], 2*freq[s] - 1]:
+        expand_state_num_bits[x] = get_expand_state_num_bits(x_shrunk)
+
+
+### the cached decode_step ########
+def decode_step_cached(x, enc_bitarray):
+    # decode s, retrieve prev state
+    s = rans_base_decode_table_s[x]
+    x_shrunk = rans_base_decode_table_x_shrunk[x]
+
+    # expand back x_shrunk to lie in Interval[L,H]
+    num_bits_step = expand_state_num_bits[x_shrunk]
+
+    # get the new state:
+    x_prev = (x_shrunk &lt;&lt; num_bits_step) + to_uint(enc_bitarray[:num_bits_step])
+    return s, x_prev, num_bits_step
+
+</code></pre>
+<p>That's it! this completes the <code>cached rANS</code> decoder. Let's also analyse how big our lookup tables are: </p>
+<pre><code class="language-python">M = 2^r, L = M, H = 2L - 1
+rans_base_decode_table_s #M rows, stores symbol s in Alphabet
+rans_base_decode_table_x_shrunk #M rows, stores state x_shrunk &lt;= H
+expand_state_num_bits  #M rows, stores num_bits (integer &lt;= r)
+</code></pre>
+<p>So, the decoding lookup tables are reasonable in terms of size! for <code>M = 2^16</code>, the size of the table is <code>~200KB</code> which is not bad!</p>
+<p>Does that make sense?</p>
+<p><strong>Mahesh:</strong> Nice! Yes, it does make lot of sense. I believe the construction for <code>L = M*t</code> for a general <code>t</code> is also similar. We still need to assume <code>M = 2^r</code> for our caching to work I suppose. </p>
+<p><strong>Brahma:</strong> Thats right Mahesh! <code>M=2^r</code> does simplify things quite a bit. As we will see, it will also simplify the <code>encode_step</code> caching. Do you want to try <em>caching</em> the encoding? </p>
+<p><strong>Mahesh:</strong> Yes, let me take a stab: Lets start by writing the <code>encode_step</code> function structure again: </p>
+<pre><code class="language-python">def encode_step(x,s):
+   # shrink state x before calling base encode
+   x_shrunk, out_bits = shrink_state(x, s)
+
+   # perform the base encoding step
+   x_next = rans_base_encode_step(x_shrunk,s)
+   
+   return x_next, out_bits
+</code></pre>
+<p>Lets start by looking at <code>rans_base_encode_step(x_shrunk,s)</code> function first,  We know that the input state <code>x_shrunk</code> lies in <code>[freq[s], 2*freq[s] - 1]</code>. Thus, we can replace <code>rans_base_encode_step(x_shrunk,s)</code> with a lookup table: </p>
+<pre><code class="language-python">base_encode_step_table = {} # contains the next state x_next
+for s in Alphabet:
+    for x_shrunk in Interval[freq[s], 2*freq[s] - 1]:
+        base_encode_step_table[x_shrunk, s] = rans_base_encode_step(x_shrunk,s)
+</code></pre>
+<p>The <code>base_encode_step_table</code> indexed by <code>(x_shrunk, s)</code> should contain in total <code>sum(freq[s]) = M</code> elements. </p>
+<p>Now, coming to the <code>shrink_state(x,s)</code>, I think it might again help visualizing the state <code>x</code> in the binary alphabet.</p>
+<p>Lets again take the same example. Say <code>r=5, i.e. M = 2^5</code>, then</p>
+<pre><code class="language-python">L =    M = 100000b
+H = 2L-1 = 111111b
+</code></pre>
+<p>and so the state <code>x</code> always looks like <code>1zzzzzb</code> where <code>z</code> is any bit. If you recall, the <code>shrink_state</code> function basically streams out the lower bits of the state <code>x</code>, until it is in the <code>Interval[freq[s], 2*freq[s] - 1]</code>. </p>
+<p>Now, lets say, <code>freq[s] &lt;= 2^y &lt; (2*freq[s] - 1)</code>. Then we know the following: </p>
+<ol>
+<li>For any <code>x_shrunk in [2^y, 2*2^y - 1]</code>, we need to output <code>r+1-y</code> bits. </li>
+<li>For any <code>x_shrunk in [2^{y-1}, 2*2^{y-1} - 1]</code>, we need to output <code>r+2-y</code> bits. </li>
+</ol>
+<p>Note that there can be one and only one integer <code>y</code> satisfying the condition. Also, note that due to the size of the interval <code>[Freq[s], 2*freq[s] - 1]</code>, we either output <code>r+1-y</code> or <code>r+2-y</code> bits, no other scenario can occur. This should help us simplify the <code>shrink_state</code> function as follows: </p>
+<pre><code class="language-python">M = 2^r
+L = M
+H = 2L - 1
+
+####### Original shrink_state func ############
+def shrink_state(x,s):
+    # initialize the output bitarray
+    out_bits = BitArray()
+
+    # shrink state until we are sure the encoded state will lie in the correct interval
+    x_shrunk = x
+    while x_shrunk not in Interval[freq[s]*t,2*freq[s]*t - 1]:
+        out_bits.prepend(x%2)
+        x = x//2
+    return x_shrunk, out_bits
+
+####### New/Simplified shrink_state func ############
+def shrink_state(x,s):
+    # calculate the power of 2 lying in [freq[s], 2freq[s] - 1]
+    y = ceil(log2(freq[s]))
+    num_out_bits = r+1 - y
+    thresh = freq[s] &lt;&lt; (num_out_bits+1)
+    if x &gt;= thresh:
+        num_out_bits += 1
+    
+    x_shrunk = x &gt;&gt; num_out_bits
+    out_bits = to_binary(x)[-num_out_bits:]
+             
+    return x_shrunk, out_bits
+</code></pre>
+<p>The new <code>shrink_state</code> much more amenable to caching. We can just cache the <code>y, thresh</code> values for each symbol <code>s</code>. This completes the <code>encode_step</code> caching. The full pseudo-code is as follows: </p>
+<pre><code class="language-python">M = 2^r
+L = M
+H = 2L - 1
+
+def rans_base_encode_step(x_shrunk,s):
+    ...
+    return x_next
+
+def shrink_state_num_out_bits_base(s):
+    # calculate the power of 2 lying in [freq[s], 2freq[s] - 1]
+    y = ceil(log2(freq[s]))
+    return r + 1 - y
+
+### build the tables ###
+# NOTE: this is a one time thing which can be done at the beginning of encoding
+# or at compile time
+
+base_encode_step_table = {} #M rows, each storing x_next in [L,H]
+for s in Alphabet:
+    for x_shrunk in Interval[freq[s], 2*freq[s] - 1]:
+        base_encode_step_table[x_shrunk, s] = rans_base_encode_step(x_shrunk,s)
+
+shrink_state_num_out_bits_base = {} #stores the exponent y values as described above
+shrink_state_thresh = {} # stores the thresh values
+for s in Alphabet:
+    shrink_state_num_out_bits_base[s] = shrink_state_num_out_bits_base(s)
+    shrink_state_thresh[s] = freq[s] &lt;&lt; (shrink_state_num_out_bits_base[s] + 1)
+
+### the cached encode_step ########
+def encode_step_cached(x,s):
+    # shrink state x before calling base encode
+    num_out_bits = shrink_state_num_out_bits_base[s]
+    if x &gt;= shrink_state_thresh[y]:
+        num_out_bits += 1
+    x_shrunk = x &gt;&gt; num_out_bits
+    out_bits = to_binary(x)[-num_out_bits:]
+
+    # perform the base encoding step
+    x_next = base_encode_step_table[x_shrunk,s]
+   
+    return x_next, out_bits
+</code></pre>
+<p><strong>Brahma:</strong> Very good Mahesh! That is quite precise. Lets again take a minute to see how much memory do our encoding lookup tables take:</p>
+<pre><code class="language-python">M = 2^r, L = M, H = 2L - 1
+base_encode_step_table = {} #M rows, each storing x_next in [L,H]
+shrink_state_num_out_bits_base = {} # A rows (alphabet size) each storing the base num_bits &lt;= r
+shrink_state_thresh = {} # A rows (alphabet size) storing an integer &lt;= H
+</code></pre>
+<p>For an alphabet size of <code>256</code>, this takes around <code>100KB</code> which is quite reasonable. Note that the cached version of the encoding is a bit slow as compared with the decoding, as we need to do a comparison, but it is not bad at all. </p>
+<p><strong>Vishnu:</strong> Thanks Brahma! Is the <code>cached rANS</code> another name for <code>tANS</code> or the <code>table ANS</code>? Intuitively the name makes sense, considering all we are now during encoding and decoding is access the lookup tables!</p>
+<p><strong>Brahma:</strong> You are right Vishnu! In fact <code>cached rANS</code>, the way in we have discussed is in fact on variant of the table ANS, the <code>tANS</code>. So, in a way <code>tANS</code> is a <em>family</em> of table-based encoders/decoders which have the exact same <code>decode_step_cached</code> and <code>encode_step_cached</code> functions. The main difference between them is how the lookup tables are filled. </p>
+<p>For example, if you look at the lookup tables we have, the only constraint we have for the encode table <code>base_encode_step_table</code> and the decode tables <code>rans_base_decode_table_s</code>, <code>rans_base_decode_table_x_shrunk</code> is that they need to be inverses of each other. </p>
+<pre><code class="language-python">base_encode_step_table[x_shrunk, s] = x
+
+# implies that
+s = rans_base_decode_table_s[x]
+x_shrunk = rans_base_decode_table_x_shrunk[x]
+</code></pre>
+<p>We can for example, permute the values in the tables, ensuring that they are inverses, and that will give us another <code>tANS</code> encoder/decoder. </p>
+<p><strong>Vishnu:</strong> Is there a particular permutation of these tables which is the <em>optimal</em> tANS? </p>
+<p><strong>Brahma:</strong> As you can imagine, all of these <code>tANS</code> encoders have subtle differences in their compression performance. A more in-depth analysis on <code>tANS</code> and which permutations should one choose is discussed in great detail by Yann and Charles: </p>
+<hr />
+<p><em>This brings us to the end of our discussion on the Asymmetric Numeral Systems. Hope you enjoyed the discussion! In case you are interested in learning more, here is a curated list of references</em></p>
+<ol>
+<li><a href="https://arxiv.org/abs/0902.0271">Original Paper</a>: Although the algorithms are great, I unfortunately found it difficult to follow the paper. Still, it might be good to skim through it, as everything we discussed is in there (in some form)</li>
+<li><a href="https://fgiesen.wordpress.com/2014/02/02/rans-notes/">Fabian Giesen's Blog</a>: Great blog + implementation focused on <code>rANS</code>. the seqeunce of articles also illustrates some brilliant tricks in code speed optimizations to make <code>rANS</code> fast. </li>
+<li><a href="https://cbloomrants.blogspot.com/2014/02/02-18-14-understanding-ans-conclusion.html">Charles Bloom's Blog</a>: Great sequence of articles again. We borrow quite a few things (including the examples) from here. It contains more in-depth discussion of different variants <code>tANS</code> among other things</li>
+<li><a href="http://fastcompression.blogspot.com/2013/12/finite-state-entropy-new-breed-of.html">Yann Collet's Blog</a>: A sequence of articles discussing <code>tANS</code> from a totally different perspective, which connects <code>tANS</code> with Huffman coding and unifies them under a single framework. Very illuminating! </li>
+</ol>
+<p><strong>TODO: Add links to theoretical works on ANS</strong></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../lossless_iid/aep.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../resources.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../lossless_iid/aep.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+    </body>
+</html>
