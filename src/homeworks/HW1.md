@@ -63,7 +63,7 @@ HINT: KL-Divergence and it's properties will be helpful to show this.
 
 We mainly explored the prefix-free codes in class. But there is a much broader class of codes, the uniquely decodable codes. In this question, we will show that even with the uniquely decodable codes, we cannot do better than the Entropy. 
 
-1. [5 points] Consider the code `C1` below. Is `C1` uniquely decodable? Implement an decoder for the code below. Briefly justify your decoding procedure. 
+1. [5 points] Consider the code `C1` below. Is `C1` uniquely decodable? Give a decoding procedure for `C1` if you claim it is uniquely decodable. Briefly justify your decoding procedure. 
     ```
     A -> 10
     B -> 00
