@@ -3313,7 +3313,7 @@ NA~BANA
 abracadabraabracadabraabracadabra -&gt; rrdd~aadrrrcccraaaaaaaaaaaabbbbbba
 hakunamatata -&gt; hnmtt~aauaaka
 </code></pre>
-<p>Notice that the BWT forward transform of <code>x_input = BANANA -&gt; BNN~AAA</code> has the letters of <code>BANANA~</code> permuted, i.e. <code>BWT(x_input)</code> is just reordering the letters in the input in a particular way. Justify in a few lines why <code>BWT(x_input)</code> is a permutation of the string <code>x_input</code> (we will assume delimiter <code>~</code> is a character in <code>x_input</code>).</p>
+<p>Notice that the BWT forward transform of <code>x_input = BANANA -&gt; BNN~AAA</code> has the letters of <code>BANANA~</code> permuted, i.e. <code>BWT(x_input)</code> is just reordering the letters in the input in a particular way. Justify in a few lines why <code>BWT(x_input)</code> is a permutation of the string <code>x_input~</code> (<code>x_input~</code> -&gt; <code>x_input</code> concatenated with the delimiter <code>~</code>).</p>
 </li>
 <li>
 <p>[5 points] Manually compute and show the BWT transform for <code>panama</code>, using the method above. Show your work to get credit (that is you can't just write the final transform but show the steps described above).</p>
