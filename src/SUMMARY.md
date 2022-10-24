@@ -19,5 +19,6 @@
     - [HW0](./homeworks/HW0.md)
     - [HW0 solution](./homeworks/HW0_sol.md)
     - [HW1](./homeworks/HW1.md)
+    - [HW2](./homeworks/HW2.md)
 
 [//]: # (    - [HW1 solution]&#40;./homeworks/HW1_sol.md&#41;)
