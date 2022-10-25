@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Project</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="././mdbook-admonish.css">
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="lossless_iid/ans.html"><strong aria-hidden="true">1.7.</strong> Arithmetic Numeral Systems</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resources.html"><strong aria-hidden="true">2.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="homeworks/coverpage.html"><strong aria-hidden="true">3.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="homeworks/HW0.html"><strong aria-hidden="true">3.1.</strong> HW0</a></li><li class="chapter-item expanded "><a href="homeworks/HW0_sol.html"><strong aria-hidden="true">3.2.</strong> HW0 solution</a></li><li class="chapter-item expanded "><a href="homeworks/HW1.html"><strong aria-hidden="true">3.3.</strong> HW1</a></li><li class="chapter-item expanded "><a href="homeworks/HW2.html"><strong aria-hidden="true">3.4.</strong> HW2</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="projects.html" class="active"><strong aria-hidden="true">4.</strong> Project</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="projects"><a class="header" href="#projects">Projects</a></h1>
+<p>The project is an important part of the course (and constitutes <code>30%</code> of the course grade). This documentation serves as an introduction to the project expectations, deliverables etc.</p>
+<h2 id="project-logistics"><a class="header" href="#project-logistics">Project Logistics</a></h2>
+<p>Following are the due dates for different components of the project. All (except final presentation) will be due on Gradescope. More details for each component will be provided in the subsequent sections.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Weightage</th><th>Description</th><th>Due Date <br/> (midnight PT)</th></tr></thead><tbody>
+<tr><td><a href="#i-project-proposal">Proposal</a></td><td>5%</td><td>One page proposal</td><td>11/4, Fri</td></tr>
+<tr><td><a href="#ii-project-milestone">Milestone Report</a></td><td>5%</td><td>Upto two pages progress report + code (if any)</td><td>11/28, Mon</td></tr>
+<tr><td><a href="#iii-final-presentation">Final Presentation</a></td><td>5%</td><td>5 min presentation + 5 min QnA</td><td>12/08, Thu 4:30pm-7:30pm (last class)</td></tr>
+<tr><td><a href="#iv-final-report-and-code">Final Report and Code</a></td><td>15%</td><td>Detailed report and code submission</td><td>12/16, Fri</td></tr>
+</tbody></table>
+</div>
+<h2 id="project-expectations"><a class="header" href="#project-expectations">Project Expectations</a></h2>
+<p>The main goal of the project is to give you all some experience of working on a problem related to data compression. Ideally, the project will involve some component of reading, understanding and also implementation of a compression technique. </p>
+<p>The expectation for the project is as follows: </p>
+<ul>
+<li>Literature review of a compression method/area. You are expected to work with your mentor in understanding the topic you choose, and narrow down on a concrete problem to work on for the project. </li>
+<li>Implement the compression method (either using SCL or otherwise). You will work with your project mentor to ensure that your implementation is well documented and tested. </li>
+<li>Finally, write a report explaining the theoretical ideas + implementation details behind your method. </li>
+</ul>
+<p>Given that the quarter is short, the problem on which you will work on will be a bit concrete. Please find a list of topics suggested by instructors <a href="#project-suggestions">below</a>. You are welcome to come up with your own ideas applying compression to your domain of interest or simply exploring a particular theoretical result or practical technique. Please work with the instructors to ensure the feasibility of the project in the given time frame.</p>
+<p>The expected team size for each project is 1-2 students. Groups of 3 are also ok in exceptional circumstances given the scope of the project. Each project will also be assigned a mentor from the teaching staff. The project team and the mentor can decide to meet as per need. </p>
+<h2 id="project-deliverables"><a class="header" href="#project-deliverables">Project Deliverables</a></h2>
+<h3 id="i-project-proposal"><a class="header" href="#i-project-proposal">I. Project Proposal</a></h3>
+<p><strong>Due: 11/4, Fri, midnight PT</strong></p>
+<p>Please use the time till the deadline to explore and decide what project you would like to work on. <strong>Before you submit the proposal, ensure to have at least one 10 minute 1-on-1 chat with the teaching staff (as a team), and finalize on the project idea.</strong> The list of finalized project ideas will be maintained here: <a href="https://docs.google.com/spreadsheets/d/1tcqttFB4fx4ekcOlHASbtBMISmcTRRqQ7UGHN4mXO_Y/edit?usp=sharing">EE274 Project sign-up spreadsheet</a>. Once the project is finalized, we will assign a project mentor (Kedar/Shubham/Pulkit/Tsachy) who can help you with references for the project, help with programming, etc. As we are a small class, ideally we would not like to repeat the exact same project. The teaching team will help you modify your idea appropriately in case someone else is working on the exact same project.</p>
+<p>For deliverable, we will follow a similar template as our friends from <a href="http://cs231n.stanford.edu/project.html">CS231N</a>. For the project proposal please submit a 1-page summary on what your project idea is, and an approximate timeline as to what you are planning to achieve by week-x etc. Some questions the proposal should answer:</p>
+<ul>
+<li>What is the problem that you will be investigating? Why is it interesting?</li>
+<li>What reading will you examine to provide context and background?</li>
+<li>What method or algorithm are you proposing? If there are existing implementations and/or theoretical justifications, will you use them and how? How do you plan to improve or modify such implementations? You don't have to have an exact answer at this point, but you should have a general sense of how you will approach the problem you are working on.</li>
+<li>How will you evaluate your results? Qualitatively, what kind of results do you expect (e.g. plots or figures)? Quantitatively, what kind of analysis will you use to evaluate and/or compare your results (e.g. what performance metrics or statistical tests)?</li>
+</ul>
+<h3 id="ii-project-milestone"><a class="header" href="#ii-project-milestone">II. Project Milestone</a></h3>
+<p><strong>Due: 11/28, Mon, midnight PT</strong></p>
+<p>As for the project milestone, please submit a two-page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). </p>
+<p>[MORE DETAILS TO FOLLOW]</p>
+<h3 id="iii-final-presentation"><a class="header" href="#iii-final-presentation">III. Final presentation</a></h3>
+<p><strong>Due: 12/08, Fri, 4:30pm-7:30pm</strong></p>
+<p>The Final presentation will be during the last class (note we will have a longer last class slot!). <strong>The presentation will involve lightning talks: (short 5min talk + 5min QnA).</strong> </p>
+<p>Attendance is mandatory for the presentation. In case you are not able to make it after 5:50pm on <code>12/08</code>, please inform us beforehand, and we will try to schedule your presentation earlier. You will work with your mentor on making sure the presentation is interesting and useful to your classmates :). </p>
+<p>[MORE DETAILS TO FOLLOW]</p>
+<h3 id="iv-final-report-and-code"><a class="header" href="#iv-final-report-and-code">IV. Final report and code</a></h3>
+<p><strong>Due: 12/16, Fri, midnight PT</strong></p>
+<ul>
+<li>
+<p>The final submission involves a 3-4 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. </p>
+</li>
+<li>
+<p>You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon. </p>
+</li>
+</ul>
+<p>Your mentor will work with you on setting expectations, and helping you review the report/code before the submission.</p>
+<p>[MORE DETAILS TO FOLLOW]</p>
+<h2 id="project-suggestions"><a class="header" href="#project-suggestions">Project Suggestions</a></h2>
+<p>Here is a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!</p>
+<p><strong>1. <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">BWT</a>: Burrows Wheeler Transform for searching over compressed text</strong></p>
+<p><em>Potential Mentor</em>: Kedar</p>
+<p>We briefly touched the world of BWT based compressors in HW2. The project will go beyond HW2 and implement fast and efficient versions of BWT transforms. It will also explore how to use BWT for searching over compressed data.</p>
+<p><strong>2. <a href="https://en.wikipedia.org/wiki/Context_tree_weighting">CTW</a>: Context Tree Weighting</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>We learned that <code>k-th</code> order probability model can be used with arithmetic coding to achieve good compression. However, the larger the <code>k</code>, the slower the adaptability of the model. CTW tries to solve this problem by &quot;mixing&quot; the distributions of different order efficiently. This project will involve understanding the CTW algorithm, understanding why CTW has such good theoretical properties (Rissanen lower bound etc.) and implementing it in SCL.</p>
+<p>A few useful links: <a href="https://docs.google.com/presentation/d/1LUbo-6mLpYTwcELOLlRR4ohku9j2kCiQj_2sYPh0uWA/edit#slide=id.g5eaf3d9f0e_0_75">ppt</a>, <a href="https://github.com/fumin/ctw">ctw-cpp-implementation</a>, <a href="https://www.cs.cmu.edu/%7Eaarti/Class/10704_Fall16/CTW.pdf">original paper</a>, <a href="https://web.stanford.edu/class/ee477/lectures2011/lecture4.pdf">lecture notes</a></p>
+<p><strong>3. <a href="https://bjlkeng.github.io/posts/lossless-compression-with-latent-variable-models-using-bits-back-coding/">Bits-back coding</a> and compression of data with permutation invariance</strong></p>
+<p><em>Potential Mentor</em>: Kedar</p>
+<p>We learnt about <code>rANS</code> in class. <code>rANS</code> has an interesting property that we decode in the reverse direction vs the encoding. This property can be used to great effect with a technique called &quot;bits-back coding&quot;. </p>
+<p>Recent <a href="https://arxiv.org/abs/2107.09202">paper</a> and <a href="https://github.com/facebookresearch/multiset-compression">implementation</a> show that it is possible to have a very general method which allows saving bits by not saving the order in the data (utilizing permutation invariance). This uses bits-back coding underneath. This project will involve understanding and re-implementing this method in SCL.</p>
+<p><strong>4. Tabular data compression using <a href="https://en.wikipedia.org/wiki/Chow%E2%80%93Liu_tree">Chow-Liu trees</a></strong> </p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>Tabular data is quite commonly found in data logs, log files, etc. and is typically compressed as-is using gzip. A recent <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5641593/">paper</a> proposes a way to exploit the dependencies between columns to improve compression. The goal of the project is to understand the paper, and implement an equivalent variant using SCL. This project will involve implementing and testing the performance of various existing compressors on variety of real life tabular datasets. </p>
+<p><strong>5. Adaptive Huffman codes, and other variants</strong></p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+<p>Huffman coding algorithm is a very useful and versatile algorithm. This project explores some variants of the standard algorithm to improve its performance. We will explore two of such variations in this project. In the first part of the project, we will implement Depth-limited huffman coding as a part of SCL (<a href="https://www.ics.uci.edu/%7Edan/pubs/LenLimHuff.pdf">original paper</a>, <a href="http://cbloomrants.blogspot.com/2010/07/07-03-10-length-limitted-huffman-codes.html">Charles Bloom's blog</a>).
+The second part of the project would entail implementing <a href="https://en.wikipedia.org/wiki/Adaptive_Huffman_coding">Dynamic Huffman tree</a> as part of SCL. Dynamic Huffman coding deals with the question of how can we update huffman tree as the source distribution changes in practice.</p>
+<p><strong>6. PPM, PPMD</strong> </p>
+<p><em>Potential Mentor</em>: Shubham/Kedar/Pulkit</p>
+<p><a href="https://en.wikipedia.org/wiki/Prediction_by_partial_matching">PPM: prediction by partial matching</a> is a very interesting algorithm for adaptive coding based on context matching. This project involves understanding and implementing this idea.</p>
+<p><strong>7. LZ77 optimized implementation</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>The most widely used general purpose compressors (gzip, zstd) are based on LZ77. The SCL implementation of LZ77 uses a simplistic greedy parsing strategy and uses static codes for encoding  the match lengths and offsets. In addition, the SCL LZ77 doesn’t have a sliding window or a chained-hash implementation. In this project, we will work towards creating a better LZ77 implementation in SCL based on existing works such as gzip, zstd as well as other resources such as this <a href="https://glinscott.github.io/lz/index.html">blog post</a> by Glinn Scott. After the implementation is finished, we will perform experiments to better analyze how the performance varies with the parameters.</p>
+<p><strong>8. LZ78/LZW in SCL</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>In the class we discussed the LZ77 compression algorithm and its practical implementation. There are other universal compressors which are quite interesting and have as good/better properties than LZ77. This project involves understanding and implementing LZ78 and/or Lempel-Ziv-Welsh (LZW) algorithm in SCL.</p>
+<p><strong>9. Alias method for speeding up rANS</strong></p>
+<p><em>Potential Mentor: Kedar</em></p>
+<p>rANS decoding is bottle-necked by the binary search of the <code>slot</code> (as we learnt in the class). The alias method can be used for speeding this part up! This project will involve understanding the alias method, and implementing it in SCL for speeding up rANS decoding. For reference, see blog by Fabian Giesen <a href="https://fgiesen.wordpress.com/2014/02/18/rans-with-static-probability-distributions/">here</a>.</p>
+<p><strong>10. Recompression</strong></p>
+<p><em>Potential Mentor: Shubham</em></p>
+<p>In many scenarios we use suboptimal compression formats like gzip or jpeg due to legacy support and compatibility reasons. Significant storage savings can be obtained if the data were to be stored in a modern optimized format. However, there is often a requirement to be able to exactly recover the original compressed file, which might not be possible with a simple transcoding approach. In this project we will explore the idea of recompression, which is a technique to compress a file in a new format while preserving the original compressed file. The project will involve implementing a known or novel recompression technique and understanding the invertibility of the recompression. Some existing recompression works include <a href="https://github.com/google/brunsli">brunsli</a> and <a href="https://github.com/dropbox/lepton">lepton</a> for JPEG, and <a href="https://github.com/schnaader/precomp-cpp">precomp-cpp</a> for gzip.</p>
+<p><strong>11. Hardware acceleration for compression</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>Many of the widely used compression algorithms rely heavily on hardware acceleration, e.g., utilizing SIMD and AVX2 instructions on CPU. In addition, there is much interest in exploring the use of GPUs to accelerate compression. This project will first identify a particular existing or novel usage of hardware acceleration in a compression setting, followed by implementation of this acceleration. We will demonstrate the speedup obtained vs. an efficient implementation without acceleration and explain the core ideas behind the speedup. Some example optimized code bases include <a href="https://github.com/facebook/zstd">Zstd</a>, <a href="https://github.com/Cyan4973/FiniteStateEntropy">FSE</a>, <a href="https://github.com/IlyaGrebnov/libbsc">BSC</a> and <a href="https://github.com/facebookresearch/dietgpu">DietGPU</a>.</p>
+<h3 id="open-ended-project-ideas"><a class="header" href="#open-ended-project-ideas">Open Ended project ideas</a></h3>
+<p>The ideas below are not fleshed out yet, but project groups can talk to the instructors to come up with a concrete idea: </p>
+<ol>
+<li>
+<p>Understanding and implementing different image/video perceptual metrics in SCL (eg: SSIM, MS-SSIM, VMAF, etc.).</p>
+<p><em>Potential Mentor: Pulkit</em></p>
+</li>
+<li>
+<p>Implement a lossless image compressor beating PNG in SCL. (NOTE: there are compressors such as JPEG-XL, AVIF, which already do this, but you can go beyond those!) </p>
+<p><em>Potential Mentor: Kedar</em></p>
+</li>
+<li>
+<p>Attempt the CLIC image compression challenge! (a bit more challenging): <a href="http://compression.cc/tasks/">http://compression.cc/tasks/</a></p>
+<p><em>Potential Mentor: Kedar/Pulkit</em></p>
+</li>
+<li>
+<p><em>Joint image compression:</em> Often very similar images are stored (e.g., same scene captured twice from slightly different angles) but are compressed independently of each other. In this project we explore the possibility of better compression by jointly compressing the images (one idea could be to stitch them into a video and use video compression algorithms). Find/generate a suitable dataset and implement an algorithm (lossless or lossy). Demonstrate the savings achieved by joint vs. individual compression.</p>
+<p><em>Potential Mentor: Tsachy/Pulkit</em></p>
+</li>
+<li>
+<p>Compression can be used to estimate entropy of a random variable. In this project we will explore the idea of using compression to estimate entropy of a random variable. We will implement a simple compression algorithm and use it to estimate entropy of a random variable. We will then compare the performance of this algorithm with other entropy estimation techniques and/or use it for a practical application such as anomaly detection and/or prediction in high-dimensional datasets via compression in a dataset you care about. </p>
+<p><em>Potential Mentor: Tsachy/Pulkit</em></p>
+</li>
+<li>
+<p>NN-based lossy compressors vs. more traditional lossy compressors vs. the fundamental limits. Comparison between recent NN-based lossy compressors and more traditional ones based on vector quantization in terms of rate-distortion-complexity tradeoffs, experimenting on simulated data for which we know and can compare to the fundamental limits.</p>
+<p><em>Potential Mentor: Tsachy/Pulkit</em></p>
+</li>
+<li>
+<p>Lossy compression of text under a meaningful distortion measure. Explore achievable rate distortion tradeoffs and/or fundamental limits in this space. </p>
+<p><em>Potential Mentor: Tsachy/Shubham</em></p>
+</li>
+<li>
+<p>Neural audio compression: explore the recent work by Meta using neural nets for audio compression.</p>
+<p><em>Potential Mentor: Tsachy</em></p>
+</li>
+<li>
+<p><em>Genome in a tweet:</em> The question to answer is can we compress a child's genome in a single tweet (~280 bytes) assuming side-information of the genomes of their parents is availabein a tweet?. The project will try to answer this question theoretically, and practically by implementing a compressor.
+The project can also explore practically implementing ideas from distributed compression.</p>
+<p><em>Potential Mentor</em>: Kedar/Shubham</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="homeworks/HW2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="homeworks/HW2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="mermaid.min.js"></script>
+        <script type="text/javascript" src="mermaid-init.js"></script>
+    </body>
+</html>
