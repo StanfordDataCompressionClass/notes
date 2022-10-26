@@ -8,7 +8,7 @@
     - [Entropy and Neg-log likelihood thumb rule](./lossless_iid/entropy.md)
     - [Huffman coding](./lossless_iid/huffman.md)
     - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
-    - [Arithmetic Numeral Systems](./lossless_iid/ans.md)
+    - [Asymmetric Numeral Systems](./lossless_iid/ans.md)
 [//]: # (    - [Arithmetic coding]&#40;./lossless_iid/arithmetic_coding.md&#41;)
 
 ---
