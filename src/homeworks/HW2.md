@@ -47,7 +47,7 @@ In this problem we will get familiar with conditional entropy and its properties
 
 We learnt a few properties of conditional entropy in class: 
 - $H(X) \geq H(X|Y)$
-- $H(X,Y) = H(X) + H(X|Y)$
+- $H(X,Y) = H(Y) + H(X|Y)$
 
 We will use these properties to show some other useful properties about conditional entropy and solve some fun problems!
 
