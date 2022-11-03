@@ -9,8 +9,7 @@
     - [Huffman coding](./lossless_iid/huffman.md)
     - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
     - [Asymmetric Numeral Systems](./lossless_iid/ans.md)
-[//]: # (    - [Arithmetic coding]&#40;./lossless_iid/arithmetic_coding.md&#41;)
-
+    - [Arithmetic coding](./lossless_iid/arithmetic_coding.md)
 ---
 - [Resources](./resources.md)
 
