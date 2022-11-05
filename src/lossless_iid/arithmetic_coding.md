@@ -169,72 +169,60 @@ That is, in fact the problem which Arithmetic coding solves:
 
 Arithmetic coding solves the problems we discussed with the block-based Huffman coder: 
 
-1. **Entire datas as a single block**: Arithmetic coding encodes entire data as a single block: For data $x_1^n$, the `block_size = n` 
+1. **Entire data as a single block**: Arithmetic coding encodes entire data as a single block: For data $x_1^n$, the `block_size = n` 
 i.e. the entire data is a single block!
 
-2. **codewords are computed on a fly**: As the block size for arithmetic coding is the entire data, the codebook size would have been massive ($$|\mathcal{X}|^n). The codeword is computed on *on the fly*
+2. **codewords are computed on a fly**: As the block size for arithmetic coding is the entire data, the codebook size would have been massive ($|\mathcal{X}|^n$). The codeword is computed on *on the fly*
 No need to pre-compute the codebook beforehand.
 
 3. **compression efficiency**: Arithmetic coding is optimal in terms of compression. ->  *theoretically* the performance can be shown to be:  
-$$ H(X) \leq \frac{\mathbb{E}[l(X_1^n)]}{B} \leq H(X) + \frac{2}{n}$$
+$$H(X) \leq \frac{\mathbb{E}[l(X_1^n)]}{B} \leq H(X) + \frac{2}{n}$$
 i.e. `~2 bits` of overhead for the *entire* sequence
 
 
-Thus, we see that Arithmetic coding solves our problem of achieving average compression equal to $H(X)$, at the same 
----
+Thus, we see that Arithmetic coding solves our problem of achieving average compression equal to $H(X)$, at the same time being practical. 
 
-# How does Arithmetic coding work? 
+## How does Arithmetic coding work? 
 
+### Primer: the number line (in binary)
 
----
+Before we get to Arithmetic coding, lets take a brief detour towards revisiting the number line, as that will be helpful for the later discussions. 
 
-# Primer: the number line (in binary)
-
-![h:250](https://user-images.githubusercontent.com/1708665/195666574-59533bd7-b67c-4fe8-8a6f-3a04a29d9af5.png)
+We are familiar with the unit interval `[0,1)` in decimal floating point. A decimal floating point number can also be represented in the binary alphabet. 
 
 
+![img](https://user-images.githubusercontent.com/1708665/195666574-59533bd7-b67c-4fe8-8a6f-3a04a29d9af5.png)
 
-```py
-# floating point values in binary
-0.3333 = # b0.... ?
-0.6666 = #?
-```
+For example: 
+1. `0.5 = 2^{-1} = b0.1`
+2. `0.75 = 2^{-1} + 2^{-2} = b0.11`
 
----
-
-# Primer: the number line (in binary)
-
-![h:250](https://user-images.githubusercontent.com/1708665/195666574-59533bd7-b67c-4fe8-8a6f-3a04a29d9af5.png)
-
-
+In fact this is similar to how computers represent floating point values. Here are some more examples below: 
 
 ```py
 # floating point values in binary
 from utils.bitarray_utils import float_to_bitarrays
 _, binary_exp = float_to_bitarrays(0.3333333, 20)
 
-0.3333 = b0.010101...
-0.6666 = b0.101010...
+0.3333.. = b0.010101...
+0.6666.. = b0.101010...
 ```
 
----
+As you can see, like the decimal case, the binary floating point representations need not be finite (or even repetitive). Getting familiar with thinking about floating point values in binary will be useful to us for Arithmetic coding discussion.
 
-# Arithmetic Encoding
 
-We will consider the following running example: 
+### Arithmetic Encoding (theoretical)
+
+Okay, we are all set to discuss Arithmetic encoding. Lets consider a specific running example, as that will make it much easier: 
+
+We want to encode the sequence $x_1^n = BACB$ sampled from the distribution $P$. 
 
 ```py
 P = ProbabilityDist({A: 0.3, B: 0.5, C: 0.2})
 x_input = BACB
 ```
 
-We want to encode the sequence $x_1^n = BACB$ sampled from the distribution $P$. 
-
-
----
-
-# Arithmetic Encoding
-
+The Arithmetic encoding works in the following two steps:
 
 1. **STEP I**: Find an *interval* (or a *range*) `[L,H)`, corresponding to the *entire sequence* $x_1^n$ 
 
@@ -249,46 +237,50 @@ We want to encode the sequence $x_1^n = BACB$ sampled from the distribution $P$.
          x_input -> [L,H) -> 011010
 ```
 
+#### STEP-I: finding the interval `[L,H)`
 
----
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671863-f6b894a3-f18e-4e62-883e-b7595a1a0003.jpg)
+Lets see how the **STEP I** (finding the interval `L,H)`) works. 
+We start with `[L,H) = [0,1)`, and the subdivide the interval as we see each symbol. 
 
----
+1. `x_input[0] = B`
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671855-1d048cea-ad31-4a20-8149-e9bfe68da2ac.jpg)
+![img](https://user-images.githubusercontent.com/1708665/195671855-1d048cea-ad31-4a20-8149-e9bfe68da2ac.jpg)
 
----
+After we process the symbol `B`, our interval shrinks from `[0,1)` to `[0.3,0.8)`. Can you guess the shrinking rule? 
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671851-7fc549b8-d2a3-4fa9-b9c7-8bb311df5ed7.jpg)
+The main idea is to find the cumulative probability values for the symbols, and then for symbol with index `i`, assign it the interval `[L,H) = [C(i), C(i+1))`
 
----
+```py
+alphabet = [A,B,C]
+prob_array = [0.3, 0.5, 0.2]
+cumul_array = [0.0, 0.3, 0.8, 1.0]
+```
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671847-0d550641-7da3-4127-8e92-dd4f251d7f3b.jpg)
+![img](https://user-images.githubusercontent.com/1708665/195671851-7fc549b8-d2a3-4fa9-b9c7-8bb311df5ed7.jpg)
 
----
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671842-0728b8a8-3718-4022-a594-b77b561f71aa.jpg)
+One comment on the interval size is that the interval size is proportional to the probability of the symbol. (i.e. `C(i+1) - C(i) = P(i)`). We will see that a similar relationship holds as we encode more symbols.
 
----
+2. `x_input[1] = A` 
+Let's now see how the interval updates as we encode the second symbol. As you can see from the image below, we continue subdiving the interval `L,H`, based on the cumulative probability of the next symbol. 
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671837-28b3955a-4710-4877-9d97-2290191ae94b.jpg)
+![img](https://user-images.githubusercontent.com/1708665/195671847-0d550641-7da3-4127-8e92-dd4f251d7f3b.jpg)
 
----
+Notice that the new interval `[L', H')` can be described as: 
 
-# Arithmetic coding example
-![h:550](https://user-images.githubusercontent.com/1708665/195671828-f2dd9392-c40b-4586-b67c-3f5c4acf810e.jpg)
+```py
+j -> index of the next symbol
+P(j), C(j) -> prob and cumulative_prob of j
 
----
+# update rule
+L' = L + C(j)*[H-L]
+H' = L' + P(j)*[H-L]
+```
 
-# Arithmetic coding example
+We can continue this way for the entire input. 
 
-1. **STEP I**: Find an *interval* (or a *range*) `[L,H)`, corresponding to the *entire sequence* $x_1^n$ 
+![img](https://user-images.githubusercontent.com/1708665/195671842-0728b8a8-3718-4022-a594-b77b561f71aa.jpg)
+
 
 ```py
 prob = ProbabilityDist({A: 0.3, B: 0.5, C: 0.2})
@@ -302,8 +294,7 @@ ENCODE: B -> [L,H) = [0.42900,0.44400)
 ```
 Thus, the final interval is: `x_input -> [0.429, 0.444)`
 
----
-# Arithmetic coding pseudo-code
+For completeness, here is a pesudo-code of the **STEP I** or Arithmetic coding. Note that in the literature *interval* and *range* are terms used interchangeably to describe `[L,H)`. 
 
 ```py
 class ArithmeticEncoder:
@@ -329,57 +320,12 @@ class ArithmeticEncoder:
         ...
 ```
 
---- 
-# Arithmetic coding example-2
+**Observation:** Notice that each time we encode symbol $s$, we shrink the interval size by $P(s)$. For example: we started with interval `[L,H) = [0,1)` of size `1`. We continued shrinking this interval to `[0.3,0.8)` which has size `0.5 = P(B)`. 
 
-```
-P = {A: 0.2, B: 0.4, C: 0.4}
-x_input = BAAB
-```
+<span style="color:purple;"> **QUIZ-1**: What is the size of the interval (`H-L`) for the input $X_1^n$?</span>
 
---- 
-# Arithmetic coding example:2
-
-```
-P = {A: 0.4, B: 0.4, C: 0.2}
-x_input = BACA
-```
-```py
-ENCODE: B -> [L,H) = [0.40000,0.80000)
-ENCODE: A -> [L,H) = [0.40000,0.56000)
-ENCODE: C -> [L,H) = [0.52800,0.56000)
-ENCODE: A -> [L,H) = [0.52800,0.54080)
-```
----
-
-# STEP-I: Find the interval [L,H)
-
-```py
-P = {A: 0.3, B: 0.5, C: 0.2}
-x_input = BACB
-L = [0.429, 0.444)
-```
-
-1. **Observation**: Interval size reduces as we encode more symbols
-
-2. <span style="color:purple;"> **QUIZ-1**: What is the size of the interval (`H-L`) for the input $X_1^n$?</span>
-
-
----
-
-
-
-# STEP-I: Find the interval [L,H)
-
-```py
-P = {A: 0.3, B: 0.5, C: 0.2}
-x_input = BACB
-L = [0.429, 0.444)
-```
-
-1. **Observation**: Interval size reduces as we encode more symbols
-
-2. <span style="color:purple;"> **QUIZ-1**: What is the size of the interval (`H-L`) for the input $X_1^n$?</span>
+**Ans:** It is easy to see that the interval size is equal to the probability of the input parsed until then. For example, when we see the first symbol `B`, the interval size is `0.8 - 0.3 = 0.5 = P(B)`, when we see the next symbol, the interval size is: 
+`0.45 - 0.3 = 0.15 = P(A)*P(B) = P(AB)`. This can be generalized to the entire sequence.  
 
 $$
 \begin{align*} 
@@ -390,9 +336,10 @@ $$
 
 
 
----
 
-# Arithmetic Encoding
+#### STEP-II communicating the interval `[L,H)`
+
+Until this point, we discussed the **STEP I** of the Arithmetic encoding, given the input `x_input`, find an interval corresponding to the input. 
 
 ```py
 P = {A: 0.3, B: 0.5, C: 0.2}
@@ -400,17 +347,10 @@ x_input = BACB
 L = [0.429, 0.444)
 ```
 
-1. **STEP-I**: Find an *interval* (or a *range*) `[L,H)`
-corresponding to the *entire sequence* $x_1^n$ 
+The **STEP-II** is logically quite simple. We want to communicate the interval $[L,H)$. We do this by communicating a value $Z \in [L,H)$. 
 
-2. **STEP-II**: Communicate the interval $[L,H)$ using a value $Z \in [L,H)$
-
-For example: $Z = \frac{(L+H)}{2}$, i.e. the midpoint of the range. 
+For example: $Z = \frac{(L+H)}{2}$, i.e. the midpoint of the range/interval. 
 (in our example `Z = 0.4365`)
-
----
-
-# Arithmetic decoding
 
 <span style="color:purple;">**Quiz-2:**</span> If the decoder knows:
 - `n=4` 
@@ -419,33 +359,59 @@ For example: $Z = \frac{(L+H)}{2}$, i.e. the midpoint of the range.
 
 <span style="color:purple;">How can it decode the entire input sequence? $X_1^n$.</span>
 
---- 
-# Arithmetic decoding - example
+### Arithmetic decoding (theoretical)
 
+Let's try to answer the quiz question above. Let's start by plotting out what all we know. We know the value of $Z=0.4365$, the midpoint of the final interval. 
 ![h:550](https://user-images.githubusercontent.com/1708665/195691372-900a32af-7f78-4e3b-8a83-a69e83cd7163.jpg)
 
----
-# Arithmetic decoding - example
-![h:550](https://user-images.githubusercontent.com/1708665/195691369-7eba6c98-c411-4599-9c59-dfb0934d8859.jpg)
+How can we use $Z$ to decode the entire input `x_input`? Lets start by asking a simpler question: how can we decode the first symbol `x_input[0]` of the input? 
 
----
-# Arithmetic decoding - example
+1. **Decoding `x_input[0]`**
+
+The answer is quite simple: 
+
+```py
+alphabet = [A,B,C]
+prob_array = [0.3, 0.5, 0.2]
+cumul_array = [0.0, 0.3, 0.8, 1.0]
+```
+As the decoder knows the probability distribution, cumulative distribution etc, the decoder can form bins using the cumulative distribution values: 
+```py
+# cumulative bits:
+bin_0 -> [C(0), C(1)) = [0.0, 0.3) #A
+bin_1 -> [C(1), C(2)) = [0.3, 0.8) #B
+bin_2 -> [C(2), C(3)) = [0.8, 1.0) #C
+```
+
+As during the encoding the successive intervals (on encoding each symbol) are subsets of the original intervals, we can see decode the first symbol by checking which interval $Z$ lies in. 
+
+
 ![h:550](https://user-images.githubusercontent.com/1708665/195691365-719c0536-a812-48f4-a836-d352fb837f0d.jpg)
 
----
-# Arithmetic decoding - example
-![h:550](https://user-images.githubusercontent.com/1708665/195691361-392b8f54-73f6-4951-bfdc-22d6a018d1a6.jpg)
 
----
-# Arithmetic decoding - example
+In our case `Z = 0.4365` lies in the bin corresponding to symbol `B`, so the first input symbol is `B`. 
+
+
+2. **Decoding `x_input[1]`**
+Having decoded the first symbol `B`, let's now see how we can decode the second symbol. 
+
+The logic here is again similar, if you recall, during the encoding, we divided the current range further into sub-intervals, and then picked one of them based on the next symbol. For example in this case the sub=intervals are: 
+
+```py
+# sub-intervals of [0.3, 0.8)
+bin_0 -> = [0.3, 0.45) #BA
+bin_1 -> = [0.45, 0.7) #BB
+bin_2 -> = [0.7, 0.8) #BC
+```
+We can again find which bin does $Z$ belong do, and that will correspond to our next symbol. In our case, the next symbol is `A`. 
+
 ![h:550](https://user-images.githubusercontent.com/1708665/195691359-5fbf1d74-09ed-43ca-a81a-0c2fc52f9d65.jpg)
 
----
-# Arithmetic decoding - example
-![h:550](https://user-images.githubusercontent.com/1708665/195691354-1f75e589-1493-4276-87bb-b7bb133a6eae.jpg)
+We can continue this recursive process until we have decoded `n=4` symbols. 
 
----
-# Arithmetic decoding
+1. Notice that the intervals are in exact sync during the encoding and decoding, and that is the key to the lossless-ness of the decoding algorithm.
+
+2. Also note that we do need to mention what the number of encoded symbols is (`n=4` in our example), as the decoder can potentially decode infinite sequence using a single $Z$. So, we need to tell it when to stop the recursive process. 
 
 ```py
 Z = 0.4365
@@ -460,13 +426,14 @@ DECODE: C -> [L,H) = [0.42000,0.45000)
 DECODE: B -> [L,H) = [0.42900,0.44400)
 ```
 
----
-# Arithmetic decoding-pseudocode
+For completeness, the decoding algorithm given the $Z$ is described below. 
+
 
 ```py
 class ArithmeticDecoder:
     ...
     def shrink_range(self, L, H, s):
+        # same as the encoder
         ...
         return new_L, new_H
 
@@ -483,59 +450,30 @@ class ArithmeticDecoder:
             L,H = self.shrink_range(L,H,s)
 ```
 
---- 
+### Communicating $Z$
 
-# Arithmetic decoding: 
-<span style="color:purple;">**Quiz-2:**</span> If the decoder knows:
-- `n=4` 
-- `P = {A: 0.3, B: 0.5, C: 0.2}`
-- `Z = 0.4365` 
-
-**Ans ->** The decoder creates intervals same as the ones encoder creates, and find which symbol corresponds to the interval in which `Z` lies. 
-
----
-
-# Arithmetic encoding
+To recap, the Arithmetic encoder we have does the following: 
 
 1. **STEP-I**: Find an *interval* (or a *range*) `[L,H)`
 corresponding to the *entire sequence* $x_1^n$ (`[0.429, 0.444]`)
 
-2. **STEP-II**: Find the midpoint of the interval $[L,H)$, $Z = \frac{(L+H)}{2}$.  (`Z =0.4365`) 
+2. **STEP-II**: Find the midpoint of the interval $[L,H)$, $Z = \frac{(L+H)}{2}$.  (`Z =0.4365`), and communicate $Z$ to the decoder. 
 
-3. **STEP-III:** Write the binary expansion of $Z$ to the bitstream -> 
+One simple way of communicating $Z$, is writing the binary expansion of $Z$ to the bitstream -> 
 eg: `Z = 0.4365 = b0.01101111101...` 
-then the final <span style="color:red;"> `encoded_bitstream = 01101111101...` </span>
+then the final <span style="color:red;"> `encoded_bitstream = 01101111101...` </span> and then just writing the binary expansion to a file. 
 
-
----
-
-# Arithmetic encoding
-
-1. **STEP-I**: Find an *interval* (or a *range*) `[L,H)`
-corresponding to the *entire sequence* $x_1^n$ (`[0.429, 0.444]`)
-
-2. **STEP-II**: Find the midpoint of the interval $[L,H)$, $Z = \frac{(L+H)}{2}$.  (`Z =0.4365`) 
-
-3. **STEP-III:** Write the binary expansion of $Z$ to the bitstream -> 
-eg: `Z = 0.4365 = b0.01101111101...` 
-then the final <span style="color:red;"> `encoded_bitstream = 01101111101...` </span>
-
-<span style="color:purple;"> **Quiz-4:** $Z$'s binary representation can be long, can also have infinite bits. 
+However there is one problem: 
+<span style="color:purple;"> **Quiz-4:** Although our method of writing the binary expansion of $Z$ to file is cute, it might not give us any compression as $Z$'s binary representation can be long, can also have infinite bits. 
 How can we fix this? </span>
 
----
-# Communicating the interval `[L,H)`
-
-![h:550](https://user-images.githubusercontent.com/1708665/195694955-dac0a2cf-7e79-4c0d-8ad5-fad43fb258b2.jpg)
-
----
-# Communicating the interval `[L,H)`
+The solution to the problem is quite simple. Instead of communicating the entire binary expansion of $Z$, we truncate the expansion to $k$ bits and communicate this truncated binary string. Let's call the the floating point value corresponding to the truncated binary string as $\hat{Z}$. 
 
 ![h:550](https://user-images.githubusercontent.com/1708665/195694952-5a4772a0-7e17-4b67-a1c8-17526c9a1d66.jpg)
 
+Thus, our full Arithmetic encoder can be described below:
 
----
-# Arithmetic coding example:
+~~~admonish note title="Arithmetic Encoder"
 
 1. **STEP-I**: Find an *interval* (or a *range*) $[L,H)$
 corresponding to the *entire sequence* $x_1^n$ (`[0.429, 0.444]`)
@@ -551,8 +489,11 @@ Z_hat = b0.011011111 ~ 0.4296
 ```
 Final Encoding = <span style="color:red;"> `encoded_bitstream = 011011111` </span> 
 
----
-# Communicating the interval `[L,H)`
+~~~
+
+### Determining how many bits to truncate $Z$ to
+Okay, we are almost done finalizing the Arithmetic encoder. The only final missing piece of the jigsaw puzzle is how do we determine $k$, the number of bits to truncate $Z$ to? 
+
 
 1. **Cond 1:** Truncate $Z$ to $\hat{Z}$ with $k$ bits, so that $ \hat{Z} \in [L,H)$
 
