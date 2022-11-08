@@ -1,0 +1,743 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arithmetic coding</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../././mdbook-admonish.css">
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html" class="active"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li></ol></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/vector_quant.html"><strong aria-hidden="true">2.1.</strong> Vector Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW0.html"><strong aria-hidden="true">4.1.</strong> HW0</a></li><li class="chapter-item expanded "><a href="../homeworks/HW0_sol.html"><strong aria-hidden="true">4.2.</strong> HW0 solution</a></li><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.3.</strong> HW1</a></li><li class="chapter-item expanded "><a href="../homeworks/HW1_sol.html"><strong aria-hidden="true">4.4.</strong> HW1 solution</a></li><li class="chapter-item expanded "><a href="../homeworks/HW2.html"><strong aria-hidden="true">4.5.</strong> HW2</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="arithmetic-coding"><a class="header" href="#arithmetic-coding">Arithmetic coding</a></h1>
+<h2 id="recap---issues-with-symbol-codes"><a class="header" href="#recap---issues-with-symbol-codes">Recap -&gt; Issues with symbol codes:</a></h2>
+<p>Lets consider the simple distribution below and think about what designing prefix-free codes for the same</p>
+<pre><code class="language-py">P = {A: 0.1, B: 0.9}
+H(P) = 0.47
+</code></pre>
+<p>It is clear that as there are just two symbols, the only reasonable prefix-free code design here is: </p>
+<pre><code>A -&gt; 0, B -&gt; 1
+Huffman code (or any other prefix-free code) = 1 bit
+</code></pre>
+<p>So the average codelength for huffman code for this data is 1 bit. If we compare it with the entropy <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.47</span></span></span></span> of the distribution,
+our average codelength (<code>1 bit</code>) is quite off. Ideally for a symbol <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>, ideally we want to use <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.3651em;vertical-align:-0.52em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">s</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> bits (to achieve <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mclose">)</span></span></span></span>). But, as we are using a symbol code, we cant use fractional bits.
+Thus, there is always going to an overhead of upto  <code>~1 bit</code> per symbol with symbol codes. Thus the expected codelength <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> with Huffman codes. </p>
+<p>One solutionto this problem, which was by considering block codes. i.e. we consider tuples of symbols from the alphabet as a new &quot;symbol&quot; and construct a Huffman code using that. 
+For example, we can consider blocks of size 2: <code>P = {AA: 0.01, AB: 0.09, BA: 0.09, BB: 0.81}</code>. Here is the Huffman tree:</p>
+<pre><code class="language-py">block_size: 1, entropy: 0.47, avg_codelen: 1.00 bits/symbol
+
+  |--A
+·-|  
+  |--B
+block_size: 2, entropy: 0.47, avg_codelen: 0.65 bits/symbol
+
+       |--BA
+  |--·-|  
+  |    |    |--AA
+  |    |--·-|  
+  |         |--AB
+·-|  
+  |--BB
+</code></pre>
+<p>We see that <code>BB</code> has probability <code>0.81</code>, so it receives the shortest codelength of <code>1 bit</code>. The aaverage codelength in this case is <code>0.65 bits/symbol</code> which is definitely an improvement over the <code>1 bit/symbol</code>. 
+The idea here is that, as we are using fixed codes per &quot;symbol&quot;, as now the symbols are tuples of size 2, the overhead gets amortized to 2 symbols from the alphabet. </p>
+<p>We can continue doing this by considering larger blocks of data. For example, with blocks of size <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>, the new alphabet size is <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span>, and the overhead due to Huffman coding should be <code>~1/k</code> (or lower). 
+Here is an example of applying the Huffman coding on blocks of size 3,4,5: </p>
+<pre><code class="language-py">block_size: 3, entropy: 0.47, avg_codelen: 0.53 bits/symbol
+
+                      |--AAA
+                 |--·-|  
+                 |    |--BAA
+            |--·-|  
+            |    |    |--ABA
+            |    |--·-|  
+            |         |--AAB
+       |--·-|  
+       |    |--ABB
+  |--·-|  
+  |    |    |--BBA
+  |    |--·-|  
+  |         |--BAB
+·-|  
+  |--BBB
+
+</code></pre>
+<pre><code class="language-py">## Huffman code for blocks
+block_size: 1, entropy: 0.47, avg_codelen: 1.00 bits/symbol
+block_size: 2, entropy: 0.47, avg_codelen: 0.65 bits/symbol
+block_size: 3, entropy: 0.47, avg_codelen: 0.53 bits/symbol
+block_size: 4, entropy: 0.47, avg_codelen: 0.49 bits/symbol
+block_size: 5, entropy: 0.47, avg_codelen: 0.48 bits/symbol
+</code></pre>
+<p>We already see that the with block size <code>4</code> we are already quite close to the entropy of <code>0.47</code>. So, this is quite great, and should help us solve our problem of reaching the entropy limit.
+In general the convergence of Huffman codes on blocks goes as:</p>
+<ol>
+<li>Huffman codes</li>
+</ol>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></p>
+<ol start="2">
+<li>Huffman codes on blocks of size B</li>
+</ol>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2043em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5183em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-2.4519em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">)]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>However there is a practical issue. Do you see it? As a hint (and also because it looks cool!) here is the huffman tree for block size <code>5</code>: </p>
+<pre><code class="language-py">block_size: 5, entropy: 0.47, avg_codelen: 0.48 bits/symbol
+
+            |--BABBB
+       |--·-|  
+       |    |              |--BBABA
+       |    |         |--·-|  
+       |    |         |    |--ABBBA
+       |    |    |--·-|  
+       |    |    |    |    |--BABBA
+       |    |    |    |--·-|  
+       |    |    |         |--AABBB
+       |    |--·-|  
+       |         |                        |--BBAAA
+       |         |                   |--·-|  
+       |         |                   |    |--AABAB
+       |         |              |--·-|  
+       |         |              |    |    |--AAABB
+       |         |              |    |--·-|  
+       |         |              |         |--ABBAA
+       |         |         |--·-|  
+       |         |         |    |         |--AABBA
+       |         |         |    |    |--·-|  
+       |         |         |    |    |    |              |--AAAAB
+       |         |         |    |    |    |         |--·-|  
+       |         |         |    |    |    |         |    |--AABAA
+       |         |         |    |    |    |    |--·-|  
+       |         |         |    |    |    |    |    |         |--AAAAA
+       |         |         |    |    |    |    |    |    |--·-|  
+       |         |         |    |    |    |    |    |    |    |--BAAAA
+       |         |         |    |    |    |    |    |--·-|  
+       |         |         |    |    |    |    |         |    |--ABAAA
+       |         |         |    |    |    |    |         |--·-|  
+       |         |         |    |    |    |    |              |--AAABA
+       |         |         |    |    |    |--·-|  
+       |         |         |    |    |         |--BAAAB
+       |         |         |    |--·-|  
+       |         |         |         |         |--BABAA
+       |         |         |         |    |--·-|  
+       |         |         |         |    |    |--ABABA
+       |         |         |         |--·-|  
+       |         |         |              |    |--BAABA
+       |         |         |              |--·-|  
+       |         |         |                   |--ABAAB
+       |         |    |--·-|  
+       |         |    |    |    |--ABBAB
+       |         |    |    |--·-|  
+       |         |    |         |--BABAB
+       |         |--·-|  
+       |              |         |--BBAAB
+       |              |    |--·-|  
+       |              |    |    |--BAABB
+       |              |--·-|  
+       |                   |    |--ABABB
+       |                   |--·-|  
+       |                        |--BBBAA
+  |--·-|  
+  |    |         |--BBBAB
+  |    |    |--·-|  
+  |    |    |    |--BBBBA
+  |    |--·-|  
+  |         |    |--BBABB
+  |         |--·-|  
+  |              |--ABBBB
+·-|  
+  |--BBBBB
+
+</code></pre>
+<p>The issue is that, as we increase the block size <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>, our codebook size increases exponentially as <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0913em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathcal" style="margin-right:0.14643em;">X</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span></span></span></span></span></span></span>.
+The larger the codebook size the more complicated the encoding/decoding becomes, the more memory we need, the higher the latency etc. For example, if we look at the tree above, the codebook size is <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span></span></span></span>. This is quite manageable. 
+However, this wouldn't have been the case if our alphabet size was <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">256</span></span></span></span> instead of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>. In that case, block code of size <code>5</code> has a codebook = <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">40</span></span></span></span></span></span></span></span></span></span></span></span>, which is definitely unmanageable.</p>
+<p>Thus, even though with block size <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>, we obtain compression as close as <code>1/B bits/symbol</code> to entropy <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span>, the idea doesn't hold ground practically. 
+That is, in fact the problem which Arithmetic coding solves: </p>
+<h2 id="arithmetic-coding-introduction"><a class="header" href="#arithmetic-coding-introduction">Arithmetic coding: Introduction</a></h2>
+<p>Arithmetic coding solves the problems we discussed with the block-based Huffman coder: </p>
+<ol>
+<li>
+<p><strong>Entire data as a single block</strong>: Arithmetic coding encodes entire data as a single block: For data <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span>, the <code>block_size = n</code> 
+i.e. the entire data is a single block!</p>
+</li>
+<li>
+<p><strong>codewords are computed on a fly</strong>: As the block size for arithmetic coding is the entire data, the codebook size would have been massive (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathcal" style="margin-right:0.14643em;">X</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>). The codeword is computed on <em>on the fly</em>
+No need to pre-compute the codebook beforehand.</p>
+</li>
+<li>
+<p><strong>compression efficiency</strong>: Arithmetic coding is optimal in terms of compression. -&gt;  <em>theoretically</em> the performance can be shown to be:<br />
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">)]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+i.e. <code>~2 bits</code> of overhead for the <em>entire</em> sequence</p>
+</li>
+</ol>
+<p>Thus, we see that Arithmetic coding solves our problem of achieving average compression equal to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span>, at the same time being practical. </p>
+<h2 id="how-does-arithmetic-coding-work"><a class="header" href="#how-does-arithmetic-coding-work">How does Arithmetic coding work?</a></h2>
+<h3 id="primer-the-number-line-in-binary"><a class="header" href="#primer-the-number-line-in-binary">Primer: the number line (in binary)</a></h3>
+<p>Before we get to Arithmetic coding, lets take a brief detour towards revisiting the number line, as that will be helpful for the later discussions. </p>
+<p>We are familiar with the unit interval <code>[0,1)</code> in decimal floating point. A decimal floating point number can also be represented in the binary alphabet. </p>
+<p><img src="https://user-images.githubusercontent.com/1708665/195666574-59533bd7-b67c-4fe8-8a6f-3a04a29d9af5.png" alt="img" /></p>
+<p>For example: </p>
+<ol>
+<li><code>0.5 = 2^{-1} = b0.1</code></li>
+<li><code>0.75 = 2^{-1} + 2^{-2} = b0.11</code></li>
+</ol>
+<p>In fact this is similar to how computers represent floating point values. Here are some more examples below: </p>
+<pre><code class="language-py"># floating point values in binary
+from utils.bitarray_utils import float_to_bitarrays
+_, binary_exp = float_to_bitarrays(0.3333333, 20)
+
+0.3333.. = b0.010101...
+0.6666.. = b0.101010...
+</code></pre>
+<p>As you can see, like the decimal case, the binary floating point representations need not be finite (or even repetitive). Getting familiar with thinking about floating point values in binary will be useful to us for Arithmetic coding discussion.</p>
+<h3 id="arithmetic-encoding-theoretical"><a class="header" href="#arithmetic-encoding-theoretical">Arithmetic Encoding (theoretical)</a></h3>
+<p>Okay, we are all set to discuss Arithmetic encoding. Lets consider a specific running example, as that will make it much easier: </p>
+<p>We want to encode the sequence <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05017em;">CB</span></span></span></span> sampled from the distribution <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>. </p>
+<pre><code class="language-py">P = ProbabilityDist({A: 0.3, B: 0.5, C: 0.2})
+x_input = BACB
+</code></pre>
+<p>The Arithmetic encoding works in the following two steps:</p>
+<ol>
+<li><strong>STEP I</strong>: Find an <em>interval</em> (or a <em>range</em>) <code>[L,H)</code>, corresponding to the <em>entire sequence</em> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span> </li>
+</ol>
+<pre><code class="language-py">        x_input -&gt; |------------------[.....)------------|
+                   0               low     high          1 
+</code></pre>
+<ol start="2">
+<li><strong>STEP II</strong>: Communicate the <em>interval</em> <code>[L,H)</code> <em>efficiently</em>
+(i.e. using less number of bits)</li>
+</ol>
+<pre><code class="language-py">         x_input -&gt; [L,H) -&gt; 011010
+</code></pre>
+<h4 id="step-i-finding-the-interval-lh"><a class="header" href="#step-i-finding-the-interval-lh">STEP-I: finding the interval <code>[L,H)</code></a></h4>
+<p>Lets see how the <strong>STEP I</strong> (finding the interval <code>L,H)</code>) works. 
+We start with <code>[L,H) = [0,1)</code>, and the subdivide the interval as we see each symbol. </p>
+<ol>
+<li><code>x_input[0] = B</code></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/1708665/195671855-1d048cea-ad31-4a20-8149-e9bfe68da2ac.jpg" alt="img" /></p>
+<p>After we process the symbol <code>B</code>, our interval shrinks from <code>[0,1)</code> to <code>[0.3,0.8)</code>. Can you guess the shrinking rule? </p>
+<p>The main idea is to find the cumulative probability values for the symbols, and then for symbol with index <code>i</code>, assign it the interval <code>[L,H) = [C(i), C(i+1))</code></p>
+<pre><code class="language-py">alphabet = [A,B,C]
+prob_array = [0.3, 0.5, 0.2]
+cumul_array = [0.0, 0.3, 0.8, 1.0]
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/1708665/195671851-7fc549b8-d2a3-4fa9-b9c7-8bb311df5ed7.jpg" alt="img" /></p>
+<p>One comment on the interval size is that the interval size is proportional to the probability of the symbol. (i.e. <code>C(i+1) - C(i) = P(i)</code>). We will see that a similar relationship holds as we encode more symbols.</p>
+<ol start="2">
+<li><code>x_input[1] = A</code> 
+Let's now see how the interval updates as we encode the second symbol. As you can see from the image below, we continue subdiving the interval <code>L,H</code>, based on the cumulative probability of the next symbol. </li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/1708665/195671847-0d550641-7da3-4127-8e92-dd4f251d7f3b.jpg" alt="img" /></p>
+<p>Notice that the new interval <code>[L', H')</code> can be described as: </p>
+<pre><code class="language-py">j -&gt; index of the next symbol
+P(j), C(j) -&gt; prob and cumulative_prob of j
+
+# update rule
+L' = L + C(j)*[H-L]
+H' = L' + P(j)*[H-L]
+</code></pre>
+<p>We can continue this way for the entire input. </p>
+<p><img src="https://user-images.githubusercontent.com/1708665/195671842-0728b8a8-3718-4022-a594-b77b561f71aa.jpg" alt="img" /></p>
+<pre><code class="language-py">prob = ProbabilityDist({A: 0.3, B: 0.5, C: 0.2})
+x_input = BACB
+
+# find interval corresp to BACB
+ENCODE: B -&gt; [L,H) = [0.30000,0.80000)
+ENCODE: A -&gt; [L,H) = [0.30000,0.45000)
+ENCODE: C -&gt; [L,H) = [0.42000,0.45000)
+ENCODE: B -&gt; [L,H) = [0.42900,0.44400)
+</code></pre>
+<p>Thus, the final interval is: <code>x_input -&gt; [0.429, 0.444)</code></p>
+<p>For completeness, here is a pesudo-code of the <strong>STEP I</strong> or Arithmetic coding. Note that in the literature <em>interval</em> and <em>range</em> are terms used interchangeably to describe <code>[L,H)</code>. </p>
+<pre><code class="language-py">class ArithmeticEncoder:
+    ...
+
+    def shrink_range(self, L, H, s):
+        rng = H - L
+        new_L = L + (rng * self.P.cumul[s])
+        new_H = new_L + (rng * self.P.probs(s))
+        return new_L, new_H
+
+    def find_interval(self, x_input):
+        L,H = 0.0, 1.0
+        for s in x_input:
+            L,H = self.shrink_range(L,H,s)
+        return L,H
+
+    def encode_block(self, x_input):
+        # STEP1
+        L,H = self.find_interval(x_input)
+
+        # STEP-II
+        ...
+</code></pre>
+<p><strong>Observation:</strong> Notice that each time we encode symbol <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>, we shrink the interval size by <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span>. For example: we started with interval <code>[L,H) = [0,1)</code> of size <code>1</code>. We continued shrinking this interval to <code>[0.3,0.8)</code> which has size <code>0.5 = P(B)</code>. </p>
+<p><span style="color:purple;"> <strong>QUIZ-1</strong>: What is the size of the interval (<code>H-L</code>) for the input <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9314em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span>?</span></p>
+<p><strong>Ans:</strong> It is easy to see that the interval size is equal to the probability of the input parsed until then. For example, when we see the first symbol <code>B</code>, the interval size is <code>0.8 - 0.3 = 0.5 = P(B)</code>, when we see the next symbol, the interval size is: 
+<code>0.45 - 0.3 = 0.15 = P(A)*P(B) = P(AB)</code>. This can be generalized to the entire sequence.</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6.2291em;vertical-align:-2.8645em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.3645em;"><span style="top:-6.1759em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">L</span><span class="mclose">)</span></span></span><span style="top:-3.8645em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"></span></span><span style="top:-1.4469em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.8645em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.3645em;"><span style="top:-6.1759em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">...</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.8645em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-1.4469em;"><span class="pstrut" style="height:3.6514em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.8645em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h4 id="step-ii-communicating-the-interval-lh"><a class="header" href="#step-ii-communicating-the-interval-lh">STEP-II communicating the interval <code>[L,H)</code></a></h4>
+<p>Until this point, we discussed the <strong>STEP I</strong> of the Arithmetic encoding, given the input <code>x_input</code>, find an interval corresponding to the input. </p>
+<pre><code class="language-py">P = {A: 0.3, B: 0.5, C: 0.2}
+x_input = BACB
+L = [0.429, 0.444)
+</code></pre>
+<p>The <strong>STEP-II</strong> is logically quite simple. We want to communicate the interval <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>. We do this by communicating a value <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>. </p>
+<p>For example: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">L</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, i.e. the midpoint of the range/interval. 
+(in our example <code>Z = 0.4365</code>)</p>
+<p><span style="color:purple;"><strong>Quiz-2:</strong></span> If the decoder knows:</p>
+<ul>
+<li><code>n=4</code> </li>
+<li><code>P = {A: 0.3, B: 0.5, C: 0.2}</code></li>
+<li><code>Z = 0.4365</code> </li>
+</ul>
+<p><span style="color:purple;">How can it decode the entire input sequence? <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9314em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span>.</span></p>
+<h3 id="arithmetic-decoding-theoretical"><a class="header" href="#arithmetic-decoding-theoretical">Arithmetic decoding (theoretical)</a></h3>
+<p>Let's try to answer the quiz question above. Let's start by plotting out what all we know. We know the value of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4365</span></span></span></span>, the midpoint of the final interval. 
+<img src="https://user-images.githubusercontent.com/1708665/195691372-900a32af-7f78-4e3b-8a83-a69e83cd7163.jpg" alt="h:550" /></p>
+<p>How can we use <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to decode the entire input <code>x_input</code>? Lets start by asking a simpler question: how can we decode the first symbol <code>x_input[0]</code> of the input? </p>
+<ol>
+<li><strong>Decoding <code>x_input[0]</code></strong></li>
+</ol>
+<p>The answer is quite simple: </p>
+<pre><code class="language-py">alphabet = [A,B,C]
+prob_array = [0.3, 0.5, 0.2]
+cumul_array = [0.0, 0.3, 0.8, 1.0]
+</code></pre>
+<p>As the decoder knows the probability distribution, cumulative distribution etc, the decoder can form bins using the cumulative distribution values: </p>
+<pre><code class="language-py"># cumulative bits:
+bin_0 -&gt; [C(0), C(1)) = [0.0, 0.3) #A
+bin_1 -&gt; [C(1), C(2)) = [0.3, 0.8) #B
+bin_2 -&gt; [C(2), C(3)) = [0.8, 1.0) #C
+</code></pre>
+<p>As during the encoding the successive intervals (on encoding each symbol) are subsets of the original intervals, we can see decode the first symbol by checking which interval <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> lies in. </p>
+<p><img src="https://user-images.githubusercontent.com/1708665/195691365-719c0536-a812-48f4-a836-d352fb837f0d.jpg" alt="h:550" /></p>
+<p>In our case <code>Z = 0.4365</code> lies in the bin corresponding to symbol <code>B</code>, so the first input symbol is <code>B</code>. </p>
+<ol start="2">
+<li><strong>Decoding <code>x_input[1]</code></strong>
+Having decoded the first symbol <code>B</code>, let's now see how we can decode the second symbol. </li>
+</ol>
+<p>The logic here is again similar, if you recall, during the encoding, we divided the current range further into sub-intervals, and then picked one of them based on the next symbol. For example in this case the sub=intervals are: </p>
+<pre><code class="language-py"># sub-intervals of [0.3, 0.8)
+bin_0 -&gt; = [0.3, 0.45) #BA
+bin_1 -&gt; = [0.45, 0.7) #BB
+bin_2 -&gt; = [0.7, 0.8) #BC
+</code></pre>
+<p>We can again find which bin does <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> belong do, and that will correspond to our next symbol. In our case, the next symbol is <code>A</code>. </p>
+<p><img src="https://user-images.githubusercontent.com/1708665/195691359-5fbf1d74-09ed-43ca-a81a-0c2fc52f9d65.jpg" alt="h:550" /></p>
+<p>We can continue this recursive process until we have decoded <code>n=4</code> symbols. </p>
+<ol>
+<li>
+<p>Notice that the intervals are in exact sync during the encoding and decoding, and that is the key to the lossless-ness of the decoding algorithm.</p>
+</li>
+<li>
+<p>Also note that we do need to mention what the number of encoded symbols is (<code>n=4</code> in our example), as the decoder can potentially decode infinite sequence using a single <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>. So, we need to tell it when to stop the recursive process. </p>
+</li>
+</ol>
+<pre><code class="language-py">Z = 0.4365
+ENCODE: B -&gt; [L,H) = [0.30000,0.80000)
+ENCODE: A -&gt; [L,H) = [0.30000,0.45000)
+ENCODE: C -&gt; [L,H) = [0.42000,0.45000)
+ENCODE: B -&gt; [L,H) = [0.42900,0.44400)
+------------------------------
+DECODE: B -&gt; [L,H) = [0.30000,0.80000)
+DECODE: A -&gt; [L,H) = [0.30000,0.45000)
+DECODE: C -&gt; [L,H) = [0.42000,0.45000)
+DECODE: B -&gt; [L,H) = [0.42900,0.44400)
+</code></pre>
+<p>For completeness, the decoding algorithm given the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> is described below. </p>
+<pre><code class="language-py">class ArithmeticDecoder:
+    ...
+    def shrink_range(self, L, H, s):
+        # same as the encoder
+        ...
+        return new_L, new_H
+
+    def decode_symbol(self, L, H, Z):
+        rng = H - L
+        search_list = L + (self.P.cumul * rng)
+        symbol_ind = np.searchsorted(search_list, Z)
+        return self.P.alphabet[symbol_ind]
+
+    def decode_block(self, Z, n):
+        L,H = 0.0, 1.0
+        for _ in range(n): #main decoding loop
+            s = self.decode_symbol(L, H, Z)
+            L,H = self.shrink_range(L,H,s)
+</code></pre>
+<h3 id="communicating-z"><a class="header" href="#communicating-z">Communicating <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span></a></h3>
+<p>To recap, the Arithmetic encoder we have does the following: </p>
+<ol>
+<li>
+<p><strong>STEP-I</strong>: Find an <em>interval</em> (or a <em>range</em>) <code>[L,H)</code>
+corresponding to the <em>entire sequence</em> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span> (<code>[0.429, 0.444]</code>)</p>
+</li>
+<li>
+<p><strong>STEP-II</strong>: Find the midpoint of the interval <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">L</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.  (<code>Z =0.4365</code>), and communicate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to the decoder. </p>
+</li>
+</ol>
+<p>One simple way of communicating <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>, is writing the binary expansion of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to the bitstream -&gt; 
+eg: <code>Z = 0.4365 = b0.01101111101...</code> 
+then the final <span style="color:red;"> <code>encoded_bitstream = 01101111101...</code> </span> and then just writing the binary expansion to a file. </p>
+<p>However there is one problem: 
+<span style="color:purple;"> <strong>Quiz-4:</strong> Although our method of writing the binary expansion of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to file is cute, it might not give us any compression as <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>'s binary representation can be long, can also have infinite bits. 
+How can we fix this? </span></p>
+<p>The solution to the problem is quite simple. Instead of communicating the entire binary expansion of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>, we truncate the expansion to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> bits and communicate this truncated binary string. Let's call the the floating point value corresponding to the truncated binary string as <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span>. </p>
+<p>Note that we have to be careful regarding how we choose <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>, if <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> is too small the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> might be steer out of the interval <code>[L,H)</code>, which will be a problem for the decoding. Also, choosing <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> too large will hamper our compression performance. </p>
+<p><img src="https://user-images.githubusercontent.com/1708665/195694952-5a4772a0-7e17-4b67-a1c8-17526c9a1d66.jpg" alt="h:550" /></p>
+<p>Thus, our full Arithmetic encoder can be described below:</p>
+<div id="admonition-arithmetic-encoder" class="admonition note">
+<div class="admonition-title">
+<p>Arithmetic Encoder</p>
+<p><a class="admonition-anchor-link" href="#admonition-arithmetic-encoder"></a></p>
+</div>
+<div>
+<ol>
+<li>
+<p><strong>STEP-I</strong>: Find an <em>interval</em> (or a <em>range</em>) <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>
+corresponding to the <em>entire sequence</em> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span> (<code>[0.429, 0.444]</code>)</p>
+</li>
+<li>
+<p><strong>STEP-II</strong>: Find the midpoint of the interval <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">L</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.  (<code>Z =0.4365</code>) </p>
+</li>
+<li>
+<p><strong>STEP-III:</strong> Truncate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> bits (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span>)
+e.g: </p>
+</li>
+</ol>
+<pre><code>L,H = 0.429, 0.444
+Z = 0.4365 = b0.01101111101...
+Z_hat = b0.011011111 ~ 0.4296
+</code></pre>
+<p>Final Encoding = <span style="color:red;"> <code>encoded_bitstream = 011011111</code> </span></p>
+</div>
+</div>
+<h3 id="determining-how-many-bits-to-truncate-z-to"><a class="header" href="#determining-how-many-bits-to-truncate-z-to">Determining how many bits to truncate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to</a></h3>
+<p>Okay, we are almost done finalizing the Arithmetic encoder. The only final missing piece of the jigsaw puzzle is how do we determine <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>, the number of bits to truncate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to? </p>
+<p>There are in fact two conditions we need to satisfy when choosing <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>:</p>
+<ol>
+<li>
+<p><strong>Cond 1:</strong> Truncate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> with <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> bits, so that <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9859em;vertical-align:-0.0391em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Cond 2:</strong> If <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> has binary representation: <code>Z_hat = b0.011011111</code> for example, then we also need, any extension of it <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">x</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span>. </p>
+</li>
+</ol>
+<p>For eg: </p>
+<pre><code>Z_hat = b0.011011111
+Z_ext = b0.01101111111011110101..
+</code></pre>
+<p>The <strong>Cond-1</strong> is somewhat obvious, we want the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> obtained on truncating <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span> to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> bits, we still lie inside the interval <code>[L,H)</code>. Lets now see why the  <strong>Cond 2</strong> is imposed: Lets say Arithmetic coding leads to <code>Z_hat = b0.011011111</code>, and thus the final encoded bitarray is <code>011011111</code>. Now, in practice arithmetic coded bitstream is always going to be followed by some other bitstream, and so the decoder is going to see this stream like: <code>01101111111011110101..</code>. the second condition ensures that, even if the decoder reads in some bits not part of the arithmetic encoding, the resultant floating point value <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">x</span><span class="mord mathnormal">t</span></span></span></span> will still lie inside the interval <code>[L, H)</code>. </p>
+<p>With some simple arithmetic, it can be shown that the two conditions together can be written as:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1968em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span></span></p>
+<p>which gives us a simple bound on <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>:
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">⌈</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">L</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">⌉</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></p>
+<p>The key observation here is that shorter the interval, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mord">∣</span></span></span></span>, the larger <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> we need to use to truncate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>. Using the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> computation above, we finally have got our complete Arithmetic coder pseudocode: </p>
+<pre><code class="language-py"># Arithmetic Encoding pseudo-code
+class ArithmeticEncoder:
+    def shrink_range(self, L, H, s):
+        ...
+    def find_interval(self, x_input):
+        L,H = 0.0, 1.0
+        for s in x_input:
+            L,H = self.shrink_range(L,H,s)
+        return L,H
+
+    def encode_block(self, x_input):
+        # STEP-1 find interval
+        L,H = self.find_interval(x_input)
+
+        # STEP-II,III communicate interval
+        Z = (L+H)/2 
+        num_bits = ceil(log2((H-L))) + 1
+        _, code = float_to_bitarray(Z, num_bits)
+        return code
+
+# Arithmetic decoding-pseudocode
+class ArithmeticDecoder:
+    ...
+    def shrink_range(self, L, H, s):
+        ...
+
+    def decode_symbol(self, L, H, Z):
+        ...
+
+    def decode_block(self, code, n):
+        Z = bitarray_to_float(code)
+
+        # start decoding
+        L,H = 0.0, 1.0
+        for _ in range(n): #main decoding loop
+            s = self.decode_symbol(L, H, Z)
+            L,H = self.shrink_range(L,H,s)
+
+        # add code to remove additional bits read
+</code></pre>
+<p>One point to note in the decoding is that, as the decoder might have read in more bits that what the encoder wrote, after decoding all the symbols, the decoder needs to backtrack a bit (otherwise the program processing the next stream is going to falter!)</p>
+<h3 id="arithmetic-coding-compression-performance"><a class="header" href="#arithmetic-coding-compression-performance">Arithmetic coding compression performance:</a></h3>
+<p>Now that we have discussed the full Arithmetic encoder/decoder, lets try to understand the compression performance of Arithmetic coder. </p>
+<p>Let us start by summarizing what we know:</p>
+<ul>
+<li>Size of interval <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">1</span></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">1</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">L</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></li>
+</ul>
+<p>Based on these two properties, it is quite straightforward to see that the codelength for encoding an entire sequence <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span> using Arithmetic coding is:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2737em;vertical-align:-0.9523em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6462em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></p>
+<p>As the optimal number of bits to encode a sequence <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span> using a distribution <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">.</span><span class="mclose">)</span></span></span></span> are <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4082em;vertical-align:-0.5631em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6523em;"><span style="top:-2.1885em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span><span style="top:-2.8448em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3115em;"><span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5631em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, we see that arithmetic coding is in fact within <code>2</code> bits of the optimal on the <em>ENTIRE</em> sequence! Thus, we can summarize by saying that:</p>
+<div id="admonition-arithmetic-coder-compression-performance" class="admonition note">
+<div class="admonition-title">
+<p>Arithmetic coder compression performance</p>
+<p><a class="admonition-anchor-link" href="#admonition-arithmetic-coder-compression-performance"></a></p>
+</div>
+<div>
+<p>Given any model/distritbution <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> for a sequence <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9125em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span>, arithmetic coding achieves codelength of 
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2737em;vertical-align:-0.9523em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6462em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></p>
+<p>Also, the average codelength achieved by Arithmetic coding is within <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2/</span><span class="mord mathnormal">n</span></span></span></span> bits of the entropy <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span>. </p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-2.4519em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">)]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</div>
+</div>
+<p>It is quite incredible that Arithmetic coding is basically optimal for <em>any</em> given distribution <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>. This in a way shifts the complexity in designing compression algorithms from designing codes to finding a distribution/model <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span> which matches the data! This property of Arithmetic coding is also called the <strong>model, entropy coding separation</strong>.</p>
+<h3 id="arithmetic-coding-speed-performance"><a class="header" href="#arithmetic-coding-speed-performance">Arithmetic coding speed performance</a></h3>
+<h2 id="arithmetic-coding-in-practice"><a class="header" href="#arithmetic-coding-in-practice">Arithmetic coding in practice</a></h2>
+<p>Now that we have concluded our discussion of the (theoretical) Arithmetic coding algorithm, lets think about implementing the pseudo-code in practice and what challenges we might face. </p>
+<p>There is one clear practical issue which you might be able to spot from the hint below!</p>
+<p><span style="color:purple;"> <strong>Quiz-8</strong>: What are the practical issues with our Arithmetic encoding/decoding?</span></p>
+<p>Hint -&gt; </p>
+<pre><code class="language-py">prob = ProbabilityDist({A: 0.3, B: 0.5, C: 0.2})
+x_input = BACBBCCBA
+
+# find interval corresp to BACB
+ENCODE: B -&gt; [L,H) = [0.30000,0.80000)
+ENCODE: A -&gt; [L,H) = [0.30000,0.45000)
+ENCODE: C -&gt; [L,H) = [0.42000,0.45000)
+ENCODE: B -&gt; [L,H) = [0.42900,0.44400)
+ENCODE: C -&gt; [L,H) = [0.44100,0.44400)
+ENCODE: C -&gt; [L,H) = [0.44340,0.44400)
+ENCODE: B -&gt; [L,H) = [0.44358,0.44388)
+ENCODE: A -&gt; [L,H) = [0.44358,0.44367)
+</code></pre>
+<p>The key idea is that every time we encode a symbol <code>s</code>, we are shrinking the interval <code>[L,H)</code>, by the probability of the symbol <code>P(s)</code>. Thus, we see that very quickly the interval becomes quite small. For example in the hint above, on encoding <code>8</code> symbols, we are already at a place where out interval is <code>[0.44358,0.44367)</code>. We quickly see that due to finite bit arithmetic, we are going to run out of bits to represent this interval. So we need to find a way to avoid the interval <code>[L,H)</code> from getting too small:</p>
+<p><span style="color:purple;"> <strong>Quiz-9</strong>: What can we do to avoid the interval <code>[L,H)</code> from getting too small?</span></p>
+<p>Hint -&gt; </p>
+<pre><code class="language-py">L = 0.429 = b0.0110110...
+H = 0.444 = b0.01110001...
+</code></pre>
+<p>The core idea is quite simple. Notice that in the example above both <code>L</code>, <code>H</code> start with <code>011</code>. Then, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>, or any value lying inside the interval also will start with <code>011</code>! Thus, we can pre-emptively output <code>011</code>, and then <em>rescale</em> the intervals <code>L,H</code>. For example:</p>
+<pre><code class="language-py">L = 0.429 = b0.0110110...
+H = 0.444 = b0.01110001...
+
+Rescaled: L=0.8580, H=0.8880, bitarray='0'
+Rescaled: L=0.7160, H=0.7760, bitarray='01'
+Rescaled: L=0.4320, H=0.5520, bitarray='011'
+</code></pre>
+<p>Notice that after rescaling our intervals are <code>L=0.4320, H=0.5520</code> are much larger that what we started with: <code>0.429, 0.444</code>. This can be understood from the fact that, flushing out a <code>0</code> is equivalent to setting <code>L,H</code> as: <code>L,H = 2*L,2*H</code>; while flushing out a <code>1</code> is equivalend to <code>L,H = (L - 0.5)*2, (H - 0.5)*2</code>. i.e. we are expanding out either the left half (<code>[0,0.5)</code>) of the number line or the right half (<code>[0.5, 1)</code>) of the number line by <code>2x</code>. </p>
+<p>Thus, our rescaling operation can be summarized below. </p>
+<pre><code class="language-py"># Arithmetic encoding with rescaling of the range
+class ArithmeticEncoder:
+    def shrink_range(self, L, H, s):
+        ...
+    def rescale_range(self, L, H):
+        bitarray = &quot;&quot;
+        while (L &gt;= 0.5) or (H &lt; 0.5):
+            if (L &lt; 0.5) and (H &lt; 0.5):
+                bitarray+= &quot;0&quot;
+                L,H = L*2, H*2
+            elif ((L &gt;= 0.5) and (H &gt;= 0.5)):
+                bitarray += &quot;1&quot;
+                L,H = (L - 0.5)*2, (H - 0.5)*2    
+        return L, H, bitarray
+    def find_interval(self, x_input):
+        L,H, bitarray = 0.0, 1.0, Bitarray(&quot;&quot;)
+        for s in x_input:
+            L,H = self.shrink_range(L,H,s)
+            L,H, bits = self.rescale_range(L,H)
+            bitarray += bits
+        return L,H, bitarray
+</code></pre>
+<p>This largely mitigates the problem. However, it is possible that <code>L,H</code> are extremely close, but don't start with the same bits. For example: </p>
+<pre><code class="language-py">L = 0.499 = 0.111..b, 
+H = 0.501 = 0.100..b
+</code></pre>
+<p>In this case, we cannot premptively flush-out bits and rescale the range <code>[L,H)</code>. This <em>mid-range rescaling</em> issues is handled in different ways, by either:</p>
+<ol>
+<li>
+<p>If <code>L=0.499, H = 0.501</code>, we can setting<code>H = 0.4999999...</code> for example, and then apply the usual re-scaling. In this case, we are loosing a bit of compression, as we are reducing the interval size when it is not needed.</p>
+</li>
+<li>
+<p>An optimal way to handle the <em>mid-range rescaling</em> is to expand the middle interval <code>[0.25, 0.75)</code> by 2x <code>L,H &lt;- 2L - 0.5, 2H - 0.5</code>. This is a bit non-trivial, but is well explained in these series of lectures on Arithmetic coding. Note that this optimal rescaling is also implemented as part of the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/arithmetic_coding.py">Arithmetic coder in the SCL</a></p>
+</li>
+<li>
+<p>In practice, it is more efficient to flush out bytes or even words instead of bits. i.e if <code>L,H</code> start with the same 8 bits, only then those 8 bits are flushed out. These variants of Arithmetic coding are traditional called <em>range coding</em>. One variant of the <em>range coder</em> is impplemented in the SCL and can be <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/range_coder.py">accessed here</a>. </p>
+</li>
+</ol>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>To summarize, Arithmetic encoding had a profound impact on the compression world due to its optimality, and made it possibly to work on much more complex models such as adaptive i.i.d models, and even non-iid k-markov models (as we will see in future lectures). </p>
+<p>the only drawback of Arithmetic coding is its speed (especially when compared with Huffman coding)</p>
+<div class="table-wrapper"><table><thead><tr><th>Codec</th><th>Encode speed</th><th>Decode speed</th><th>compression</th></tr></thead><tbody>
+<tr><td>Huffman coding</td><td>252 Mb/s</td><td>300 Mb/s</td><td>1.66</td></tr>
+<tr><td>Arithmetic coding</td><td>120 Mb/s</td><td>69 Mb/s</td><td>1.24</td></tr>
+</tbody></table>
+</div>
+<p>NOTE -&gt; Speed numbers from: <a href="http://cbloomrants.blogspot.com/2014/02/02-01-14-understanding-ans-3.html">Charles Bloom's blog</a></p>
+<p>In the next lecture we see how we can achieve compression performance similar to Arithmetic coding, but speeds closer to that of Huffman coding. </p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../lossless_iid/aep.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../lossless_iid/ans.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../lossless_iid/aep.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../lossless_iid/ans.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+    </body>
+</html>
