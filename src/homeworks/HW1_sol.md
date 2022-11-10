@@ -273,7 +273,7 @@ You will observe that gzip does significantly better than the Huffman coding, ev
     **Solution**
     - For the first distribution, the codewords should be `{"A": BitArray("00"), "B": BitArray("01"), "C": BitArray("10"), "D": BitArray("11")}`.
     - For the second distribution, the codewords should be `{"A": BitArray("0"), "B": BitArray("10"), "C": BitArray("1110"), "D": BitArray("110")}`.
-    - For the third distribution, the codewords should be `{"A": BitArray("0"), "B": BitArray("1")}`.
+    - For the third distribution, the codewords should be `{"A": BitArray("0"), "B": BitArray("1000")}`.
 
 
 2. [10 points] Complete the code for the `ShannonTreeEncoder` in `hw1_p4.py`. Also, complete the `test_shannon_tree_coding_specific_case()` to check the correctness of your codewords in part 1 against your implemented code. 
