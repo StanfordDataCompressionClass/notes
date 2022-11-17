@@ -48,9 +48,12 @@ For deliverable, we will follow a similar template as our friends from [CS231N](
 ### II. Project Milestone 
 **Due: 11/28, Mon, midnight PT**
 
-As for the project milestone, please submit a two-page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). 
+For the project milestone, please submit a 2/3 page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). If possible, you can use GitHub markdown (.md) file as your milestone report, put the .md it on your code repo, and provide us a link to that. That way you will find it easy to later modify it to get the final report. The milestone should roughly include the following sections:
 
-[MORE DETAILS TO FOLLOW]
+- Introduction: what is the problem, why is it interesting?
+- Literature/Code review: summarize any existing papers/implementations that you referred to
+- Methods: what do you plan to implement as part of this project? What end result do you expect to achieve and how will you evaluate it qualitatively and quantitatively?
+- Progress report: what have you already finished (please include code link where relevant)? What is the plan for the remaining weeks?
 
 ### III. Final presentation
 **Due: 12/08, Fri, 4:30pm-7:30pm**
