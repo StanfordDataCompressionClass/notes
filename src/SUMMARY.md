@@ -13,6 +13,7 @@
 - [Lossy data Compression](./lossy/coverpage.md)
     - [Vector Quantization](./lossy/vector_quant.md)
     - [Rate-Distortion Theory](./lossy/rd.md)
+    - [Transform Coding Theory](./lossy/transform_coding_theory.md)
 
 ---
 - [Resources](./resources.md)
