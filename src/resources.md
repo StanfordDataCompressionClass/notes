@@ -26,6 +26,7 @@ Although there are no textbooks which exactly correspond to the course material,
 1. [Elements of Information Theory](http://staff.ustc.edu.cn/~cgong821/Wiley.Interscience.Elements.of.Information.Theory.Jul.2006.eBook-DDU.pdf): Classic textbook on Information Theory
 2. [Introduction to Data Compression, Guy E. Blelloch](https://www.cs.cmu.edu/~guyb/realworld/compression.pdf): Set of lecture notes/book on Data Compression by Guy E. Blelloch, CMU 2013
 3. [Data Compression Explained, Matt Mahoney](http://mattmahoney.net/dc/dce.html): A nice set of lecture notes on Data Compression by Matt Mahoney.
+4. [JPEG paper](https://web.stanford.edu/class/ee398a/handouts/papers/Wallace%20-%20JPEG%20-%201992.pdf): Summary of JPEG by Gregory K. Wallace
 
 ## 4. Blogs/websites
 The web is filled with great engineers and researchers writing blogs related to Data Compression. We list a few below:
@@ -35,3 +36,5 @@ The web is filled with great engineers and researchers writing blogs related to 
 3. [Fabian Giesen's blog](https://fgiesen.wordpress.com/category/compression/): Blog by Fabian Giesen. (The parts related to rANS implementation are particularly great!)
 4. [On understanding zlib](https://www.euccas.me/zlib/): Introduction to zlib by Euccas Chen.
 5. [Modern LZ Compression](https://glinscott.github.io/lz/index.html#toc4): Walk-through of modern LZ compressors by Gary Linscott.
+6. [DCT](http://weitz.de/dct/): A nice blog post on DCT by Prof. Dr. Edmund Weitz
+7. [DCT History](https://www.cse.iitd.ac.in/~pkalra/col783-2017/DCT-History.pdf): A small red on the history of DCT by Nasir Ahmed.
