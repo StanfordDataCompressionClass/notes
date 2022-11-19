@@ -82,7 +82,7 @@ In this problem, we'll play with audio compression. The problem and the subparts
 
 ### Q3: Vector Quantization _(20 points)_
 
-We have studied vector quantization (VQ) in class. In this question we will first implement part of vector quantization and then study the performance of vector quantization for a correlated gaussian process. 
+We have studied vector quantization (VQ) in class. In this question we will first implement part of vector quantization and then study the performance of vector quantization for a correlated Gaussian process. 
 
 1. [10 points] Implement the `build_kmeans_codebook()` method in `vector_quantizer.py`. You cannot use the existing kmeans implementations for this part (e.g. `build_kmeans_codebook_scipy()` method) and must implement your own version. You can use the methods pre-implemented in `vector_quantizer` module. It will be instructive to look at the provided test cases in the module. Ensure that the test case `test_vector_quantization` passes on the provided data. You can use the following command to run the test cases:
 
@@ -90,10 +90,10 @@ We have studied vector quantization (VQ) in class. In this question we will firs
     py.test -s -v vector_quantizer.py -k test_vector_quantization               
     ```
 
-2. [10 points] Now we use the VQ to encode a correlated source. Consider a simple gaussian process where $$X_n = \rho X_{n-1} + \sqrt{1 - \rho^2} \mathcal{N}(0, \sigma^2) $$
+2. [10 points] Now we use the VQ to encode a correlated source. Consider a simple Gaussian process where $$X_n = \rho X_{n-1} + \sqrt{1 - \rho^2} \mathcal{N}(0, \sigma^2) $$
 the second term is independent of $X_0,\dots,X_{n-1}$, and $$X_0 \sim \mathcal{N}(0, \sigma^2)$$ 
 
-   Below we visualize the Rate-Distortion performance as well as encoding complexity for different values of $k$ (block sizes) and $\rho$ (parameter in the gaussian process), for a given rate of `1 bits per symbol`. Based on these plots and what we have learnt in the class, answer following questions:
+   Below we visualize the Rate-Distortion performance as well as encoding complexity for different values of $k$ (block sizes) and $\rho$ (parameter in the Gaussian process), for a given rate of `1 bits per symbol`. Based on these plots and what we have learnt in the class, answer following questions:
 
       ![VQ](plots/VQ_expts.png)
 
@@ -104,9 +104,9 @@ the second term is independent of $X_0,\dots,X_{n-1}$, and $$X_0 \sim \mathcal{N
 
 ### Q4: Transform Coding _(30 points)_
 
-In this question, we will first theoretically derive the transform for the given gaussian process in the previous question (reproduced below) and then implement the decoding part of the transform coding. Finally, we will try to understand some properties of Transform Coding. Throughout this question, we will be working with a block-size of $k=2$. 
+In this question, we will first theoretically derive the transform for the given Gaussian process in the previous question (reproduced below) and then implement the decoding part of the transform coding. Finally, we will try to understand some properties of Transform Coding. Throughout this question, we will be working with a block-size of $k=2$. 
 
-Consider a simple gaussian process where $$X_n = \rho X_{n-1} + \sqrt{1 - \rho^2} \mathcal{N}(0, \sigma^2) $$ 
+Consider a simple Gaussian process where $$X_n = \rho X_{n-1} + \sqrt{1 - \rho^2} \mathcal{N}(0, \sigma^2) $$ 
 the second term is independent of $X_0,\dots,X_{n-1}$, and $$X_0 \sim \mathcal{N}(0, \sigma^2)$$ 
 
 In this question we will study the quantization of such a source. 
@@ -117,9 +117,9 @@ In this question we will study the quantization of such a source.
 
    1. [2 points] Calculate the $2 \times 2$ covariance matrix 
    
-   $$\Sigma = \mathbb{E}\left[\begin{bmatrix}X_i - \mathbb{E}X_i\\ X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\begin{bmatrix}X_i - \mathbb{E}X_i & X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\right]$$ for the given source. Your answer should be in terms of $\rho$ and should not depend on $k$.
+   $$\Sigma = \mathbb{E}\left[\begin{bmatrix}X_i - \mathbb{E}X_i\\ X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\begin{bmatrix}X_i - \mathbb{E}X_i & X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\right]$$ for the given source. Your answer should be in terms of $\rho$ and should not depend on $i$.
 
-   2. [4 points] Now, let's do eigenvalue value decomposition of $\Sigma$. What are the eigenvalues ($\lambda_1$, $\lambda_2$) and corresponding eigenvectors ($V_1$, $V_2$) of $\Sigma$? Again, your answer should be in terms of $\rho$. Remember, the eigenvectors should be unit-norm. 
+   2. [4 points] Now, let's do eigenvalue decomposition of $\Sigma$. What are the eigenvalues ($\lambda_1$, $\lambda_2$) and corresponding eigenvectors ($V_1$, $V_2$) of $\Sigma$? Again, your answer should be in terms of $\rho$. Remember, the eigenvectors should be unit-norm. 
    3. [2 points] Based on the above eigenvectors, we get the following eigenvalue-based transform at block-size $k=2$:
         
         $$
@@ -130,8 +130,8 @@ In this question we will study the quantization of such a source.
         $$
     
         What is the $2 \times 2$ covariance matrix $$\Lambda = \mathbb{E}\left[\begin{bmatrix}Y_i - \mathbb{E}Y_i\\ Y_{i+1} - \mathbb{E}Y_{i+1}\end{bmatrix}\begin{bmatrix}Y_i - \mathbb{E}Y_i & Y_{i+1} - \mathbb{E}Y_{i+1}\end{bmatrix}\right]$$
-        Again, your answer should be in terms of $\rho$ and should not depend on k.
-   4. [2 points] Below we show how this transform changes the distribution of the data for samples generated from given gaussian process with $\rho=0.99$ and $k=2$ (same plots, just different scale on the axis). What do you observe? Justify in a few lines.
+        Again, your answer should be in terms of $\rho$ and should not depend on $i$.
+   4. [2 points] Below we show how this transform changes the distribution of the data for samples generated from given Gaussian process with $\rho=0.99$ and $k=2$ (same plots, just different scale on the axis). What do you observe? Justify in a few lines.
       ![Transform figure](plots/TransformPlots.png) 
       ![Transform figure](plots/TransformPlots_unnormalized.png) 
 
@@ -229,10 +229,10 @@ $$P_X(x=i) = 1/n, \forall i = \{1, 2, \ldots, n\}$$
 
 3. [5 points] Show the following sub-problems. For each of the sub-problems, also intuitively explain in a single sentence why the inequalities are true.
    - Show that $H(X) = \log_2 n$, and $H(Y_i) \leq log_2 3$ for each $i$. When is equality achieved? 
-   - Show that $H(Y_1,Y_2,\ldots,Y_k|X) = 0$.
+   - Argue why $H(Y_1,Y_2,\ldots,Y_k|X) = 0$.
 
 4. [10 points] We want to show that we will at least need $\log_3 n$ matches to determine the strongest rower. 
-   - Show that we can determine the strongest rower from $k$ matches, if and only if $H(X|Y_1, Y_2, \ldots, Y_k) = 0$. 
+   - Argue why we can determine the strongest rower from your $k$ matches, if and only if $H(X|Y_1, Y_2, \ldots, Y_k) = 0$. 
    - Using the sub-problem above, show that $k \geq \log_3 n$ matches are required to determine the strongest rower. Thus, proving that the scheme in Q4.1 is indeed optimal! 
    (*HINT: think about using $I(X; Y_1, \ldots, Y_k)$, and its properties*).
 
