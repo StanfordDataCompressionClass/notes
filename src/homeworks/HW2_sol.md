@@ -218,7 +218,7 @@ Lets consider a simple puzzle:
     
     ![Figure 2](./figures/puzzle_sol_2.png)
 
-Note how these are distinct sets, hence if you knew $Y$ and also knew that $X$ is either $000$ or $111$, you are able to decode. Thus Kakashi can send $X$ using 2 bits by basically pairing symbols with hamming distance $> 2$. For instace one possible encoding is:
+Note how these are distinct sets, hence if you knew $Y$ and also knew that $X$ is either $000$ or $111$, you are able to decode $X$. Thus, Kakashi can send $X$ using 2 bits by basically pairing symbols with hamming distance $> 2$. For instance one possible encoding is:
 
 | X          | 2-bit encoding |
 |------------|----------------|
