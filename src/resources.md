@@ -8,6 +8,7 @@ A great way to learn about data compression is to play around with the compressi
 1. [Stanford compression Library](https://github.com/kedartatwawadi/stanford_compression_library): A library of compression algorithms implemented in native python for accessibility and educational purpose. Take a look at the tutorials (in progress)  to get started! We will also be using the library as a basis for the course assignments.
 2. [Audio Compression code/book](https://ccrma.stanford.edu/events/python-programs-and-book-building-audio-coder-and-deep-learning-audio) A python based implementation of audio compression, in form of tutorials. 
 3. [Introduction to Digital Video compression](https://github.com/leandromoreira/digital_video_introduction): Great hands-on tutorial on digital video coding.
+4. [H264 in Python](https://github.com/balbekov/PyH264): Experimental implementation of H264 in pure Python
 
 ## 2. Video Resources
 Interested in data compression? Here are some nice youtube videos to watch to get an introduction. Most of them are beginner-friendly and are useful to get a sense of the data compression. 
