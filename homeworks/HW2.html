@@ -162,10 +162,10 @@ You should see a <code>HW2</code> folder in the <code>HWs</code> folder.</li>
 </code></pre>
 </li>
 <li>Ensure you have <code>stanford_compression_library</code> folder added to your <code>PYTHONPATH</code> by running the following command:
-<pre><code class="language-sh">echo $PYTHONPATH
+<pre><code class="language-sh">echo \$PYTHONPATH
 </code></pre>
 You should see the path to the <code>stanford_compression_library</code> folder. If not, run the following command to add it to your <code>PYTHONPATH</code>:
-<pre><code class="language-sh">export PYTHONPATH=$PYTHONPATH:/path/to/stanford_compression_library
+<pre><code class="language-sh">export PYTHONPATH=\$PYTHONPATH:/path/to/stanford_compression_library
 </code></pre>
 You can also add this line to your <code>~/.bashrc</code> file to make sure it is added every time you open a new terminal.</li>
 </ul>
