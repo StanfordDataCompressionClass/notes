@@ -66,9 +66,8 @@ Attendance is mandatory for the presentation. In case you are not able to make i
 
 **Guidelines**:
 
-- You need to submit your slide-deck by 12pm PT on Thursday (12/08) using [gradescope](https://www.gradescope.com/courses/436519/assignments/2479092). **No late days allowed for this submission!**
+- You need to submit your slide-deck by 12pm PT on Thursday (12/08) using [gradescope](https://www.gradescope.com/courses/436519/assignments/2479092). Please submit a PDF of the slides. **No late days allowed for this submission!**
 - We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Entropy Compressors and their optimizations, Group 2: Domain-specific Compressors and Group 3: Multimedia Compression. You can check your groups in available [spreadsheet](https://docs.google.com/spreadsheets/d/1tcqttFB4fx4ekcOlHASbtBMISmcTRRqQ7UGHN4mXO_Y/edit?usp=sharing).
-- You are still expected to attend the presentations of everyone in the group. Your presentation order can be anywhere within your group. 
 - You will have 5 minutes for your presentation, and 5 minutes for QnA. Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk. 
 - You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
 - You can use any presentation tool you like. We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.
@@ -77,7 +76,7 @@ Attendance is mandatory for the presentation. In case you are not able to make i
 ### IV. Final report and code 
 **Due: 12/16, Fri, midnight PT**
 
-- The final submission involves a 3-4 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
+- The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
 
 - You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon. 
 
