@@ -117,7 +117,7 @@ In this question we will study the quantization of such a source.
 
    1. [2 points] Calculate the $2 \times 2$ covariance matrix 
    
-   $$\Sigma = \mathbb{E}\left[\begin{bmatrix}X_i - \mathbb{E}X_i\\ X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\begin{bmatrix}X_i - \mathbb{E}X_i & X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\right]$$ for the given source. Your answer should be in terms of $\rho$ and should not depend on $i$.
+   $$\Sigma = \mathbb{E}\left[\begin{bmatrix}X_i - \mathbb{E}X_i\\ X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\begin{bmatrix}X_i - \mathbb{E}X_i & X_{i+1} - \mathbb{E}X_{i+1}\end{bmatrix}\right]$$ for the given source. Your answer should be in terms of $\rho$ and $\sigma$, and should not depend on $i$.
 
    2. [4 points] Now, let's do eigenvalue decomposition of $\Sigma$. What are the eigenvalues ($\lambda_1$, $\lambda_2$) and corresponding eigenvectors ($V_1$, $V_2$) of $\Sigma$? Again, your answer should be in terms of $\rho$. Remember, the eigenvectors should be unit-norm. 
    3. [2 points] Based on the above eigenvectors, we get the following eigenvalue-based transform at block-size $k=2$:
@@ -130,8 +130,8 @@ In this question we will study the quantization of such a source.
         $$
     
         What is the $2 \times 2$ covariance matrix $$\Lambda = \mathbb{E}\left[\begin{bmatrix}Y_i - \mathbb{E}Y_i\\ Y_{i+1} - \mathbb{E}Y_{i+1}\end{bmatrix}\begin{bmatrix}Y_i - \mathbb{E}Y_i & Y_{i+1} - \mathbb{E}Y_{i+1}\end{bmatrix}\right]$$
-        Again, your answer should be in terms of $\rho$ and should not depend on $i$.
-   4. [2 points] Below we show how this transform changes the distribution of the data for samples generated from given Gaussian process with $\rho=0.99$ and $k=2$ (same plots, just different scale on the axis). What do you observe? Justify in a few lines.
+        Again, your answer should be in terms of $\rho$ and $\sigma$, and should not depend on $i$.
+   4. [2 points] Below we show how this transform changes the distribution of the data for samples generated from given Gaussian process with $\rho=0.99$, $\sigma=1$ and $k=2$ (same plots, just different scale on the axis). What do you observe? Justify in a few lines.
       ![Transform figure](plots/TransformPlots.png) 
       ![Transform figure](plots/TransformPlots_unnormalized.png) 
 
