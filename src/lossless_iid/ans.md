@@ -50,7 +50,7 @@ x = x*10 + 5 # x = 32415
 Thus, during the *encoding* we are start with state `x=0`, and then it increases as `x = 0, 3, 32, 324, 3214, 32145` as we *encode* the symbols. 
 Can either of you tell me how would you decode back the sequence if I give you the final state `32145`? 
 
-**Mahesh:** Sure, the we can decode the sequence as: 
+**Mahesh:** Sure, then we can decode the sequence as: 
 ```python
 symbols = []
 x = 32145 # <- final state
