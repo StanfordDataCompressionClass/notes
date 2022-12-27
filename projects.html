@@ -4,7 +4,10 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Project</title>
+
+
         <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +19,11 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
@@ -26,6 +31,7 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="././mdbook-admonish.css">
+
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
@@ -86,7 +92,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -103,6 +109,7 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -116,6 +123,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -203,7 +211,7 @@
 <p><strong>2. <a href="https://en.wikipedia.org/wiki/Context_tree_weighting">CTW</a>: Context Tree Weighting</strong></p>
 <p><em>Potential Mentor</em>: Shubham</p>
 <p>We learned that <code>k-th</code> order probability model can be used with arithmetic coding to achieve good compression. However, the larger the <code>k</code>, the slower the adaptability of the model. CTW tries to solve this problem by &quot;mixing&quot; the distributions of different order efficiently. This project will involve understanding the CTW algorithm, understanding why CTW has such good theoretical properties (Rissanen lower bound etc.) and implementing it in SCL.</p>
-<p>A few useful links: <a href="https://docs.google.com/presentation/d/1LUbo-6mLpYTwcELOLlRR4ohku9j2kCiQj_2sYPh0uWA/edit#slide=id.g5eaf3d9f0e_0_75">ppt</a>, <a href="https://github.com/fumin/ctw">ctw-cpp-implementation</a>, <a href="https://www.cs.cmu.edu/%7Eaarti/Class/10704_Fall16/CTW.pdf">original paper</a>, <a href="https://web.stanford.edu/class/ee477/lectures2011/lecture4.pdf">lecture notes</a></p>
+<p>A few useful links: <a href="https://docs.google.com/presentation/d/1LUbo-6mLpYTwcELOLlRR4ohku9j2kCiQj_2sYPh0uWA/edit#slide=id.g5eaf3d9f0e_0_75">ppt</a>, <a href="https://github.com/fumin/ctw">ctw-cpp-implementation</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10704_Fall16/CTW.pdf">original paper</a>, <a href="https://web.stanford.edu/class/ee477/lectures2011/lecture4.pdf">lecture notes</a></p>
 <p><strong>3. <a href="https://bjlkeng.github.io/posts/lossless-compression-with-latent-variable-models-using-bits-back-coding/">Bits-back coding</a> and compression of data with permutation invariance</strong></p>
 <p><em>Potential Mentor</em>: Kedar</p>
 <p>We learnt about <code>rANS</code> in class. <code>rANS</code> has an interesting property that we decode in the reverse direction vs the encoding. This property can be used to great effect with a technique called &quot;bits-back coding&quot;. </p>
@@ -213,7 +221,7 @@
 <p>Tabular data is quite commonly found in data logs, log files, etc. and is typically compressed as-is using gzip. A recent <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5641593/">paper</a> proposes a way to exploit the dependencies between columns to improve compression. The goal of the project is to understand the paper, and implement an equivalent variant using SCL. This project will involve implementing and testing the performance of various existing compressors on variety of real life tabular datasets. </p>
 <p><strong>5. Adaptive Huffman codes, and other variants</strong></p>
 <p><em>Potential Mentor</em>: Pulkit</p>
-<p>Huffman coding algorithm is a very useful and versatile algorithm. This project explores some variants of the standard algorithm to improve its performance. We will explore two of such variations in this project. In the first part of the project, we will implement Depth-limited huffman coding as a part of SCL (<a href="https://www.ics.uci.edu/%7Edan/pubs/LenLimHuff.pdf">original paper</a>, <a href="http://cbloomrants.blogspot.com/2010/07/07-03-10-length-limitted-huffman-codes.html">Charles Bloom's blog</a>).
+<p>Huffman coding algorithm is a very useful and versatile algorithm. This project explores some variants of the standard algorithm to improve its performance. We will explore two of such variations in this project. In the first part of the project, we will implement Depth-limited huffman coding as a part of SCL (<a href="https://www.ics.uci.edu/~dan/pubs/LenLimHuff.pdf">original paper</a>, <a href="http://cbloomrants.blogspot.com/2010/07/07-03-10-length-limitted-huffman-codes.html">Charles Bloom's blog</a>).
 The second part of the project would entail implementing <a href="https://en.wikipedia.org/wiki/Adaptive_Huffman_coding">Dynamic Huffman tree</a> as part of SCL. Dynamic Huffman coding deals with the question of how can we update huffman tree as the source distribution changes in practice.</p>
 <p><strong>6. PPM, PPMD</strong> </p>
 <p><em>Potential Mentor</em>: Shubham/Kedar/Pulkit</p>
@@ -282,6 +290,8 @@ The project can also explore practically implementing ideas from distributed com
                             <a rel="prev" href="homeworks/HW3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
+
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
@@ -291,16 +301,23 @@ The project can also explore practically implementing ideas from distributed com
                     <a rel="prev" href="homeworks/HW3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>
 
+
+
+
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
+
+
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
@@ -308,5 +325,7 @@ The project can also explore practically implementing ideas from distributed com
         <!-- Custom JS scripts -->
         <script type="text/javascript" src="mermaid.min.js"></script>
         <script type="text/javascript" src="mermaid-init.js"></script>
+
+
     </body>
 </html>
