@@ -25,7 +25,8 @@ jobs:
       - run: |
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
           cargo install mdbook-mermaid # for the diagrams
-          cargo install --git "https://github.com/lzanini/mdbook-katex"
+          cargo install --version 0.2.10 mdbook-katex
+        #          cargo install --git "https://github.com/lzanini/mdbook-katex"
           mdbook build
 
       - name: Deploy
