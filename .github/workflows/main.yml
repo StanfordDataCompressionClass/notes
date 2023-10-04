@@ -23,7 +23,7 @@ jobs:
         with:
           mdbook-version: 'latest'
       - run: |
-          cargo install mdbook-katex
+          cargo install --version 0.2.10 mdbook-katex
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
           cargo install mdbook-mermaid # for the diagrams
           mdbook build
