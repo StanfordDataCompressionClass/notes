@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../././mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html" class="active"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li></ol></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/vector_quant.html"><strong aria-hidden="true">2.1.</strong> Vector Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="chapter-item expanded "><a href="../lossy/transform_coding_theory.html"><strong aria-hidden="true">2.3.</strong> Transform Coding Theory</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.1.</strong> HW1</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="introduction-to-lossless-coding"><a class="header" href="#introduction-to-lossless-coding">Introduction to lossless coding</a></h1>
+<p>Data compression, is one area of EECS which we are aware of and unknowingly make use of thousands of times a day.
+But, not many engineers are aware of how things work <em>under the hood</em>.
+Each text, image and video is compressed before it gets transmitted and shared across devices using compression
+schemes/formats such as <code>GZIP, JPEG, PNG, H264 ...</code> and so on. A lot of these compression schemes are somewhat domain
+specific, for example typically use <code>GZIP</code> for text files, while we have <code>JPEG</code> for images.
+While there is significant domain expertise involved in designing these schemes,
+there are lots of commonalities and fundamental similarities.</p>
+<p>Our focus in the first half of the course is going to be to understand these common techniques part of all of these
+compression techniques, irrespective of the domain. The goal is to also build an <em>intuition</em> for these fundamental
+ideas, so that we can appropriately tweak them when eventually designing real-life and domain-specific compression
+techniques. With that in mind, we are going to start with very simple hypothetical but relevant scenarios, and try
+to tackle these. As we will see, understanding these simpler cases will help us understand the fundamental details of
+compression.</p>
+<p>Let's start with a simple example:</p>
+<blockquote>
+<p>Let's say we are given a large random text file consisting of <code>4</code> letters <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>. To be more precise, each
+letter
+of the text file is generated randomly by picking a letter from the set <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">}</span></span></span></span> independently
+and with uniform probability. i.e.</p>
+</blockquote>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/4</span></span></span></span></span></p>
+<p>An example of such a file is given below. Let's say we have such a file containing <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">000</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">000</span></span></span></span> letters.</p>
+<pre><code>ACABDADCBDDCABCDADCBDCADCBDACDACDBAAAAACDACDA...
+</code></pre>
+<p>Now if one examines this file, then the size of the file is going to be <code>1,000,000</code> bytes, as can be seen below.</p>
+<pre><code>➜ ls -l sample_ABCD_uniform.txt 
+-rw-rw-r-- 1 kedar kedar 1000000 Jun 23 19:27 sample_ABCD_uniform.txt
+</code></pre>
+<p>This is quite obvious as we are using 1 byte (or <code>8 bits/symbol</code>) to represent each alphabet. In fact, if we look at the
+bits in the file, we see that each symbol has a unique <em>codeword</em>, given by the ASCII table:</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>ASCII code</th></tr></thead><tbody>
+<tr><td>A</td><td>1000001</td></tr>
+<tr><td>B</td><td>1000010</td></tr>
+<tr><td>C</td><td>1000011</td></tr>
+<tr><td>D</td><td>1000100</td></tr>
+</tbody></table>
+</div>
+<p>Every time we write text to a file, the programming language <em>encodes</em> the text file using ASCII encoding table -- to
+map the characters and other punctuations to binary data. Also, when we read the file back, the binary data is
+read <code>8 bits</code> at a time and then <em>decoded</em> back to the character.</p>
+<p>Now, the question we want to answer is &quot;<em>Can we reduce the size of the file?</em>&quot;</p>
+<p>To be more precise, we will restrict ourselves to <em>Symbol codes</em>, which are encoding schemes where we have a unique
+binary string (called a <em>codeword</em>) for every symbol.</p>
+<div id="admonition-quiz-1-fixed-bitwidth-encoding" class="admonition question">
+<div class="admonition-title">
+<p>Quiz-1: Fixed Bitwidth Encoding</p>
+<p><a class="admonition-anchor-link" href="#admonition-quiz-1-fixed-bitwidth-encoding"></a></p>
+</div>
+<div>
+<p>For the example above where our file contains random letters from the set <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">}</span></span></span></span>, 
+the ASCII code gives us a compression of <code>8 bits/symbol</code>. Can we design a <em>symbol code</em> which 
+achieves better compression and is <em>lossless</em>, i.e. a <em>lossless compression</em> scheme?</p>
+</div>
+</div>
+<h2 id="fixed-bitwidth-encoding"><a class="header" href="#fixed-bitwidth-encoding">Fixed Bitwidth encoding</a></h2>
+<p>If we look at the ASCII code table, we see that all the codes start <code>1000</code>, which is kind of redundant. It is useful if
+we have other letters in the file, but in this case we only have 4 letters. Thus, we don't need all the 8-bits! In
+fact, we can just use <code>2 bits/symbol</code> to represent them all as follows:</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>ASCII code</th></tr></thead><tbody>
+<tr><td>A</td><td>00</td></tr>
+<tr><td>B</td><td>01</td></tr>
+<tr><td>C</td><td>10</td></tr>
+<tr><td>D</td><td>11</td></tr>
+</tbody></table>
+</div>
+<p>Note that this is lossless compression, as during decoding as well we can just read <code>2</code> bits at a time and map them
+to <code>A,B,C,D</code>. Thus, this simple idea has given us a <em>compression</em> of <strong>4x</strong>!</p>
+<p>In general, if we have <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mord">∣</span></span></span></span> different symbols in our text file, then using this simple idea we can
+represent/<em>encode</em> the data using <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌈</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">⌉</span></span></span></span> bits.</p>
+<h2 id="going-beyond-fixed-bitwidth-encoding"><a class="header" href="#going-beyond-fixed-bitwidth-encoding">Going beyond Fixed Bitwidth encoding</a></h2>
+<p>Now, this <code>2 bits/symbol</code> compression is all well and good, but works only if some letters are fully absent from our
+text file. For example, if now our file the letters <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> were absent and only the letters <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">}</span></span></span></span> were present, then
+we could go from <code>2 bits/symbol</code> to <code>1 bit/symbol</code>, by assigning codes a follows:</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>ASCII code</th></tr></thead><tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>1</td></tr>
+</tbody></table>
+</div>
+<p>But, what if <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> were present, but in a smaller proportion? Is it possible to achieve better compression?
+Here is a more precise question:</p>
+<div id="admonition-quiz-2-beyond-fixed-bitwidth-encoding" class="admonition question">
+<div class="admonition-title">
+<p>Quiz-2: Beyond Fixed Bitwidth encoding</p>
+<p><a class="admonition-anchor-link" href="#admonition-quiz-2-beyond-fixed-bitwidth-encoding"></a></p>
+</div>
+<div>
+<p>Lets say that our random text file contains the letters <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">}</span></span></span></span>, such that each letter is sampled
+independently with probability: <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0.49</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0.49</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0.01</span></span></span></span></span>
+Then can we design a <em>symbol code</em> which achieves lossless compression better than <code>2 bits/symbol</code>?</p>
+</div>
+</div>
+<p>Clearly, if we stick with fixed bitwidth encoding, then irrespective of the distribution of letters in our file, we are
+always going to get compression of <code>2 bits/symbol</code> for all the <code>4</code> symbols, and so of course we can't achieve
+compression better than <code>2 bits/symbol</code>. But, intuitively we know that most of the time we are only going to encounter
+symbol <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> or <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>, and hence we should be able to compress our file closer to <code>1 bit/symbol</code>. To improve compression,
+the idea here is to go for <em>variable length codes</em>, where the code length of each symbol can be different.</p>
+<p>But, designing <em>variable length codes</em> which are also <em>lossless</em> is a bit tricky. In the fixed bitwidth scenario, the
+decoding was simple: we always looked at <code>2 bits</code> at a time, and just performed a reverse mapping using the code table
+we had. In case of <em>variable length codes</em>, we don't have that luxury as we don't really know how many bits does the
+next codeword consists of.</p>
+<p>Thus, the <em>variable length codes</em> need to have some special properties which makes it both lossless and also
+convenient to decode.</p>
+<p>Instead of just mentioning the property, we are going to try to discover and reverse engineer this property! With that
+in mind, I am going to present the solution to the <strong>Quiz-2</strong>, but what you have to do is figure out the decoding
+procedure! So here is one possible code:</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>codewords</th></tr></thead><tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>10</td></tr>
+<tr><td>C</td><td>110</td></tr>
+<tr><td>D</td><td>111</td></tr>
+</tbody></table>
+</div>
+<p>Some questions for you to answer:</p>
+<div id="admonition-quiz-3-variable-length-symbol-code" class="admonition question">
+<div class="admonition-title">
+<p>Quiz-3: Variable length symbol code</p>
+<p><a class="admonition-anchor-link" href="#admonition-quiz-3-variable-length-symbol-code"></a></p>
+</div>
+<div>
+<p>For the variable code above, answer the following questions: </p>
+<ol>
+<li>Are we doing better than <code>2 bits/symbol</code> in terms of the average compression? </li>
+<li>Is the code really lossless?</li>
+<li>How can we perform the decoding?</li>
+</ol>
+</div>
+</div>
+<p>Even before we try to answer these questions, lets try to first eyeball the designed code and see if we can
+understand something! We see that the code for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> is now just <code>1</code> bit instead of <code>2</code>. At the same time, the code
+lengths for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> are <code>3</code> instead of <code>2</code>. So, in a way, we are reducing the code length for symbols which are more
+frequent, while increasing the code length for symbols which occur less frequently, which intuitively makes sense if
+we want to reduce the average code length of our file!</p>
+<p><strong>Compression ratio</strong>: Lets try to answer the first question: &quot;<em>Are we doing better than <code>2 bits/symbol</code> in terms of the
+average compression?</em>&quot; To do this, we are going to compute <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mclose">)</span></span></span></span>, the average code length of the code:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">4</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">3</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0.49</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0.49</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0.01</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0.01</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">3</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">1.53</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>So, although in the worst case this increases the symbol code length from <code>2</code> to <code>3</code>, we have been able to reduce the
+average code length from <code>2</code> to <code>1.53</code>, which although is not as good as <code>1 bit/symbol</code> we see when <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> were
+completely absent, it is still an improvement from <code>2 bits/symbol</code>. Great!</p>
+<p><strong>Lossless Decoding</strong>: Now that we have answered the first question, lets move to the second one: &quot;<em>Is the code really
+lossless?</em>&quot;</p>
+<p>Okay, lets get back to the code we have:</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>codewords</th></tr></thead><tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>10</td></tr>
+<tr><td>C</td><td>110</td></tr>
+<tr><td>D</td><td>111</td></tr>
+</tbody></table>
+</div>
+<p>Let's take an example string and see how the encoding/decoding proceeds:</p>
+<pre><code>input_string = ABCADBBA
+</code></pre>
+<p>The encoding proceeds in the same way as earlier: for every symbol, we look at the lookup table and write the
+corresponding bits to the file. So, the encoding for our sample string looks like:</p>
+<pre><code class="language-python">input_string = ABCADBBA
+encoding = concat(0, 10, 110, 0, 111, 10, 10, 0)
+= 010110011110100
+</code></pre>
+<p>Now, lets think about how we can decode this bit sequence: <code>010110011110100</code>. The issue with using a <em>variable length
+code</em>, unlike before where we used <code>2</code> bits for each symbol is that we don't know where each code ends beforehand. For
+example, we don't know how to decode symbol no. <code>7</code> directly. but let's see how we can decode the input sequentially,
+one symbol at a time.</p>
+<ol>
+<li>
+<p>The first bit of <code>010110011110100</code> is <code>0</code>. We see that only one codeword (corresponding to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>) starts with <code>0</code>, so
+we can be confident that the first letter was an <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>! At this time we have consumed <code>1</code> bit, and so to decode the
+second symbol we have to start reading from the second bit.</p>
+</li>
+<li>
+<p>Let's now focus our attention on the remaining bits: <code>10110011110100</code>. Now, the first bit is a <code>1</code>. Unfortunately
+<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> have codewords which start with a <code>1</code>, so lets read another bit: <code>10</code>. Okay! we have a match with the symbol
+<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>. We can also be confident that the second symbol is indeed <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>, as no other codeword begins with <code>10</code>. Thus, our
+decoded string until now is <code>A,B</code></p>
+</li>
+<li>
+<p>We can continue in the same way and decode the remaining symbols one at a time, by following the following procedure,
+to recover the input string: <code>ABCADBBA</code>.</p>
+</li>
+</ol>
+<p>Below is a pseudocode to decode a single symbol using the matching scheme described above.</p>
+<pre><code class="language-python">codewords_table = {A: 0, B: 10, C: 110, D: 111}
+
+
+def decode_symbol(encoded_bitstring, codewords_table):
+    temp_bits = &quot;&quot;
+
+    # read until we find a match with a codeword in the codewords_table
+    while not find_match(temp_bits, codewords_table):
+        temp_bits += encoded_bitstring.read_next_bit()
+
+    decoded_symbol = find_match(temp_bits, codewords_table)
+    return decoded_symbol
+</code></pre>
+<p>Note, that one reason why our decoding procedure works is because no codeword is an initial segment of another codeword,
+i.e. no two codewords are prefixes of each other. Thus, if
+codeword for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> is <code>10</code>, then no other codeword can begin with <code>10</code>. This kind of <em>Symbol codes</em> are known as
+<strong>prefix-free codes</strong> (or simply <strong>Prefix Codes</strong>). As we just saw, we can confidently say that if a code is *
+prefix-free*, then it indeed leads to lossless compression, and a convenient decoding procedure.</p>
+<p>Note that <em>prefix-free codes</em> aren't the only way of designing <em>symbol codes</em> which are lossless. For example, consider
+the following code</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>codewords</th></tr></thead><tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>01</td></tr>
+<tr><td>C</td><td>011</td></tr>
+<tr><td>D</td><td>111</td></tr>
+</tbody></table>
+</div>
+<p>Notice that codeword for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span> starts with <code>01</code> which is in fact the codeword for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> (similarly for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>). Thus,
+this code is not <em>prefix-free</em> and our decoding procedure described above will fail. For example if we encode a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>
+-&gt; <code>011...</code>, our decoding procedure will always output a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>, as it would find a match at <code>01</code> itself. Note that
+although our simple decoding scheme above fails, lossless decoding is still possible. Although, the decoding scheme
+might be more complicated as, we have to read &quot;future bits&quot; to determine if a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> or a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span> was encoded here.</p>
+<p>As a fun exercise, can you try to figure out how the decoding works for this code?</p>
+<div id="admonition-quiz-4-non-prefix-free-code-example" class="admonition question">
+<div class="admonition-title">
+<p>Quiz-4: Non-prefix free code example</p>
+<p><a class="admonition-anchor-link" href="#admonition-quiz-4-non-prefix-free-code-example"></a></p>
+</div>
+<div>
+<p>Can you think of a decoding procedure which works for this code? (<em>Hint: It sometimes helps to think in the 
+reverse direction</em>)</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>codewords</th></tr></thead><tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>01</td></tr>
+<tr><td>C</td><td>011</td></tr>
+<tr><td>D</td><td>111</td></tr>
+</tbody></table>
+</div></div>
+</div>
+<p>To summarize: the key idea to learn from the design of our code is that</p>
+<div id="admonition-key-idea-1-prefix-free-codes" class="admonition info">
+<div class="admonition-title">
+<p>Key-Idea 1: Prefix-free codes</p>
+<p><a class="admonition-anchor-link" href="#admonition-key-idea-1-prefix-free-codes"></a></p>
+</div>
+<div>
+<p>If no codeword in a <em>symbol code</em> is a prefix of each other, then the <em>symbol code</em> is a <em>prefix-free code</em>. </p>
+<p>Prefix-free codes by design are lossless compression schemes which allow for a convenient decoding scheme.</p>
+</div>
+</div>
+<p>Another name for <em>prefix-free</em> codes is <em>instantaneous codes</em> as the decoding procedure is in a sense &quot;instantaneous&quot;,
+i.e. we don't have to read bits written by future symbols to decode the current symbols.</p>
+<h2 id="next-lecture"><a class="header" href="#next-lecture">Next Lecture</a></h2>
+<p>In this lecture, we discussed the design of a simple <em>prefix-free code</em> which improves upon the compression of a
+non-uniform source from <code>2 bits/symbol</code> to <code>1.53 bits/symbol</code> by using variable length codewords. We also briefly
+discussed how the decoding might proceed.</p>
+<p>In the next lecture we will take this discussion further and try to answer the following questions:</p>
+<ol>
+<li>
+<p><strong>Implementing the decoding</strong>: We will see how to transform our simple decoding procedure into an efficient
+algorithm, which we can implement in practice</p>
+</li>
+<li>
+<p><strong>Designing prefix-free codes</strong>: We will discuss how to design prefix-free codes to obtain better compression.</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../lossless_iid/coverpage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../lossless_iid/prefix_free_codes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../lossless_iid/coverpage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../lossless_iid/prefix_free_codes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>
