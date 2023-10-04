@@ -23,7 +23,7 @@ jobs:
         with:
           mdbook-version: 'latest'
       - run: |
-          cargo install --version 0.2.10 mdbook-katex
+          cargo install mdbook-katex
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
           cargo install mdbook-mermaid # for the diagrams
           mdbook build
@@ -33,4 +33,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book/html
+          publish_dir: ./book
