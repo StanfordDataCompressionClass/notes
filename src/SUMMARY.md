@@ -20,8 +20,7 @@
 
 ---
 - [Homeworks](./homeworks/coverpage.md)
-
-[//]: # (    - [HW0]&#40;./homeworks/HW0.md&#41;)
+    - [HW1](./homeworks/HW1.md)
 
 [//]: # (    - [HW1]&#40;./homeworks/HW1.md&#41;)
 
