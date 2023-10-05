@@ -56,9 +56,9 @@ For example in the tree example above, node $A$ has `4` nodes corresponding to i
 nodes.
 
 - It is clear that the nodes at depth $l_{max}$ are distinct for each of the leaf nodes $n_i$ (Think why?). As the "total number of nodes at depth $l_{max}$", is larger than "the sum of nodes at depth $l_{max}$ corresponding to leaf nodes
-  $n_i$`, we get the inequality
+  $n_i$, we get the inequality
 
-$$ \sum_{i=1}^k 2^{l_{max}-l_i} \leq 2^{l_{max}} $$
+$$ \sum_{i=1}^k 2^{l_{max}-l_{i}} \leq 2^{l_{max}} $$
 
 - This completes the proof sketch for the Kraft Inequality:
 
@@ -67,7 +67,7 @@ $$ \sum_{i=1}^k 2^{-l_i} \leq 1$$
 Well, that was a short and simple proof! It is also clear that the equality is true, if and only if there is no leaf
 node left unaccounted for.
 
-We can use the Kraft inequality to now show the *correctness* of the prefix-free tree construction with code-lengths $l_i$, as we discussed in last lecture.
+We can use the Kraft inequality to now show the *correctness* of the prefix-free tree construction with code-lengths $l_{i}$, as we discussed in last lecture.
 
 ## Prefix-tree construction *correctness*
 
