@@ -4,11 +4,15 @@
 - **Due Date:** Oct 18, midnight (11:59 PM)
 - **Weightage:** 15%
 - **Total Points:** 135
-- **Submission Instructions:** Provided at the end of HW (ensure you read these!)
+- **Submission Instructions:**
+  - Provided at the end of HW (ensure you read these!)
+  - We will be using both manual and auto-grading for the assignment submissions. Please follow the submission instructions carefully to ensure you get full credit for your submissions.
 - **Submission link:** 
   - For written part: [HW1-Written](https://www.gradescope.com/courses/625620/assignments/3459512)
-  - For programming part: [HW1-Code](https://www.gradescope.com/courses/625620/assignments/3466287) 
+  - For programming part: [HW1-Code](https://www.gradescope.com/courses/625620/assignments/3466287)
 - Please post any questions on Ed, or feel free to contact the instructors during the office hours. We will be supporting Linux and Mac OS. Windows users are welcome to use the Linux subsystem, or use a virtual machine, or use Stanford [Farmshare](https://web.stanford.edu/group/farmshare/cgi-bin/wiki/index.php/FarmShare_2) server resources.
+
+**NOTE:** The homework looks longer that it actually is! We try to be verbose with the questions for clarity.
 
 ### 0. Python, SCL setup (*10 points*)
 We will be using python as the programming language during the course for the assignments and for code demonstrations during the course. If you are not familiar with python, please take a look at the [python tutorial](https://cs231n.github.io/python-numpy-tutorial/) contributed by our friends from the CS231n course.
@@ -102,7 +106,8 @@ Compute the entropy $H(X)$ of random variable $X$. What are the optimal code-len
 Then show that:
 $$ H(Y) \leq 2 $$ 
 For what distribution of the random variable $Y$ does the equality hold, i.e. $H(Y) = 2$? 
-HINT: KL-Divergence and it's properties will be helpful to show this.
+
+    **HINT:** KL-Divergence and it's properties will be helpful to show this.
 
 
 ### Q3. Uniquely decodable codes (*25 points*)
@@ -116,7 +121,8 @@ We mainly explored prefix-free codes in class. But there is a much broader class
     C -> 11
     D -> 110
     ```
-    Consider an alphabet $\mathcal{U}$ and a uniquely decodable code with code lengths for $u \in \mathcal{U}$ denoted by $L(u)$. Also, we denote the codelength of the n-tuple $u^n$ as $L(u^n) = \sum_{i=1}^n L(u_i)$.
+
+Consider an alphabet $\mathcal{U}$ and a uniquely decodable code with code lengths for $u \in \mathcal{U}$ denoted by $L(u)$. Also, we denote the codelength of the n-tuple $u^n$ as $L(u^n) = \sum_{i=1}^n L(u_i)$.
 
 2. [5 points] Show that $$\left( \sum_{u \in \mathcal{U}} 2^{-L(u)} \right)^n = \sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} $$
 
@@ -132,10 +138,12 @@ Using `Q4.2` and the identity above, show that:
 $$\left( \sum_{u\in\mathcal{U}} 2^{-L(u)} \right) \leq 1$$
 
 5. [5 points] Now show that for any uniquely decodable code for $U$ with codeword lengths $L(U)$, $$\mathbb{E}[L(U)] \geq H(U) .$$
-  Also argue that for any uniquely decodable code, it is possible to construct a prefix-free code with the same codeword lengths. This means that uniquely decodable codes generally do not provide any benefits over prefix-free codes and instead have a more complicated decoding procedure!
+  Also argue that for any uniquely decodable code, it is possible to construct a prefix-free code with the same codeword lengths. 
+
+This means that uniquely decodable codes generally do not provide any benefits over prefix-free codes and instead have a more complicated decoding procedure!
 
 
-    **NOTE:** Feel free to refer to the corresponding proof for prefix-free codes.
+**NOTE:** We saw a similar proof for prefix-free codes in the class!
 
 ### Q4: Shannon Code(s) (*25 points*)
 
@@ -151,9 +159,9 @@ In class, we saw one version of the Shannon codes; the [tree-based construction]
 
 2. [10 points] Complete the code for the `ShannonTreeEncoder` in `hw1_p4.py`. Also, complete the `test_shannon_tree_coding_specific_case()` to check the correctness of your codewords in part 1 against your implemented code. If you encounter errors, you should identify the failing test case and fix any issues. Note: we will be using automated tests to grade your code, so it is important that you do not change the function signatures. We will have more test cases for grading, so feel free to add more test cases of your own of your own when working on the problem. 
 
-We have also studied the tree-parsing based decoding for Shannon codes (or prefix-free codes in general). This decoding has already been implemented in the `ShannonTreeDecoder`. The core tree-parsing logic can be found in [here](https://stanforddatacompressionclass.github.io/notes/lossless_iid/prefix_free_codes.html). The tree-parsing based decoder works well however includes too many if/else conditions which leads to branching -- this is pretty bad for modern hardware. [Here](https://stackoverflow.com/questions/9820319/why-is-a-cpu-branch-instruction-slow#:~:text=A%20branch%20instruction%20is%20not,sequential%20instructions%20being%20executed%20simultaneously) is some additional information about this inefficiency for those interested.
+We have also studied the tree-parsing based decoding for Shannon codes (or prefix-free codes in general). This decoding has already been implemented in the `ShannonTreeDecoder`. The core tree-parsing logic can be found in [here](https://stanforddatacompressionclass.github.io/notes/lossless_iid/prefix_free_codes.html). The tree-parsing based decoder works well however includes too many if/else conditions which leads to branching -- this is pretty bad for modern hardware. ([Here](https://stackoverflow.com/questions/9820319/why-is-a-cpu-branch-instruction-slow#:~:text=A%20branch%20instruction%20is%20not,sequential%20instructions%20being%20executed%20simultaneously) is some additional information about this inefficiency for those interested.)
 
-In this next subproblem, we will implement another decoder which we call the `ShannonTableDecoder`. The `ShannonTableDecoder` works by creating a *decoding lookup table* and then using it for decoding symbols without branching etc. 
+In this next subproblem, we will implement another decoder which we call the `ShannonTableDecoder`. The `ShannonTableDecoder` works by creating a *decoding lookup table* and then using it for decoding symbols without branching. 
 
 As an example, lets consider the following simple code:
 ```python
@@ -193,7 +201,7 @@ def decode_symbol_table(encoded_bitarray):
 
 3. [5 points] Based on the pseudo-code above, explain in a few sentences how the table based decoding works. Why do you need to output both the decoded symbol and the number of bits consumed?
 
-4. [5 points] Complete the `ShannonTableDecoder` by implementing the `create_decoding_table` function. You can verify if your implementation is correct by using `test_shannon_table_coding_end_to_end` function.
+4. [5 points] Complete the `ShannonTableDecoder` in `hw1_p4.py` by implementing the `create_decoding_table` function. You can verify if your implementation is correct by using `test_shannon_table_coding_end_to_end` function.
 
 
 ### Q5. Huffman coding on real data (*30 points*)
@@ -229,7 +237,7 @@ To understand the overall process, you should go through the provided code and s
 
 2. [10 points] Implement the encoding and decoding of probability distribution step above (Step 4) in the functions `encode_prob_dist` & `decode_prob_dist` respectively. There are multiple ways to encode this, and we are not looking for the most optimized implementation here. Note that we are working with 50 KB blocks here, while the alphabet size is just 256. So as long as your implementation is not absurdly bad, the overhead will be small. You might find the following pointers useful as you implement the function: 
     - The input `bitarray` to `decode_prob_dist` can include more than the encoding of the probability distribution itself. Thus, it should only read as much as it needs and return the number of bits read so that the Huffman decoding can start from the next bit.
-    - Python dictionaries are ordered (according to insertion order of keys). It is critical to have the same order of keys during encoding and decoding. See the Pulkit-Shubham communication fiasco above for an example of what can go wrong if the order is not preserved.
+    - Python dictionaries are [OrderedDicts](https://stackoverflow.com/questions/39980323/are-dictionaries-ordered-in-python-3-6). If you are using dictionaries to represent probability distribution, then it is critical to maintain this ordering while creating Huffman trees during encoding/decoding. See the Pulkit-Shubham communication fiasco above for an example of what can go wrong if the order is not preserved.
     - Python's `float` type is equivalent to the `double` type in C (see [this](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) for a refresher). As long as you provide the same exact distribution to the encoder and decoder, all is well!
     - Also, you will hear about [Canonical Huffman code](https://en.wikipedia.org/wiki/Canonical_Huffman_code) in class, which provides an alternative to solve some of these issues in practice. You do not need it for this question.
 
