@@ -10,6 +10,7 @@
     - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
     - [Arithmetic coding](./lossless_iid/arithmetic_coding.md)
     - [Asymmetric Numeral Systems](./lossless_iid/ans.md)
+---
 - [Lossy data Compression](./lossy/coverpage.md)
     - [Vector Quantization](./lossy/vector_quant.md)
     - [Rate-Distortion Theory](./lossy/rd.md)
@@ -30,3 +31,7 @@
 
 ---
 - [Project](./projects.md)
+---
+- [SCL Tutorial](./scl_tutorial/SCL_tutorial.md)
+  - [SCL Basics](./scl_tutorial/basics.md)
+  - [SCL Exercise](./scl_tutorial/exercise.md)
