@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SCL Basics</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../././mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/vector_quant.html"><strong aria-hidden="true">2.1.</strong> Vector Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="chapter-item expanded "><a href="../lossy/transform_coding_theory.html"><strong aria-hidden="true">2.3.</strong> Transform Coding Theory</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.1.</strong> HW1</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../scl_tutorial/SCL_tutorial.html"><strong aria-hidden="true">6.</strong> SCL Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scl_tutorial/basics.html" class="active"><strong aria-hidden="true">6.1.</strong> SCL Basics</a></li><li class="chapter-item expanded "><a href="../scl_tutorial/exercise.html"><strong aria-hidden="true">6.2.</strong> SCL Exercise</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>Let us go over the main library structure.</p>
+<h2 id="library-structure----useful-building-blocks"><a class="header" href="#library-structure----useful-building-blocks">Library Structure -- Useful Building Blocks</a></h2>
+<p>The main library folder is <code>scl</code>. The <code>scl</code> directory structure is as follows:</p>
+<pre><code>├── compressors
+│   ├── arithmetic_coding.py
+│   ├── elias_delta_uint_coder.py
+│   ├── fano_coder.py
+│   ├── fixed_bitwidth_compressor.py
+│   ├── ... (more compressors)
+├── core
+│   ├── data_block.py
+│   ├── data_encoder_decoder.py
+│   ├── data_stream.py
+│   ├── encoded_stream.py
+│   └── prob_dist.py
+├── external_compressors
+│   ├── pickle_external.py
+│   ├── zlib_external.py
+│   └── zstd_external.py
+└── utils
+    ├── bitarray_utils.py
+    ├── misc_utils.py
+    ├── test_utils.py
+    └── tree_utils.py
+</code></pre>
+<p>The directories are self-explanatory, but here are some more details:</p>
+<ul>
+<li><a href="https://github.com/kedartatwawadi/stanford_compression_library/tree/main/scl/core">/core</a>: This contains the core part of the library which is common to almost all compressors. For eg: classes to represent input data, encoded bitarrays, Encoders, Decoders</li>
+<li><a href="https://github.com/kedartatwawadi/stanford_compression_library/tree/main/scl/compressors">/compressors</a>: This includes compressors implemented natively in SCL. </li>
+<li><a href="https://github.com/kedartatwawadi/stanford_compression_library/tree/main/scl/external_compressors">/external_compressors</a>: SCL-like interface to external compressors (such as <code>zlib</code> etc.) </li>
+<li><a href="https://github.com/kedartatwawadi/stanford_compression_library/tree/main/scl/utils">/utils</a>: general utility functions for debugging, bitarray manipulation, testing etc. </li>
+</ul>
+<h2 id="1-the-core-library"><a class="header" href="#1-the-core-library">1. The <code>core</code> library</a></h2>
+<p>We noticed that most of the compressors share a lot of commonalities. For example, a lot of them encode data in blocks and write to bits. The core library implements the basic frameworks and classes common to all compressors. We elaborate some of them below. </p>
+<h3 id="11-datablock"><a class="header" href="#11-datablock">1.1 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/data_block.py">DataBlock</a></a></h3>
+<p>The encoders and decoders in SCL operate on blocks of data. Each input block is of type <code>DataBlock</code>. The <code>DataBlock</code> can be thought of as a thin wrapper around a list of input symbols. Let's take a look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/core/data_block.py#L5C9-L5C9">class definition</a>:</p>
+<pre><code class="language-python">class DataBlock:
+    &quot;&quot;&quot;
+    wrapper around a list of symbols.
+
+    The class is a wrapper around a list of symbols (self.data_list). The data_block is typically used
+    to represent input to the data encoders (or output from data decoders)
+
+    Some utility functions (useful generally for compression) implemented are:
+    - size
+    - alphabet
+    - empirical_distribution
+    - entropy
+    &quot;&quot;&quot;
+
+    def __init__(self, data_list: List):
+        self.data_list = data_list
+
+    @property
+    def size(self):
+        return len(self.data_list)
+        
+    ...
+</code></pre>
+<p>As you can see, the main data is stored in the <code>self.data_list</code> attribute, the other functions are helper functions which are useful in multiple places in the code. </p>
+<p>One useful think in the SCL is that unit tests are present in the same file at the bottom, and are very useful as usage examples. For example, lets take a look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/core/data_block.py#L109">tests for DataBlock</a>:</p>
+<pre><code class="language-python">def test_data_block_basic_ops():
+    &quot;&quot;&quot;checks basic operations for a DataBlock&quot;&quot;&quot;
+    data_list = [0, 1, 0, 0, 1, 1]
+
+    # create data block object
+    data_block = DataBlock(data_list)
+
+    # check size
+    assert data_block.size == 6
+
+    # check counts
+    counts_dict = data_block.get_counts(order=0)
+    assert counts_dict[0] == 3
+
+    # check empirical dist
+    prob_dist = data_block.get_empirical_distribution(order=0)
+    assert prob_dist.prob_dict[0] == 0.5
+
+    # check entropy
+    entropy = data_block.get_entropy(order=0)
+    assert entropy == 1.0
+</code></pre>
+<p>The tests above are useful for also checking out the various pre-implemented methods for the classes e.g. you can see how once you define the <code>data_block</code>, you can use <code>data_block.get_entropy(order=0)</code> to get 0th order entropy of the data, or <code>data_block.get_empirical_distribution(order=0)</code> to get the empirical distribution of the data.</p>
+<h3 id="12-dataencoder-and-datadecoder"><a class="header" href="#12-dataencoder-and-datadecoder">1.2 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/data_encoder_decoder.py">DataEncoder and DataDecoder</a></a></h3>
+<p>Another abstraction in <code>core</code> library is that of <code>DataEncoder</code> and <code>DataDecoder</code>. Any compressor consists of an <em>Encoder</em> and a <em>Decoder</em>. The encoder maps input symbols (<code>DataBlock</code>) to bits (<code>BitArray</code>) while the decoder does the reverse mapping (bits to output symbols). In case of SCL, all encoders are subclasses of <code>DataEncoder</code> and all decoders are subclasses of <code>DataDecoder</code>. Let's take a look at the class definitions to understand better: </p>
+<pre><code class="language-python">class DataEncoder(abc.ABC):
+    ...
+    def encode_block(self, data_block: DataBlock):
+        ...
+        # return encoded_bitarray
+        raise NotImplementedError
+    ...
+
+
+class DataDecoder(abc.ABC):
+    ...
+    def decode_block(self, bitarray: BitArray):
+        ...
+        # return decoded_block, num_bits_consumed
+        raise NotImplementedError
+   ...
+</code></pre>
+<p>For now let's focus on the <code>encode_block</code> and <code>decode_block</code> member functions, which are inverses of each other. The <code>encode_block</code> function of <code>DataEncoder</code> maps input <code>DataBlock</code> to a <code>BitArray</code>, while the <code>decode_block</code> function of <code>DataDecoder</code> does the reverse. Note that <code>decode_block</code> also returns the <code>num_bits_consumed</code>. This is useful as the input <code>BitArray</code> might contain bits written by other encoders, and so the <code>decode_block</code> might not consume all the bits. We will see how this is useful in combining multiple encoders. </p>
+<p>The <code>encode_block</code> and <code>decode_block</code> functions are the core logic of any compressor, and is usually the only part subclassing encoders/decoders need to implement. Here is an example of the</p>
+<p>The <code>DataEncoder</code> and <code>DataDecoder</code> also contains other functions which are useful to convert our encoder/decoders until practical coders which can handle multiple blocks of data etc. Do take a look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/data_encoder_decoder.py"><code>encode</code>, <code>decode</code>, <code>encode_file</code></a> functions if you are interested! </p>
+<h3 id="13-probabilitydist"><a class="header" href="#13-probabilitydist">1.3 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/prob_dist.py">ProbabilityDist</a></a></h3>
+<p>The final abstraction in <code>core</code> library that we will discuss is that of <code>ProbabilityDist</code>. The <code>ProbabilityDist</code> class is used to represent probability distributions. The class is a thin wrapper around a dictionary which maps symbols to their probabilities (<code>prob_dict</code>). It provides some useful member properties to extract relevant information, such as the <code>alphabet</code> (list of symbols) and <code>prob_list</code> (list of probabilities). Take a look at the class definition and some of the function methods below:</p>
+<pre><code class="language-python">class ProbabilityDist:
+    ...
+    def __init__(self, prob_dict=None):
+        self._validate_prob_dist(prob_dict)
+
+        # NOTE: We use the fact that since python 3.6, dictionaries in python are
+        # also OrderedDicts. https://realpython.com/python-ordereddict/
+        self.prob_dict = prob_dict
+    ...
+    def __repr__(self):
+        return f&quot;ProbabilityDist({self.prob_dict.__repr__()}&quot;
+    ...
+    @property
+    def alphabet(self):
+        return list(self.prob_dict)
+
+    @property
+    def prob_list(self):
+        return [self.prob_dict[s] for s in self.alphabet]
+
+    @classmethod
+    def get_sorted_prob_dist(cls, prob_dict, descending=False):
+        &quot;&quot;&quot;
+        Returns ProbabilityDist class object with sorted probabilities.
+        By default, returns Probabilities in increasing order (descending=False), i.e.,
+        p1 &lt;= p2 &lt;= .... &lt;= pn (python-default)
+        &quot;&quot;&quot;
+        return cls(dict(sorted(prob_dict.items(), key=lambda x: x[1], reverse=descending)))
+    ...
+    def cumulative_prob_dict(self):
+    ...
+    def entropy(self):
+    ...
+    def probability(self, symbol):
+    ...
+    def neg_log_probability(self, symbol):
+    ... 
+</code></pre>
+<p>It also provides some useful functions to manipulate the probability distributions. We will see in the construction of various codes such as Huffman code that sorting the probabilities is a useful operation and so the <code>ProbabilityDist</code> class provides <code>get_sorted_prob_dist</code> function to get the <code>prob_dict</code> in sorted order. Other such operations include computing cumulative probabilities (<code>cumulative_prob_dict</code>), computing entropy (<code>entropy</code>), probability of a particular symbol (<code>probability(symbol)</code>), negative log probability of a particular symbol (<code>neg_log_probability(symbol)</code>), etc. Please have a look at the class definition for more details.</p>
+<h2 id="2-the-compressors-library"><a class="header" href="#2-the-compressors-library">2. The <code>compressors</code> library</a></h2>
+<p>We natively implemented some of the compressors in the <code>compressors</code> library. The <code>compressors</code> library is contains these compressors. We will give a detailed example below but please refer to the library for further exploration.</p>
+<p>For instance, let's look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/shannon_coder.py">Shannon Coder</a> we have seen in class. It subclasses from <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/prefix_free_compressors.py">Prefix-free Coder</a> which in-turn subclasses from <code>DataEncoder</code> and <code>DataDecoder</code> from the <code>core</code> library. <code>Prefix-free Coder</code> has implementations of <code>PrefixFreeEncoder</code>, <code>PrefixFreeDecoder</code> and <code>PrefixFreeTree</code> which are utility abstract classes
+useful for implementing any prefix free code. <code>Shannon Coder</code> is one specific example of a prefix free code.</p>
+<p>Let's first look at the encoding part of the Shannon Coder. You will notice that <code>encode_block</code> function is already implemented in the <code>PrefixFreeCoder</code> class: <code>encode_block</code> function just loops over each symbol in the input and concatenate the bitstreams. Therefore, we only need to implement the <code>encode_symbol</code> function in the inherited <code>ShannonEncoder</code> part. Let's take a look at the <code>encode_symbol</code> function in the <code>ShannonEncoder</code> class:</p>
+<pre><code class="language-python">class ShannonEncoder(PrefixFreeEncoder):
+    &quot;&quot;&quot;
+    PrefixFreeEncoder already has a encode_block function to encode the symbols once we define a encode_symbol function
+    for the particular compressor.
+    &quot;&quot;&quot;
+
+    def __init__(self, prob_dist: ProbabilityDist):
+        self.prob_dist = prob_dist
+        self.encoding_table = ShannonEncoder.generate_shannon_codebook(self.prob_dist)
+
+    @classmethod
+    def generate_shannon_codebook(cls, prob_dist):
+        # sort the probability distribution in decreasing probability and get cumulative probability which will be
+        # used for encoding
+        sorted_prob_dist = ProbabilityDist.get_sorted_prob_dist(
+            prob_dist.prob_dict, descending=True
+        )
+        cum_prob_dict = sorted_prob_dist.cumulative_prob_dict
+
+        codebook = {}
+        for s in sorted_prob_dist.prob_dict:
+            # get the encode length for the symbol s
+            encode_len = math.ceil(sorted_prob_dist.neg_log_probability(s))
+
+            # get the code as a truncated floating point representation
+            _, code = float_to_bitarrays(cum_prob_dict[s], encode_len)
+            codebook[s] = code
+        return codebook
+
+    def encode_symbol(self, s):
+        return self.encoding_table[s]
+</code></pre>
+<p>As evident, it encodes individual symbol by creating a codebook based on sorted probabilities. Look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/compressors/shannon_coder.py#L1">readme for this script</a> or refer to <a href="https://stanforddatacompressionclass.github.io/notes/lossless_iid/prefix_free_codes.html#designing-prefix-free-codes">class notes</a> for details.</p>
+<p>Next, let's look at the decoding part of the Shannon Coder. You will again notice that <code>decode_block</code> function is already implemented in the <code>PrefixFreeCoder</code> class: <code>decode_block</code> function just loops over the bitstream and utilizes efficient decoding of prefix-free codes to output individual symbol and the bits consumed during decoding (as explained above in <code>DataDecoder</code> class). Therefore, we only need to implement the <code>decode_symbol</code> function in the inherited <code>ShannonDecoder</code> part. Let's take a look at the <code>decode_symbol</code> function in the <code>ShannonDecoder</code> class:</p>
+<pre><code class="language-python">class ShannonDecoder(PrefixFreeDecoder):
+    &quot;&quot;&quot;
+    PrefixFreeDecoder already has a decode_block function to decode the symbols once we define a decode_symbol function
+    for the particular compressor.
+    PrefixFreeTree provides decode_symbol given a PrefixFreeTree
+    &quot;&quot;&quot;
+
+    def __init__(self, prob_dist: ProbabilityDist):
+        encoding_table = ShannonEncoder.generate_shannon_codebook(prob_dist)
+        self.tree = PrefixFreeTree.build_prefix_free_tree_from_code(encoding_table)
+
+    def decode_symbol(self, encoded_bitarray: BitArray) -&gt; Tuple[Any, BitArray]:
+        decoded_symbol, num_bits_consumed = self.tree.decode_symbol(encoded_bitarray)
+        return decoded_symbol, num_bits_consumed
+</code></pre>
+<p>Here you see something interesting: we were able to use <code>PrefixFreeTree</code> class to implement the <code>decode_symbol</code> function. This is because the Shannon code is just a special case of a prefix-free code, and so we can use the <code>PrefixFreeTree</code> to first get the encoding tree used to encode the message given probability distribution and then use it to decode the message. Obviously in practice, we also need to communicate or be able to replicate the probability distribution used to encode the message at the decoder, but we will ignore that for now. </p>
+<p>Again, please look at the corresponding files to get better understanding of the code.</p>
+<h2 id="3-the-external_compressors-library"><a class="header" href="#3-the-external_compressors-library">3. The <code>external_compressors</code> library</a></h2>
+<p>This library includes implementation of external compressors so that they can be natively used within SCL, such as <a href="https://github.com/facebook/zstd">zstd</a> and <a href="https://www.zlib.net">zlib</a>. These might be beneficial to use in some cases, for example, if you want to compare the performance of a compressor with a state-of-the-art compressor, or use them in conjunction with a lossy compressor technique you implement in SCL. Please look at the folder with test cases for examples on how to use these.</p>
+<h2 id="4-the-utils-library"><a class="header" href="#4-the-utils-library">4. The <code>utils</code> library</a></h2>
+<p>Finally, we cover <code>utils</code> library which has some useful functions for debugging, bitarray manipulation, testing etc. The naming should be evident, and you should visit them while working on problem sets or contributing to the SCL to get help from these helper functions. Feel free to contribute back if you think you have some useful functions to add to the library.</p>
+<p>Some notable ones are:</p>
+<h3 id="41-bitarray_utilsuint_to_bitarray"><a class="header" href="#41-bitarray_utilsuint_to_bitarray">4.1 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/utils/bitarray_utils.py#L27">bitarray_utils.uint_to_bitarray</a></a></h3>
+<p>This function converts an unsigned integer to a bitarray. For example, <code>uint_to_bitarray(5, 4)</code> will return <code>BitArray('0b0101')</code>. It is very useful in encoding lengths to help decode a bitstream.</p>
+<h3 id="42-bitarray_utilsbitarray_to_uint"><a class="header" href="#42-bitarray_utilsbitarray_to_uint">4.2 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/utils/bitarray_utils.py#L36">bitarray_utils.bitarray_to_uint</a></a></h3>
+<p>This function implements reverse of previous method, i.e. it converts a bitarray to an unsigned integer. For example, <code>bitarray_to_uint(BitArray('0b0101'))</code> will return <code>5</code>. As expected, it will be very useful in decoding lengths from a bitstream.</p>
+<h3 id="43-tree_utilsbinarynode"><a class="header" href="#43-tree_utilsbinarynode">4.3 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/utils/tree_utils.py#L6C7-L6C17">tree_utils.BinaryNode</a></a></h3>
+<p>This class implements a binary tree node. It is useful in implementing prefix-free trees, or trees in general. It also has some useful debugging functions such as <code>print_tree</code> which can be used to print the tree in a nice format.</p>
+<h3 id="44-test_utilsget_random_data_block"><a class="header" href="#44-test_utilsget_random_data_block">4.4 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/utils/test_utils.py#L17C5-L17C26">test_utils.get_random_data_block</a></a></h3>
+<p>This function can be used to generate random data blocks with given probability distribution. It is useful for generating random test data during testing of compressors.</p>
+<h3 id="45-test_utilstry_lossless_compression"><a class="header" href="#45-test_utilstry_lossless_compression">4.5 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/d221a3208d46e6faab21d05e9b21e87dc088d9ae/scl/utils/test_utils.py#L73">test_utils.try_lossless_compression</a></a></h3>
+<p>This function can be used to test if a compressor is lossless. It takes a compressor (encoder-decoder pair), and a data block as input, and checks if the compressor is able to losslessly compress the data block. It is useful for testing if a compressor is lossless.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../scl_tutorial/SCL_tutorial.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../scl_tutorial/exercise.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../scl_tutorial/SCL_tutorial.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../scl_tutorial/exercise.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

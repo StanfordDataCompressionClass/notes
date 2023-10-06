@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Lossless data compression: basics</title>
+        <title>SCL Tutorial</title>
 
 
         <!-- Custom HTML head -->
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html" class="active"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/vector_quant.html"><strong aria-hidden="true">2.1.</strong> Vector Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="chapter-item expanded "><a href="../lossy/transform_coding_theory.html"><strong aria-hidden="true">2.3.</strong> Transform Coding Theory</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.1.</strong> HW1</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../scl_tutorial/SCL_tutorial.html"><strong aria-hidden="true">6.</strong> SCL Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scl_tutorial/basics.html"><strong aria-hidden="true">6.1.</strong> SCL Basics</a></li><li class="chapter-item expanded "><a href="../scl_tutorial/exercise.html"><strong aria-hidden="true">6.2.</strong> SCL Exercise</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/vector_quant.html"><strong aria-hidden="true">2.1.</strong> Vector Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="chapter-item expanded "><a href="../lossy/transform_coding_theory.html"><strong aria-hidden="true">2.3.</strong> Transform Coding Theory</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.1.</strong> HW1</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../scl_tutorial/SCL_tutorial.html" class="active"><strong aria-hidden="true">6.</strong> SCL Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scl_tutorial/basics.html"><strong aria-hidden="true">6.1.</strong> SCL Basics</a></li><li class="chapter-item expanded "><a href="../scl_tutorial/exercise.html"><strong aria-hidden="true">6.2.</strong> SCL Exercise</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,28 +136,32 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<h1 id="lossless-data-compression"><a class="header" href="#lossless-data-compression">Lossless data compression</a></h1>
-<p>The first part of the lecture notes pertain with lossless data compression</p>
-<ol>
-<li><a href="./intro.html">Introduction</a></li>
-<li><a href="./prefix_free_codes.html">Prefix Free Codes</a></li>
-<li><a href="./kraft_ineq_and_optimality.html">Kraft Inequality</a></li>
-<li><a href="./entropy.html">Entropy and Neg-log likelihood thumb rule</a></li>
-<li><a href="./huffman.html">Huffman coding</a></li>
-<li><a href="./aep.html">Asymptotic Equipartition Property</a></li>
-<li><a href="./arithmetic_coding.html">Arithmetic coding</a></li>
-<li><a href="./ans.html">Asymmetric Numeral Systems</a></li>
-</ol>
+<h1 id="stanford-compression-library-scl-a-brief-tutorial"><a class="header" href="#stanford-compression-library-scl-a-brief-tutorial">Stanford Compression Library (SCL): A brief tutorial</a></h1>
+<p>This document provides an overview of motivation and SCL structure. We end this tutorial with an exercise on SCL and show how to use SCL in google colab notebook. For students, it is highly recommended to attempt the exercise. Please reach out to the teaching staff if you have any questions.</p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>The Stanford Compression Library is being implemented to aid research in the area of data compression. As students working in the field of data compression, we noticed that although these pieces of software are used everyday (gzip, jpeg etc); unfortunately there is no good pedagogical/research implementation which can be tweaked quickly.</p>
+<p>The goals of SCL are:</p>
+<ul>
+<li>To provide pedagogical implementations of common data compression algorithms</li>
+<li>To provide convenient framework to quickly modify existing compression algorithm and to aid research in the area</li>
+<li>More selfishly, to understand these algorithms better :)</li>
+</ul>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<p>Before we dive deep into the library, please make sure you have followed the installation instructions in the <a href="https://github.com/kedartatwawadi/stanford_compression_library">README</a> and that all the tests are passing. Please file an issue if you face problems with the setup.</p>
+<h2 id="using-the-library"><a class="header" href="#using-the-library">Using the library</a></h2>
+<p>Let's look at the library structure next to understand how to use the library. Please look at next section on <a href="./basics.html">SCL basics</a> to understand the basic building blocks of SCL.</p>
+<h2 id="exercise"><a class="header" href="#exercise">Exercise</a></h2>
+<p>After understanding the abstractions and various classes introduced, lets take a look at the <a href="./exercise.html">following exercise</a>. This was a problem from year 2022 homework, and so to make it most useful it might be best to treat it as such!</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../contents.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../projects.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../lossless_iid/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../scl_tutorial/basics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -167,11 +171,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../contents.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../projects.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../lossless_iid/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../scl_tutorial/basics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
