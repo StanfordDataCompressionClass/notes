@@ -26,6 +26,7 @@ jobs:
           cargo install mdbook-katex
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
           cargo install mdbook-mermaid # for the diagrams
+          mdbook-admonish install
           mdbook build
 
       - name: Deploy
