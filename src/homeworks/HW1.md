@@ -133,7 +133,7 @@ Using `Q4.2` and the identity above, show that:
 
    $$\left( \sum_{i=1}^{|\mathcal{U}|} 2^{-L(u_i)} \right)^n \leq n.l_{max}$$
 
-4. [5 points] Using `Q4.3` show that uniquely decodable codes satisfy Kraft's inequality i.e. 
+4. [5 points] Using `Q3.3` show that uniquely decodable codes satisfy Kraft's inequality i.e. 
 
 $$\left( \sum_{u\in\mathcal{U}} 2^{-L(u)} \right) \leq 1$$
 
