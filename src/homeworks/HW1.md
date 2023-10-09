@@ -126,12 +126,12 @@ Consider an alphabet $\mathcal{U}$ and a uniquely decodable code with code lengt
 
 2. [5 points] Show that $$\left( \sum_{u \in \mathcal{U}} 2^{-L(u)} \right)^n = \sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} $$
 
-3. [5 points] Let $l_{max} = \max_{u \in \mathcal{U}} L(u)$. Then we can rewrite the summation as: $$\sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} = \sum_{j=1}^{n.l_{max}} |\{u^n| L(u^n) = j\}|. 2^{-j}$$ 
+3. [5 points] Let $l_{max} = \max_{u \in \mathcal{U}} L(u)$. Then we can rewrite the summation as: $$\sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} = \sum_{j=1}^{n \cdot l_{max}} |\{u^n| L(u^n) = j\}| \cdot 2^{-j}$$ 
 
    NOTE: Rewriting summation is a common proof trick, and is a useful one to watch out for!
-Using `Q4.2` and the identity above, show that:
+Using `Q3.2` and the identity above, show that:
 
-   $$\left( \sum_{i=1}^{|\mathcal{U}|} 2^{-L(u_i)} \right)^n \leq n.l_{max}$$
+   $$\left( \sum_{i=1}^{|\mathcal{U}|} 2^{-L(u_i)} \right)^n \leq n\cdot l_{max}$$
 
 4. [5 points] Using `Q3.3` show that uniquely decodable codes satisfy Kraft's inequality i.e. 
 
@@ -141,7 +141,6 @@ $$\left( \sum_{u\in\mathcal{U}} 2^{-L(u)} \right) \leq 1$$
   Also argue that for any uniquely decodable code, it is possible to construct a prefix-free code with the same codeword lengths. 
 
 This means that uniquely decodable codes generally do not provide any benefits over prefix-free codes and instead have a more complicated decoding procedure!
-
 
 **NOTE:** We saw a similar proof for prefix-free codes in the class!
 
