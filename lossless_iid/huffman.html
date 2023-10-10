@@ -31,6 +31,7 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../././mdbook-admonish.css">
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
 
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -139,7 +140,7 @@
 <h1 id="huffman-code"><a class="header" href="#huffman-code">Huffman Code</a></h1>
 <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
 <p>As a recap, in the last lecture we formulated the problem of finding the <em>optimal prefix-free code</em> given a probability distribution <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> as a concrete optimization problem as follows:</p>
-<div id="admonition-optimal-prefix-free-code" class="admonition note">
+<div id="admonition-optimal-prefix-free-code" class="admonition admonish-note">
 <div class="admonition-title">
 <p>Optimal prefix-free code</p>
 <p><a class="admonition-anchor-link" href="#admonition-optimal-prefix-free-code"></a></p>
@@ -317,7 +318,7 @@ For example, in our case the table we get is: </p>
 <p>For example, <code>STEP 1</code> in the pseudocode can be replaced with a priority queue, as we mainly need top two elements and nothing more. Here is the full code implementation in the Stanford Compression Library: <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/huffman_coder.py">https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/huffman_coder.py</a>.</p>
 <h2 id="optimality-of-huffman-codes"><a class="header" href="#optimality-of-huffman-codes">Optimality of Huffman codes</a></h2>
 <p>To get some intuition into the Huffman code optimality, let's think about what are the necessary conditions for a prefix-free code to be optimal? Let me list a couple of conditions, and we will see why they are true: </p>
-<div id="admonition-theorem-8-necessary-conditions-for-prefix-free-code-optimality" class="admonition example">
+<div id="admonition-theorem-8-necessary-conditions-for-prefix-free-code-optimality" class="admonition admonish-example">
 <div class="admonition-title">
 <p>Theorem-8: Necessary conditions for prefix-free code optimality</p>
 <p><a class="admonition-anchor-link" href="#admonition-theorem-8-necessary-conditions-for-prefix-free-code-optimality"></a></p>

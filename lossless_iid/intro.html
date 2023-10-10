@@ -31,6 +31,7 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../././mdbook-admonish.css">
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
 
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -180,7 +181,7 @@ read <code>8 bits</code> at a time and then <em>decoded</em> back to the charact
 <p>Now, the question we want to answer is &quot;<em>Can we reduce the size of the file?</em>&quot;</p>
 <p>To be more precise, we will restrict ourselves to <em>Symbol codes</em>, which are encoding schemes where we have a unique
 binary string (called a <em>codeword</em>) for every symbol.</p>
-<div id="admonition-quiz-1-fixed-bitwidth-encoding" class="admonition question">
+<div id="admonition-quiz-1-fixed-bitwidth-encoding" class="admonition admonish-question">
 <div class="admonition-title">
 <p>Quiz-1: Fixed Bitwidth Encoding</p>
 <p><a class="admonition-anchor-link" href="#admonition-quiz-1-fixed-bitwidth-encoding"></a></p>
@@ -217,7 +218,7 @@ we could go from <code>2 bits/symbol</code> to <code>1 bit/symbol</code>, by ass
 </div>
 <p>But, what if <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> were present, but in a smaller proportion? Is it possible to achieve better compression?
 Here is a more precise question:</p>
-<div id="admonition-quiz-2-beyond-fixed-bitwidth-encoding" class="admonition question">
+<div id="admonition-quiz-2-beyond-fixed-bitwidth-encoding" class="admonition admonish-question">
 <div class="admonition-title">
 <p>Quiz-2: Beyond Fixed Bitwidth encoding</p>
 <p><a class="admonition-anchor-link" href="#admonition-quiz-2-beyond-fixed-bitwidth-encoding"></a></p>
@@ -250,7 +251,7 @@ procedure! So here is one possible code:</p>
 </tbody></table>
 </div>
 <p>Some questions for you to answer:</p>
-<div id="admonition-quiz-3-variable-length-symbol-code" class="admonition question">
+<div id="admonition-quiz-3-variable-length-symbol-code" class="admonition admonish-question">
 <div class="admonition-title">
 <p>Quiz-3: Variable length symbol code</p>
 <p><a class="admonition-anchor-link" href="#admonition-quiz-3-variable-length-symbol-code"></a></p>
@@ -349,7 +350,7 @@ this code is not <em>prefix-free</em> and our decoding procedure described above
 although our simple decoding scheme above fails, lossless decoding is still possible. Although, the decoding scheme
 might be more complicated as, we have to read &quot;future bits&quot; to determine if a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> or a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span> was encoded here.</p>
 <p>As a fun exercise, can you try to figure out how the decoding works for this code?</p>
-<div id="admonition-quiz-4-non-prefix-free-code-example" class="admonition question">
+<div id="admonition-quiz-4-non-prefix-free-code-example" class="admonition admonish-question">
 <div class="admonition-title">
 <p>Quiz-4: Non-prefix free code example</p>
 <p><a class="admonition-anchor-link" href="#admonition-quiz-4-non-prefix-free-code-example"></a></p>
@@ -366,7 +367,7 @@ reverse direction</em>)</p>
 </div></div>
 </div>
 <p>To summarize: the key idea to learn from the design of our code is that</p>
-<div id="admonition-key-idea-1-prefix-free-codes" class="admonition info">
+<div id="admonition-key-idea-1-prefix-free-codes" class="admonition admonish-info">
 <div class="admonition-title">
 <p>Key-Idea 1: Prefix-free codes</p>
 <p><a class="admonition-anchor-link" href="#admonition-key-idea-1-prefix-free-codes"></a></p>
