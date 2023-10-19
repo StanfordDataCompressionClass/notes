@@ -2,7 +2,7 @@
 
 - **Focus area:** Lossless Compression
 - **Due Date:** Nov 1, midnight (11:59 PM)
-- **Weightage:** 20%
+- **Weightage:** 15%
 - **Total Points:** 110
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
