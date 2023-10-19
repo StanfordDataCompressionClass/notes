@@ -22,6 +22,7 @@
 ---
 - [Homeworks](./homeworks/coverpage.md)
     - [HW1](./homeworks/HW1.md)
+    - [HW2](./homeworks/HW2.md)
 
 [//]: # (    - [HW1]&#40;./homeworks/HW1.md&#41;)
 
