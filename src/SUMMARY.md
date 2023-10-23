@@ -10,6 +10,8 @@
     - [Asymptotic Equipartition Property](./lossless_iid/aep.md)
     - [Arithmetic coding](./lossless_iid/arithmetic_coding.md)
     - [Asymmetric Numeral Systems](./lossless_iid/ans.md)
+    - [Non IID Sources and Entropy Rate](./lossless_iid/non_iid_sources.md)
+
 ---
 - [Lossy data Compression](./lossy/coverpage.md)
     - [Vector Quantization](./lossy/vector_quant.md)
