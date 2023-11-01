@@ -16,7 +16,7 @@ The notes are live here: https://stanforddatacompressionclass.github.io/notes/.
     8. [Asymmetric Numeral Systems](./lossless_iid/ans.md)
 ---
 2. [Lossy Compression](./lossy/coverpage.md)
-    1. [Vector Quantization](./lossy/vector_quant.md)
+    1. [Basics and Quantization](./lossy/quant.md)
     2. [Rate-Distortion Theory](./lossy/rd.md)
     3. [Transform Coding Theory](./lossy/transform_coding_theory.md)
 ---
