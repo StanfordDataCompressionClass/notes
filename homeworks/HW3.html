@@ -155,24 +155,32 @@
 <p><strong>Note for the coding part</strong><br>
 Before starting the coding related questions ensure following instructions from HW1 are followed:</p>
 <ul>
-<li>Ensure you are using the latest version of the SCL <code>EE274/HWs</code> GitHub branch. To ensure run the following command in the SCL repository you cloned from HW1:
+<li>
+<p>Ensure you are using the latest version of the SCL <code>EE274/HWs</code> GitHub branch. To ensure run the following command in the SCL repository you cloned from HW1:</p>
 <pre><code class="language-sh">git status
 </code></pre>
-You should get an output saying <code>On branch EE274_Fall23/HWs</code>. If not, run the following command to switch to the correct branch:
+<p>You should get an output saying <code>On branch EE274_Fall23/HWs</code>. If not, run the following command to switch to the correct branch:</p>
 <pre><code class="language-sh">git checkout EE274_Fall23/HWs
 </code></pre>
-Finally ensure you are on the latest commit by running:
+<p>Finally ensure you are on the latest commit by running:</p>
 <pre><code class="language-sh">git pull
 </code></pre>
-You should see a <code>HW3</code> folder in the <code>HWs</code> folder.</li>
-<li>Ensure you are in the right conda environment you created in <code>HW1</code>. To ensure run the following command:
+<p>You should see a <code>HW3</code> folder in the <code>HWs</code> folder. Also ensure you are on the right commit before starting the <code>HW</code> by running the following command and verifying the commit hash.</p>
+<pre><code class="language-sh">git rev-parse HEAD
+</code></pre>
+<p>This should give you <code>6d467aca3ef49d0fcc98efa7c06a54b984fda137</code></p>
+</li>
+<li>
+<p>Ensure you are in the right conda environment you created in <code>HW1</code>. To ensure run the following command:</p>
 <pre><code class="language-sh">conda activate ee274_env
 </code></pre>
 </li>
-<li>Before starting, ensure the previous tests are passing as expected. To do so, run following from <code>stanford_compression_library</code> folder:
+<li>
+<p>Before starting, ensure the previous tests are passing as expected. To do so, run following from <code>stanford_compression_library</code> folder:</p>
 <pre><code class="language-sh">find scl -name &quot;*.py&quot; -exec py.test -s -v {} +
 </code></pre>
-and ensure tests except in HW folders pass.</li>
+<p>and ensure tests except in HW folders pass.</p>
+</li>
 </ul>
 <h3 id="q1-lz77-compression-for-small-data-25-points"><a class="header" href="#q1-lz77-compression-for-small-data-25-points">Q1 LZ77 compression for small data (<em>25 points</em>)</a></h3>
 <p>In this problem, we will understand how LZ77 compression perform on small files and how to improve its performance. Recall that the LZ77 algorithm looks for matches in a window storing the previously seen data and then encodes the match lengths, match offsets and unmatched characters (literals). We use the LZ77 implementation provided in SCL for the experiments below, and you can take a look at the code <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/lz77.py">here</a> to understand the details better. We have provided a set of small json files in the <code>p1_data/github_data</code> directory. Run the script <code>python hw3_p1.py -i p1_data/github_data</code> which produces the following output:</p>
