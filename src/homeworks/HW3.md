@@ -25,7 +25,12 @@ Before starting the coding related questions ensure following instructions from 
    ```sh
    git pull
    ```
-  You should see a `HW3` folder in the `HWs` folder.
+  You should see a `HW3` folder in the `HWs` folder. Also ensure you are on the right commit before starting the `HW` by running the following command and verifying the commit hash.
+  ```sh
+  git rev-parse HEAD
+  ```    
+  This should give you `6d467aca3ef49d0fcc98efa7c06a54b984fda137`
+
 - Ensure you are in the right conda environment you created in `HW1`. To ensure run the following command:
    ```sh
    conda activate ee274_env
