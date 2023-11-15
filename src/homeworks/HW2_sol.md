@@ -348,7 +348,7 @@ For example if `Z = 4`, then `X = B` as `cumul(B) = 2 <= 4 < 6 = cumul(B) + freq
     \end{align}
     $$
 
-    The full calculation of $H(Z|X)$ is shown below:
+    (if you are curious) The full calculation of $H(Z|X)$ is shown below:
 
     $$
     \begin{align}
