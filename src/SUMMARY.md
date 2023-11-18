@@ -29,12 +29,7 @@
     - [HW2](./homeworks/HW2.md)
     - [HW2 Solution](./homeworks/HW2_sol.md)
     - [HW3](./homeworks/HW3.md)
-
-[//]: # (    - [HW1]&#40;./homeworks/HW1.md&#41;)
-
-[//]: # (    - [HW2]&#40;./homeworks/HW2.md&#41;)
-
-[//]: # (    - [HW3]&#40;./homeworks/HW3.md&#41;)
+    - [HW4](./homeworks/HW4.md)
 
 ---
 - [Project](./projects.md)
