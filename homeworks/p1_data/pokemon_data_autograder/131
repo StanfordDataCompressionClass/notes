@@ -1,0 +1,24 @@
+{
+  "id": 131,
+  "num": "131",
+  "name": "Lapras",
+  "img": "http://www.serebii.net/pokemongo/pokemon/131.png",
+  "type": [
+    "Water",
+    "Ice"
+  ],
+  "height": "2.49 m",
+  "weight": "220.0 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.006,
+  "avg_spawns": 0.6,
+  "spawn_time": "08:59",
+  "multipliers": null,
+  "weaknesses": [
+    "Electric",
+    "Grass",
+    "Fighting",
+    "Rock"
+  ]
+}

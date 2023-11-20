@@ -1,0 +1,26 @@
+{
+  "id": 124,
+  "num": "124",
+  "name": "Jynx",
+  "img": "http://www.serebii.net/pokemongo/pokemon/124.png",
+  "type": [
+    "Ice",
+    "Psychic"
+  ],
+  "height": "1.40 m",
+  "weight": "40.6 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.35,
+  "avg_spawns": 35,
+  "spawn_time": "05:41",
+  "multipliers": null,
+  "weaknesses": [
+    "Fire",
+    "Bug",
+    "Rock",
+    "Ghost",
+    "Dark",
+    "Steel"
+  ]
+}

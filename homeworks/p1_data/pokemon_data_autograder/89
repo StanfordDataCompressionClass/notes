@@ -1,0 +1,27 @@
+{
+  "id": 89,
+  "num": "089",
+  "name": "Muk",
+  "img": "http://www.serebii.net/pokemongo/pokemon/089.png",
+  "type": [
+    "Poison"
+  ],
+  "height": "1.19 m",
+  "weight": "30.0 kg",
+  "candy": "Grimer Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.0031,
+  "avg_spawns": 0.31,
+  "spawn_time": "01:28",
+  "multipliers": null,
+  "weaknesses": [
+    "Ground",
+    "Psychic"
+  ],
+  "prev_evolution": [
+    {
+      "num": "088",
+      "name": "Grimer"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": 40,
+  "num": "040",
+  "name": "Wigglytuff",
+  "img": "http://www.serebii.net/pokemongo/pokemon/040.png",
+  "type": [
+    "Normal"
+  ],
+  "height": "0.99 m",
+  "weight": "12.0 kg",
+  "candy": "Jigglypuff Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.018,
+  "avg_spawns": 1.8,
+  "spawn_time": "12:28",
+  "multipliers": null,
+  "weaknesses": [
+    "Fighting"
+  ],
+  "prev_evolution": [
+    {
+      "num": "039",
+      "name": "Jigglypuff"
+    }
+  ]
+}

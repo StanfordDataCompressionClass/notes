@@ -1,0 +1,37 @@
+{
+  "id": 102,
+  "num": "102",
+  "name": "Exeggcute",
+  "img": "http://www.serebii.net/pokemongo/pokemon/102.png",
+  "type": [
+    "Grass",
+    "Psychic"
+  ],
+  "height": "0.41 m",
+  "weight": "2.5 kg",
+  "candy": "Exeggcute Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 0.78,
+  "avg_spawns": 78,
+  "spawn_time": "09:09",
+  "multipliers": [
+    2.7,
+    3.18
+  ],
+  "weaknesses": [
+    "Fire",
+    "Ice",
+    "Poison",
+    "Flying",
+    "Bug",
+    "Ghost",
+    "Dark"
+  ],
+  "next_evolution": [
+    {
+      "num": "103",
+      "name": "Exeggutor"
+    }
+  ]
+}

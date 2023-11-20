@@ -1,0 +1,28 @@
+{
+  "id": 22,
+  "num": "022",
+  "name": "Fearow",
+  "img": "http://www.serebii.net/pokemongo/pokemon/022.png",
+  "type": [
+    "Normal",
+    "Flying"
+  ],
+  "height": "1.19 m",
+  "weight": "38.0 kg",
+  "candy": "Spearow Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.15,
+  "avg_spawns": 15,
+  "spawn_time": "01:11",
+  "multipliers": null,
+  "weaknesses": [
+    "Electric",
+    "Rock"
+  ],
+  "prev_evolution": [
+    {
+      "num": "021",
+      "name": "Spearow"
+    }
+  ]
+}

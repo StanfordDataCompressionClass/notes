@@ -1,0 +1,31 @@
+{
+  "id": 50,
+  "num": "050",
+  "name": "Diglett",
+  "img": "http://www.serebii.net/pokemongo/pokemon/050.png",
+  "type": [
+    "Ground"
+  ],
+  "height": "0.20 m",
+  "weight": "0.8 kg",
+  "candy": "Diglett Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 0.4,
+  "avg_spawns": 40,
+  "spawn_time": "02:22",
+  "multipliers": [
+    2.69
+  ],
+  "weaknesses": [
+    "Water",
+    "Grass",
+    "Ice"
+  ],
+  "next_evolution": [
+    {
+      "num": "051",
+      "name": "Dugtrio"
+    }
+  ]
+}

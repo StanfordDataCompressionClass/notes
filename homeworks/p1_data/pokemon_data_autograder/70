@@ -1,0 +1,39 @@
+{
+  "id": 70,
+  "num": "070",
+  "name": "Weepinbell",
+  "img": "http://www.serebii.net/pokemongo/pokemon/070.png",
+  "type": [
+    "Grass",
+    "Poison"
+  ],
+  "height": "0.99 m",
+  "weight": "6.4 kg",
+  "candy": "Bellsprout Candy",
+  "candy_count": 100,
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.072,
+  "avg_spawns": 7.2,
+  "spawn_time": "09:45",
+  "multipliers": [
+    1.59
+  ],
+  "weaknesses": [
+    "Fire",
+    "Ice",
+    "Flying",
+    "Psychic"
+  ],
+  "prev_evolution": [
+    {
+      "num": "069",
+      "name": "Bellsprout"
+    }
+  ],
+  "next_evolution": [
+    {
+      "num": "071",
+      "name": "Victreebel"
+    }
+  ]
+}
