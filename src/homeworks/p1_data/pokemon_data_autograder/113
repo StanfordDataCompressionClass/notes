@@ -1,0 +1,20 @@
+{
+  "id": 113,
+  "num": "113",
+  "name": "Chansey",
+  "img": "http://www.serebii.net/pokemongo/pokemon/113.png",
+  "type": [
+    "Normal"
+  ],
+  "height": "1.09 m",
+  "weight": "34.6 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.013,
+  "avg_spawns": 1.3,
+  "spawn_time": "04:46",
+  "multipliers": null,
+  "weaknesses": [
+    "Fighting"
+  ]
+}

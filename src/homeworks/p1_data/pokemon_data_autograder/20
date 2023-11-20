@@ -1,0 +1,26 @@
+{
+  "id": 20,
+  "num": "020",
+  "name": "Raticate",
+  "img": "http://www.serebii.net/pokemongo/pokemon/020.png",
+  "type": [
+    "Normal"
+  ],
+  "height": "0.71 m",
+  "weight": "18.5 kg",
+  "candy": "Rattata Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.41,
+  "avg_spawns": 41,
+  "spawn_time": "01:56",
+  "multipliers": null,
+  "weaknesses": [
+    "Fighting"
+  ],
+  "prev_evolution": [
+    {
+      "num": "019",
+      "name": "Rattata"
+    }
+  ]
+}

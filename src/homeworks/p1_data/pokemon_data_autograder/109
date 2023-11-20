@@ -1,0 +1,30 @@
+{
+  "id": 109,
+  "num": "109",
+  "name": "Koffing",
+  "img": "http://www.serebii.net/pokemongo/pokemon/109.png",
+  "type": [
+    "Poison"
+  ],
+  "height": "0.61 m",
+  "weight": "1.0 kg",
+  "candy": "Koffing Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 0.2,
+  "avg_spawns": 20,
+  "spawn_time": "08:16",
+  "multipliers": [
+    1.11
+  ],
+  "weaknesses": [
+    "Ground",
+    "Psychic"
+  ],
+  "next_evolution": [
+    {
+      "num": "110",
+      "name": "Weezing"
+    }
+  ]
+}

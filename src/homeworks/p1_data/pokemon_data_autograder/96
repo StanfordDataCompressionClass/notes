@@ -1,0 +1,32 @@
+{
+  "id": 96,
+  "num": "096",
+  "name": "Drowzee",
+  "img": "http://www.serebii.net/pokemongo/pokemon/096.png",
+  "type": [
+    "Psychic"
+  ],
+  "height": "0.99 m",
+  "weight": "32.4 kg",
+  "candy": "Drowzee Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 3.21,
+  "avg_spawns": 321,
+  "spawn_time": "01:51",
+  "multipliers": [
+    2.08,
+    2.09
+  ],
+  "weaknesses": [
+    "Bug",
+    "Ghost",
+    "Dark"
+  ],
+  "next_evolution": [
+    {
+      "num": "097",
+      "name": "Hypno"
+    }
+  ]
+}

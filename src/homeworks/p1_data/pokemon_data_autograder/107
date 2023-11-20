@@ -1,0 +1,22 @@
+{
+  "id": 107,
+  "num": "107",
+  "name": "Hitmonchan",
+  "img": "http://www.serebii.net/pokemongo/pokemon/107.png",
+  "type": [
+    "Fighting"
+  ],
+  "height": "1.40 m",
+  "weight": "50.2 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.022,
+  "avg_spawns": 2.2,
+  "spawn_time": "05:58",
+  "multipliers": null,
+  "weaknesses": [
+    "Flying",
+    "Psychic",
+    "Fairy"
+  ]
+}

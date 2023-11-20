@@ -1,0 +1,34 @@
+{
+  "id": 48,
+  "num": "048",
+  "name": "Venonat",
+  "img": "http://www.serebii.net/pokemongo/pokemon/048.png",
+  "type": [
+    "Bug",
+    "Poison"
+  ],
+  "height": "0.99 m",
+  "weight": "30.0 kg",
+  "candy": "Venonat Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 2.28,
+  "avg_spawns": 228,
+  "spawn_time": "02:31",
+  "multipliers": [
+    1.86,
+    1.9
+  ],
+  "weaknesses": [
+    "Fire",
+    "Flying",
+    "Psychic",
+    "Rock"
+  ],
+  "next_evolution": [
+    {
+      "num": "049",
+      "name": "Venomoth"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 86,
+  "num": "086",
+  "name": "Seel",
+  "img": "http://www.serebii.net/pokemongo/pokemon/086.png",
+  "type": [
+    "Water"
+  ],
+  "height": "1.09 m",
+  "weight": "90.0 kg",
+  "candy": "Seel Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 0.28,
+  "avg_spawns": 28,
+  "spawn_time": "06:46",
+  "multipliers": [
+    1.04,
+    1.96
+  ],
+  "weaknesses": [
+    "Electric",
+    "Grass"
+  ],
+  "next_evolution": [
+    {
+      "num": "087",
+      "name": "Dewgong"
+    }
+  ]
+}

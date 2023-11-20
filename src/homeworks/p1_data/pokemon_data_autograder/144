@@ -1,0 +1,24 @@
+{
+  "id": 144,
+  "num": "144",
+  "name": "Articuno",
+  "img": "http://www.serebii.net/pokemongo/pokemon/144.png",
+  "type": [
+    "Ice",
+    "Flying"
+  ],
+  "height": "1.70 m",
+  "weight": "55.4 kg",
+  "candy": "None",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0,
+  "avg_spawns": 0,
+  "spawn_time": "N/A",
+  "multipliers": null,
+  "weaknesses": [
+    "Fire",
+    "Electric",
+    "Rock",
+    "Steel"
+  ]
+}

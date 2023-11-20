@@ -1,0 +1,32 @@
+{
+  "id": 56,
+  "num": "056",
+  "name": "Mankey",
+  "img": "http://www.serebii.net/pokemongo/pokemon/056.png",
+  "type": [
+    "Fighting"
+  ],
+  "height": "0.51 m",
+  "weight": "28.0 kg",
+  "candy": "Mankey Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 0.92,
+  "avg_spawns": 92,
+  "spawn_time": "12:52",
+  "multipliers": [
+    2.17,
+    2.28
+  ],
+  "weaknesses": [
+    "Flying",
+    "Psychic",
+    "Fairy"
+  ],
+  "next_evolution": [
+    {
+      "num": "057",
+      "name": "Primeape"
+    }
+  ]
+}

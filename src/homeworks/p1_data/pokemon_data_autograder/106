@@ -1,0 +1,22 @@
+{
+  "id": 106,
+  "num": "106",
+  "name": "Hitmonlee",
+  "img": "http://www.serebii.net/pokemongo/pokemon/106.png",
+  "type": [
+    "Fighting"
+  ],
+  "height": "1.50 m",
+  "weight": "49.8 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.02,
+  "avg_spawns": 2,
+  "spawn_time": "03:59",
+  "multipliers": null,
+  "weaknesses": [
+    "Flying",
+    "Psychic",
+    "Fairy"
+  ]
+}

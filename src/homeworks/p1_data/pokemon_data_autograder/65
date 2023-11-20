@@ -1,0 +1,32 @@
+{
+  "id": 65,
+  "num": "065",
+  "name": "Alakazam",
+  "img": "http://www.serebii.net/pokemongo/pokemon/065.png",
+  "type": [
+    "Psychic"
+  ],
+  "height": "1.50 m",
+  "weight": "48.0 kg",
+  "candy": "Abra Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.0073,
+  "avg_spawns": 0.73,
+  "spawn_time": "12:33",
+  "multipliers": null,
+  "weaknesses": [
+    "Bug",
+    "Ghost",
+    "Dark"
+  ],
+  "prev_evolution": [
+    {
+      "num": "063",
+      "name": "Abra"
+    },
+    {
+      "num": "064",
+      "name": "Kadabra"
+    }
+  ]
+}

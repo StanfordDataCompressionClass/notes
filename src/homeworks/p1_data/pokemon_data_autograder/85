@@ -1,0 +1,28 @@
+{
+  "id": 85,
+  "num": "085",
+  "name": "Dodrio",
+  "img": "http://www.serebii.net/pokemongo/pokemon/085.png",
+  "type": [
+    "Normal",
+    "Flying"
+  ],
+  "height": "1.80 m",
+  "weight": "85.2 kg",
+  "candy": "Doduo Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.22,
+  "avg_spawns": 22,
+  "spawn_time": "02:12",
+  "multipliers": null,
+  "weaknesses": [
+    "Electric",
+    "Rock"
+  ],
+  "prev_evolution": [
+    {
+      "num": "084",
+      "name": "Doduo"
+    }
+  ]
+}

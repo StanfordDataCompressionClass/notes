@@ -1,0 +1,30 @@
+{
+  "id": 42,
+  "num": "042",
+  "name": "Golbat",
+  "img": "http://www.serebii.net/pokemongo/pokemon/042.png",
+  "type": [
+    "Poison",
+    "Flying"
+  ],
+  "height": "1.60 m",
+  "weight": "55.0 kg",
+  "candy": "Zubat Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.42,
+  "avg_spawns": 42,
+  "spawn_time": "02:15",
+  "multipliers": null,
+  "weaknesses": [
+    "Electric",
+    "Ice",
+    "Psychic",
+    "Rock"
+  ],
+  "prev_evolution": [
+    {
+      "num": "041",
+      "name": "Zubat"
+    }
+  ]
+}

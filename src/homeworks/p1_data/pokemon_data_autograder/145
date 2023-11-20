@@ -1,0 +1,22 @@
+{
+  "id": 145,
+  "num": "145",
+  "name": "Zapdos",
+  "img": "http://www.serebii.net/pokemongo/pokemon/145.png",
+  "type": [
+    "Electric",
+    "Flying"
+  ],
+  "height": "1.60 m",
+  "weight": "52.6 kg",
+  "candy": "None",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0,
+  "avg_spawns": 0,
+  "spawn_time": "N/A",
+  "multipliers": null,
+  "weaknesses": [
+    "Ice",
+    "Rock"
+  ]
+}

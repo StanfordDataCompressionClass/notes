@@ -1,0 +1,31 @@
+{
+  "id": 98,
+  "num": "098",
+  "name": "Krabby",
+  "img": "http://www.serebii.net/pokemongo/pokemon/098.png",
+  "type": [
+    "Water"
+  ],
+  "height": "0.41 m",
+  "weight": "6.5 kg",
+  "candy": "Krabby Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 2.12,
+  "avg_spawns": 212,
+  "spawn_time": "03:33",
+  "multipliers": [
+    2.36,
+    2.4
+  ],
+  "weaknesses": [
+    "Electric",
+    "Grass"
+  ],
+  "next_evolution": [
+    {
+      "num": "099",
+      "name": "Kingler"
+    }
+  ]
+}

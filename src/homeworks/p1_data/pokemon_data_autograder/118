@@ -1,0 +1,31 @@
+{
+  "id": 118,
+  "num": "118",
+  "name": "Goldeen",
+  "img": "http://www.serebii.net/pokemongo/pokemon/118.png",
+  "type": [
+    "Water"
+  ],
+  "height": "0.61 m",
+  "weight": "15.0 kg",
+  "candy": "Goldeen Candy",
+  "candy_count": 50,
+  "egg": "5 km",
+  "spawn_chance": 2.18,
+  "avg_spawns": 218,
+  "spawn_time": "03:14",
+  "multipliers": [
+    2.15,
+    2.2
+  ],
+  "weaknesses": [
+    "Electric",
+    "Grass"
+  ],
+  "next_evolution": [
+    {
+      "num": "119",
+      "name": "Seaking"
+    }
+  ]
+}

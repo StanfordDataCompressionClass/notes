@@ -1,0 +1,22 @@
+{
+  "id": 122,
+  "num": "122",
+  "name": "Mr. Mime",
+  "img": "http://www.serebii.net/pokemongo/pokemon/122.png",
+  "type": [
+    "Psychic"
+  ],
+  "height": "1.30 m",
+  "weight": "54.5 kg",
+  "candy": "None",
+  "egg": "10 km",
+  "spawn_chance": 0.0031,
+  "avg_spawns": 0.31,
+  "spawn_time": "01:51",
+  "multipliers": null,
+  "weaknesses": [
+    "Bug",
+    "Ghost",
+    "Dark"
+  ]
+}

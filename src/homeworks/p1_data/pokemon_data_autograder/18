@@ -1,0 +1,32 @@
+{
+  "id": 18,
+  "num": "018",
+  "name": "Pidgeot",
+  "img": "http://www.serebii.net/pokemongo/pokemon/018.png",
+  "type": [
+    "Normal",
+    "Flying"
+  ],
+  "height": "1.50 m",
+  "weight": "39.5 kg",
+  "candy": "Pidgey Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.13,
+  "avg_spawns": 13,
+  "spawn_time": "01:50",
+  "multipliers": null,
+  "weaknesses": [
+    "Electric",
+    "Rock"
+  ],
+  "prev_evolution": [
+    {
+      "num": "016",
+      "name": "Pidgey"
+    },
+    {
+      "num": "017",
+      "name": "Pidgeotto"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": 57,
+  "num": "057",
+  "name": "Primeape",
+  "img": "http://www.serebii.net/pokemongo/pokemon/057.png",
+  "type": [
+    "Fighting"
+  ],
+  "height": "0.99 m",
+  "weight": "32.0 kg",
+  "candy": "Mankey Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.031,
+  "avg_spawns": 3.1,
+  "spawn_time": "12:33",
+  "multipliers": null,
+  "weaknesses": [
+    "Flying",
+    "Psychic",
+    "Fairy"
+  ],
+  "prev_evolution": [
+    {
+      "num": "056",
+      "name": "Mankey"
+    }
+  ]
+}

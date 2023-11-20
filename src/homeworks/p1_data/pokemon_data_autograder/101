@@ -1,0 +1,26 @@
+{
+  "id": 101,
+  "num": "101",
+  "name": "Electrode",
+  "img": "http://www.serebii.net/pokemongo/pokemon/101.png",
+  "type": [
+    "Electric"
+  ],
+  "height": "1.19 m",
+  "weight": "66.6 kg",
+  "candy": "Voltorb Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.02,
+  "avg_spawns": 2,
+  "spawn_time": "04:10",
+  "multipliers": null,
+  "weaknesses": [
+    "Ground"
+  ],
+  "prev_evolution": [
+    {
+      "num": "100",
+      "name": "Voltorb"
+    }
+  ]
+}

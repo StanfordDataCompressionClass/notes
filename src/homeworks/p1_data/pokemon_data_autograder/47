@@ -1,0 +1,32 @@
+{
+  "id": 47,
+  "num": "047",
+  "name": "Parasect",
+  "img": "http://www.serebii.net/pokemongo/pokemon/047.png",
+  "type": [
+    "Bug",
+    "Grass"
+  ],
+  "height": "0.99 m",
+  "weight": "29.5 kg",
+  "candy": "Paras Candy",
+  "egg": "Not in Eggs",
+  "spawn_chance": 0.074,
+  "avg_spawns": 7.4,
+  "spawn_time": "01:22",
+  "multipliers": null,
+  "weaknesses": [
+    "Fire",
+    "Ice",
+    "Poison",
+    "Flying",
+    "Bug",
+    "Rock"
+  ],
+  "prev_evolution": [
+    {
+      "num": "046",
+      "name": "Paras"
+    }
+  ]
+}
