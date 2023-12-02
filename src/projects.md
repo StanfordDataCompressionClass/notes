@@ -64,9 +64,9 @@ For the project milestone, please submit a 2/3 page write-up on the technique/me
 
 ### III. Final presentation
 
-**12/06, Wed, 4:30pm-7:30pm, Location TBD**
+**12/06, Wed, 4:30pm-7:30pm, Location AllenX 101X**
 
-**Slides due: 12/06, Wed, 12pm PT**
+**Slides due: 12/06, Wed, 2pm PT**
 
 The Final presentation will be during the last class (note we will have a longer last class slot!). **The presentation will involve lightning talks: (short 5min talk + 5min QnA).**
 
@@ -74,36 +74,23 @@ Attendance is mandatory for the presentation. In case you are not able to make i
 
 **Guidelines**:
 
-- Guidelines will be released when we reach near the presentation date.
-
-[//]: # (- You need to submit your slide-deck by 12pm PT on Thursday &#40;12/06&#41; using gradescope &#40;link will be added later&#41;. Please submit a PDF of the slides. **No late days allowed for this submission!**)
-
-[//]: # (- We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Entropy Compressors and their optimizations, Group 2: Domain-specific Compressors and Group 3: Multimedia Compression. You can check your groups in available [spreadsheet]&#40;https://docs.google.com/spreadsheets/d/1tcqttFB4fx4ekcOlHASbtBMISmcTRRqQ7UGHN4mXO_Y/edit?usp=sharing&#41;.)
-[//]: # ()
-[//]: # (- You will have 5 minutes for your presentation, and 5 minutes for QnA. Here are some [guidelines]&#40;https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide&#41; on how to give a good lightning talk. )
-
-[//]: # ()
-[//]: # (- You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.)
-
-[//]: # (- You can use any presentation tool you like. We recommend using [Google Slides]&#40;https://www.google.com/slides/about/&#41; or [PowerPoint]&#40;https://products.office.com/en-us/powerpoint&#41;. You can also use [LaTeX Beamer]&#40;https://www.overleaf.com/learn/latex/Beamer&#41; if you are comfortable with it.)
-
-[//]: # ()
-[//]: # (- We plan to have some drinks and snacks for everyone during the presentation. We also plan to have pizza for dinner during the presentation. :&#41;)
-
+- You need to submit your slide-deck by 2pm PT on Wednesday (12/06) using [gradescope](https://www.gradescope.com/courses/625620/assignments/3752034). Please submit a PDF of the slides. **No late days allowed for this submission!**
+- We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Lossless coders we saw in class and their optimizations, Group 2: Advanced lossless coders and Group 3: Compression and applications. You can check your groups in available [spreadsheet - see the presentations tab](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing).
+- You will have 5 minutes for your presentation, and 5 minutes for QnA. Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk. 
+- You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
+- You can use any presentation tool you like. We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.
+- We plan to have some drinks and snacks for everyone during the presentation. We also plan to have pizza for dinner during the presentation. :)
+- We will be making the projects public after the class ends. If you do not wish your project to be made publically available, please let us know.
 
 ### IV. Final report and code 
 
 **Due: 12/15, Fri, midnight PT**
-
 
 - The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
 
 - You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon. 
 
 Your mentor will work with you on setting expectations, and helping you review the report/code before the submission.
-
-[MORE DETAILS TO FOLLOW]
-
 
 ## Project Suggestions
 
