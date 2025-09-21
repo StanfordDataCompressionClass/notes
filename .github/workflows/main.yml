@@ -21,7 +21,7 @@ jobs:
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: 'latest'
+          mdbook-version: '0.4.40'
       - run: |
           cargo install mdbook-katex
           cargo install mdbook-admonish #for the example, note, quiz kind of blocks
