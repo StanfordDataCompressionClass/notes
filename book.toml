@@ -19,7 +19,7 @@ assets_version = "2.0.0" # do not edit: managed by `mdbook-admonish install`
 #[output.katex]
 
 [output.html]
-site-url = "/notes/"
+site-url = "https://stanforddatacompressionclass.github.io/notes/"
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
 default-theme = "light"
 preferred-dark-theme = "light"
