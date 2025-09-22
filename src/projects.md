@@ -8,10 +8,10 @@ Following are the due dates for different components of the project. All (except
 
 |                                                    | Weightage | Description                                    | Due Date <br/> (midnight PT)     |
 |----------------------------------------------------|-----------|------------------------------------------------|----------------------------------|
-| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 11/03                            |
-| [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 11/27                            |
-| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + 5 min QnA                 | 12/06 4:30pm-7:30pm (last class) |
-| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | 12/15, Fri                       |
+| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/30                       |
+| [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 2025/11/20                       |
+| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + 5 min QnA                 | 2025/12/04 (last class) |
+| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | TBD                      |
 
 
 ## Project Expectations
@@ -31,9 +31,9 @@ The expected team size for each project is 1-2 students. Groups of 3 are also ok
 
 ### I. Project Proposal 
 
-**Due: 11/03, Friday, 11:59pm**
+**Due: 2025/10/30, Thursday, 11:59pm**
 
-Please use the time till the deadline to explore and decide what project you would like to work on. **Before you submit the proposal, ensure to have at least one 10 minute 1-on-1 chat with the teaching staff (as a team), and finalize on the project idea.** The list of finalized project ideas will be maintained here: [EE274-23 Project sign-up spreadsheet](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing). Once the project is finalized, we will assign a project mentor (Pulkit/Shubham/Tsachy/Noah) who can help you with references for the project, help with programming, etc. As we are a small class, ideally we would not like to repeat the exact same project. The teaching team will help you modify your idea appropriately in case someone else is working on the exact same project.
+Please use the time till the deadline to explore and decide what project you would like to work on. **Before you submit the proposal, ensure to have at least one 10 minute 1-on-1 chat with the teaching staff (as a team), and finalize on the project idea.** The list of finalized project ideas will be maintained here: [TBD](https://stanforddatacompressionclass.github.io/Fall25/). Once the project is finalized, we will assign a project mentor (Kedar/Shubham/Tsachy/Jiwon) who can help you with references for the project, help with programming, etc. As we are a small class, ideally we would not like to repeat the exact same project. The teaching team will help you modify your idea appropriately in case someone else is working on the exact same project.
 
 For deliverable, we will follow a similar template as our friends from [CS231N](http://cs231n.stanford.edu/project.html). For the project proposal please submit a 1-page summary on what your project idea is, and an approximate timeline as to what you are planning to achieve by week-x etc. Some questions the proposal should answer:
 
@@ -48,7 +48,7 @@ For deliverable, we will follow a similar template as our friends from [CS231N](
 
 ### II. Project Milestone 
 
-**Due: 11/27, Mon, midnight PT**
+**Due: 2025/11/20, Thu, midnight PT**
 
 
 For the project milestone, please submit a 2/3 page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). If possible, you can use GitHub markdown (.md) file as your milestone report, put the .md it on your code repo, and provide us a link to that. That way you will find it easy to later modify it to get the final report. The milestone should roughly include the following sections:
@@ -64,18 +64,18 @@ For the project milestone, please submit a 2/3 page write-up on the technique/me
 
 ### III. Final presentation
 
-**12/06, Wed, 4:30pm-7:30pm, Location AllenX 101X**
+**2025/12/04 Thu Time TBD, Location TBD**
 
-**Slides due: 12/06, Wed, 2pm PT**
+**Slides due: TBD**
 
 The Final presentation will be during the last class (note we will have a longer last class slot!). **The presentation will involve lightning talks: (short 5min talk + 5min QnA).**
 
-Attendance is mandatory for the presentation. In case you are not able to make it after 5:50pm on `12/06`, please inform us beforehand, and we will try to schedule your presentation earlier. You will work with your mentor on making sure the presentation is interesting and useful to your classmates :). 
+Attendance is mandatory for the presentation. <!--In case you are not able to make it after 5:50pm on `12/06`, please inform us beforehand, and we will try to schedule your presentation earlier.--> You will work with your mentor on making sure the presentation is interesting and useful to your classmates :). 
 
 **Guidelines**:
 
-- You need to submit your slide-deck by 2pm PT on Wednesday (12/06) using [gradescope](https://www.gradescope.com/courses/625620/assignments/3752034). Please submit a PDF of the slides. **No late days allowed for this submission!**
-- We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Lossless coders we saw in class and their optimizations, Group 2: Advanced lossless coders and Group 3: Compression and applications. You can check your groups in available [spreadsheet - see the presentations tab](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing).
+- You need to submit your slide-deck by TBD<!--2pm PT on Wednesday (12/06)--> using [gradescope](https://www.gradescope.com/courses/1140353). Please submit a PDF of the slides. **No late days allowed for this submission!**
+<!-- - We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Lossless coders we saw in class and their optimizations, Group 2: Advanced lossless coders and Group 3: Compression and applications. You can check your groups in available [spreadsheet - see the presentations tab](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing). -->
 - You will have 5 minutes for your presentation, and 5 minutes for QnA. Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk. 
 - You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
 - You can use any presentation tool you like. We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.
@@ -84,7 +84,7 @@ Attendance is mandatory for the presentation. In case you are not able to make i
 
 ### IV. Final report and code 
 
-**Due: 12/15, Fri, midnight PT**
+**Due: TBD**
 
 - The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
 
