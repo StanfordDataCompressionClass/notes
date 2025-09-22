@@ -38,7 +38,7 @@ You observe that there is an overhead above due to 9 not being a power of 2. To 
 
 #### Q1.3 (1 point)
 
-Now the alphabet size is 81 because we will be encoding pairs of symbols together, so the length in bits/symbol is $\lceil{\log_2(81)\rceil} = 7$. However, we are encoding blocks of 2 symbols, so the length in bits/symbol is $\lceil{\log_2(81)\rceil} / 2 = 3.5$. Did working in blocks of 2 give a better compression ratio?
+Now the alphabet size is 81 because we will be encoding pairs of symbols together, so the length in bits/block is $\lceil{\log_2(81)\rceil} = 7$. However, we are encoding blocks of 2 symbols, so the length in bits/symbol is $\lceil{\log_2(81)\rceil} / 2 = 3.5$. Did working in blocks of 2 give a better compression ratio?
 
 ( ) Yes
 
