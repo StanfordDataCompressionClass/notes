@@ -94,7 +94,10 @@ Your mentor will work with you on setting expectations, and helping you review t
 
 ## Project Suggestions
 
-The list of projects from last year can be found [here](https://docs.google.com/spreadsheets/d/1Ooxk-3b4kDvAxSOX5jaITWVCkMp48eFG522fU8_UdW8/edit?usp=sharing). Next, we suggest a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!
+The list of projects from previous iterations of the course can be found [here](https://docs.google.com/spreadsheets/d/1Ooxk-3b4kDvAxSOX5jaITWVCkMp48eFG522fU8_UdW8/edit?usp=sharing). 
+
+
+<!--Next, we suggest a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!
 
 
 **1. [BWT](https://en.wikipedia.org/wiki/Burrows–Wheeler_transform): Burrows Wheeler Transform for searching over compressed text**
@@ -258,7 +261,7 @@ The ideas below are not fleshed out yet, but project groups can talk to the inst
 
     *Potential Mentor*: Shubham
 
-
+-->
 
 
 
