@@ -1903,7 +1903,7 @@ class ArithmeticEncoder:
 
         # STEP-II,III communicate interval
         Z = (L+H)/2 
-        num_bits = ceil(log2((H-L))) + 1
+        num_bits = ceil(log2(1/(H-L))) + 1
         _, code = float_to_bitarray(Z, num_bits)
         return code
 
