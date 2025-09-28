@@ -539,7 +539,7 @@ class ArithmeticEncoder:
 
         # STEP-II,III communicate interval
         Z = (L+H)/2 
-        num_bits = ceil(log2((H-L))) + 1
+        num_bits = ceil(log2(1/(H-L))) + 1
         _, code = float_to_bitarray(Z, num_bits)
         return code
 
@@ -571,8 +571,8 @@ One point to note in the decoding is that, as the decoder might have read in mor
 Now that we have discussed the full Arithmetic encoder/decoder, lets try to understand the compression performance of Arithmetic coder. 
 
 Let us start by summarizing what we know:
-- Size of interval $H-L = \log_2{1}{p(x_1^n)}$
-- $k \leq \log_2 {1}{H-L} + 2$
+- Size of interval $H-L = \log_2{p(x_1^n)}$
+- $k \leq \log_2 {\frac{1}{H-L}} + 2$
 
 Based on these two properties, it is quite straightforward to see that the codelength for encoding an entire sequence $x_1^n$ using Arithmetic coding is:
 
