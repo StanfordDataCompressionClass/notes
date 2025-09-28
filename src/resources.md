@@ -39,3 +39,4 @@ The web is filled with great engineers and researchers writing blogs related to 
 5. [Modern LZ Compression](https://glinscott.github.io/lz/index.html#toc4): Walk-through of modern LZ compressors by Gary Linscott.
 6. [DCT](http://weitz.de/dct/): A nice blog post on DCT by Prof. Dr. Edmund Weitz
 7. [DCT History](https://www.cse.iitd.ac.in/~pkalra/col783-2017/DCT-History.pdf): A small red on the history of DCT by Nasir Ahmed.
+8. [Tossing a Biased Coin](./coinflipext.pdf): An accessible exploration of how to generate fair randomness from a biased coin by Michael Mitzenmacher.
