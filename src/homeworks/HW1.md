@@ -1,16 +1,17 @@
-# EE274 (Fall 23): Homework-1
+# EE274 (Fall 25): Homework-1
 
 - **Focus area:** Prefix-free codes, Basic Information theory
-- **Due Date:** Oct 18, midnight (11:59 PM)
+- **Due Date:** Oct 14, midnight (11:59 PM)
 - **Weightage:** 15%
 - **Total Points:** 135
 - **Submission Instructions:**
   - Provided at the end of HW (ensure you read these!)
   - We will be using both manual and auto-grading for the assignment submissions. Please follow the submission instructions carefully to ensure you get full credit for your submissions.
 - **Submission link:** 
-  - For written part: [HW1-Written](https://www.gradescope.com/courses/625620/assignments/3459512)
-  - For programming part: [HW1-Code](https://www.gradescope.com/courses/625620/assignments/3466287)
-- Please post any questions on Ed, or feel free to contact the instructors during the office hours. We will be supporting Linux and Mac OS. Windows users are welcome to use the Linux subsystem, or use a virtual machine, or use Stanford [Farmshare](https://web.stanford.edu/group/farmshare/cgi-bin/wiki/index.php/FarmShare_2) server resources.
+  - For written part: [HW1-Written](https://www.gradescope.com/courses/1140353/assignments/6862936)
+  - For programming part: [HW1-Code](https://www.gradescope.com/courses/1140353/assignments/6862937)
+- Please post any questions on Ed, or feel free to contact the instructors during the office hours. We will be supporting Linux and Mac OS. 
+  - We strongly recommend Windows users to use **Windows Subsystem Linux (WSL)**. Refer to [this instruction](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) for setup. 
 
 **NOTE:** The homework looks longer that it actually is! We try to be verbose with the questions for clarity.
 
@@ -54,7 +55,7 @@ Usually it is more convenient and safer to install python packages in a *virtual
     pip install -e .
     ```
 
-   Once this is done let us ensure the library is installed correctly by running unit tests. **Submit the output of this command in gradescope for credit.**
+   Once this is done let us ensure the library is installed correctly by running unit tests. **Submit the output of this command in gradescope for credit.** The results may include both *passed* and *xfailed* tests, but there should be no *failed* tests if you run the command on the `main` branch. 
    
    ```sh
    find scl -name "*.py" -exec py.test -s -v {} +
@@ -68,13 +69,13 @@ py.test -s -v scl/core/data_block.py
 
 Feel free to look at different compressors in the `compressors/` folder, and the tests to get yourself familiar with them!
 
-6. We will be using `EE274_Fall23/HWs` branch of `SCL` for releasing HWs. Checkout to the branch for getting access to HW problem templates.
+6. We will be using `EE274_Fall25/HWs` branch of `SCL` for releasing HWs. Checkout to the branch for getting access to HW problem templates.
     ```sh
-    git checkout EE274_Fall23/HWs
+    git checkout EE274_Fall25/HWs
     ```
 You should see a `scl/HWs/HW1` folder containing template files for the rest of the assignment. Going ahead, we will refer to files relative to `scl` folder in your `stanford_compression_library` folder. For example, `HWs/HW1/hw1_p1.py` refers to the file `stanford_compression_library/scl/HWs/HW1/hw1_p1.py`.
 
-For more details about SCL and to get comfortable with it, we also created a SCL tutorial. You can find the SCL tutorial linked [here](today).
+For more details about SCL and to get comfortable with it, we also created a SCL tutorial. You can find the SCL tutorial linked [here](https://stanforddatacompressionclass.github.io/notes/scl_tutorial/SCL_tutorial.html).
 
 ### 1. Probability and Coin Toss (*20 points*)
 Kedar is a big [Cricket](https://en.wikipedia.org/wiki/Cricket) fan. In cricket (like many other sports), there is a coin toss in the beginning to determine which team gets the first chance to bat. However, Kedar thinks that the coin being used is *biased* and lands as *Heads* (`H`) much more often than *tails* (`T`). Let the probability of the coin landing on `H` be $p$.
@@ -88,7 +89,7 @@ Shubham suggests to Kedar that this problem can be solved (i.e. we can get a *fa
 3. [5 points] Kedar is still not convinced and thinks that we should really implement this idea to see if it works. Please help out Shubham by implementing the function `shubhams_fair_coin_generator()` in the file `HWs/HW1/hw1_p1.py`. 
 NOTE: please run all of this in the `(ee274_env)` environment which you created and that you are in the correct branch of the `SCL` repo (`EE274_Fall23/HWs`). Ensure that the tests except those in `HWs` folder pass before you start implementing the function.
 
-4. [5 points] It is always a good practice to write tests to ensure the implementation is correct (even if you think theoretically it is alright :)). Please implement `test_shubhams_fair_coin_generator()` function in `HWs/HW1/hw1_p1.py`. You can test your code by running:
+4. [5 points] It is always a good practice to write tests to ensure the implementation is correct (even if you think theoretically it is alright :)). Please implement `test_shubhams_fair_coin_generator()` function in `HWs/HW1/hw1_p1.py`. You can test your code by running the following command in `stanford_compression_library/scl` folder:
 
     ```sh
     py.test -s -v HWs/HW1/hw1_p1.py
@@ -98,13 +99,13 @@ NOTE: please run all of this in the `(ee274_env)` environment which you created 
 
 ### Q2: Basic Information theory  (*20 points*)
 
-1. [5 points] Let $X$ be a random variable over positive integers with a distribution 
-$$ P_X(X=k) = 2^{-k}, k \geq 1$$ 
+1. [5 points] Let $X$ be a random variable over positive integers with a distribution $$P_X(X=k) = 2^{-k}, k \geq 1$$ 
 Compute the entropy $H(X)$ of random variable $X$. What are the optimal code-lengths for a prefix-free code designed for distribution $P_X$?
+
 2. [5 points] Provide an optimal prefix-free code design for the distribution $P_X$. 
+
 3. [10 points] Let $Y$ be a random variable over positive integers such that $\mathbb{E}(Y) = 2$. 
-Then show that:
-$$ H(Y) \leq 2 $$ 
+Then show that:$$ H(Y) \leq 2 $$ 
 For what distribution of the random variable $Y$ does the equality hold, i.e. $H(Y) = 2$? 
 
     **HINT:** KL-Divergence and it's properties will be helpful to show this.
@@ -124,6 +125,8 @@ We mainly explored prefix-free codes in class. But there is a much broader class
 
 Consider an alphabet $\mathcal{U}$ and a uniquely decodable code with code lengths for $u \in \mathcal{U}$ denoted by $L(u)$. Also, we denote the codelength of the n-tuple $u^n$ as $L(u^n) = \sum_{i=1}^n L(u_i)$.
 
+**HINT**: For parts `Q3.2` and `Q3.3`, you might find it easier to gain intuition by starting with small values of $|\mathcal{U}|$ and $n$ (e.g., binary alphabet with $n=1$ or $2$) and manually expanding the summations.
+
 2. [5 points] Show that $$\left( \sum_{u \in \mathcal{U}} 2^{-L(u)} \right)^n = \sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} $$
 
 3. [5 points] Let $l_{max} = \max_{u \in \mathcal{U}} L(u)$. Then we can rewrite the summation as: $$\sum_{u^n \in \mathcal{U}^n} 2^{-L(u^n)} = \sum_{j=1}^{n \cdot l_{max}} |\{u^n| L(u^n) = j\}| \cdot 2^{-j}$$ 
@@ -138,11 +141,13 @@ Using `Q3.2` and the identity above, show that:
 $$\left( \sum_{u\in\mathcal{U}} 2^{-L(u)} \right) \leq 1$$
 
 5. [5 points] Now show that for any uniquely decodable code for $U$ with codeword lengths $L(U)$, $$\mathbb{E}[L(U)] \geq H(U) .$$
+  **NOTE:** We saw a similar proof for prefix-free codes in the class!<br>
+  <br>
   Also argue that for any uniquely decodable code, it is possible to construct a prefix-free code with the same codeword lengths. 
 
 This means that uniquely decodable codes generally do not provide any benefits over prefix-free codes and instead have a more complicated decoding procedure!
 
-**NOTE:** We saw a similar proof for prefix-free codes in the class!
+
 
 ### Q4: Shannon Code(s) (*25 points*)
 
@@ -193,7 +198,7 @@ The tables can be then used for decoding as per the pseudo-code below.
 ```python
 def decode_symbol_table(encoded_bitarray):
     state = encoded_bitarray[:max_codelen] 
-    decoded_symbol = decoding_table[state]
+    decoded_symbol = decoding_table[str(state)]
     num_bits_consumed = codelen_table[decoded_symbol]
     return decoded_symbol, num_bits_consumed
 ```
@@ -213,7 +218,7 @@ Before we start with the code, let's look at how important it is to transmit the
 
     a. What are the codeword lengths for the symbols in the Huffman code?
     
-    After a harrowing cab experience in US, Pulkit wants to send a codeword `BADCAB` to Shubham to describe his frustration. Shubham and Pulkit had agreed to use Huffman encoding for such communications in the past. He encodes the codeword `BADCAB` using the original distribution `{A: 0.11, B: 0.09, C: 0.09, D: 0.71}`, and sends both the codeword and this distribution  to Shubham (so that Shubham is able to decode it on his end by building a Huffman tree on his own). 
+    After a harrowing cab experience in the US, Pulkit wants to send a codeword `BADCAB` to Shubham to describe his frustration. Shubham and Pulkit had agreed to use Huffman encoding for such communications in the past. He encodes the codeword `BADCAB` using a Huffman code for the original distribution `{A: 0.11, B: 0.09, C: 0.09, D: 0.71}`, and sends both the codeword and this distribution  to Shubham (so that Shubham is able to decode it on his end by building a Huffman tree on his own). 
 
     b. Unfortunately,  Shubham decodes the message to be `CADBAC` instead of `BADCAB` making him confused. What might have gone wrong during this communication between the two?
 
@@ -238,6 +243,7 @@ To understand the overall process, you should go through the provided code and s
     - The input `bitarray` to `decode_prob_dist` can include more than the encoding of the probability distribution itself. Thus, it should only read as much as it needs and return the number of bits read so that the Huffman decoding can start from the next bit.
     - Python dictionaries are [OrderedDicts](https://stackoverflow.com/questions/39980323/are-dictionaries-ordered-in-python-3-6). If you are using dictionaries to represent probability distribution, then it is critical to maintain this ordering while creating Huffman trees during encoding/decoding. See the Pulkit-Shubham communication fiasco above for an example of what can go wrong if the order is not preserved.
     - Python's `float` type is equivalent to the `double` type in C (see [this](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) for a refresher). As long as you provide the same exact distribution to the encoder and decoder, all is well!
+      - **IMPORTANT**: Unless you are feeling particularly adventurous, we strongly recommend using the provided helper functions `float_to_bitarray64` and `bitarray64_to_float` for conversion between `float` and `BitArray`.
     - Also, you will hear about [Canonical Huffman code](https://en.wikipedia.org/wiki/Canonical_Huffman_code) in class, which provides an alternative to solve some of these issues in practice. You do not need it for this question.
 
 Verify that your implementation is correct by running
@@ -259,9 +265,9 @@ If you encounter errors, you should identify the failing test case and fix any i
     ```
     Nothing should be printed on the terminal as a result of the last command if the files match.
     
-    - Report the size of your compressed file. You can run `wc -c sherlock.txt.huffz` to print the size.
+    - Report the size of your compressed file. You can run `wc -c HWs/HW1/sherlock.txt.huffz` to print the size.
     - How much is the overhead due to storing the probability distribution? **Note:** One easy way to check this to replace `encode_prob_dist` with a version that just returns `BitArray()`. Obviously the decoding won't work with this change!
-    - Print the obtained huffman tree on sherlock.txt by using the `print_huffman_tree` function. What do you observe? Does the printed Huffman tree make sense? Why or why not?
+    - Print the obtained huffman tree on sherlock.txt by using the `print_huffman_tree` function (commented in `encode_block` function of `HuffmanEmpiricalEncoder`). What do you observe? Does the printed Huffman tree make sense? Why or why not?
    
 4. [3 points] What happens if you repeatedly use this compressor on the file (`sherlock.txt -> sherlock.txt.huffz -> sherlock.txt.huffz.huffz -> ...`)? Does the file size keep getting smaller? Why or why not? 
 

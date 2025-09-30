@@ -24,8 +24,8 @@
 
 ---
 - [Homeworks](homeworks/coverpage.md)
-    <!-- - [HW1](homeworks/HW1.md)
-    - [HW2](homeworks/HW2.md)
+    - [HW1](homeworks/HW1.md)
+    <!-- - [HW2](homeworks/HW2.md)
     - [HW3](homeworks/HW3.md)
     - [HW4](homeworks/HW4.md) -->
 
