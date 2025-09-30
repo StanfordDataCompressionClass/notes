@@ -4558,7 +4558,7 @@ class DataDecoder(abc.ABC):
    ...
 </code></pre>
 <p>For now let's focus on the <code>encode_block</code> and <code>decode_block</code> member functions, which are inverses of each other. The <code>encode_block</code> function of <code>DataEncoder</code> maps input <code>DataBlock</code> to a <code>BitArray</code>, while the <code>decode_block</code> function of <code>DataDecoder</code> does the reverse. Note that <code>decode_block</code> also returns the <code>num_bits_consumed</code>. This is useful as the input <code>BitArray</code> might contain bits written by other encoders, and so the <code>decode_block</code> might not consume all the bits. We will see how this is useful in combining multiple encoders.</p>
-<p>The <code>encode_block</code> and <code>decode_block</code> functions are the core logic of any compressor, and is usually the only part subclassing encoders/decoders need to implement. Here is an example of the</p>
+<p>The <code>encode_block</code> and <code>decode_block</code> functions are the core logic of any compressor, and is usually the only part subclassing encoders/decoders need to implement. Here is an example of the  <code>encode_block</code> of <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/arithmetic_coding.py#L80">arithmetic code</a>.</p>
 <p>The <code>DataEncoder</code> and <code>DataDecoder</code> also contains other functions which are useful to convert our encoder/decoders until practical coders which can handle multiple blocks of data etc. Do take a look at the <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/data_encoder_decoder.py"><code>encode</code>, <code>decode</code>, <code>encode_file</code></a> functions if you are interested!</p>
 <h3 id="13-probabilitydist"><a class="header" href="#13-probabilitydist">1.3 <a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/prob_dist.py">ProbabilityDist</a></a></h3>
 <p>The final abstraction in <code>core</code> library that we will discuss is that of <code>ProbabilityDist</code>. The <code>ProbabilityDist</code> class is used to represent probability distributions. The class is a thin wrapper around a dictionary which maps symbols to their probabilities (<code>prob_dict</code>). It provides some useful member properties to extract relevant information, such as the <code>alphabet</code> (list of symbols) and <code>prob_list</code> (list of probabilities). Take a look at the class definition and some of the function methods below:</p>
@@ -4676,10 +4676,10 @@ useful for implementing any prefix free code. <code>Shannon Coder</code> is one 
 <h1 id="exercise-1"><a class="header" href="#exercise-1">Exercise</a></h1>
 <p>To make sure we understand the abstractions and various classes introduced, lets take a look at the following exercise. This was a problem from year 2022 homework, and so to make it most useful it might be best to treat it as such!</p>
 <p><em>The solution to the exercise and how to use SCL in a Google colab notebook is also available <a href="https://colab.research.google.com/drive/1zf5Kk6rhf0mhfYjIQx8inx1TpwVpYLTg?usp=sharing">here</a>.</em></p>
-<p>We will use a simple pedagogical compressor <code>compressors/universal_uint_coder.py</code> as an example, and then use it to implement a more complex compressor <code>HWs/tutorial/universal_int_coder.py</code>. To access the starter file, ensure you are in the <code>EE274_Fall23/HWs</code> branch of <code>SCL</code>. Checkout to the branch for getting access to tutorial (and HW problem templates).</p>
-<pre><code class="language-sh"> git checkout EE274_Fall23/HWs
+<p>We will use a simple pedagogical compressor <code>compressors/universal_uint_coder.py</code> as an example, and then use it to implement a more complex compressor <code>HWs/tutorial/universal_int_coder.py</code>. To access the starter file, ensure you are in the <code>EE274_Fall25/HWs</code> branch of <code>SCL</code>. Checkout to the branch for getting access to tutorial (and HW problem templates).</p>
+<pre><code class="language-sh"> git checkout EE274_Fall25/HWs
 </code></pre>
-<p>Let's start with understanding the <code>compressors/universal_uint_coder.py</code> compressor (<a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/universal_uint_coder.py">link</a>). The compressor is a simple implementation of a universal compressor for unsigned integers. First let us note the structure of the compressor. The compressor has three main components:</p>
+<p>Let's start with understanding the <code>compressors/universal_uint_coder.py</code> compressor (<a href="https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/universal_uint_coder.py">link</a>). The compressor is a simple implementation of a universal compressor for unsigned integers. First let us note the structure of the compressor. The compressor has two main components:</p>
 <ul>
 <li>
 <p><em>UniversalUintEncoder</em>: This class is used to encode a list of unsigned integers to a bitarray. It subclasses from <code>DataEncoder</code> class as described in detail in the <a href="scl_tutorial/./basics.html">basics</a>. Therefore, we only need to implement the <code>encode_block</code> function. In this particular case, we can encode symbols individually and concatenate them to output the final bitstream. Hence, we can use the <code>encode_symbol</code> function to encode each symbol individually. The <code>encode_symbol</code> function takes in an unsigned integer and returns a bitarray.</p>
@@ -4729,7 +4729,7 @@ useful for implementing any prefix free code. <code>Shannon Coder</code> is one 
 <li>
 <p>The <code>compressors/universal_uint_coder.py</code> unfortunately only encodes unsigned integers. How will you extend the uint coder to create an encoder/decoder which handles compressing signed integers losslessly? Add your code in the file <code>HWs/tutorial/universal_int_coder.py</code>. NOTE: you mainly have to implement <code>encode_symbol</code> and <code>decode_symbol</code> functions. At the end, the test as present in the file (<code>test_universal_integer_encode_decode</code>) should pass. Report the length of the <code>encoded_bitarray</code> output by the test on Gradescope.</p>
 <p><strong>Solution</strong></p>
-<p>One way of implementing a <code>universal_interger_coder</code> by utilizing the <code>universal_uint_coder</code> coder is by doing a mapping of negative integers to positive integers. There are multiple possible way to do so and we accept all of them as a solution. One simple way to do the same is by mapping negative integers to positive integers in a zig-zag fashion as follows:</p>
+<p>One way of implementing a <code>universal_integer_coder</code> by utilizing the <code>universal_uint_coder</code> coder is by doing a mapping of negative integers to positive integers. There are multiple possible way to do so and we accept all of them as a solution. One simple way to do the same is by mapping negative integers to positive integers in a zig-zag fashion as follows:</p>
 <pre><code> 0 -&gt; 0
 +1 -&gt; 1
 -1 -&gt; 2
@@ -4739,7 +4739,7 @@ useful for implementing any prefix free code. <code>Shannon Coder</code> is one 
 .
 .
 </code></pre>
-<p>The <code>encode_symbol</code> for <code>universal_interger_coder</code> can be implemented as follows:</p>
+<p>The <code>encode_symbol</code> for <code>universal_integer_coder</code> can be implemented as follows:</p>
 <pre><code class="language-python">def encode_symbol(self, x: int):
      assert isinstance(x, int)
 
@@ -4753,7 +4753,7 @@ useful for implementing any prefix free code. <code>Shannon Coder</code> is one 
          return self.uint_encoder.encode_symbol(2*x - 1)
      ########################
 </code></pre>
-<p>The <code>decode_symbol</code> for <code>universal_interger_coder</code> can be implemented as follows:</p>
+<p>The <code>decode_symbol</code> for <code>universal_integer_coder</code> can be implemented as follows:</p>
 <pre><code class="language-python">def decode_symbol(self, encoded_bitarray):
      #########################
      # ADD CODE HERE
