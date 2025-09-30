@@ -134,7 +134,7 @@ Consider an alphabet $\mathcal{U}$ and a uniquely decodable code with code lengt
    NOTE: Rewriting summation is a common proof trick, and is a useful one to watch out for!
 Using `Q3.2` and the identity above, show that:
 
-   $$\left( \sum_{i=1}^{|\mathcal{U}|} 2^{-L(u_i)} \right)^n \leq n\cdot l_{max}$$
+   $$\left( \sum_{u \in \mathcal{U}} 2^{-L(u)} \right)^n \leq n\cdot l_{max}$$
 
 4. [5 points] Using `Q3.3` show that uniquely decodable codes satisfy Kraft's inequality i.e. 
 
