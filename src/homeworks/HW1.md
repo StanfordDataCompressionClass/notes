@@ -8,7 +8,7 @@
   - Provided at the end of HW (ensure you read these!)
   - We will be using both manual and auto-grading for the assignment submissions. Please follow the submission instructions carefully to ensure you get full credit for your submissions.
 - **Submission link:** 
-  - For written part: [HW1-Written](https://www.gradescope.com/courses/1140353/assignments/6862936)
+  - For written part: [HW1-Written](https://www.gradescope.com/courses/1140353/assignments/6877003)
   - For programming part: [HW1-Code](https://www.gradescope.com/courses/1140353/assignments/6862937)
 - Please post any questions on Ed, or feel free to contact the instructors during the office hours. We will be supporting Linux and Mac OS. 
   - We strongly recommend Windows users to use **Windows Subsystem Linux (WSL)**. Refer to [this instruction](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) for setup. Follow the steps up to *Update and upgrade packages*. If you are using VS Code, continue with *Set up your favorite code editor - Use Visual Studio Code*.
