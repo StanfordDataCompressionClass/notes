@@ -4,13 +4,13 @@ To make sure we understand the abstractions and various classes introduced, lets
 
 *The solution to the exercise and how to use SCL in a Google colab notebook is also available [here](https://colab.research.google.com/drive/1zf5Kk6rhf0mhfYjIQx8inx1TpwVpYLTg?usp=sharing).*
 
-We will use a simple pedagogical compressor `compressors/universal_uint_coder.py` as an example, and then use it to implement a more complex compressor `HWs/tutorial/universal_int_coder.py`. To access the starter file, ensure you are in the `EE274_Fall23/HWs` branch of `SCL`. Checkout to the branch for getting access to tutorial (and HW problem templates).
+We will use a simple pedagogical compressor `compressors/universal_uint_coder.py` as an example, and then use it to implement a more complex compressor `HWs/tutorial/universal_int_coder.py`. To access the starter file, ensure you are in the `EE274_Fall25/HWs` branch of `SCL`. Checkout to the branch for getting access to tutorial (and HW problem templates).
     
 ```sh
- git checkout EE274_Fall23/HWs
+ git checkout EE274_Fall25/HWs
  ```
 
-Let's start with understanding the `compressors/universal_uint_coder.py` compressor ([link](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/universal_uint_coder.py)). The compressor is a simple implementation of a universal compressor for unsigned integers. First let us note the structure of the compressor. The compressor has three main components:
+Let's start with understanding the `compressors/universal_uint_coder.py` compressor ([link](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/universal_uint_coder.py)). The compressor is a simple implementation of a universal compressor for unsigned integers. First let us note the structure of the compressor. The compressor has two main components:
 
 - *UniversalUintEncoder*: This class is used to encode a list of unsigned integers to a bitarray. It subclasses from `DataEncoder` class as described in detail in the [basics](./basics.md). Therefore, we only need to implement the `encode_block` function. In this particular case, we can encode symbols individually and concatenate them to output the final bitstream. Hence, we can use the `encode_symbol` function to encode each symbol individually. The `encode_symbol` function takes in an unsigned integer and returns a bitarray. 
 
@@ -64,7 +64,7 @@ Next, let's now try to understand how the compressor losslessly compresses unsig
 
     **Solution**
 
-   One way of implementing a `universal_interger_coder` by utilizing the `universal_uint_coder` coder is by doing a mapping of negative integers to positive integers. There are multiple possible way to do so and we accept all of them as a solution. One simple way to do the same is by mapping negative integers to positive integers in a zig-zag fashion as follows:
+   One way of implementing a `universal_integer_coder` by utilizing the `universal_uint_coder` coder is by doing a mapping of negative integers to positive integers. There are multiple possible way to do so and we accept all of them as a solution. One simple way to do the same is by mapping negative integers to positive integers in a zig-zag fashion as follows:
 
    ```
     0 -> 0
@@ -76,7 +76,7 @@ Next, let's now try to understand how the compressor losslessly compresses unsig
    .
    .
    ``` 
-   The `encode_symbol` for `universal_interger_coder` can be implemented as follows:
+   The `encode_symbol` for `universal_integer_coder` can be implemented as follows:
 
    ```python
    def encode_symbol(self, x: int):
@@ -93,7 +93,7 @@ Next, let's now try to understand how the compressor losslessly compresses unsig
         ########################
     ```
 
-   The `decode_symbol` for `universal_interger_coder` can be implemented as follows:
+   The `decode_symbol` for `universal_integer_coder` can be implemented as follows:
    ```python
    def decode_symbol(self, encoded_bitarray):
         #########################

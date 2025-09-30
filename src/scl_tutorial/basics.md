@@ -119,7 +119,7 @@ class DataDecoder(abc.ABC):
 ```
 For now let's focus on the `encode_block` and `decode_block` member functions, which are inverses of each other. The `encode_block` function of `DataEncoder` maps input `DataBlock` to a `BitArray`, while the `decode_block` function of `DataDecoder` does the reverse. Note that `decode_block` also returns the `num_bits_consumed`. This is useful as the input `BitArray` might contain bits written by other encoders, and so the `decode_block` might not consume all the bits. We will see how this is useful in combining multiple encoders. 
 
-The `encode_block` and `decode_block` functions are the core logic of any compressor, and is usually the only part subclassing encoders/decoders need to implement. Here is an example of the  
+The `encode_block` and `decode_block` functions are the core logic of any compressor, and is usually the only part subclassing encoders/decoders need to implement. Here is an example of the  `encode_block` of [arithmetic code](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/arithmetic_coding.py#L80). 
 
 The `DataEncoder` and `DataDecoder` also contains other functions which are useful to convert our encoder/decoders until practical coders which can handle multiple blocks of data etc. Do take a look at the [`encode`, `decode`, `encode_file`](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/core/data_encoder_decoder.py) functions if you are interested! 
 
