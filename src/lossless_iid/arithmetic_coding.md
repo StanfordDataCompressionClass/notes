@@ -1,5 +1,7 @@
 # Arithmetic coding
 
+In this chapter, we discuss arithmetic coding, which is a major step in the direction of achieving entropy without sacrificing efficiency. While here we will discuss the case of data from known iid distributions, arithmetic coding is versatile and is most useful in cases of complex adaptive data distributions (to be discussed in the following chapters). In addition, as we will see later, arithmetic coding plays a crucial role in understanding the link between compression and prediction.
+
 ## Recap -> Issues with symbol codes: 
 
 Lets consider the simple distribution below and think about what designing prefix-free codes for the same
@@ -14,10 +16,10 @@ A -> 0, B -> 1
 Huffman code (or any other prefix-free code) = 1 bit
 ```
 So the average codelength for huffman code for this data is 1 bit. If we compare it with the entropy $H(P) = 0.47$ of the distribution,
-our average codelength (`1 bit`) is quite off. Ideally for a symbol $s$, ideally we want to use $l(s) = \log_2 \frac{1}{P(s)}$ bits (to achieve $H(P)$). But, as we are using a symbol code, we cant use fractional bits.
-Thus, there is always going to an overhead of upto  `~1 bit` per symbol with symbol codes. Thus the expected codelength $L \leq H(P) + 1$ with Huffman codes. 
+our average codelength (`1 bit`) is quite off. Ideally for a symbol $s$, ideally we want to use $l(s) = \log_2 \frac{1}{P(s)}$ bits (to achieve $H(P)$). But, as we are using a symbol code, we can't use fractional bits.
+Thus, there is always going to an overhead of up to  `~1 bit` per symbol with symbol codes. This is consistent with the guarantees on the expected codelength $L \leq H(P) + 1$ with Huffman codes. 
 
-One solutionto this problem, which was by considering block codes. i.e. we consider tuples of symbols from the alphabet as a new "symbol" and construct a Huffman code using that. 
+One solution to this problem is to use considering block codes. i.e. we consider tuples of symbols from the alphabet as a new "symbol" and construct a Huffman code using that. 
 For example, we can consider blocks of size 2: `P = {AA: 0.01, AB: 0.09, BA: 0.09, BB: 0.81}`. Here is the Huffman tree:
 
 ```py
@@ -37,7 +39,7 @@ block_size: 2, entropy: 0.47, avg_codelen: 0.65 bits/symbol
   |--BB
 ```
 
-We see that `BB` has probability `0.81`, so it receives the shortest codelength of `1 bit`. The aaverage codelength in this case is `0.65 bits/symbol` which is definitely an improvement over the `1 bit/symbol`. 
+We see that `BB` has probability `0.81`, so it receives the shortest codelength of `1 bit`. The average codelength in this case is `0.65 bits/symbol` which is definitely an improvement over the `1 bit/symbol`. 
 The idea here is that, as we are using fixed codes per "symbol", as now the symbols are tuples of size 2, the overhead gets amortized to 2 symbols from the alphabet. 
 
 We can continue doing this by considering larger blocks of data. For example, with blocks of size $k$, the new alphabet size is $2^k$, and the overhead due to Huffman coding should be `~1/k` (or lower). 
@@ -159,11 +161,11 @@ block_size: 5, entropy: 0.47, avg_codelen: 0.48 bits/symbol
 
 The issue is that, as we increase the block size $B$, our codebook size increases exponentially as $|\mathcal{X}|^B$.
 The larger the codebook size the more complicated the encoding/decoding becomes, the more memory we need, the higher the latency etc. For example, if we look at the tree above, the codebook size is $2^5 = 32$. This is quite manageable. 
-However, this wouldn't have been the case if our alphabet size was $256$ instead of $2$. In that case, block code of size `5` has a codebook = $2^{40}$, which is definitely unmanageable.
+However, this wouldn't have been the case if our alphabet size was $256$ for a byte coder instead of $2$. In that case, block code of size `5` has a codebook = $2^{40}$, which is definitely unmanageable.
 
 
 Thus, even though with block size $B$, we obtain compression as close as `1/B bits/symbol` to entropy $H(X)$, the idea doesn't hold ground practically. 
-That is, in fact the problem which Arithmetic coding solves: 
+That is, in fact the problem which Arithmetic coding solves.
 
 ## Arithmetic coding: Introduction
 
@@ -172,11 +174,11 @@ Arithmetic coding solves the problems we discussed with the block-based Huffman 
 1. **Entire data as a single block**: Arithmetic coding encodes entire data as a single block: For data $x_1^n$, the `block_size = n` 
 i.e. the entire data is a single block!
 
-2. **codewords are computed on a fly**: As the block size for arithmetic coding is the entire data, the codebook size would have been massive ($|\mathcal{X}|^n$). The codeword is computed on *on the fly*
-No need to pre-compute the codebook beforehand.
+2. **codewords are computed on a fly**: As the block size for arithmetic coding is the entire data, the codebook size would have been massive ($|\mathcal{X}|^n$). The codeword is computed on *on the fly*. 
+No need to pre-compute the codebook beforehand!
 
 3. **compression efficiency**: Arithmetic coding is optimal in terms of compression. ->  *theoretically* the performance can be shown to be:  
-$$H(X) \leq \frac{\mathbb{E}[l(X_1^n)]}{B} \leq H(X) + \frac{2}{n}$$
+$$H(X) \leq \frac{\mathbb{E}[l(X_1^n)]}{n} \leq H(X) + \frac{2}{n}$$
 i.e. `~2 bits` of overhead for the *entire* sequence
 
 
@@ -237,9 +239,22 @@ The Arithmetic encoding works in the following two steps:
          x_input -> [L,H) -> 011010
 ```
 
+Before we discuss the steps in detail, let's discuss some desirable properties to gain further intuition. Consider the range `[0,1)` divided up into subintervals (known to both encoder and decoder). You want to convey a particular subinterval to a friend. For example you wanted to convey the interval `[0.3, 0.8)`. One way to do this is to just send over any point within this interval, for example `0.5`. As you can see, this can be done quite cheaply. Whereas if you wanted to convey the interval `[0.3, 0.30001)`, you would need to send over a much more precise value, for example `0.300005`. Thus the first piece of intuition is that: 
+- **Intuition 1: Bigger intervals need fewer bits to communicate**.
+
+But recall from previous chatpers that a good coding scheme should assign shorter codewords to more probable sequences. Thus we would like to have the following property:
+- **Intuition 2: More probable sequences should correspond to bigger intervals**.
+
+The simplest logic is to have the size of the interval be proportional to the probability of the sequence, which is surprisingly what we will do!
+
+With these combined intuitions, we get:
+- More probable sequences => Bigger interval => Fewer bits to communicate
+
+With this in mind, let's study the steps and see how they satisfy this basic intuition.
+
 #### STEP-I: finding the interval `[L,H)`
 
-Lets see how the **STEP I** (finding the interval `L,H)`) works. 
+Lets see how the **STEP I** (finding the interval `[L,H)`) works. 
 We start with `[L,H) = [0,1)`, and the subdivide the interval as we see each symbol. 
 
 1. `x_input[0] = B`
@@ -322,7 +337,7 @@ class ArithmeticEncoder:
 
 **Observation:** Notice that each time we encode symbol $s$, we shrink the interval size by $P(s)$. For example: we started with interval `[L,H) = [0,1)` of size `1`. We continued shrinking this interval to `[0.3,0.8)` which has size `0.5 = P(B)`. 
 
-<span style="color:purple;"> **QUIZ-1**: What is the size of the interval (`H-L`) for the input $X_1^n$?</span>
+<span style="color:purple;"> **Quiz-1**: What is the size of the interval (`H-L`) for the input $x_1^n$?</span>
 
 **Ans:** It is easy to see that the interval size is equal to the probability of the input parsed until then. For example, when we see the first symbol `B`, the interval size is `0.8 - 0.3 = 0.5 = P(B)`, when we see the next symbol, the interval size is: 
 `0.45 - 0.3 = 0.15 = P(A)*P(B) = P(AB)`. This can be generalized to the entire sequence.  
@@ -334,7 +349,7 @@ $$
         & = p(x_1^n)
 \end{align*}$$
 
-
+This is consistent with the intuition presented above!
 
 
 #### STEP-II communicating the interval `[L,H)`
@@ -357,7 +372,7 @@ For example: $Z = \frac{(L+H)}{2}$, i.e. the midpoint of the range/interval.
 - `P = {A: 0.3, B: 0.5, C: 0.2}`
 - `Z = 0.4365` 
 
-<span style="color:purple;">How can it decode the entire input sequence? $X_1^n$.</span>
+<span style="color:purple;">How can it decode the entire input sequence? $x_1^n$.</span>
 
 ### Arithmetic decoding (theoretical)
 
@@ -411,7 +426,9 @@ We can continue this recursive process until we have decoded `n=4` symbols.
 
 1. Notice that the intervals are in exact sync during the encoding and decoding, and that is the key to the lossless-ness of the decoding algorithm.
 
-2. Also note that we do need to mention what the number of encoded symbols is (`n=4` in our example), as the decoder can potentially decode infinite sequence using a single $Z$. So, we need to tell it when to stop the recursive process. 
+2. Also note that we do need to mention what the number of encoded symbols is (`n=4` in our example), as the decoder can potentially decode infinite sequence using a single $Z$. So, we need to tell it when to stop the recursive process. In practice we can inform the decoder about when to stop in two common ways:
+    1. Prepend the length `n` at the start of the bitstream using a fixed length encoding
+    2. Use a special `EOF` symbol in the alphabet, and inform the decoder to stop when it sees the `EOF` symbol. In this case, the `EOF` symbol should have a non-zero but typically small probability in the distribution.
 
 ```py
 Z = 0.4365
@@ -464,7 +481,8 @@ eg: `Z = 0.4365 = b0.01101111101...`
 then the final <span style="color:red;"> `encoded_bitstream = 01101111101...` </span> and then just writing the binary expansion to a file. 
 
 However there is one problem: 
-<span style="color:purple;"> **Quiz-4:** Although our method of writing the binary expansion of $Z$ to file is cute, it might not give us any compression as $Z$'s binary representation can be long, can also have infinite bits. 
+
+<span style="color:purple;"> **Quiz-3:** Although our method of writing the binary expansion of $Z$ to file is cute, it might not give us any compression as $Z$'s binary representation can be long, can also have infinite bits. 
 How can we fix this? </span>
 
 The solution to the problem is quite simple. Instead of communicating the entire binary expansion of $Z$, we truncate the expansion to $k$ bits and communicate this truncated binary string. Let's call the the floating point value corresponding to the truncated binary string as $\hat{Z}$. 
@@ -510,7 +528,7 @@ Z_ext = b0.01101111111011110101..
 ```
 
 
-The **Cond-1** is somewhat obvious, we want the $\hat{Z}$ obtained on truncating $Z$ to $k$ bits, we still lie inside the interval `[L,H)`. Lets now see why the  **Cond 2** is imposed: Lets say Arithmetic coding leads to `Z_hat = b0.011011111`, and thus the final encoded bitarray is `011011111`. Now, in practice arithmetic coded bitstream is always going to be followed by some other bitstream, and so the decoder is going to see this stream like: `01101111111011110101..`. the second condition ensures that, even if the decoder reads in some bits not part of the arithmetic encoding, the resultant floating point value $Z_ext$ will still lie inside the interval `[L, H)`. 
+The **Cond-1** is somewhat obvious, we want the $\hat{Z}$ obtained on truncating $Z$ to $k$ bits, we still lie inside the interval `[L,H)`. Lets now see why the  **Cond 2** is imposed: Lets say Arithmetic coding leads to `Z_hat = b0.011011111`, and thus the final encoded bitarray is `011011111`. Now, in practice arithmetic coded bitstream is always going to be followed by some other bitstream, and so the decoder is going to see this stream like: `01101111111011110101..`. the second condition ensures that, even if the decoder reads in some bits not part of the arithmetic encoding, the resultant floating point value $Z_{ext}$ will still lie inside the interval `[L, H)`. 
 
 With some simple arithmetic, it can be shown that the two conditions together can be written as:
 
@@ -519,7 +537,10 @@ $$ [\hat{Z}, \hat{Z} + 2^{-k}) \in [L,H)$$
 which gives us a simple bound on $k$:
 $$ k \leq \left\lceil {log_2 \frac{1}{(H-L)}} \right \rceil + 1 $$
 
-The key observation here is that shorter the interval, $|H-L|$, the larger $k$ we need to use to truncate $Z$. Using the $k$ computation above, we finally have got our complete Arithmetic coder pseudocode: 
+<span style="color:purple;"> **Quiz-4:** Explain where the condition $ [\hat{Z}, \hat{Z} + 2^{-k}) \in [L,H)$ comes from. As a hint, think about a $k$-bit binary value like $b = 0.b_1b_2b_3\dots b_k$ - what can you say about a value $c=0.b_1b_2b_3\dots b_k c_1c_2\dots$? What is the maximum possible value of $c-b$? </span>
+
+
+The key observation here is that shorter the interval, $|H-L|$, the larger $k$ we need to use to truncate $Z$ (consistent with the basic intuition we presented at the very beginning!). Using the $k$ computation above, we finally have got our complete Arithmetic coder pseudocode: 
 
 
 ```py
@@ -564,14 +585,14 @@ class ArithmeticDecoder:
         # add code to remove additional bits read
 ```
 
-One point to note in the decoding is that, as the decoder might have read in more bits that what the encoder wrote, after decoding all the symbols, the decoder needs to backtrack a bit (otherwise the program processing the next stream is going to falter!)
+One point to note in the decoding is that, as the decoder might have read in more bits that what the encoder wrote, after decoding all the symbols, the decoder needs to backtrack a bit (otherwise the program processing the next stream is going to falter!). Since the decoder will know the decoded sequence and hence the value of $k$, it can easily backtrack the extra bits read.
 
 ### Arithmetic coding compression performance: 
 
 Now that we have discussed the full Arithmetic encoder/decoder, lets try to understand the compression performance of Arithmetic coder. 
 
 Let us start by summarizing what we know:
-- Size of interval $H-L = \log_2{p(x_1^n)}$
+- Size of interval $H-L = p(x_1^n)$
 - $k \leq \log_2 {\frac{1}{H-L}} + 2$
 
 Based on these two properties, it is quite straightforward to see that the codelength for encoding an entire sequence $x_1^n$ using Arithmetic coding is:
@@ -582,7 +603,7 @@ As the optimal number of bits to encode a sequence $x_1^n$ using a distribution 
 
 ~~~admonish note title="Arithmetic coder compression performance"
 
-Given any model/distritbution $p(x)$ for a sequence $x_1^n$, arithmetic coding achieves codelength of 
+Given any model/distribution $p(x)$ for a sequence $x_1^n$, arithmetic coding achieves codelength of 
 $$ l(x_1^n) = k \leq \log_2 \frac{1}{p(x_1^n)} + 2 $$
 
 Also, the average codelength achieved by Arithmetic coding is within $2/n$ bits of the entropy $H(X)$. 
@@ -591,10 +612,7 @@ $$ H(X) \leq \frac{\mathbb{E}[l(X_1^n)]}{n} \leq H(X) + \frac{2}{n}$$
 
 ~~~
 
-It is quite incredible that Arithmetic coding is basically optimal for *any* given distribution $P$. This in a way shifts the complexity in designing compression algorithms from designing codes to finding a distribution/model $P$ which matches the data! This property of Arithmetic coding is also called the **model, entropy coding separation**.
-
-### Arithmetic coding speed performance
-
+It is quite incredible that Arithmetic coding is basically optimal for *any* given distribution $P$. This in a way shifts the complexity in designing compression algorithms from designing codes to finding a distribution/model $P$ which matches the data! This property of Arithmetic coding is also called the **model, entropy coding separation**. This means we can just focus on building good probability models, which could even be adaptive (i.e., the distribution changes as we see more data), and then use Arithmetic coding as a black-box to convert the probabilities to bits efficiently. We will revisit this idea in the upcoming chapters.
 
 ## Arithmetic coding in practice
 
@@ -602,7 +620,7 @@ Now that we have concluded our discussion of the (theoretical) Arithmetic coding
 
 There is one clear practical issue which you might be able to spot from the hint below!
 
-<span style="color:purple;"> **Quiz-8**: What are the practical issues with our Arithmetic encoding/decoding?</span>
+<span style="color:purple;"> **Quiz-5**: What are the practical issues with our Arithmetic encoding/decoding?</span>
 
 Hint -> 
 ```py
@@ -623,7 +641,7 @@ ENCODE: A -> [L,H) = [0.44358,0.44367)
 The key idea is that every time we encode a symbol `s`, we are shrinking the interval `[L,H)`, by the probability of the symbol `P(s)`. Thus, we see that very quickly the interval becomes quite small. For example in the hint above, on encoding `8` symbols, we are already at a place where out interval is `[0.44358,0.44367)`. We quickly see that due to finite bit arithmetic, we are going to run out of bits to represent this interval. So we need to find a way to avoid the interval `[L,H)` from getting too small:
 
 
-<span style="color:purple;"> **Quiz-9**: What can we do to avoid the interval `[L,H)` from getting too small?</span>
+<span style="color:purple;"> **Quiz-6**: What can we do to avoid the interval `[L,H)` from getting too small?</span>
 
 Hint -> 
 ```py
@@ -642,7 +660,9 @@ Rescaled: L=0.7160, H=0.7760, bitarray='01'
 Rescaled: L=0.4320, H=0.5520, bitarray='011'
 ```
 
-Notice that after rescaling our intervals are `L=0.4320, H=0.5520` are much larger that what we started with: `0.429, 0.444`. This can be understood from the fact that, flushing out a `0` is equivalent to setting `L,H` as: `L,H = 2*L,2*H`; while flushing out a `1` is equivalend to `L,H = (L - 0.5)*2, (H - 0.5)*2`. i.e. we are expanding out either the left half (`[0,0.5)`) of the number line or the right half (`[0.5, 1)`) of the number line by `2x`. 
+Notice that after rescaling our intervals are `L=0.4320, H=0.5520` are much larger that what we started with: `0.429, 0.444`. This can be understood from the fact that, flushing out a `0` is equivalent to setting `L,H` as: `L,H = 2*L,2*H`; while flushing out a `1` is equivalend to `L,H = (L - 0.5)*2, (H - 0.5)*2`. i.e. we are expanding out either the left half (`[0,0.5)`) of the number line or the right half (`[0.5, 1)`) of the number line by `2x`. This is also illustrated in the figure below (credit: [YouTube](https://www.youtube.com/watch?v=t8_198HHSfI)):
+
+![img](images/arith_rescaling.png)
 
 Thus, our rescaling operation can be summarized below. 
 ```py
@@ -677,17 +697,31 @@ H = 0.501 = 0.100..b
 
 In this case, we cannot premptively flush-out bits and rescale the range `[L,H)`. This *mid-range rescaling* issues is handled in different ways, by either:
 
-1. If `L=0.499, H = 0.501`, we can setting`H = 0.4999999...` for example, and then apply the usual re-scaling. In this case, we are loosing a bit of compression, as we are reducing the interval size when it is not needed.
+1. If `L=0.499, H = 0.501`, we can setting`H = 0.4999999...` for example, and then apply the usual re-scaling. In this case, we are losing a bit of compression, as we are reducing the interval size when it is not needed. The [range coder variant](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/range_coder.py) implemented in the SCL uses this simple approach.
 
-2. An optimal way to handle the *mid-range rescaling* is to expand the middle interval `[0.25, 0.75)` by 2x `L,H <- 2L - 0.5, 2H - 0.5`. This is a bit non-trivial, but is well explained in these series of lectures on Arithmetic coding. Note that this optimal rescaling is also implemented as part of the [Arithmetic coder in the SCL](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/arithmetic_coding.py)
+2. An optimal way to handle the *mid-range rescaling* is to expand the middle interval `[0.25, 0.75)` by 2x `L,H <- 2L - 0.5, 2H - 0.5`. This is a bit non-trivial, but is well explained in [this YouTube series](https://www.youtube.com/playlist?list=PLE125425EC837021F) of lectures on Arithmetic coding. Note that this optimal rescaling is also implemented as part of the [Arithmetic coder in the SCL](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/arithmetic_coding.py)
 
 3. In practice, it is more efficient to flush out bytes or even words instead of bits. i.e if `L,H` start with the same 8 bits, only then those 8 bits are flushed out. These variants of Arithmetic coding are traditional called *range coding*. One variant of the *range coder* is impplemented in the SCL and can be [accessed here](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/range_coder.py). 
 
+We encourage the reader to study the implementations of both the Arithmetic coder and the Range coder in the SCL to get a better understanding of these practical issues. The implementations are written in a simple and clear manner, and are well commented to enable easy understanding. The code also links to various resources which can be used to understand the implementation better.
+
+### Arithmetic coding computational performance
+
+Let's start with some basic points:
+1. The encoding/decoding complexity is linear in the number of symbols.
+2. We do not need to store any codebook, the codewords are computed on the fly. Hence the memory requirements are quite low. In fact observe we never even need to compute the probability table for the entire sequence $p(x_1^n)$, we can just work with the symbol probabilities $p(x_i)$.
+
+While this all sounds great, there are a few caveats to consider:
+1. The encoding/decoding as presented above involves floating point operations, which can be slow. In practice, integer arithmetic is used to speed up the operations but it is still significantly slower than the table lookup based implementations of Huffman coding.
+2. For larger alphabet size, there is dependency on the alphabet size $|\mathcal{X}|$ especially during decoding since we need to identify the interval. In practice, this can be mitigated by using data structures like Fenwick trees or binary search, which can reduce the complexity to $O(\log |\mathcal{X}|)$ per symbol.
+3. Another complication happens with large alphabet sizes and finite precision arithmetic, which can lead to underflows. This can be mitigated by using techniques like scaling or renormalization (discussed above) which further complicate the implementation. This is the reason many uses of arithmetic coding in practice (e.g., in image and video codecs) are limited to binary alphabets, such as [CABAC](https://en.wikipedia.org/wiki/Context-adaptive_binary_arithmetic_coding) in H.264 and H.265 video coding standards. Of course, the actual alphabet needs to be mapped to binary symbols before encoding which can done in various ways.
+4. As discussed above, in many cases byte-level flushing (range coder) is used instead of bit-level flushing, which can lead to some loss in compression performance while being faster.
+
 ## Summary
 
-To summarize, Arithmetic encoding had a profound impact on the compression world due to its optimality, and made it possibly to work on much more complex models such as adaptive i.i.d models, and even non-iid k-markov models (as we will see in future lectures). 
+To summarize, Arithmetic encoding has had a profound impact on the compression world due to its optimality, and made it possible to work on much more complex models such as adaptive i.i.d models, and even non-iid k-markov models (as we will see in future lectures). 
 
-the only drawback of Arithmetic coding is its speed (especially when compared with Huffman coding)
+The only drawback of Arithmetic coding is its speed (especially when compared with Huffman coding)
 
 | Codec       | Encode speed | Decode speed | compression | 
 | ----------- | -----------  | ------------ | ----------- |
