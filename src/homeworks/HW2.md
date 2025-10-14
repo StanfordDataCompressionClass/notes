@@ -1,25 +1,25 @@
-# EE274 (Fall 23): Homework-2
+# EE274 (Fall 25): Homework-2
 
 - **Focus area:** Lossless Compression
-- **Due Date:** Nov 1, midnight (11:59 PM)
+- **Due Date:** Oct 28, midnight (11:59 PM)
 - **Weightage:** 15%
-- **Total Points:** 110
+- **Total Points:** 115 (Written 85 + Programming 30)
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
-  - For written part: [HW2-Written](https://www.gradescope.com/courses/625620/assignments/3532290/)
-  - For programming part: [HW2-Code](https://www.gradescope.com/courses/625620/assignments/3532252/)
+  - For written part (85 points): [HW2-Written](https://www.gradescope.com/courses/1140353/assignments/6957549)
+  - For programming part (30 points): [HW2-Code](https://www.gradescope.com/courses/1140353/assignments/6957544)
 
 *Please ensure that you follow the [Stanford Honor Code](https://communitystandards.stanford.edu/policies-guidance/honor-code) while doing the homework. You are encouraged to discuss the homework with your classmates, but you should write your own solutions and code. You are also encouraged to use the internet to look up the syntax of the programming language, but you should not copy-paste code from the internet. If you are unsure about what is allowed, please ask the instructors.* 
 
 **Note for the coding part**<br>
-Before starting the coding related HW1 questions ensure following instructions from HW1 are followed:
+Before starting the coding related questions ensure following instructions from HW1 are followed:
 - Ensure you are using the latest version of the SCL `EE274/HWs` GitHub branch. To ensure run the following command in the SCL repository you cloned from HW1:
    ```sh
    git status
    ```   
-  You should get an output saying `On branch EE274_Fall23/HWs`. If not, run the following command to switch to the correct branch:
+  You should get an output saying `On branch EE274_Fall25/HWs`. If not, run the following command to switch to the correct branch:
    ```sh
-   git checkout EE274_Fall23/HWs
+   git checkout EE274_Fall25/HWs
    ```
   Finally ensure you are on the latest commit by running:
    ```sh
@@ -39,16 +39,17 @@ Before starting the coding related HW1 questions ensure following instructions f
 
 ### Q1: Camping Trip (*20 points*)
 
-During one of the camping trips, Pulkit was given $n$ rope segments of lengths $l_1, l_2,\ldots, l_n$ by Kedar, and was asked to join all the ropes into a single long segment of length $\sum_{i=1}^n l_i$. Pulkit can only join two ropes at a time and the "effort" in joining ropes $i, j$ using a knot is $l_i + l_j$. Pulkit is lazy and would like to minimize his "effort" to join all the segments together.  
+During one of the camping trips, Pulkit was given $n$ rope segments of lengths $l_1, l_2,\ldots, l_n$ by Kedar, and was asked to join all the ropes into a single long segment of length $\sum_{i=1}^n l_i$. Pulkit can only join two ropes at a time and the "effort" in joining ropes with length $l_i$ and $l_j$ using a knot is $l_i + l_j$. Pulkit is lazy and would like to minimize his "effort" to join all the segments together. 
 
+For instance, consider $n=3$, and $l_1, l_2, l_3 = 4, 5 ,6$. One could first combine $l_1$ and $l_2$ leading to an effort of $4+5=9$, followed by combining $l_1+l_2$ and $l_3$ with effort of $9+6=15$. This corresponds to a total effort of $9+15=24$. On the other hand, if one combines $l_2$ and $l_3$ first, that would lead to a first step cost of $5+6=11$, and total effort of $11+15=26$. Thus the first approach in this example would lead to a lower total effort.
 1. [5 points] Do you see any parallels between the problem and one of the prefix-free codes you have learnt about? Please justify your answer.
-2. [5 points] Let $E_{opt}$ be the optimal (minimal) value for the effort required to join all the segments. Without solving the problem, can Pulkit get an estimate of what the $E_{opt}$ would be? Leaving your answer in terms of inequalities is fine.
+2. [5 points] Let $E_{opt}$ be the optimal (minimal) value for the effort required to join all the segments. Without solving the problem, can Pulkit get an estimate of what the $E_{opt}$ would be? Provide a lower bound and an upper bound as a function of the rope lengths. 
 3. [10 points] Implement the function `compute_minimum_effort()` in the file `hw2_p1.py`.  
-HINT: You may use one of the prefix-free code implementations in the SCL Library
+HINT: One way to solve this is to use one of the prefix-free code implementations in the SCL Library. You may import it under TODO section.
 
 ### Q2: Generating random non-uniform data (*25 points*)
 
-Consider the problem of sampling a non-uniform discrete distribution, when you given samples from a uniform distribution. 
+Consider the problem of sampling a non-uniform discrete distribution, given samples from a uniform distribution. 
 
 Let's assume that we are given a single sample of random variable `U`, uniformly distributed in the unit interval `[0,1)` (e.g. `U = numpy.random.rand()`). The goal is to generate samples from a non-uniform discrete distribution $P$. We will assume that $P$ is a *rational distribution*. i.e. for any symbol $s$, $P(s) = n_s/M$, where $n_s, M$ are integers. 
 
@@ -79,11 +80,11 @@ We learnt a few properties of conditional entropy in class:
 
 We will use these properties to show some other useful properties about conditional entropy and solve some fun problems!
 
-1. [5 points] Let $f(X) = Z$ be an arbitrary function which maps $X \in \mathcal{X}$ to a discrete set $Z \in \mathcal{Z}$. Then show that: $H(f(X)|X) = 0$. Can you intuitively explain why this is the case? 
+1. [5 points] Let $f(X) = Z$ be an arbitrary function which maps $X \in \mathcal{X}$ to a discrete set $Z \in \mathcal{Z}$. Then show that: $H(f(X)|X) = 0$. Can you intuitively explain why this is the case? Make sure to provide both theoretical proof and intuitive explanation.
 
-2. [5 points] Show that $H(f(X)) \leq H(X)$, i.e. processing the data in any form is just going to reduce the entropy. Also, show that the equality holds if the function $f$ is invertible, i.e. if there exists a function $g$ such that $g(f(X)) = X$. Can you intuitively explain why this is the case?
+2. [5 points] Show that $H(f(X)) \leq H(X)$, i.e. processing the data in any form is just going to reduce the entropy. Also, show that the equality holds if the function $f$ is invertible, i.e. if there exists a function $g$ such that $g(f(X)) = X$. Can you intuitively explain why this is the case? Make sure to provide both theoretical proof and intuitive explanation.
 
-3. [4 points] In the HW1 of the 2023 edition of EE274, Pulkit and Shubham had an assignment to compress the Sherlock novel (lets call it $x_{orig}$). Pulkit computed the empirical `0th` order distribution of the letters and used those with Arithmetic coding to compress $x_{orig}$, and received average codelength $L_1$. While working on the assignment, Shubham accidentally replaced all letters with lowercase (i.e `A -> a`, `B -> b` etc.). Lets call this modified text $x_{lowercase}$. Shubham compressed $x_{lowercase}$ with the same algorithm as Pulkit, and got average codelength $L_2$. Do you expect $L_1 \geq L_2$, or $L_2 \geq L_1$. Justify based on properties of Arithmetic coding and `Q3.2`.
+3. [4 points] In the HW1 of the 2025 edition of EE274, Pulkit and Shubham had an assignment to compress the Sherlock novel (let's call it $x_{orig}$). Pulkit computed the empirical `0th` order distribution of the letters and used those with Arithmetic coding to compress $x_{orig}$, and received average codelength $L_1$. While working on the assignment, Shubham accidentally replaced all letters with lowercase (i.e `A -> a`, `B -> b` etc.). Let's call this modified text $x_{lowercase}$. Shubham compressed $x_{lowercase}$ with the same algorithm as Pulkit, and got average codelength $L_2$. Do you expect $L_1 \geq L_2$, or $L_2 \geq L_1$. Justify based on properties of Arithmetic coding and `Q3.2`.
 
 4. [6 points] We say that random variables $X_1, X_2, \ldots, X_n$ are pairwise independent, if any pair of random variables $(X_i,X_j), i \neq j$ are independent. Let $X_1, X_2, X_3$ be three pairwise independent random variables, identically distributed as $Ber({1\over 2})$. Then show that:
 
@@ -113,7 +114,7 @@ The encoder maintains a single state, which we increase when we encode a symbol.
 
 3. [5 points] Now, implement your decoder in `hw2_p4.py` as `UniformDistDecoder`. Specifically, you just need to implement `decode_op` function. Ensure that your code passes the `test_uniform_coder` test in `hw2_p4.py`. Feel free to add more test cases.
 
-Now, we want to implement a compressor which works well for non-uniform data. We will use the base encode/decode functions from `UniformDistEncoder`, `UniformDistDecoder` and approach this problem from a new perspective. In class, we learnt $H(X,Z) = H(X) + H(Z|X)$ for any two random-variables $X$ and $Z$. We will use this property to encode the data $X$. Note that this identity implies
+Now, we want to implement a compressor which works well for non-uniform data. We will use the base encode/decode functions from `UniformDistEncoder`, `UniformDistDecoder` and approach this problem from a new perspective. In class, we learned $H(X,Z) = H(X) + H(Z|X)$ for any two random-variables $X$ and $Z$. We will use this property to encode the data $X$. Note that this identity implies
 $$ H(X) = H(X,Z) - H(Z|X)$$
 
 Interpreting this intuitively, it should be possible to encode data `X` in following two steps:
@@ -122,7 +123,7 @@ a. Encode `X,Z` together using a joint distribution `P(X,Z)`. Assuming an ideal 
 
 b. Decode `H(Z|X)` from the encoded state using distribution `P(Z|X)`. Again, assuming an ideal compressor, this lets us _recover_ `H(Z|X)` bits. 
 
-Step b gives you an intuition for the question name -- `bits-back`! Here `Z` is an additional random variable typically latent variable (latent means hidden).
+Step b gives you an intuition for the question name -- `bits-back`! Here `Z` is an additional random variable, typically latent variable (latent means hidden).
 Be careful while reading this step, as it is not a compressor for `X` but a decompressor for `Z|X`! This compressor assumes knowledge of `X` and decodes `Z` from the encoded state. 
 More concretely, we will have an encoder-decoder pair which will work as follows:
 
@@ -159,7 +160,7 @@ i.e. `X` is the symbol `s` such that `Z` lies in the interval `[cumul(s), cumul(
 
 For example if `Z = 4`, then `X = B` as `cumul(B) = 2 <= 4 < 6 = cumul(B) + freq_list[B]`.
 
-4. [2 points] What are the values of $H(X), H(Z), H(X|Z)$ in the above example? 
+4. [2 points] What are the values of $H(X), H(Z), H(X|Z)$ in the above example?
 
 5. [3 points] What is the distribution and entropy of $Z$ given $X$, i.e. $P(Z|X)$ and $H(Z|X=x)$ in the above example? Note that $H(Z|X=x)$ is a function of `x` and hence you need to report it for each symbol `x` in the alphabet `A,B,C`.
 
@@ -206,8 +207,16 @@ def rans_base_decode_step(x):
 
 10. [5 points] Justify that `decode_symbol` in `NonUniformDistEncoder` performs the same operation as above.
 
-Therefore, bits-back coding is equivalent to rANS! Thinking again in terms of $H(X) = H(X,Z) - H(Z|X)$, it allows us to interpret rANS in terms of latent variables $Z$ in a more intuitive way. This question was highly motivated by the IT-Forum talk by James Townsend in 2022. Check out the [YouTube video](https://www.youtube.com/watch?v=dHwfgw-ZKKA) if you are interested to learn more!
+Therefore, bits-back coding is equivalent to rANS! Thinking again in terms of $H(X) = H(X,Z) - H(Z|X)$, it allows us to interpret rANS in terms of latent variables $Z$ in a more intuitive way. This question was highly motivated by the IT-Forum talk by James Townsend in 2022.
    
+### Q5: HW2 Feedback *(5 points)* 
+Please answer the following questions, so that we can adjust the difficulty/nature of the problems for the next HWs.
+
+1. How much time did you spent on the HW in total?
+2. Which question(s) did you enjoy the most? 
+3. Are the programming components in the HWs helping you understand the concepts better?
+4. Did the HW2 questions complement the lectures?
+5. Any other comments?
 
 ### Submission Instructions
 Please submit both the written part and your code on Gradescope in their respective submission links. **We will be using both autograder and manual code evaluation for evaluating the coding parts of the assignments.** You can see the scores of the autograded part of the submissions immediately. For code submission ensure following steps are followed for autograder to work correctly:
