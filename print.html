@@ -4858,171 +4858,124 @@ Note: To avoid autograder errors, ensure that the directory structure is maintai
 <p>Your mentor will work with you on setting expectations, and helping you review the report/code before the submission.</p>
 <h2 id="project-suggestions"><a class="header" href="#project-suggestions">Project Suggestions</a></h2>
 <p>The list of projects from previous iterations of the course can be found <a href="https://docs.google.com/spreadsheets/d/1Ooxk-3b4kDvAxSOX5jaITWVCkMp48eFG522fU8_UdW8/edit?usp=sharing">here</a>.</p>
-<!--Next, we suggest a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!
-
-
-**1. [BWT](https://en.wikipedia.org/wiki/Burrows–Wheeler_transform): Burrows Wheeler Transform for searching over compressed text**
-
-*Potential Mentor*: Pulkit
-
-We will briefly touch the world of BWT based compressors in HW3. The project will go beyond HW3 and implement fast and efficient versions of BWT transforms. It will also explore how to use BWT for searching over compressed data.
-
-**2. [CTW](https://en.wikipedia.org/wiki/Context_tree_weighting): Context Tree Weighting**
-
-*Potential Mentor*: Shubham
-
-We learned that `k-th` order probability model can be used with arithmetic coding to achieve good compression. However, the larger the `k`, the slower the adaptability of the model. CTW tries to solve this problem by "mixing" the distributions of different order efficiently. This project will involve understanding the CTW algorithm, understanding why CTW has such good theoretical properties (Rissanen lower bound etc.) and implementing it in SCL.
-
-A few useful links: [ppt](https://docs.google.com/presentation/d/1LUbo-6mLpYTwcELOLlRR4ohku9j2kCiQj_2sYPh0uWA/edit#slide=id.g5eaf3d9f0e_0_75), [ctw-cpp-implementation](https://github.com/fumin/ctw), [original paper](https://www.cs.cmu.edu/~aarti/Class/10704_Fall16/CTW.pdf), [lecture notes](https://web.stanford.edu/class/ee477/lectures2011/lecture4.pdf)
-
-
-**3. [Bits-back coding](https://bjlkeng.github.io/posts/lossless-compression-with-latent-variable-models-using-bits-back-coding/) and compression of data with permutation invariance**
-
-*Potential Mentor*: Pulkit  
-
-
-We learnt about `rANS` in class and will learn about `bits-back coding` in HW2. Recent [paper](https://arxiv.org/abs/2107.09202) and [implementation](https://github.com/facebookresearch/multiset-compression) show that it is possible to have a very general method which allows saving bits by not saving the order in the data (utilizing permutation invariance). This uses bits-back coding underneath. This project will involve understanding and re-implementing this method in SCL.
-
-**4. Tabular data compression using [Chow-Liu trees](https://en.wikipedia.org/wiki/Chow–Liu_tree)** 
-
-*Potential Mentor*: Shubham
-
-Tabular data is quite commonly found in data logs, log files, etc. and is typically compressed as-is using gzip. A recent [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5641593/) proposes a way to exploit the dependencies between columns to improve compression. The goal of the project is to understand the paper, and implement an equivalent variant using SCL. This project will involve implementing and testing the performance of various existing compressors on variety of real life tabular datasets. 
-
-
-**5. Adaptive Huffman codes, and other variants**
-
-*Potential Mentor*: Pulkit
-
-Huffman coding algorithm is a very useful and versatile algorithm. This project explores some variants of the standard algorithm to improve its performance. We will explore two of such variations in this project. In the first part of the project, we will implement Depth-limited huffman coding as a part of SCL ([original paper](https://www.ics.uci.edu/~dan/pubs/LenLimHuff.pdf), [Charles Bloom's blog](http://cbloomrants.blogspot.com/2010/07/07-03-10-length-limitted-huffman-codes.html)).
-
-The second part of the project would entail implementing [Dynamic Huffman tree](https://en.wikipedia.org/wiki/Adaptive_Huffman_coding) as part of SCL. Dynamic Huffman coding deals with the question of how can we update huffman tree as the source distribution changes in practice.
-
-
-**6. PPM, PPMD**
-
-*Potential Mentor*: Shubham
-
-[PPM: prediction by partial matching](https://en.wikipedia.org/wiki/Prediction_by_partial_matching) is a very interesting algorithm for adaptive coding based on context matching. This project involves understanding and implementing this idea.
-
-**7. LZ77 optimized implementation**
-
-*Potential Mentor*: Shubham
-
-The most widely used general purpose compressors (gzip, zstd) are based on LZ77. The SCL implementation of LZ77 uses a simplistic greedy parsing strategy and uses static codes for encoding  the match lengths and offsets. In addition, the SCL LZ77 doesn’t have a sliding window or a chained-hash implementation. In this project, we will work towards creating a better LZ77 implementation in SCL based on existing works such as gzip, zstd, LZMA as well as other resources such as this [blog post](https://glinscott.github.io/lz/index.html) by Glinn Scott. After the implementation is finished, we will perform experiments to better analyze how the performance varies with the parameters.
-
-
-**8. LZ78/LZW in SCL**
-
-*Potential Mentor*: Shubham
-
-In the class we discussed the LZ77 compression algorithm and its practical implementation. There are other universal compressors which are quite interesting and have as good/better properties than LZ77. This project involves understanding and implementing LZ78 and/or Lempel-Ziv-Welsh (LZW) algorithm in SCL.
-
-
-**9. Alias method for speeding up rANS**  
-
-*Potential Mentor: Pulkit*
-
-rANS decoding is bottle-necked by the binary search of the `slot` (as we learnt in the class). The alias method can be used for speeding this part up! This project will involve understanding the alias method, and implementing it in SCL for speeding up rANS decoding. For reference, see blog by Fabian Giesen [here](https://fgiesen.wordpress.com/2014/02/18/rans-with-static-probability-distributions/).
-
-
-**10. Recompression**
-
-*Potential Mentor: Shubham*
-
-In many scenarios we use suboptimal compression formats like gzip or jpeg due to legacy support and compatibility reasons. Significant storage savings can be obtained if the data were to be stored in a modern optimized format. However, there is often a requirement to be able to exactly recover the original compressed file, which might not be possible with a simple transcoding approach. In this project we will explore the idea of recompression, which is a technique to compress a file in a new format while preserving the original compressed file. The project will involve implementing a known or novel recompression technique and understanding the invertibility of the recompression. Some existing recompression works include [brunsli](https://github.com/google/brunsli) and [lepton](https://github.com/dropbox/lepton) for JPEG, and [precomp-cpp](https://github.com/schnaader/precomp-cpp) for gzip.
-
-
-**11. Hardware acceleration for compression**
-
-*Potential Mentor*: Shubham
-
-Many of the widely used compression algorithms rely heavily on hardware acceleration, e.g., utilizing SIMD and AVX2 instructions on CPU. In addition, there is much interest in exploring the use of GPUs to accelerate compression. This project will first identify a particular existing or novel usage of hardware acceleration in a compression setting, followed by implementation of this acceleration. We will demonstrate the speedup obtained vs. an efficient implementation without acceleration and explain the core ideas behind the speedup. Some example optimized code bases include [Zstd](https://github.com/facebook/zstd), [FSE](https://github.com/Cyan4973/FiniteStateEntropy), [BSC](https://github.com/IlyaGrebnov/libbsc) and [DietGPU](https://github.com/facebookresearch/dietgpu). The recent release of Zstd also enables hardware matchfinding, e.g., see [this Intel announcement](https://community.intel.com/t5/Blogs/Tech-Innovation/Artificial-Intelligence-AI/Intel-QuickAssist-Technology-Zstandard-Plugin-an-External/post/1509818).
-
-**12. LLM based compression**
-
-*Potential Mentor*: Shubham
-
-With the new wave of LLMs, there have been multiple works looking at how they can be utilized for compression, including [ts_zip](https://bellard.org/ts_server/ts_zip.html), [LLMZip](https://github.com/vcskaushik/LLMzip) and [this paper](https://aps.arxiv.org/abs/2309.10668). The project can involve identifying a data domain, developing an end-to-end compressor, and evluating with different size LLM models.
-
-**13. Understanding and implementing tANS as used in Zstd**
-
-*Potential Mentor*: Pulkit/Shubham
-
-Zstd heavily relies on the [FSE library](https://github.com/Cyan4973/FiniteStateEntropy) by the same author (Yann Collet) for achieving lightning fast and efficient entropy coding. This project will focus on understand and implementing aspects of FSE in SCL, based on the library itself and [Yann's blog](https://fastcompression.blogspot.com/).
-
-**14. Ultra low bit rate image compression via text**
-
-*Potential Mentor*: Tsachy 
-
-We'll explore the use of text-to-image generative models for image compression at extremely low bit rates. The project will involve understanding and building on the framework in the paper [Text + Sketch: Image Compression at Ultra Low Rates](https://arxiv.org/pdf/2307.01944.pdf). Also another relevant reading is [Toward Textual Transform Coding](https://arxiv.org/abs/2305.01857).
-
-**15. Ultra low bit rate video compression via text**
-
-*Potential Mentor*:  Pulkit/Tsachy
-
-We'll explore the use of text-to-video generative models for video compression at extremely low bit rates. Relevant readings are:
-(i) [Toward Textual Transform Coding](https://arxiv.org/abs/2305.01857)
-(ii) [Txt2Vid: Ultra-Low Bitrate Compression of Talking-Head Videos via Text](https://arxiv.org/abs/2106.14014)
-
-
-### Open Ended project ideas
-
-
-The ideas below are not fleshed out yet, but project groups can talk to the instructors to come up with a concrete idea: 
-
-
-1. Understanding and implementing different image/video perceptual metrics in SCL (eg: SSIM, MS-SSIM, VMAF, etc.).
-
-
-    *Potential Mentor: Pulkit*
-
-
-2. Implement a lossless image compressor beating PNG in SCL. (NOTE: there are compressors such as JPEG-XL, AVIF, which already do this, but you can go beyond those!) 
-
-
-   *Potential Mentor: Pulkit*
-
-
-3. Attempt the CLIC image compression challenge! (a bit more challenging): [http://compression.cc/tasks/](http://compression.cc/tasks/)
-
-    *Potential Mentor: Pulkit*
-
-
-4. *Joint image compression:* Often very similar images are stored (e.g., same scene captured twice from slightly different angles) but are compressed independently of each other. In this project we explore the possibility of better compression by jointly compressing the images (one idea could be to stitch them into a video and use video compression algorithms). Find/generate a suitable dataset and implement an algorithm (lossless or lossy). Demonstrate the savings achieved by joint vs. individual compression.
-
-
-    *Potential Mentor: Tsachy/Pulkit*
-
-
-5. Compression can be used to estimate entropy of a random variable. In this project we will explore the idea of using compression to estimate entropy of a random variable. We will implement a simple compression algorithm and use it to estimate entropy of a random variable. We will then compare the performance of this algorithm with other entropy estimation techniques and/or use it for a practical application such as anomaly detection and/or prediction in high-dimensional datasets via compression in a dataset you care about. 
-
-
-    *Potential Mentor: Tsachy/Pulkit*
-
-
-6. NN-based lossy compressors vs. more traditional lossy compressors vs. the fundamental limits. Comparison between recent NN-based lossy compressors and more traditional ones based on vector quantization in terms of rate-distortion-complexity tradeoffs, experimenting on simulated data for which we know and can compare to the fundamental limits.  
-
-
-   *Potential Mentor: Tsachy/Pulkit*
-
-
-7. Lossy compression of text under a meaningful distortion measure. Explore achievable rate distortion tradeoffs and/or fundamental limits in this space. 
-
-
-   *Potential Mentor: Tsachy/Shubham*
-
-
-8. Neural audio compression: explore the recent work by Meta using neural nets for audio compression.  
-
-    *Potential Mentor: Tsachy*
-
-
-9. *Genome in a tweet:* The question to answer is can we compress a child's genome in a single tweet (~280 bytes) assuming side-information of the genomes of their parents is available in a tweet?. The project will try to answer this question theoretically, and practically by implementing a compressor. The project can also explore practically implementing ideas from distributed compression.
-
-    *Potential Mentor*: Shubham
-
--->
+<p>Next, we suggest a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!</p>
+<p><strong>1. Domain-specific compression with <a href="https://github.com/facebook/openzl">OpenZL</a></strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>OpenZL is a recent data compression framework for domain-specific data, in particular tabular data, structured data, logging data and databases/Parquet files. The framework supports parsing of the data into columnar format, applying various transformations, and applying general-purpose compressors like zstd or Huffman. In the project, the student will first understand OpenZL and identify a particular dataset of interest. Then they will work on finding a good configuration for OpenZL to get the best compression for the dataset of interest. The findings will include the optimal configuration, the compression ratio achieved, and various tradeoffs in compression ratio vs. speed. This project is a great opportunity for learning about lossless domain-specific compression, and is closely aligned with various compression practices in industry.</p>
+<p><strong>2. <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">BWT</a>: Burrows Wheeler Transform for searching over compressed text</strong></p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+<p>We will briefly touch the world of BWT based compressors in HW3. The project will go beyond HW3 and implement fast and efficient versions of BWT transforms. It will also explore how to use BWT for searching over compressed data.</p>
+<p><strong>3. <a href="https://en.wikipedia.org/wiki/Context_tree_weighting">CTW</a>: Context Tree Weighting</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>We learned that <code>k-th</code> order probability model can be used with arithmetic coding to achieve good compression. However, the larger the <code>k</code>, the slower the adaptability of the model. CTW tries to solve this problem by "mixing" the distributions of different order efficiently. This project will involve understanding the CTW algorithm, understanding why CTW has such good theoretical properties (Rissanen lower bound etc.) and implementing it in SCL.</p>
+<p>A few useful links: <a href="https://docs.google.com/presentation/d/1LUbo-6mLpYTwcELOLlRR4ohku9j2kCiQj_2sYPh0uWA/edit#slide=id.g5eaf3d9f0e_0_75">ppt</a>, <a href="https://github.com/fumin/ctw">ctw-cpp-implementation</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10704_Fall16/CTW.pdf">original paper</a>, <a href="https://web.stanford.edu/class/ee477/lectures2011/lecture4.pdf">lecture notes</a></p>
+<p><strong>4. <a href="https://bjlkeng.github.io/posts/lossless-compression-with-latent-variable-models-using-bits-back-coding/">Bits-back coding</a> and compression of data with permutation invariance</strong></p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+<p>We learnt about <code>rANS</code> in class and will learn about <code>bits-back coding</code> in HW2. Recent <a href="https://arxiv.org/abs/2107.09202">paper</a> and <a href="https://github.com/facebookresearch/multiset-compression">implementation</a> show that it is possible to have a very general method which allows saving bits by not saving the order in the data (utilizing permutation invariance). This uses bits-back coding underneath. This project will involve understanding and re-implementing this method in SCL.</p>
+<p><strong>5. Tabular data compression using <a href="https://en.wikipedia.org/wiki/Chow%E2%80%93Liu_tree">Chow-Liu trees</a></strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>Tabular data is quite commonly found in data logs, log files, etc. and is typically compressed as-is using gzip. A recent <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5641593/">paper</a> proposes a way to exploit the dependencies between columns to improve compression. The goal of the project is to understand the paper, and implement an equivalent variant using SCL. This project will involve implementing and testing the performance of various existing compressors on variety of real life tabular datasets.</p>
+<p><strong>6. Adaptive Huffman codes, and other variants</strong></p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+<p>Huffman coding algorithm is a very useful and versatile algorithm. This project explores some variants of the standard algorithm to improve its performance. We will explore two of such variations in this project. In the first part of the project, we will implement Depth-limited huffman coding as a part of SCL (<a href="https://www.ics.uci.edu/~dan/pubs/LenLimHuff.pdf">original paper</a>, <a href="http://cbloomrants.blogspot.com/2010/07/07-03-10-length-limitted-huffman-codes.html">Charles Bloom's blog</a>).</p>
+<p>The second part of the project would entail implementing <a href="https://en.wikipedia.org/wiki/Adaptive_Huffman_coding">Dynamic Huffman tree</a> as part of SCL. Dynamic Huffman coding deals with the question of how can we update huffman tree as the source distribution changes in practice.</p>
+<p><strong>7. PPM, PPMD</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p><a href="https://en.wikipedia.org/wiki/Prediction_by_partial_matching">PPM: prediction by partial matching</a> is a very interesting algorithm for adaptive coding based on context matching. This project involves understanding and implementing this idea.</p>
+<p><strong>8. LZ77 optimized implementation</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>The most widely used general purpose compressors (gzip, zstd) are based on LZ77. The SCL implementation of LZ77 uses a simplistic greedy parsing strategy and uses static codes for encoding  the match lengths and offsets. In addition, the SCL LZ77 doesn’t have a sliding window or a chained-hash implementation. In this project, we will work towards creating a better LZ77 implementation in SCL based on existing works such as gzip, zstd, LZMA as well as other resources such as this <a href="https://glinscott.github.io/lz/index.html">blog post</a> by Glinn Scott. After the implementation is finished, we will perform experiments to better analyze how the performance varies with the parameters.</p>
+<p><strong>9. LZ78/LZW in SCL</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>In the class we discussed the LZ77 compression algorithm and its practical implementation. There are other universal compressors which are quite interesting and have as good/better properties than LZ77. This project involves understanding and implementing LZ78 and/or Lempel-Ziv-Welsh (LZW) algorithm in SCL.</p>
+<p><strong>10. Alias method for speeding up rANS</strong></p>
+<p><em>Potential Mentor: Pulkit</em></p>
+<p>rANS decoding is bottle-necked by the binary search of the <code>slot</code> (as we learnt in the class). The alias method can be used for speeding this part up! This project will involve understanding the alias method, and implementing it in SCL for speeding up rANS decoding. For reference, see blog by Fabian Giesen <a href="https://fgiesen.wordpress.com/2014/02/18/rans-with-static-probability-distributions/">here</a>.</p>
+<p><strong>11. Recompression</strong></p>
+<p><em>Potential Mentor: Shubham</em></p>
+<p>In many scenarios we use suboptimal compression formats like gzip or jpeg due to legacy support and compatibility reasons. Significant storage savings can be obtained if the data were to be stored in a modern optimized format. However, there is often a requirement to be able to exactly recover the original compressed file, which might not be possible with a simple transcoding approach. In this project we will explore the idea of recompression, which is a technique to compress a file in a new format while preserving the original compressed file. The project will involve implementing a known or novel recompression technique and understanding the invertibility of the recompression. Some existing recompression works include <a href="https://github.com/google/brunsli">brunsli</a> and <a href="https://github.com/dropbox/lepton">lepton</a> for JPEG, and <a href="https://github.com/schnaader/precomp-cpp">precomp-cpp</a> for gzip.</p>
+<p><strong>12. Hardware acceleration for compression</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>Many of the widely used compression algorithms rely heavily on hardware acceleration, e.g., utilizing SIMD and AVX2 instructions on CPU. In addition, there is much interest in exploring the use of GPUs to accelerate compression. This project will first identify a particular existing or novel usage of hardware acceleration in a compression setting, followed by implementation of this acceleration. We will demonstrate the speedup obtained vs. an efficient implementation without acceleration and explain the core ideas behind the speedup. Some example optimized code bases include <a href="https://github.com/facebook/zstd">Zstd</a>, <a href="https://github.com/Cyan4973/FiniteStateEntropy">FSE</a>, <a href="https://github.com/IlyaGrebnov/libbsc">BSC</a> and <a href="https://github.com/facebookresearch/dietgpu">DietGPU</a>. The recent release of Zstd also enables hardware matchfinding, e.g., see <a href="https://community.intel.com/t5/Blogs/Tech-Innovation/Artificial-Intelligence-AI/Intel-QuickAssist-Technology-Zstandard-Plugin-an-External/post/1509818">this Intel announcement</a>.</p>
+<p><strong>13. LLM based compression</strong></p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>With the new wave of LLMs, there have been multiple works looking at how they can be utilized for compression, including <a href="https://bellard.org/ts_server/ts_zip.html">ts_zip</a>, <a href="https://github.com/vcskaushik/LLMzip">LLMZip</a> and <a href="https://aps.arxiv.org/abs/2309.10668">this paper</a>. The project can involve identifying a data domain, developing an end-to-end compressor, and evluating with different size LLM models.</p>
+<p><strong>14. Understanding and implementing tANS as used in Zstd</strong></p>
+<p><em>Potential Mentor</em>: Pulkit/Shubham</p>
+<p>Zstd heavily relies on the <a href="https://github.com/Cyan4973/FiniteStateEntropy">FSE library</a> by the same author (Yann Collet) for achieving lightning fast and efficient entropy coding. This project will focus on understand and implementing aspects of FSE in SCL, based on the library itself and <a href="https://fastcompression.blogspot.com/">Yann's blog</a>.</p>
+<p><strong>15. Ultra low bit rate image compression via text</strong></p>
+<p><em>Potential Mentor</em>: Tsachy</p>
+<p>We'll explore the use of text-to-image generative models for image compression at extremely low bit rates. The project will involve understanding and building on the framework in the paper <a href="https://arxiv.org/pdf/2307.01944.pdf">Text + Sketch: Image Compression at Ultra Low Rates</a>. Also another relevant reading is <a href="https://arxiv.org/abs/2305.01857">Toward Textual Transform Coding</a>.</p>
+<p><strong>16. Ultra low bit rate video compression via text</strong></p>
+<p><em>Potential Mentor</em>:  Pulkit/Tsachy</p>
+<p>We'll explore the use of text-to-video generative models for video compression at extremely low bit rates. Relevant readings are:
+(i) <a href="https://arxiv.org/abs/2305.01857">Toward Textual Transform Coding</a>
+(ii) <a href="https://arxiv.org/abs/2106.14014">Txt2Vid: Ultra-Low Bitrate Compression of Talking-Head Videos via Text</a></p>
+<h3 id="open-ended-project-ideas"><a class="header" href="#open-ended-project-ideas">Open Ended project ideas</a></h3>
+<p>The ideas below are not fleshed out yet, but project groups can talk to the instructors to come up with a concrete idea:</p>
+<ol>
+<li>
+<p>Rate-Distortion Optimal Compression for Video Embeddings</p>
+<p><em>Potential Mentor</em>: Pumiao Yan (Alumna of Tsachy's group)</p>
+<p>Video understanding systems store high-dimensional embeddings (512-768 dims) for every frame, creating massive storage and retrieval costs. This project applies rate-distortion theory to find the optimal compression of video embeddings that minimizes storage (rate) while preserving semantic search quality (minimizing distortion). The key twist: unlike traditional rate-distortion where distortion measures pixel-level reconstruction error, we define distortion as the loss in retrieval accuracy—how well can compressed embeddings still match relevant queries? You’ll implement a learned compression scheme using variational autoencoders, where the rate R = I(X;Z) (mutual information between original and compressed embeddings) and distortion D = task performance degradation. By varying the rate-distortion tradeoff parameter β, you’ll trace out the operational R-D curve and compare it to theoretical bounds derived from Shannon’s rate-distortion theorem. This directly connects to EE274's coverage of lossy source coding, achieving 8x compression (512 → 64 dims) while maintaining video search quality.</p>
+</li>
+<li>
+<p>Multi-Resolution Semantic Pyramids for Progressive Video Retrieval</p>
+<p><em>Potential Mentor</em>: Pumiao Yan (Alumna of Tsachy's group)</p>
+<p>Searching large video databases is computationally prohibitive—matching a query against millions of high-dimensional frame embeddings requires examining every frame. This project applies rate-distortion theory to create a hierarchical representation where videos are encoded at multiple temporal resolutions: coarse chapter-level (64-dim, one per 5 minutes), medium scene-level (128-dim, one per 30 seconds), and fine frame-level (512-dim, one per frame). Users query the coarsest level first, then progressively refine by drilling down to finer resolutions only for relevant segments—pruning the search space by 100x while maintaining retrieval accuracy. The core theoretical question: does this layered encoding approach the rate-distortion bound? You’ll analyze whether the total rate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">ha</span><span class="mord mathnormal mtight">pt</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">er</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">sce</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">am</span><span class="mord mathnormal mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span> approaches the single-stage optimal rate <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span> for achieving the finest-level distortion, demonstrating that hierarchical compression is rate-efficient. By implementing conditional encoding where each level compresses information given the previous coarser level, you’ll show empirically that <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span>  where <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span> represents the rate penalty of multi-stage encoding, connecting directly to EE274's coverage of lossy source coding and rate-distortion theory with side information.</p>
+</li>
+<li>
+<p>Compressing captions of video frames for boosting LVMs</p>
+<p><em>Potential Mentor</em>: Tsachy</p>
+<p>Consider the body of text resulting from concatenating the captions of frames, sampled at some frequency from a video, where the captions are obtained via a visual language model. The project will explore both lossless and lossy compression of such text. In the lossy case, part of the exploration will be dedicated to finding the right distortion criteria under both human and machine consumption. The compressors will be put to use for boosting the performance of Large Vision Models (LVMs).</p>
+</li>
+<li>
+<p>Compressibility properties of LLM tokenizers</p>
+<p><em>Potential Mentor</em>: Shubham</p>
+<p>Modern LLMs tokenize the input into integer tokens before passing them into the neural network. While tokenization is not exactly focused on compression, it does offer some compressibility properties and LLM providers often tout the reduced token consumption for various languages. In this project, students will explore the interplay between tokenization and compression, with experimentation across different tokenizers, languages, types of text (classical vs. modern, natural language vs. logs, etc.). They will study the properties of tokenizers with regards to compression, and how it compares to general-purpose compressors like zstd. Some recent works in similar directions include https://arxiv.org/pdf/2402.01035v1 and https://arxiv.org/pdf/2404.03626v1.</p>
+</li>
+<li>
+<p>Video compression for AI</p>
+<p><em>Potential Mentor</em>: Tsachy Weissman</p>
+<p>We will examine ways to lossily compress a video before it is fed to a large video language model such that the inference time is reduced substantially, with little degradation to the accuracy.</p>
+</li>
+<li>
+<p>Understanding and implementing different image/video perceptual metrics in SCL (eg: SSIM, MS-SSIM, VMAF, etc.).</p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+</li>
+<li>
+<p>Implement a lossless image compressor beating PNG in SCL. (NOTE: there are compressors such as JPEG-XL, AVIF, which already do this, but you can go beyond those!)</p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+</li>
+<li>
+<p>Attempt the CLIC image compression challenge! (a bit more challenging): <a href="http://compression.cc/tasks/">http://compression.cc/tasks/</a></p>
+<p><em>Potential Mentor</em>: Pulkit</p>
+</li>
+<li>
+<p><em>Joint image compression:</em> Often very similar images are stored (e.g., same scene captured twice from slightly different angles) but are compressed independently of each other. In this project we explore the possibility of better compression by jointly compressing the images (one idea could be to stitch them into a video and use video compression algorithms). Find/generate a suitable dataset and implement an algorithm (lossless or lossy). Demonstrate the savings achieved by joint vs. individual compression.</p>
+<p><em>Potential Mentor</em>: Tsachy/Pulkit</p>
+</li>
+<li>
+<p>Compression can be used to estimate entropy of a random variable. In this project we will explore the idea of using compression to estimate entropy of a random variable. We will implement a simple compression algorithm and use it to estimate entropy of a random variable. We will then compare the performance of this algorithm with other entropy estimation techniques and/or use it for a practical application such as anomaly detection and/or prediction in high-dimensional datasets via compression in a dataset you care about.</p>
+<p><em>Potential Mentor</em>: Tsachy/Pulkit</p>
+</li>
+<li>
+<p>NN-based lossy compressors vs. more traditional lossy compressors vs. the fundamental limits. Comparison between recent NN-based lossy compressors and more traditional ones based on vector quantization in terms of rate-distortion-complexity tradeoffs, experimenting on simulated data for which we know and can compare to the fundamental limits.</p>
+<p><em>Potential Mentor</em>: Tsachy/Pulkit</p>
+</li>
+<li>
+<p>Lossy compression of text under a meaningful distortion measure. Explore achievable rate distortion tradeoffs and/or fundamental limits in this space.</p>
+<p><em>Potential Mentor</em>: Tsachy/Shubham</p>
+</li>
+<li>
+<p>Neural audio compression: explore the recent work by Meta using neural nets for audio compression.</p>
+<p><em>Potential Mentor</em>: Tsachy</p>
+</li>
+<li>
+<p><em>Genome in a tweet:</em> The question to answer is can we compress a child's genome in a single tweet (~280 bytes) assuming side-information of the genomes of their parents is available in a tweet?. The project will try to answer this question theoretically, and practically by implementing a compressor. The project can also explore practically implementing ideas from distributed compression.</p>
+<p><em>Potential Mentor</em>: Shubham</p>
+</li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="stanford-compression-library-scl-a-brief-tutorial"><a class="header" href="#stanford-compression-library-scl-a-brief-tutorial">Stanford Compression Library (SCL): A brief tutorial</a></h1>
 <p>This document provides an overview of motivation and SCL structure. We end this tutorial with an exercise on SCL and show how to use SCL in google colab notebook. For students, it is highly recommended to attempt the exercise. Please reach out to the teaching staff if you have any questions.</p>
