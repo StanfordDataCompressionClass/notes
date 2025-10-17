@@ -99,7 +99,7 @@ The list of projects from previous iterations of the course can be found [here](
 
 Next, we suggest a (non-exhaustive) list of projects which the teaching staff came up with. You can pick/modify one of these projects, or just use these as inspiration to choose one of your own!
 
-**1. Domain-specific compression with [OpenZL](https://github.com/facebook/openzl) **
+**1. Domain-specific compression with [OpenZL](https://github.com/facebook/openzl)**
 
 *Potential Mentor*: Shubham
 
@@ -240,9 +240,10 @@ The ideas below are not fleshed out yet, but project groups can talk to the inst
     Modern LLMs tokenize the input into integer tokens before passing them into the neural network. While tokenization is not exactly focused on compression, it does offer some compressibility properties and LLM providers often tout the reduced token consumption for various languages. In this project, students will explore the interplay between tokenization and compression, with experimentation across different tokenizers, languages, types of text (classical vs. modern, natural language vs. logs, etc.). They will study the properties of tokenizers with regards to compression, and how it compares to general-purpose compressors like zstd. Some recent works in similar directions include https://arxiv.org/pdf/2402.01035v1 and https://arxiv.org/pdf/2404.03626v1.
 
 5. Video compression for AI 
-Potential Mentor: Tsachy Weissman
 
-We will examine ways to lossily compress a video before it is fed to a large video language model such that the inference time is reduced substantially, with little degradation to the accuracy.  
+    *Potential Mentor*: Tsachy Weissman
+
+    We will examine ways to lossily compress a video before it is fed to a large video language model such that the inference time is reduced substantially, with little degradation to the accuracy.  
 
 
 6. Understanding and implementing different image/video perceptual metrics in SCL (eg: SSIM, MS-SSIM, VMAF, etc.).
