@@ -207,7 +207,7 @@ def rans_base_decode_step(x):
 
 10. [5 points] Justify that `decode_symbol` in `NonUniformDistEncoder` performs the same operation as above.
 
-Therefore, bits-back coding is equivalent to rANS! Thinking again in terms of $H(X) = H(X,Z) - H(Z|X)$, it allows us to interpret rANS in terms of latent variables $Z$ in a more intuitive way. This question was highly motivated by the IT-Forum talk by James Townsend in 2022.
+Therefore, bits-back coding is equivalent to rANS! Thinking again in terms of $H(X) = H(X,Z) - H(Z|X)$, it allows us to interpret rANS in terms of latent variables $Z$ in a more intuitive way. This question was highly motivated by the [IT-Forum talk by James Townsend in 2022](https://stanford.zoom.us/rec/play/8aIVScMUklFQB5fClrMox6oVUiaMcYqQuhaMotkKI55VWUXLO6nFF8hK8jDVSlvbohSTZ_yG4JUXOsfp.IFXkcq1pGLBPJvmL).
    
 ### Q5: HW2 Feedback *(5 points)* 
 Please answer the following questions, so that we can adjust the difficulty/nature of the problems for the next HWs.
