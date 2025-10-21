@@ -187,7 +187,7 @@ Many of the widely used compression algorithms rely heavily on hardware accelera
 
 *Potential Mentor*: Shubham
 
-With the new wave of LLMs, there have been multiple works looking at how they can be utilized for compression, including [ts_zip](https://bellard.org/ts_server/ts_zip.html), [LLMZip](https://github.com/vcskaushik/LLMzip) and [this paper](https://aps.arxiv.org/abs/2309.10668). The project can involve identifying a data domain, developing an end-to-end compressor, and evluating with different size LLM models.
+With the new wave of LLMs, there have been multiple works looking at how they can be utilized for compression, including [ts_zip](https://bellard.org/ts_server/ts_zip.html), [LLMZip](https://github.com/vcskaushik/LLMzip) and [this paper](https://arxiv.org/abs/2309.10668). The project can involve identifying a data domain, developing an end-to-end compressor, and evluating with different size LLM models.
 
 **14. Understanding and implementing tANS as used in Zstd**
 
