@@ -117,11 +117,11 @@ The encoder maintains a single state, which we increase when we encode a symbol.
 Now, we want to implement a compressor which works well for non-uniform data. We will use the base encode/decode functions from `UniformDistEncoder`, `UniformDistDecoder` and approach this problem from a new perspective. In class, we learned $H(X,Z) = H(X) + H(Z|X)$ for any two random-variables $X$ and $Z$. We will use this property to encode the data $X$. Note that this identity implies
 $$ H(X) = H(X,Z) - H(Z|X)$$
 
-Interpreting this intuitively, it should be possible to encode data `X` in following two steps:
+Interpreting this intuitively, it should be possible to encode data `X` in the following two steps:
 
 a. Encode `X,Z` together using a joint distribution `P(X,Z)`. Assuming an ideal compressor, this will require `H(X,Z)` bits. 
 
-b. Decode `H(Z|X)` from the encoded state using distribution `P(Z|X)`. Again, assuming an ideal compressor, this lets us _recover_ `H(Z|X)` bits. 
+b. Decode `Z|X` from the encoded state using distribution `P(Z|X)`. Again, assuming an ideal compressor, this lets us _recover_ `H(Z|X)` bits. 
 
 Step b gives you an intuition for the question name -- `bits-back`! Here `Z` is an additional random variable, typically latent variable (latent means hidden).
 Be careful while reading this step, as it is not a compressor for `X` but a decompressor for `Z|X`! This compressor assumes knowledge of `X` and decodes `Z` from the encoded state. 
