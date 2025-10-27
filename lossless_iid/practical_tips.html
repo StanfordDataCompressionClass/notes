@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Practical Tips on Lossless Compression</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../././mdbook-admonish.css">
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../contents.html">EE274: Data Compression, course notes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/coverpage.html"><strong aria-hidden="true">1.</strong> Lossless data compression: basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossless_iid/intro.html"><strong aria-hidden="true">1.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../lossless_iid/prefix_free_codes.html"><strong aria-hidden="true">1.2.</strong> Prefix Free Codes</a></li><li class="chapter-item expanded "><a href="../lossless_iid/kraft_ineq_and_optimality.html"><strong aria-hidden="true">1.3.</strong> Kraft Inequality</a></li><li class="chapter-item expanded "><a href="../lossless_iid/entropy.html"><strong aria-hidden="true">1.4.</strong> Entropy and Neg-log likelihood thumb rule</a></li><li class="chapter-item expanded "><a href="../lossless_iid/huffman.html"><strong aria-hidden="true">1.5.</strong> Huffman coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/aep.html"><strong aria-hidden="true">1.6.</strong> Asymptotic Equipartition Property</a></li><li class="chapter-item expanded "><a href="../lossless_iid/arithmetic_coding.html"><strong aria-hidden="true">1.7.</strong> Arithmetic coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/ans.html"><strong aria-hidden="true">1.8.</strong> Asymmetric Numeral Systems</a></li><li class="chapter-item expanded "><a href="../lossless_iid/non_iid_sources.html"><strong aria-hidden="true">1.9.</strong> Non IID Sources and Entropy Rate</a></li><li class="chapter-item expanded "><a href="../lossless_iid/context_based_coding.html"><strong aria-hidden="true">1.10.</strong> Context-based coding</a></li><li class="chapter-item expanded "><a href="../lossless_iid/lz77.html"><strong aria-hidden="true">1.11.</strong> Universal Compression with LZ77</a></li><li class="chapter-item expanded "><a href="../lossless_iid/practical_tips.html" class="active"><strong aria-hidden="true">1.12.</strong> Practical Tips on Lossless Compression</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../lossy/coverpage.html"><strong aria-hidden="true">2.</strong> Lossy data Compression</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lossy/quant.html"><strong aria-hidden="true">2.1.</strong> Basics and Quantization</a></li><li class="chapter-item expanded "><a href="../lossy/rd.html"><strong aria-hidden="true">2.2.</strong> Rate-Distortion Theory</a></li><li class="chapter-item expanded "><a href="../lossy/transform_coding_theory.html"><strong aria-hidden="true">2.3.</strong> Transform Coding Theory</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../resources.html"><strong aria-hidden="true">3.</strong> Resources</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../homeworks/coverpage.html"><strong aria-hidden="true">4.</strong> Homeworks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../homeworks/HW1.html"><strong aria-hidden="true">4.1.</strong> HW1</a></li><li class="chapter-item expanded "><a href="../homeworks/HW1_sol.html"><strong aria-hidden="true">4.2.</strong> HW1 Solution</a></li><li class="chapter-item expanded "><a href="../homeworks/HW2.html"><strong aria-hidden="true">4.3.</strong> HW2</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../projects.html"><strong aria-hidden="true">5.</strong> Project</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../scl_tutorial/SCL_tutorial.html"><strong aria-hidden="true">6.</strong> SCL Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scl_tutorial/basics.html"><strong aria-hidden="true">6.1.</strong> SCL Basics</a></li><li class="chapter-item expanded "><a href="../scl_tutorial/exercise.html"><strong aria-hidden="true">6.2.</strong> SCL Exercise</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../quiz_problems_2023.html"><strong aria-hidden="true">7.</strong> Quiz Problems (2023)</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="practical-tips-on-lossless-compression"><a class="header" href="#practical-tips-on-lossless-compression">Practical tips on lossless compression</a></h1>
+<p>Over the last several chapters, we have covered the theory and algorithms behind lossless compression. We understood the fundamental limits (entropy and entropy rate), looked at various prefix-free codes and entropy coders like Huffman coding, Arithmetic coding and ANS. We also saw how to deal with non-IID sources using context-based coding and universal compression algorithms like LZ77. Each of these ideas was optimal in some sense. In this chapter, we will look into how you could use this knowledge in practice when you are faced with a real world compression problem.</p>
+<p>The first question you want to ask of yourself is:</p>
+<blockquote>
+<p>Is compression the most pressing problem you are facing?</p>
+</blockquote>
+<p>Try to think about the following:</p>
+<ul>
+<li>Do you have a lot of data that needs to be stored/transmitted?</li>
+<li>Is the cost of storage/transmission significant enough to warrant investing time and resources into compression?</li>
+<li>Will compression just save on storage or will it also improve performance (e.g., faster data transfer, reduced latency)?</li>
+</ul>
+<p>You want to make sure you are solving the right problem! Many times compression is a cost-saving measure, but maybe your business is not at the point where this is a priority.</p>
+<p>Suppose you convinced yourself that you have too much data or it is indeed becoming a bottleneck in some way. The next question you want to ask is:</p>
+<blockquote>
+<p>Is it possible you don't need all this data? Can you eliminate the entire data or parts of it?</p>
+</blockquote>
+<ul>
+<li>Identify parts of data that are costing the most:
+<ul>
+<li>Can you get rid of it or change the representation? Do you need the text-based logs at full fidelity? Can you sample the data?
+<ul>
+<li>Make sure you use your compression knowledge to understand what's really contributing to the size of the data. A long string will hardly take up any space it is repeated many times (e.g., the server host name in a log that repeats for every request). Whereas a short string of random characters (e.g., unique identifiers, hashes) will be incompressible and take up space after compression.</li>
+</ul>
+</li>
+<li>Does the identifier need to be so random? Is there a real security reason behind all the random incompressible strings in your data?</li>
+</ul>
+</li>
+<li>Do you need to store the data for so long? Can you filter it down to fewer fields or aggregate it in some way?
+<ul>
+<li>Sometimes legal requirements and unavoidable to store.</li>
+</ul>
+</li>
+<li>What is your data access pattern?
+<ul>
+<li>Backup/archive (cold storage) cheaper than hot storage.</li>
+</ul>
+</li>
+</ul>
+<p>Also: lossy compression is crucial for multimedia data - starting in the next chapter!</p>
+<p>Remember that compression is not only about storage. It can have multiple benefits like:</p>
+<ul>
+<li>memory reduction</li>
+<li>bandwidth reduction</li>
+<li>faster querying</li>
+</ul>
+<p>So we reached this point where we want to compress some data and need to compress it losslessly.</p>
+<blockquote>
+<p>You definitely need to store this data losslessly! Now what?</p>
+</blockquote>
+<p>There can be so many approaches, and sadly many of the suboptimal ones are pretty commonly undertaken. Being a compression expert, it is very important to avoid the following <strong>Things not to do</strong>:</p>
+<ul>
+<li>Use your recently acquired compression knowledge and straightaway start spending a bunch of time developing your own compressor. Implement LZ77 and all the entropy coders on your own.</li>
+<li>Search online and purchase the license to a fancy looking compression solution.</li>
+<li>Use CMIX since your company deserves the best possible compression irrespective of the compute costs.</li>
+<li>Use gzip because LZ77 is an universal algorithm and so it has to be the best compressor for every occasion, and use it with the default settings since that's the popular thing.</li>
+<li>Make a statistically accurate model of your data, design a predictor, and then use a context-based arithmetic coder.</li>
+</ul>
+<p>We are not saying these approaches can never make sense, but they are not the first step!</p>
+<p>A much better approach is to:</p>
+<blockquote>
+<p>Understand the application requirements, try existing compressors like zstd and then evaluate whether there are benefits to create a domain specific compressor based on an approximate model for the data.</p>
+</blockquote>
+<h3 id="understand-your-application"><a class="header" href="#understand-your-application">Understand your application</a></h3>
+<ul>
+<li>Resource requirements - compression/decompression speed/memory - this is the single most important factor in choosing a compressor in practice. Sometimes for write-once-read-many applications, decompression speed can be more important than compression speed. Whereas in some real-time applications, both compression and decompression speed are crucial.</li>
+<li>Where will compression and decompression happen?
+<ul>
+<li>Closed system owned by you? Deployed by customers? Open source library? Production use vs. research?</li>
+</ul>
+</li>
+<li>How will compression and decompression happen?
+<ul>
+<li>CLI? Library in some programming language?</li>
+</ul>
+</li>
+<li>Is the data homogenous? Is there a lot of the same kind of data? For example, you could have a lot of log files of the same format, or genomic data. On the other hand, you could be running a cloud storage service where users can upload arbitrary files.</li>
+</ul>
+<p>All these would affect your choice of compressor (or your decision to build your own), as well as how to deploy it.</p>
+<h3 id="use-compression-benchmarks"><a class="header" href="#use-compression-benchmarks">Use compression benchmarks</a></h3>
+<p>Compression benchmarks are a great way to compare different compressors on a common ground. They provide standardized datasets, evaluation metrics and comparison plots. Let's look a popular benchmark available at <a href="http://quixdb.github.io/squash-benchmark/unstable/">http://quixdb.github.io/squash-benchmark/unstable/</a>. In general, you want to measure compression ratio as well as compression and decompression speed on your specific dataset or on a general corpus, and then find the most prefered operating point depending on your application requirements.</p>
+<p><img src="images/compression_speed_ratio_squash.png" alt="" /></p>
+<p>In the plot above, you see the compression ratio vs. compression speed for some corpus (for different levels of different compressors). You can see LZ4 handily wins on compression speed, while ZPAQ provides excellent compression ratio at the cost of speed. zstd seems to provide a good trade-off between the two. If you want to get slightly better compression ratio than zstd but not be extremely slow, you can try bsc or bzip2. Some compressors like gzip are not on the pareto frontier so you should ideally never use it (unless you only have KBs of memory). As you can see such benchmarks are a great way to quickly narrow down your choices.</p>
+<p><img src="images/decompression_speed_ratio_squash.png" alt="" /></p>
+<p>Similarly, the plot above shows compression ratio vs. decompression speed. Again, LZ4 is the fastest, while zstd provides a good trade-off. Most LZ77 based compressors (gzip, zstd, brotli) are pretty fast at decompression (since it's just entropy decoding followed by memcpy), while BWT based compressors (bzip2, bsc) are slower.</p>
+<h3 id="general-rule-of-thumb"><a class="header" href="#general-rule-of-thumb">General rule of thumb</a></h3>
+<p>With the above understanding, here are some rules of thumb to guide your choice of compressor:</p>
+<ul>
+<li>zstd has very fast decompression, and a variety of compression levels - should be the first thing to try. Don't use gzip unless you have a very good reason (e.g., your readers can't consume zstd).</li>
+<li>To go even faster, try LZ4. LZ4 uses a very fast match-finder and doesn't use entropy coding making both compression and decompression fast.</li>
+<li>For slower but better compression (e.g., you want to store the data for archiving, and storage cost is your primary objective), you can try out:
+<ul>
+<li>LZMA based compressors (LZ77+arithmetic coding) (7-zip, xz)</li>
+<li>BWT based compressors (bzip2, bsc) - faster compression (than LZMA), slower decompression. We didn't cover BWT in these notes, but it is a reversible transformation that makes the data compressible by creating repetitive patterns.</li>
+</ul>
+</li>
+<li>For even more resource intensive - try context based arithmetic coding with <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>th order, PPMd, etc. (these don't always beat LZ/BWT - check for your data!)</li>
+<li>CMIX/NNCP/LLM - if you want to understand the limits, rarely useful in practice due to extreme resource requirements.</li>
+</ul>
+<h4 id="using-zstd-and-using-it-well"><a class="header" href="#using-zstd-and-using-it-well">Using zstd and using it well</a></h4>
+<ul>
+<li>Use the latest version</li>
+<li>Choose the right level (1-19, also negative and ultra levels)
+<ul>
+<li>sometimes makes sense to use custom advanced parameters (e.g., window size, hash length). Levels are just presets for these advanced parameters, and you can set them manually if you want more control (recall it doesn't affect the decompression).</li>
+</ul>
+</li>
+<li>Use CLI/library in language of your choice - zstd also supports multithreaded compression</li>
+<li>Reuse zstd context objects if processing multiple files. There is some overhead in creating these objects and reusing them can significantly speed up compression/decompression if you are processing many files.</li>
+<li>For small files, consider using dictionary compression (check out the Small data section in the <a href="https://engineering.fb.com/2016/08/31/core-infra/smaller-and-faster-data-compression-with-zstandard/">zstd blog post</a>). This is helpful when you have many small files with similar format or content. While you can't expect to find matches within a small file, you can find matches across files using a shared dictionary. zstd provides tools to build such dictionaries from sample data, and then you can use those dictionaries to compress small files as long as the same dictionary is used for decompression.</li>
+</ul>
+<h3 id="domain-specific-compressors"><a class="header" href="#domain-specific-compressors">Domain specific compressors</a></h3>
+<p>So we've seen that general-purpose compressors, and specifically zstd, are a great starting point for lossless compression. The question arises:</p>
+<blockquote>
+<p>When does a domain specific compressor make sense?</p>
+</blockquote>
+<ul>
+<li>You see noticeable gap between existing compressors and estimated entropy. Theory super useful here to meaningful estimates!</li>
+<li>You can do well while being faster than existing compressors (using the structure of the data to "help out" zstd make smarter choices). An example could be that in a table you expect a column to only have matches within the column, whereas zstd would search for matches across the entire data.</li>
+<li>Easier if closed ecosystem since it's easier to deploy, maintain and make sure all consumers can decompress.</li>
+<li>There is lots of data of the same type (homogenous data) making investment worth it - check out <a href="https://www.youtube.com/watch?v=G5n37deW3uw">the talk by Yann Collet</a> to understand all these aspects that come after you build your compressor. Genomics is a great example of this where the vast amount of homogenous data and the huge storage costs make it worthwhile to build domain specific compressors. Other cases include a large company having there own proprietary data format that is used across the company, or a startup whose entire product is based on storing some specific kind of data (e.g., time series data).
+<ul>
+<li>design</li>
+<li>implement</li>
+<li>test</li>
+<li>format and versioning (with compatibility guarantees)</li>
+<li>monitoring and maintenance</li>
+<li>portability and language support</li>
+</ul>
+</li>
+</ul>
+<p>The general approach to building a domain specific compressor is to parse (columnarize) your data, apply various transforms to the fields and make them compressible by general-purpose compressors like zstd. The idea is that we can make the job of zstd easier by removing redundancies and making patterns more explicit. <a href="https://arxiv.org/abs/2510.03203">OpenZL: A Graph-Based Model for Compression</a> is a great paper that describes such a general approach to building domain-specific compressors.</p>
+<p>That's all on lossless compression, and we hope you found these notes useful! Next up, we will start our journey into lossy compression, starting with the basics of quantization.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../lossless_iid/lz77.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../lossy/coverpage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../lossless_iid/lz77.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../lossy/coverpage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>
