@@ -14,6 +14,10 @@ The notes are live here: https://stanforddatacompressionclass.github.io/notes/.
     6. [Asymptotic Equipartition Property](./lossless_iid/aep.md)
     7. [Arithmetic Coding](./lossless_iid/arithmetic_coding.md)
     8. [Asymmetric Numeral Systems](./lossless_iid/ans.md)
+    9. [Non IID Sources and Entropy Rate](lossless_iid/non_iid_sources.md)
+    10. [Context-based coding](lossless_iid/context_based_coding.md)
+    11. [Universal Compression with LZ77](./lossless_iid/lz77.md)
+    12. [Practical Tips on Lossless Compression](./lossless_iid/practical_tips.md)
 ---
 2. [Lossy Compression](./lossy/coverpage.md)
     1. [Basics and Quantization](./lossy/quant.md)
