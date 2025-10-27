@@ -20,6 +20,7 @@ Here are a set of videos to watch at leisure to get an intuition for compression
 4. [PNG Image Compression](https://youtu.be/EFUYNoFRHQI): video on PNG lossless compression
 5. [JPEG compression](https://youtu.be/0me3guauqOU): A bit more detailed video on JPEG compression
 6. [Arithmetic coding series](https://youtube.com/playlist?list=PLE125425EC837021F): Great sequence of lectures Information theory in general and particularly on Arithmetic coding. One of the best I found on this subject.
+7. [Designing Data Compression Solutions](https://www.youtube.com/watch?v=G5n37deW3uw): Talk by Yann Collet (author of zstd and lz4) what comes next once you have your great compression idea.
 
 ## 3. Textbooks, research papers
 Although there are no textbooks which exactly correspond to the course material, but here are few books which might be relevant. 
@@ -28,6 +29,7 @@ Although there are no textbooks which exactly correspond to the course material,
 2. [Introduction to Data Compression, Guy E. Blelloch](https://www.cs.cmu.edu/~guyb/realworld/compression.pdf): Set of lecture notes/book on Data Compression by Guy E. Blelloch, CMU 2013
 3. [Data Compression Explained, Matt Mahoney](http://mattmahoney.net/dc/dce.html): A nice set of lecture notes on Data Compression by Matt Mahoney.
 4. [JPEG paper](https://web.stanford.edu/class/ee398a/handouts/papers/Wallace%20-%20JPEG%20-%201992.pdf): Summary of JPEG by Gregory K. Wallace
+5. [OpenZL: A Graph-Based Model for Compression](https://arxiv.org/abs/2510.03203): General approach to building domain-specific compressors
 
 ## 4. Blogs/websites
 The web is filled with great engineers and researchers writing blogs related to Data Compression. We list a few below:
@@ -40,3 +42,12 @@ The web is filled with great engineers and researchers writing blogs related to 
 6. [DCT](http://weitz.de/dct/): A nice blog post on DCT by Prof. Dr. Edmund Weitz
 7. [DCT History](https://www.cse.iitd.ac.in/~pkalra/col783-2017/DCT-History.pdf): A small red on the history of DCT by Nasir Ahmed.
 8. [Tossing a Biased Coin](./coinflipext.pdf): An accessible exploration of how to generate fair randomness from a biased coin by Michael Mitzenmacher.
+
+## 5. Course notes from EE 376C (Stanford)
+
+The notes from EE376C are provided below, covering universal techniques in lossless and lossy compression, as well as applications in prediction and denoising. Students can refer to these notes for a deeper understanding of universal compression techniques including the proofs of universality.
+
+1. [Part 1: Lempel-Ziv Compression](ee376c_notes/Part1_LZ.pdf)
+2. [Part 2: Context-Tree Weighting](ee376c_notes/Part2_CTW.pdf)
+3. [Part 3: Universal Denoising](ee376c_notes/Part3_Denoising.pdf)
+4. [Part 4: Universal Lossy Compression](ee376c_notes/Part4_Lossy_compression.pdf)
