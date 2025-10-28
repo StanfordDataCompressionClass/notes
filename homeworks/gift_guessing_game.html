@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gift Guessing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #f7f3ee;
+            color: #333;
+            max-width: 700px;
+            margin: auto;
+            padding: 2em;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b03060;
+        }
+
+        .input-box {
+            margin-top: 1.5em;
+        }
+
+        input[type=text] {
+            width: 80%;
+            padding: 0.5em;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 0.5em 1em;
+            font-size: 1em;
+            margin-left: 0.5em;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5em;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        th {
+            background: #e0d5c5;
+            cursor: pointer;
+            position: relative;
+        }
+
+        th .arrow {
+            margin-left: 5px;
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+
+        th.active .arrow {
+            opacity: 1;
+            color: #b03060;
+        }
+
+        #result {
+            margin-top: 1em;
+            font-weight: bold;
+        }
+
+        #result.success {
+            color: green;
+        }
+
+        details {
+            background: #f1e8df;
+            margin: 0.5em 0;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: #903;
+        }
+
+        .toggle-buttons {
+            text-align: right;
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎁 Gift Guessing</h1>
+    <p>
+        Della is planning to buy a thoughtful Christmas gift for Jim. There are five possible gifts, each described
+        below.
+        One of them has been chosen by Della-but you can't see which one! Your job is to guess it by entering
+        <b>injected strings</b>
+        and observing how well your text compresses together with the gift description.
+    </p>
+    <p>
+        Each time you enter an injected string, it is concatenated with Della's chosen gift's description and compressed
+        with <code>zlib</code> (LZ77). Try to find patterns that make compression better or worse and when you think you
+        know, submit your final guess! Make sure to type the exact name of the gift shown in the list below.
+    </p>
+
+    <h2>Possible Gifts</h2>
+    <p>Click on each to reveal its description.</p>
+    <div class="toggle-buttons">
+        <button onclick="showAll()">Show All</button>
+        <button onclick="hideAll()">Hide All</button>
+    </div>
+
+    <details>
+        <summary>Watch Chain</summary>
+        <p>A platinum fob chain, simple yet strong, chosen to honor Jim’s cherished watch passed down through
+            generations. Its subtle shine and firm links spoke of quiet dignity and timeless affection from Della.</p>
+    </details>
+    <details>
+        <summary>Comb Set</summary>
+        <p>A pair of tortoiseshell combs with slender silver edges, meant for Jim’s dark hair that always fell slightly
+            over his forehead. Della knew he admired neatness, and the gift promised everyday grace and care.</p>
+    </details>
+    <details>
+        <summary>Wool Scarf</summary>
+        <p>A navy-blue wool scarf, woven thick and soft, to guard Jim against the cold winter mornings. Each thread
+            carried Della’s thoughtfulness, wrapping warmth and affection around him wherever he went.</p>
+    </details>
+    <details>
+        <summary>Leather Wallet</summary>
+        <p>A hand-stitched brown leather wallet, neat and sturdy. Inside, Jim could tuck his coins, notes, and a tiny
+            photograph of Della. The design was simple but built to last, like their devotion to each other.</p>
+    </details>
+    <details>
+        <summary>Book</summary>
+        <p>A small, leather-bound volume of poetry, its pages soft and faintly scented with ink. The words within spoke
+            of love’s patience and endurance—sentiments Della knew Jim would treasure deeply on quiet evenings.</p>
+    </details>
+
+    <div class="input-box">
+        <input type="text" id="seedInput" placeholder="Enter injected string (max 80 chars)" maxlength="80" />
+        <button onclick="compressInput()">Compress</button>
+    </div>
+
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" id="th0">Attempt <span class="arrow" id="arrow0">↕</span></th>
+                <th>Injected String</th>
+                <th onclick="sortTable(2)" id="th2">Compressed Size <span class="arrow" id="arrow2">↕</span></th>
+                <th onclick="sortTable(3)" id="th3">Ratio (comp/raw) <span class="arrow" id="arrow3">↕</span></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="guessBox" class="input-box">
+        <input type="text" id="finalGuess" placeholder="Your guess for the gift (e.g., wallet, book, scarf)" />
+        <button onclick="submitGuess()">Submit Guess</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        const gifts = {
+            watch_chain: `A platinum fob chain, simple yet strong, chosen to honor Jim’s cherished watch passed down through generations. Its subtle shine and firm links spoke of quiet dignity and timeless affection from Della.`,
+            comb_set: `A pair of tortoiseshell combs with slender silver edges, meant for Jim’s dark hair that always fell slightly over his forehead. Della knew he admired neatness, and the gift promised everyday grace and care.`,
+            wool_scarf: `A navy-blue wool scarf, woven thick and soft, to guard Jim against the cold winter mornings. Each thread carried Della’s thoughtfulness, wrapping warmth and affection around him wherever he went.`,
+            leather_wallet: `A hand-stitched brown leather wallet, neat and sturdy. Inside, Jim could tuck his coins, notes, and a tiny photograph of Della. The design was simple but built to last, like their devotion to each other.`,
+            book: `A small, leather-bound volume of poetry, its pages soft and faintly scented with ink. The words within spoke of love’s patience and endurance—sentiments Della knew Jim would treasure deeply on quiet evenings.`
+        };
+
+        const giftKeys = Object.keys(gifts);
+        const chosenGiftKey = giftKeys[Math.floor(Math.random() * giftKeys.length)];
+        const secretText = gifts[chosenGiftKey];
+
+        let attemptCount = 0;
+
+        function compressInput() {
+            const input = document.getElementById('seedInput').value;
+            if (!input) return;
+            attemptCount++;
+            const combined = input + secretText;
+            const rawBytes = new TextEncoder().encode(combined);
+            const compressed = pako.deflate(rawBytes);
+            const ratio = (compressed.length / rawBytes.length).toFixed(3);
+
+            const row = `<tr><td>${attemptCount}</td><td>${input}</td><td>${compressed.length}</td><td>${ratio}</td></tr>`;
+            document.querySelector('#resultsTable tbody').insertAdjacentHTML('beforeend', row);
+            document.getElementById('seedInput').value = '';
+
+            // Reapply the current sort (preserving direction)
+            const table = document.getElementById('resultsTable');
+            const activeHeader = document.querySelector('th.active');
+            if (activeHeader) {
+                const colIndex = Array.from(activeHeader.parentElement.children).indexOf(activeHeader);
+                sortTable(colIndex, true);
+            }
+        }
+
+        function submitGuess() {
+            const guess = document.getElementById('finalGuess').value.trim().toLowerCase();
+            const resultDiv = document.getElementById('result');
+
+            // Normalize both sides: replace underscores with spaces
+            const normalizedKey = chosenGiftKey.toLowerCase().replace(/_/g, ' ');
+            const normalizedGuess = guess.replace(/\s+/g, ' '); // collapse multiple spaces
+
+            if (guess && normalizedKey.includes(normalizedGuess)) {
+                resultDiv.innerHTML = `🎉 Correct! Della’s gift was the ${chosenGiftKey.replace('_', ' ')}.`;
+                resultDiv.className = 'success';
+            } else {
+                resultDiv.textContent = `❌ Not quite! Try again — Della’s secret remains hidden.`;
+                resultDiv.className = '';
+            }
+        }
+
+        function showAll() {
+            document.querySelectorAll('details').forEach(d => d.open = true);
+        }
+
+        function hideAll() {
+            document.querySelectorAll('details').forEach(d => d.open = false);
+        }
+
+        function sortTable(colIndex, preserveOrder = false) {
+            const table = document.getElementById('resultsTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            let ascending = table.dataset.sortOrder !== 'asc';
+            if (preserveOrder && table.dataset.sortOrder) {
+                ascending = table.dataset.sortOrder === 'asc';
+            }
+
+            rows.sort((a, b) => {
+                const aVal = parseFloat(a.children[colIndex].textContent);
+                const bVal = parseFloat(b.children[colIndex].textContent);
+                if (isNaN(aVal) || isNaN(bVal)) return 0;
+                return ascending ? aVal - bVal : bVal - aVal;
+            });
+
+            tbody.innerHTML = '';
+            rows.forEach(r => tbody.appendChild(r));
+            table.dataset.sortOrder = ascending ? 'asc' : 'desc';
+
+            document.querySelectorAll('th').forEach(th => th.classList.remove('active'));
+            document.querySelectorAll('.arrow').forEach(a => a.textContent = '↕');
+            document.getElementById(`th${colIndex}`).classList.add('active');
+            document.getElementById(`arrow${colIndex}`).textContent = ascending ? '▲' : '▼';
+        }
+    </script>
+</body>
+
+</html>
