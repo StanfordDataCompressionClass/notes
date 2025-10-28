@@ -8,7 +8,7 @@ Following are the due dates for different components of the project. All (except
 
 |                                                    | Weightage | Description                                    | Due Date <br/> (midnight PT)     |
 |----------------------------------------------------|-----------|------------------------------------------------|----------------------------------|
-| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/30                       |
+| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/31                       |
 | [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 2025/11/20                       |
 | [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + 5 min QnA                 | 2025/12/04 (last class) |
 | [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | TBD                      |
@@ -31,7 +31,7 @@ The expected team size for each project is 1-2 students. Groups of 3 are also ok
 
 ### I. Project Proposal 
 
-**Due: 2025/10/30, Thursday, 11:59pm**
+**Due: 2025/10/31, Friday, 11:59pm**
 
 Please use the time till the deadline to explore and decide what project you would like to work on. **Before you submit the proposal, ensure to have at least one 10 minute 1-on-1 chat with the teaching staff (as a team), and finalize on the project idea.** The list of finalized project ideas will be maintained here: [TBD](https://stanforddatacompressionclass.github.io/Fall25/). Once the project is finalized, we will assign a project mentor (Kedar/Shubham/Tsachy/Jiwon) who can help you with references for the project, help with programming, etc. As we are a small class, ideally we would not like to repeat the exact same project. The teaching team will help you modify your idea appropriately in case someone else is working on the exact same project.
 
