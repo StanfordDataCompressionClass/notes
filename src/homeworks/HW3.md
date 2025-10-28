@@ -1,9 +1,9 @@
-# EE274 (Fall 23): Homework-3
+# EE274 (Fall 25): Homework-3
 
-- **Focus area:** Context-based compression
-- **Due Date:** Nov 15, midnight (11:59 PM)
+- **Focus area:** Context-based compression and LZ77
+- **Due Date:** Nov 11, midnight (11:59 PM)
 - **Weightage:** 15%
-- **Total Points:** 140
+- **Total Points:** 150
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
   - For written part: [HW3-Written](https://www.gradescope.com/courses/625620/assignments/3619012)
@@ -17,20 +17,15 @@ Before starting the coding related questions ensure following instructions from 
    ```sh
    git status
    ```   
-  You should get an output saying `On branch EE274_Fall23/HWs`. If not, run the following command to switch to the correct branch:
+  You should get an output saying `On branch EE274_Fall25/HWs`. If not, run the following command to switch to the correct branch:
    ```sh
-   git checkout EE274_Fall23/HWs
+   git checkout EE274_Fall25/HWs
    ```
   Finally ensure you are on the latest commit by running:
    ```sh
    git pull
    ```
-  You should see a `HW3` folder in the `HWs` folder. Also ensure you are on the right commit before starting the `HW` by running the following command and verifying the commit hash.
-  ```sh
-  git rev-parse HEAD
-  ```    
-  This should give you `6d467aca3ef49d0fcc98efa7c06a54b984fda137`
-
+  You should see a `HW3` folder in the `HWs` folder.
 - Ensure you are in the right conda environment you created in `HW1`. To ensure run the following command:
    ```sh
    conda activate ee274_env
@@ -41,9 +36,9 @@ Before starting the coding related questions ensure following instructions from 
    ```
   and ensure tests except in HW folders pass.
 
-### Q1 LZ77 compression for small data (*25 points*)
+### Q1 LZ77 compression for small data (*35 points*)
 
-In this problem, we will understand how LZ77 compression perform on small files and how to improve its performance. Recall that the LZ77 algorithm looks for matches in a window storing the previously seen data and then encodes the match lengths, match offsets and unmatched characters (literals). We use the LZ77 implementation provided in SCL for the experiments below, and you can take a look at the code [here](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/lz77.py) to understand the details better. We have provided a set of small json files in the `p1_data/github_data` directory. Run the script `python hw3_p1.py -i p1_data/github_data` which produces the following output:
+In this problem, we will understand how LZ77 compression performs on small files and how to improve its performance. Recall that the LZ77 algorithm looks for matches in a window storing the previously seen data and then encodes the match lengths, match offsets and unmatched characters (literals). We use the LZ77 implementation provided in SCL for the experiments below, and you can take a look at the code [here](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/lz77.py) to understand the details better. We have provided a set of small json files in the `p1_data/github_data` directory. Run the script `python hw3_p1.py -i p1_data/github_data` in scl/HWs/HW3 folder, which produces the following output:
 
 ```
 Compressing without using a seed input
@@ -51,10 +46,10 @@ Number of files: 134
 Total uncompressed size (in bits): 956272
 Normalized uncompressed size (in avg. bits/file): 7136
 Total size after compressing the files individually (in bits): 363774
-Total size after compressing the files jointly (in bits): 71792
+Total size after compressing the files jointly (in bits): 71795
 ```
 
-Ignore the first line for a moment. We see that we have `134` relatively small files with average size of `7136 bits`. If we compress the files individually and then sum the sizes, we get a total of `363774 bits`, whereas if we concatenate the files and then compress them as a single block ("jointly") the compressed size is just `71792 bits`! 
+Ignore the first line for a moment. We see that we have `134` relatively small files with average size of `7136 bits`. If we compress the files individually and then sum the sizes, we get a total of `363774 bits`, whereas if we concatenate the files and then compress them as a single block ("jointly") the compressed size is just `71795 bits`! 
 
 1. [4 points] Give two reasons why concatenating the files together provides a reduction in file size.
 
@@ -74,7 +69,7 @@ Number of files: 134
 Total uncompressed size (in bits): 956272
 Normalized uncompressed size (in avg. bits/file): 7136
 Total size after compressing the files individually (in bits): 224738
-Total size after compressing the files jointly (in bits): 70668
+Total size after compressing the files jointly (in bits): 70678
 ```
 
 2. [6 points] We see a significant reduction in the total size for compressing the files individually (`363774` bits to `224738` bits). Based on your understanding of the LZ77 algorithm and your answer to `Q1.1`, explain why this is the case. You might find it useful to look both at the json files in `p1_data/github_data/` and the seed input in `p1_data/github_data_seed_input.txt`.
@@ -87,12 +82,21 @@ Total size after compressing the files jointly (in bits): 70668
 
 5. [10 points] Now you will create a seed input for another dataset provided in the `p1_data/pokemon_data` directory. We will evaluate your submissions on a test dataset which has similar files as the `p1_data/pokemon_data` directory. Your submission should satisfy the following:
    - name the seed input file as `p1_data/pokemon_data_seed_input.txt`
-   - the seed input file should be less than 1 KB large
-   - the total size for compressing the files individually should reduce to at least 2x when using the seed input (vs. when not using it) for both the `pokemon_data` set and the autograder submission
+   - the seed input file should be less than 1 KB (1000 B) large. You can check the file size in bytes by running `wc -c p1_data/pokemon_data_seed_input.txt`.
+   - the total size for compressing the files individually should reduce to at least 2x when using the seed input (vs. when not using a seed input) for both the `pokemon_data` set and the autograder submission. For example, if the `Total size after compressing the files individually` is `308031 bits` without seed input, then with your seed input it should be at most `154015 bits`.
+   - A couple hints to help you achieve best results: (i) try to use similar JSON format and formatting in your seed input file as in the pokemon data files - this includes using the same 2-space indendation, and (ii) (for Windows users) make sure your seed input uses LF (`\n`) line-endings and not CRLF (`\r\n`) - verify your editor is not changing this automatically.
+
+6. [10 points] Christmas is approaching and [Jim knows that Della](https://en.wikipedia.org/wiki/The_Gift_of_the_Magi) is going to buy a thoughtful gift for him. Unable to control his curiosity and being a part-time hacker, he has decided to spy on Della’s internet search patterns by executing a side-channel attack. As shown in the diagram below, he is able to inject strings into Della’s http requests, and once Della makes a search request he can monitor the LZ77 compressed size of the response. Here the response includes his injected string along with the gift description, allowing him to infer some side-channel information about the search. _Don't take the story too seriously from a internet security standpoint! But do take a look at the references provided in the note below to learn more about real instances of such attacks._
+
+    Use the [provided webpage](gift_guessing_game.html) to help Jim select injected strings and based on that make a guess about the chosen gift. Include a screenshot of the injected strings you used and the “🎉 Correct!” message.
+
+    <img src="figures/crime_attack.png" alt="LZ77 side-channel attack diagram" width="500"/>
 
 **Note:** 
-- To learn more about small data compression using seed inputs and how it is used in practice, you can have a look at Yann Collet's IT-forum talk available on [YouTube](https://www.youtube.com/watch?v=jl9ncLcMlVY&t=126s&ab_channel=StanfordResearchTalks). 
+- To learn more about small data compression using seed inputs and how it is used in practice, you can have a look at Yann Collet's IT-forum talk ([Part 1](https://drive.google.com/file/d/1-nd9k9GghjR_rtSpTqNesSGaoMx1N0of/view?usp=sharing), [Part 2](https://drive.google.com/file/d/1Ps4PwGqX7douC5PClZp-8XCt7WS9rGJa/view?usp=drive_link)). 
 - zstd uses the term "dictionary" to refer to what we called seed inputs above.
+- To read more about LZ77 side-channel attacks mentioned in part 6, you can refer to the slides [here](https://docs.google.com/presentation/d/11eBmGiHbYcHR9gL5nDyZChu_-lCa2GizeuOfaLU2HOU/edit?usp=sharing
+) or Fall 2023 course project report [here](https://github.com/samanthaarcher0/Compression-Security-Project/blob/main/Project%20Report.pdf).
 
 
 ### Q2: Burrows Wheeler Transform and compression (*50 points*)
@@ -101,7 +105,7 @@ Total size after compressing the files jointly (in bits): 70668
 
 You might be familiar with Fourier transforms, DCT transform, wavelet transform, etc. for images and audio signals. These transforms are widely used as they are invertible and make the data easier to analyse, compress, etc.
 
-In this problem, we will learn about a few lossless transform for textual data, which have been used for various applications, including data compression. 
+In this problem, we will learn about a few lossless transforms for textual data, which have been used for various applications, including data compression. 
 
 **I. The BWT algorithm:**
 
@@ -159,9 +163,9 @@ The BWT forward transform works the following way:
     ```
     Notice that the BWT forward transform of `x_input = BANANA -> BNN~AAA` has the letters of `BANANA~` permuted, i.e. `BWT(x_input)` is just reordering the letters in the input in a particular way. Justify in a few lines why `BWT(x_input)` is a permutation of the string `x_input~` (`x_input~` -> `x_input` concatenated with the delimiter `~`).
 
-2. [5 points] Manually compute and show the BWT transform for `panama`, using the method above. Show your work to get credit (that is you can't just write the final transform but show the steps described above).
+2. [5 points] Manually compute and show the BWT transform for `PANAMA`, using the method above. Show your work to get credit (that is you can't just write the final transform but show the steps described above).
 
-3. [10 points] Implement the BWT (forward) transform in the `hw3_p2.py` file, `BurrowsWheelerTransform::forward` function. Remember to add a delimiter in the input string (you can use `~` as delimiter as `~` has the highest ascii value). You may use the `test_bwt_transform()` (by commenting out the inverse bwt part) to test your implementation. What is the complexity of your BWT forward transform implementation for an input of length `n`? 
+3. [10 points] Implement the BWT (forward) transform in the `hw3_p2.py` file, `BurrowsWheelerTransform::forward` function. Remember to add a delimiter in the input string (you can use `~` as delimiter as `~` has the highest ascii value). You may use the `test_bwt_transform()` (by commenting out the inverse bwt part) to test your implementation. What is the time complexity of your BWT forward transform implementation for an input of length `n`? 
 
 **II. The Inverse BWT Algorithm**
 
@@ -233,11 +237,11 @@ The surprising part is that BWT is actually a fully invertible transform, i.e. w
     ```
 
 
-4. [5 points] Manually compute the inverse of `tgca~aa`. Show your work to get credit (that is you can't just write the final inverse transform but show the steps described above).
+4. [5 points] Manually compute the inverse of `TGCA~AA`. Show your work to get credit (that is you can't just write the final inverse transform but show the steps described above).
 
 5. [10 points] Implement the BWT inverse transform in `hw3_p2.py` in the `BurrowsWheelerTransform::inverse` function. Please add (some) inline comments describing your algorithm. What is the time, memory complexity of your BWT inverse transform implementation for an input of length `n`?
 
-6. [5 points] Notice that the BWT forward transform of typical english language words/sentences have lots of repeated letters. For example: 
+6. [5 points] Notice that the BWT forward transform of typical english language words/sentences have lots of consecutive repeated letters. For example: 
 
     ```py
     # BWT forward transforms of some english words
@@ -253,7 +257,7 @@ The surprising part is that BWT is actually a fully invertible transform, i.e. w
 
     So in a way BWT forward transform is approximately sorting the input strings. Can you think of why BWT has this property? 
 
-    **HINT**: In the BWM, the first $n-1$ rows form cyclic suffixes of the last column.
+    **HINT**: In the BWM, the last column forms the BWT while the first $n-1$ columns form suffixes of the last column. For example, if the last entry in a particular row is $x_j$ ($j$ th value in original string), then the first $n-1$ entries in that row would be the cyclic suffix: $x_{j+1}\dots x_{n}  x_1 \dots x_{j-1}$ Given the rows are sorted lexicographically, what can you say about the suffixes of nearby entries in the BWT?
 
 **III. Using BWT for compression**
 
@@ -271,7 +275,7 @@ Input str: rrdd~aadrrrcccraaaaaaaaaaaabbbbbba
 MTF: [114, 0, 101, 0, 126, 100, 0, 2, 3, 0, 0, 102, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 1]
 ```
 
-We use the BWT, MTF transforms to transform the first `50,000` characters (lets call this the `input_data`) of our sherlock novel and analyze the entropy of the empirical distribution of the transformed string. (this output can be obtained by running the test `test_bwt_mtf_entropy` if you are curious!). The output obtained is as below:
+We use the BWT, MTF transforms to transform the first `50,000` characters (let's call this the `input_data`) of our sherlock novel and analyze the entropy of the empirical distribution of the transformed string. (this output can be obtained by running the test `test_bwt_mtf_entropy` if you are curious!). The output obtained is as below:
 
 ```
 Input data: 0-order Empirical Entropy: 4.1322
@@ -281,10 +285,10 @@ Input data + BWT + MTF: 0-order Empirical Entropy: 2.8649
 ```
 
 7. [10 points] Let's try to understand the compression results above a bit better: 
-   1. Given a good implementation of an Arithmetic coder, what is approximate average codelength you might expect on compressing the `input_data` using its empirical 0-order distribution (i.e. just the symbol counts)? 
+   1. Given a good implementation of an Arithmetic coder, what is approximate average codelength per symbol you might expect on compressing the `input_data` using its empirical 0-order distribution (i.e. just the symbol counts)? 
    2. Notice that the empirical entropy of `input_data` is almost the same as that of `bwt_data = BWT(input_data)`. In fact the empirical entropy of `bwt_data` is slightly higher than that of `input_data` (`4.1325 vs 4.1322`). Justify why is this the case.
    3. Notice that empirical entropy of `mtf_bwt_data = MTF(BWT(input_data))` is much lower than that of the `input_data` (`2.8649` vs `4.1322`). Can you think of why this is the case? 
-   4. Based on the numbers you have, describe a compression scheme which achieves average codelength of approximately `~2.87 bits/symbol` on the `input_data`?. You don't need to implement this compressor, but ensure you clearly describe the steps involved in encoding and decoding. You are free to use any compressors you have learnt in the class.
+   4. Based on the numbers you have, describe a compression scheme which achieves average codelength of approximately `~2.87 bits/symbol` on the `input_data`. You don't need to implement this compressor, but ensure you clearly describe the steps involved in encoding and decoding. You are free to use any compressors you have learnt in the class.
 
    Feel free to experiment with the test functions, to print transformed data or to build better intuition with custom examples. Please include any relevant outputs in your submission which you found useful to answer these questions.
 
@@ -296,17 +300,17 @@ Input data + BWT + MTF: 0-order Empirical Entropy: 2.8649
 
 
 ### Q3: Compression with side information (*20 points*)
-Lets consider a simple puzzle: 
+Let's consider a simple puzzle: 
 - Let $X$ be a 3 bit random variable where each bit is i.i.d $Ber(0.5)$, i.e. $X$ is uniformly distributed  in $\{000,001,010,011,100,101,110,111\}$ with probability $1/8$, 
-- and $Y= X \oplus e$, where $e \in \{000,001,010,100\}$ and is independent of $X$. The distribution of $e$ is unknown, i.e $Y$ can be different from $X$ in just a one bit position. 
+- and $Y= X \oplus e$, where $e \in \{000,001,010,100\}$ and is independent of $X$. The distribution of $e$ is unknown, i.e. $Y$ can be different from $X$ in at most one bit position. Recall that $\oplus$ is the [bitwise-XOR operation](https://en.wikipedia.org/wiki/Bitwise_operation#XOR).
 
 1. [5 points] Show that $H(X) = 3, H(X|Y) \leq 2$.
 
    **HINT**: Consider $H(X,e|Y)$ and write it in two different ways
 
-2. [5 points] Kakashi wants to losslessly encode $X$ and send it to Sasuke. What is the optimal compression scheme for Kakashi? 
+2. [5 points] Kakashi wants to losslessly encode $X$ and send the encoded coderword to Sasuke. What is the optimal compression scheme for Kakashi? 
 
-3. [5 points] Now lets say both Kakashi and Sasuke have access to $Y$, i.e. $Y$ is the side-information available to both Kakashi and Sasuke (through side-information ninjutsu :P). In that case, show that Kakashi can do better than in `Q3.2`, by using `2 bits` to transmit $X$.
+3. [5 points] Now let's say both Kakashi and Sasuke have access to $Y$, i.e. $Y$ is the side-information available to both Kakashi and Sasuke (through side-information ninjutsu :P). In that case, show that Kakashi can do better than in `Q3.2`, by using `2 bits` to transmit $X$.
 
 4. [5 points] Unfortunately Kakashi lost access to $Y$, and only knows $X$ but Sasuke still has access to the side information $Y$. Show that in this case Kakashi can still losslessly encode $X$ and send it to Sasuke using `2 bits`, i.e. surprisingly we just need the side-information at the decoder, and not necessarily at the encoder.
 
@@ -319,12 +323,11 @@ He generates data using a noisy version of [Linear Feedback Shift Register based
 
 ```py
 def pseudo_random_LFSR_generator(data_size, tap, noise_prob=0):
-    # initial sequence = [1,0,0,0,...]
-    initial_sequence = [0]*tap
-    initial_sequence[0] = 1 
+    # initial sequence = [1,0,0,0,...] of length tap
+    initial_sequence = [1] + [0] * (tap - 1)
 
     # output sequence
-    output_sequence = initial_sequence
+    output_sequence = list(initial_sequence)
     for _ in range(data_size - tap):
         s = output_sequence[-1] ^ output_sequence[-tap]  # xor
         if noise_prob > 0: 
@@ -332,12 +335,12 @@ def pseudo_random_LFSR_generator(data_size, tap, noise_prob=0):
         output_sequence.append(s)
     return output_sequence
 ```
-Our `pseudo_random_LFSR_generator` generates an output sequence of length `data_size`. At each step, it calculates the next bit using XOR between the last bit in the sequence and the bit located `tap` positions before it (this simulates LFSR behavior). Optionally, if `noise_prob` is greater than `0`, it adds noise to the calculated bit by XOR-ing it with a random binary value generated with a given probability (`noise_prob`). The calculated (possibly noisy) bit is appended to the sequence in each iteration. To initialize the sequence, we always start it with `[1,0,0,0,...]` so that we have `tap` number of bits available to calculate the next bit.
+Our `pseudo_random_LFSR_generator` generates an output sequence of length `data_size`. At each step, it calculates the next bit using XOR (`a ^ b` is `True`/`1` if exactly one of `a` and `b` is `True`/`1`) between the last bit in the sequence and the bit located `tap` positions before it (this simulates LFSR behavior). Optionally, if `noise_prob` is greater than `0`, it adds noise to the calculated bit by XOR-ing it with a random binary value generated with a given probability (`noise_prob`). The calculated (possibly noisy) bit is appended to the sequence in each iteration. To initialize the sequence, we always start it with `[1,0,0,0,...]` so that we have `tap` number of bits available to calculate the next bit.
 
-For concreteness lets take a specific parameter setting (function in `hw3_p4.py`):
+For concreteness let's take a specific parameter setting (function in `hw3_p4.py`):
 
 ```py
-pseudo_random_LFSR_generator(DATA_SIZE=10000, TAP=3, noise_prob=0)
+pseudo_random_LFSR_generator(data_size=10000, tap=3, noise_prob=0)
 ```
 
 We see that the first 12 symbols of the sequence looks like:
@@ -345,28 +348,35 @@ We see that the first 12 symbols of the sequence looks like:
 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, ...
 ```
 
-Notice that the sequence looks random-ish but starts repeating after 8 symbols. In fact if we look at each first 7 3-mers (substrings of length 3), i.e. `100`, `001`, ..., `010`, then we see that they are all unique and do not repeat! The LFSR sequence with `noise_prob=0`, are in fact simple pseudo-random generators used in the past. We will use this source to further our understanding of context based compression.
+Notice that the sequence looks random-ish but starts repeating after 8 symbols. In fact if we look at the first 7 3-mers (substrings of length 3), i.e. `100`, `001`, ..., `010`, then we see that they are all unique and do not repeat! The LFSR sequence with `noise_prob=0`, is in fact a simple pseudo-random generator used in the past. We will use this source to further our understanding of context based compression.
 
-Let's start by defining the $k^{\text{th}}$ order `empirical entropy` of the sequence. Recall, if your sequence is $x_0, x_1, x_2, \ldots, x_n$, the  $k^{\text{th}}$-order empirical entropy of the sequence can be computed by making a joint and conditional probability distribution table using counts of the previously seen symbols (we saw this in class in L9 on context based AC lecture). Specifically,
+Let's start by defining the $k^{\text{th}}$ order `empirical entropy` of the sequence. Recall, if your sequence is $x_0, x_1, x_2, \ldots, x_n$, the  $k^{\text{th}}$-order empirical entropy of the sequence can be computed by making a joint and conditional probability distribution table using counts of the previously seen symbols (we saw this in class in L9 on context based AC lecture). Specifically, assuming the alphabet is $\mathcal{X}$, for any $(x_0, x_1, x_2, \ldots x_k) \in \mathcal{X}^{k+1}$, we can define the empirical joint probability as:
 $$
 p(x_0, x_1, x_2, \ldots x_k) = \frac{\text{count}(x_0, x_1, x_2, \ldots x_k)}{\text{total count of k+1-tuples}}
 $$
 
-and the $k^{\text{th}}$-order empirical entropy is then given by 
+the empirical conditional probability as:
+$$
+p(x_k | x_0, x_1, x_2, \ldots x_{k-1}) = \frac{p(x_0, x_1, x_2, \ldots x_k)}{p(x_0, x_1, x_2, \ldots x_{k-1})} = \frac{p(x_0, x_1, x_2, \ldots x_k)}{\sum_{x' \in \mathcal{X}} p(x_0, x_1, x_2, \ldots x_{k-1}, x')}
+$$
 
-$$H_k(X) = \sum_{x_0, x_1, x_2, \ldots, x_k} p(x_0, x_1, x_2, \ldots, x_{k}) \log {\frac{1} {p(x_k | x_0, x_1, x_2, \ldots, x_{k-1})}}$$
+and the $k^{\text{th}}$-order empirical entropy is then given by summing over all possible $(k+1)$-tuples:
+
+$$H_k(X) = \sum_{(x_0, x_1, x_2, \ldots, x_k) \in \mathcal{X}^{k+1}} p(x_0, x_1, x_2, \ldots, x_{k}) \log {\frac{1} {p(x_k | x_0, x_1, x_2, \ldots, x_{k-1})}}$$
 
 1. [5 points] Show that for infinite data ($n \rightarrow \infty$) and $k_1 > k_2$, 
     $$H_{k_1}(X) \leq H_{k_2}(X)$$
     i.e. $k_1^{\text{th}}$-order empirical entropy is always less than (or equal to) $k_2^{\text{th}}$-order empirical entropy.
 
-2. [10 points] Next let's calculate $H_k(X)$ for the above given sequence with `TAP=3`, `noise_prob=0`. 
+    You can assume the data distribution is stationary and ergodic (or in simple words you can assume the empirical probabilities converge to the stationary distribution).
+
+2. [10 points] Next let's calculate $H_k(X)$ for the above given sequence with `tap=3`, `noise_prob=0`. 
    (Recall the sequence from above: `1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, ...`)
    1. Compute the $0^{\text{th}}$ order count-distribution and empirical entropy of the sequence. **HINT**: sequence repeats itself!
    2. Compute the $1^{\text{st}}$ order count-distribution and empirical entropy of the sequence.
    3. Finally, argue that for $k \geq 3$, the $k^{\text{th}}$-order empirical entropy of the sequence is `0`. 
 
-3. [5 points] Now, Shubham decides to use Adaptive Arithmetic coding to compress data from this source. For the case with no added noise (`noise_prob=0`) and , the number of bits/symbol we achieve is as follows for different context size `k`. You can use the test code in `hw3_p4.py` to generate these numbers by changing and choosing appropriate parameters.
+3. [5 points] Now, Shubham decides to use Adaptive Arithmetic coding to compress data from this source. For the case with no added noise (`noise_prob=0`), the number of bits/symbol we achieve is as follows for different context size `k`. You can use the test code in `hw3_p4.py` to generate these numbers by changing and choosing appropriate parameters. Use the `-s` flag in pytest to dump the output even for successful tests.
 
     ```
     ----------
@@ -384,11 +394,11 @@ $$H_k(X) = \sum_{x_0, x_1, x_2, \ldots, x_k} p(x_0, x_1, x_2, \ldots, x_{k}) \lo
     
     Argue why these results make sense. In particular, argue that Adaptive Arithmetic coding with order `k=0,1,2` cannot do much better than `1 bit/symbol`. Also, argue that for `k >= 3`, the compression should be `~0 bits/symbol`. 
 
-Next, Shubham decides to encode noisy-LFSR sources with `noise_prob=0.01`, and `TAP=3,7,13`. The noisy LFSR is very similar to the non-noisy version, except we add a bit of noise after xoring the two past symbols as shown in the pseduo-code above.
+Next, Shubham decides to encode noisy-LFSR sources with `noise_prob=0.01` and `TAP=3,7,15`. The noisy LFSR is very similar to the non-noisy version, except we add a bit of noise after xoring the two past symbols as shown in the pseduo-code above.
 
-4. [5 points] For the `TAP=3, noise_prob=0.01`, what the fundamental limit to which you can compress this sequence, i.e. what is $k^{\text{th}}$-order empirical entropy of the sequence as $k \rightarrow \infty$?
+4. [5 points] For `TAP=3, noise_prob=0.01`, what is the fundamental limit to which you can compress this sequence, i.e. what is $k^{\text{th}}$-order empirical entropy of the sequence for $k \geq 3$ and large $n$?
 
-5. [5 points] Next, we encode noisy-LFSR sequence with parameters `noise_prob=0.01`, and `TAP=3,7,13` using Adaptive Arithmetic coding. The number of bits/symbol we achieve is as follows for different context size `k`. You can again use the test code in `hw3_p4.py` to generate these numbers by changing and choosing appropriate parameters. In these cases we observe the following average codelength, for a sequence of length `10000`
+5. [5 points] Next, we encode noisy-LFSR sequence with parameters `noise_prob=0.01` and `TAP=3,7,15` using Adaptive Arithmetic coding. The number of bits/symbol we achieve is as follows for different context size `k`. You can again use the test code in `hw3_p4.py` to generate these numbers by changing and choosing appropriate parameters. In these cases we observe the following average codelength, for a sequence of length `10000`
 
     ```py
     ----------
@@ -432,10 +442,12 @@ Next, Shubham decides to encode noisy-LFSR sources with `noise_prob=0.01`, and `
     ```
 
     Notice that the average codelength for `TAP=3,7` is at its minima for `k=TAP` value and then increases as we further increase `k` which seems to suggest the result we saw in `Q4.1` is wrong. Argue:
-   1. Why these results still make sense and do not contradict theory? 
-   2. Why for `TAP=15`, even for context size `k=15` , the model is not able to compress the data as well? 
+   1. Why do these results still make sense and do not contradict theory? 
+   2. For `TAP=15`, even for context size `k=15`, why is the model not able to compress the data very well? 
    
-6. [10 points] Instead of using Adaptive Arithmetic coding, Noah suggested that if we know the source parameters (i.e. `TAP` and `noise_prob`), then we could predict a better probability distribution of the next symbol based on the past, and use this for performing Arithmetic coding. Noah thinks this implementation should work for arbitrary values of `TAP` and input sequence lengths. Complete Noah's `update_model` logic in `NoisyLFSRFreqModel` provided in `hw3_p4.py`. 
+6. [10 points] Instead of using Adaptive Arithmetic coding, Jiwon suggested that if we know the source parameters (i.e. `TAP` and `noise_prob`), then we could predict a better probability distribution of the next symbol based on the past, and use this for performing Arithmetic coding. Jiwon thinks this implementation should work for arbitrary values of `TAP` and input sequence lengths. Complete Jiwon's `update_model` logic in `NoisyLFSRFreqModel` provided in `hw3_p4.py`. For the first `TAP` symbols you can use arbitrary predictions (e.g., uniform distribution) without affecting the results for large sequences. 
+
+   Once you have implemented the model, run the tests (`py.test -s hw3_p4.py`) for `TAP=3,7,15` and `noise_prob=0.01` again and report the average codelength obtained for the LFSR model. How do these results compare with the Adaptive Arithmetic coding results (from part 5) and to the expected theoretical limit (from part 4)? Explain why this is the case.
 
 NOTE: References provided with Lecture 9 on Context-based Arithmetic Coding will be useful in attempting this problem (SCL implementation of adaptive arithmetic coding, notes, slides, etc.)
 
