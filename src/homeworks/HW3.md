@@ -6,8 +6,8 @@
 - **Total Points:** 150
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
-  - For written part: [HW3-Written](https://www.gradescope.com/courses/625620/assignments/3619012)
-  - For programming part: [HW3-Code](https://www.gradescope.com/courses/625620/assignments/3619356)
+  - For written part (110): [HW3-Written](https://www.gradescope.com/courses/1140353/assignments/7060416)
+  - For programming part (40): [HW3-Code](https://www.gradescope.com/courses/1140353/assignments/7060414)
 
 *Please ensure that you follow the [Stanford Honor Code](https://communitystandards.stanford.edu/policies-guidance/honor-code) while doing the homework. You are encouraged to discuss the homework with your classmates, but you should write your own solutions and code. You are also encouraged to use the internet to look up the syntax of the programming language, but you should not copy-paste code from the internet. If you are unsure about what is allowed, please ask the instructors.* 
 
