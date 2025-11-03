@@ -9,4 +9,8 @@ The first part of the lecture notes pertain with lossless data compression
 6. [Asymptotic Equipartition Property](./aep.md)
 7. [Arithmetic coding](./arithmetic_coding.md)
 8. [Asymmetric Numeral Systems](./ans.md)
+9. [Non IID Sources and Entropy Rate](./non_iid_sources.md)
+10. [Context-based coding](./context_based_coding.md)
+11. [Universal Compression with LZ77](./lz77.md)
+12. [Practical Tips on Lossless Compression](./practical_tips.md)
 
