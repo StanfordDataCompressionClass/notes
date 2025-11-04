@@ -492,7 +492,7 @@ encode_symbol is shown below:</p>
 <li>
 <p>[5 points] Show that for a symbol <code>s</code> with frequency <code>freq[s]</code>, the encoder uses <code>~ log2(M/freq[s])</code> bits and is hence optimal.</p>
 <p><strong>Solution</strong></p>
-<p>For a symbol, <code>s</code>, the function <code>encode_symbol(s,state)</code> first divides the input state by <code>freq[s]</code> in the line <code>fake_locator_symbol, state = decode_op(state, self.freq.freq_dict[s])</code>. Then, the state is multiplied by <code>M</code> in the line <code>state = encode_op(state, combined_symbol, self.freq.total_freq)</code>. So, in each step of the encoding, we scale by <code>M/freq[s]</code>, so in the limit of a large number of symbols, we require <code>log2[M/freq[s]]</code> bits to encode a state.</p>
+<p>For a symbol, <code>s</code>, the function <code>encode_symbol(s,state)</code> first divides the input state by <code>freq[s]</code> in the line <code>fake_locator_symbol, state = decode_op(state, self.freq.freq_dict[s])</code>. Then, the state is multiplied by <code>M</code> in the line <code>state = encode_op(state, combined_symbol, self.freq.total_freq)</code>. So, in each step of the encoding, we scale by <code>M/freq[s]</code>, so in the limit of a large number of symbols, we require <code>log2[M/freq[s]]</code> bits to encode a state. The expected number of bits per symbol under the true distribution is therefore equal to the entropy of the source, which makes the encoder optimal.</p>
 </li>
 </ol>
 <p>Great, we have now implemented a bits-back encoder/decoder pair for a non-uniform distribution. Let us now see how it is equivalent to rANS we studied in class. As a reminder, the rANS base encoding step looks like</p>
