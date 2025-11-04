@@ -441,7 +441,7 @@ By using `decode_op` from our `UniformDistDecoder`, we can decode a "fake" unifo
 
     **Solution**
 
-    For a symbol, `s`, the function `encode_symbol(s,state)` first divides the input state by `freq[s]` in the line `fake_locator_symbol, state = decode_op(state, self.freq.freq_dict[s])`. Then, the state is multiplied by `M` in the line `state = encode_op(state, combined_symbol, self.freq.total_freq)`. So, in each step of the encoding, we scale by `M/freq[s]`, so in the limit of a large number of symbols, we require `log2[M/freq[s]]` bits to encode a state.
+    For a symbol, `s`, the function `encode_symbol(s,state)` first divides the input state by `freq[s]` in the line `fake_locator_symbol, state = decode_op(state, self.freq.freq_dict[s])`. Then, the state is multiplied by `M` in the line `state = encode_op(state, combined_symbol, self.freq.total_freq)`. So, in each step of the encoding, we scale by `M/freq[s]`, so in the limit of a large number of symbols, we require `log2[M/freq[s]]` bits to encode a state. The expected number of bits per symbol under the true distribution is therefore equal to the entropy of the source, which makes the encoder optimal.
 
 
 Great, we have now implemented a bits-back encoder/decoder pair for a non-uniform distribution. Let us now see how it is equivalent to rANS we studied in class. As a reminder, the rANS base encoding step looks like
