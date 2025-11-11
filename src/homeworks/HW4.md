@@ -6,8 +6,8 @@
 - **Total Points:** 120
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
-  - For written part (92 Points): [HW4-Written](https://www.gradescope.com/courses/1140353/assignments/7098945)
-  - For programming part (28 Points): [HW4-Code](https://www.gradescope.com/courses/1140353/assignments/7098941)
+  - For written part (70 Points): [HW4-Written](https://www.gradescope.com/courses/1140353/assignments/7098945)
+  - For programming part (50 Points): [HW4-Code](https://www.gradescope.com/courses/1140353/assignments/7098941)
 
 *Please ensure that you follow the [Stanford Honor Code](https://communitystandards.stanford.edu/policies-guidance/honor-code) while doing the homework. You are encouraged to discuss the homework with your classmates, but you should write your own solutions and code. You are also encouraged to use the internet to look up the syntax of the programming language, but you should not copy-paste code from the internet. If you are unsure about what is allowed, please ask the instructors.* 
 
