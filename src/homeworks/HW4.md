@@ -1,13 +1,13 @@
-# EE274 (Fall 23): Homework-4
+# EE274 (Fall 25): Homework-4
 
 - **Focus area:** Lossy compression
-- **Due Date:** 12/04, *Mon*, midnight (11:59 PM)
+- **Due Date:** 12/02, *Tue*, midnight (11:59 PM)
 - **Weightage:** 15%
 - **Total Points:** 120
 - **Submission Instructions:** Provided at the end of HW (ensure you read these!)
 - **Submission link:** 
-  - For written part: [HW4-Written](https://www.gradescope.com/courses/625620/assignments/3700718)
-  - For programming part: [HW4-Code](https://www.gradescope.com/courses/625620/assignments/3700744)
+  - For written part (92 Points): [HW4-Written](https://www.gradescope.com/courses/1140353/assignments/7098945)
+  - For programming part (28 Points): [HW4-Code](https://www.gradescope.com/courses/1140353/assignments/7098941)
 
 *Please ensure that you follow the [Stanford Honor Code](https://communitystandards.stanford.edu/policies-guidance/honor-code) while doing the homework. You are encouraged to discuss the homework with your classmates, but you should write your own solutions and code. You are also encouraged to use the internet to look up the syntax of the programming language, but you should not copy-paste code from the internet. If you are unsure about what is allowed, please ask the instructors.* 
 
@@ -17,9 +17,9 @@ Before starting the coding related questions ensure following instructions from 
    ```sh
    git status
    ```   
-  You should get an output saying `On branch EE274_Fall23/HWs`. If not, run the following command to switch to the correct branch:
+  You should get an output saying `On branch EE274_Fall25/HWs`. If not, run the following command to switch to the correct branch:
    ```sh
-   git checkout EE274_Fall23/HWs
+   git checkout EE274_Fall25/HWs
    ```
   Finally ensure you are on the latest commit by running:
    ```sh
@@ -37,34 +37,26 @@ Before starting the coding related questions ensure following instructions from 
   and ensure tests except in HW folders pass.
 
 ### Q1: Mutual Information and Rate Distortion *(20 points)*
-1. [5 points] Consider random variables $X$ and $Y$ and let $f$ be an arbitrary function applied to $Y$. Show that
-$$I(X; Y) \geq I(X; f(Y))$$
+1. [5 points] Consider random variables $X$ and $Y$ and let $f$ be an arbitrary function applied to $Y$. Show that $$I(X; Y) \geq I(X; f(Y))$$
 When does equality hold?
 
-  **Note**: This is a special case of the **data-processing inequality**, which more generally holds whenever $X-Y-Z$ form a Markov chain (i.e., $X$ and $Z$ are conditionally independent given $Y$) and says that $I(X; Y) \geq I(X; Z)$. Intuitively, this says that no processing of $Y$, deterministic or random, can increase the information that $Y$ contains about $X$. You can't boost information about $X$ contained in $Y$ just by processing it further!
+    **Note**: This is a special case of the **data-processing inequality**, which more generally holds whenever $X-Y-Z$ form a Markov chain (i.e., $X$ and $Z$ are conditionally independent given $Y$) and says that $I(X; Y) \geq I(X; Z)$. Intuitively, this says that no processing of $Y$, deterministic or random, can increase the information that $Y$ contains about $X$. You can't boost information about $X$ contained in $Y$ just by processing it further!
 
-2. [15 points] Consider a source $X \sim \mathrm{i.i.d.}\ Ber({1\over 2})$ which we wish to lossily compress. The reconstruction $Y$ is allowed to take values in $\{0,1,e\}$ where $e$ represents an erasure symbol. The distortion function is given by
-
-$$
-d(x,y)=
-\begin{cases}
+2. [15 points] Consider a source $X \sim \mathrm{i.i.d.}\ Ber({1\over 2})$ which we wish to lossily compress. The reconstruction $Y$ is allowed to take values in $\{0,1,e\}$ where $e$ represents an erasure symbol. The distortion function is given by $$
+d(x,y)=\begin{cases}
 0, \ \ y=x\\
 1, \ \ y=e\\
 \infty, \ \mathrm{otherwise}
-\end{cases}
-$$
-
+\end{cases}$$
 In words, erasures incur a distortion of $1$, but making a mistake is not allowed (infinite distortion).
 
-  a. [10 points] Show that $R(D) = \min_{E[d(x,y)]\leq D} I(X;Y) = 1-D$ for $D\in [0,1]$.
+    a. [10 points] Show that $R(D) = \min_{E[d(x,y)]\leq D} I(X;Y) = 1-D$ for $D\in [0,1]$.
 
-  **Hint:** You can first show that $I(X;Y) = H(X) - P(Y=e)H(X|Y=e)$. Can you relate $P(Y=e)$ to $E[d(X,Y)]$?
+    **Hint:** You can first show that $I(X;Y) = H(X) - P(Y=e)H(X|Y=e)$ under the condition $E[d(x,y)]\leq D$. Can you relate $P(Y=e)$ to $E[d(X,Y)]$?
 
-  b. [5 points] Suggest a simple and efficient scheme for some finite block size $k$ which achieves the optimal
-  rate-distortion performance for this setting. You
-  can assume that $D$ is rational.
+    b. [5 points] Suggest a simple and efficient scheme for some finite block size $k$ which achieves the optimal rate-distortion performance for this setting. You can assume that $D$ is rational, and may choose an appropriate value of $k$ accordingly.
 
-  **Hint:** You can start working with a simple example where $D=\frac{1}{2}, k=2$ and the optimal rate is $\frac{1}{2}$, i.e. you encode two input bits into a single codeword bit.
+    **Hint:** You can start working with a simple example where $D=\frac{1}{2}, k=2$ and the optimal rate is $\frac{1}{2}$, i.e. you encode two input bits into a single codeword bit.
 
 ### Q2: Vector Quantization *(20 points)*
 
@@ -81,11 +73,15 @@ the second term is independent of $X_0,\dots,X_{n-1}$, and $$X_0 \sim \mathcal{N
 
    Below we visualize the Rate-Distortion performance as well as encoding complexity for different values of $k$ (block sizes) and $\rho$ (parameter in the gaussian process), for a given rate of `1 bits per symbol`. Based on these plots and what we have learnt in the class, answer following questions:
 
-  ![VQ](plots/VQ_expts.png)
+   ![VQ](plots/VQ_expts.png)
 
-  1. [2 points] What is the theoretical distortion limit for $\rho=0$ at rate of `1 bits per symbol`?
-  2. [4 points] What do you observe as $k$ increases for a given $\rho$? Comment on the performance and complexity of the encoder as $k$ increases. Justify your observations in a few lines.
-  3. [4 points] What do you observe as $\rho$ increases? Comment on how the change in performance of the encoder with increasing $k$ depends on the value of $\rho$. Justify your observations in a few lines.
+   _How to read the plots?_ We fix rate = 1 and use vector quantization. The left plot shows the MSE distortion (y-axis) vs. the block size $k$ (x-axis) for different values of $\rho$. The right plot shows the MSE distortion (y-axis) vs. the Encoding Time (x-axis) for different values of $\rho$. Note that the points in the second plot correspond to different block sizes which can be inferred based on the matching MSE values from the first plot.
+
+   a. [2 points] What is the theoretical distortion limit for $\rho=0$ at rate of `1 bits per symbol`?
+
+   b. [4 points] What do you observe as $k$ increases for a given $\rho$? Comment on the performance and complexity of the encoder as $k$ increases. Justify your observations in a few lines.
+
+   c. [4 points] Focusing on the left plot, what do you observe as $\rho$ increases? Comment on how the change in performance of the encoder with increasing $k$ depends on the value of $\rho$. Justify your observations in a few lines.
 
 ### Q3: Lower Bounds via Information Theory *(35 points)*
 At the annual *Claude Shannon rowing contest*, there are $n$ participants, with $n-1$ out of them having exactly same strength but one of the rowers is exceptionally strong. The contest aims at finding that one strongest rower. The competition organizers are unfortunately limited on the funds, and so want to minimize the number of rounds to declare the winner. 
@@ -102,27 +98,27 @@ As a world renowned information theorist and compression expert, you have been r
 2. [5 points] Generalize your strategy to $n$ rowers. Show that you can find one strongest rower in $\lceil \log_3 n \rceil$ matches. 
 
 To get your full fees, you have also been asked to *prove* that your strategy is indeed the optimal. Let $X$ be the random variable representing which player is the stronger rower. $X$ is uniformly distributed in the set of all participants $\{1, 2, \ldots, n\}$
-$$P_X(x=i) = 1/n, \forall i = \{1, 2, \ldots, n\}$$
+$$P_X(x=i) = \frac{1}{n}, \forall i = \{1, 2, \ldots, n\}$$
 
 Let $Y_1, Y_2, \ldots, Y_k$ be the random variable representing the outcome of the $k$ matches you organize. 
 
-3. [5 points] Show the following sub-problems. For each of the sub-problems, also intuitively explain in a single sentence why the inequalities are true.
-   - Show that $H(X) = \log_2 n$, and $H(Y_i) \leq log_2 3$ for each $i$. When is equality achieved? 
-   - Show that $H(Y_1,Y_2,\ldots,Y_k|X) = 0$.
+3. [5 points] Answer the following sub-problems.
+   - Show that $H(X) = \log_2 n$, and $H(Y_i) \leq log_2 3$ for each $i$. When is equality achieved?
+   - Explain why $H(Y_1,Y_2,\ldots,Y_k|X) = 0$.
 
 4. [10 points] We want to show that we will at least need $\log_3 n$ matches to determine the strongest rower. 
    - Show that we can determine the strongest rower from $k$ matches, if and only if $H(X|Y_1, Y_2, \ldots, Y_k) = 0$. 
    - Using the sub-problem above, show that $k \geq \log_3 n$ matches are required to determine the strongest rower. Thus, proving that the scheme in Q4.1 is indeed optimal! 
    (*HINT: think about using $I(X; Y_1, \ldots, Y_k)$, and its properties*).
 
-5. [5 points] Let's get back to the $n=9$ rowers scenario. To simplify the logistics, the organizers wanted to pre-decide what the matches are going to be, even before the contest began. That is, the teams for the $i$th match are pre-decided, and do not depend upon the outcome of the first $i-1$ matches. In other words the match deciding strategy is *non-adaptive*. Show that even in this *non-adaptive* case, you can find the strongest rower using the outcome of 2 pre-decided matches! 
+5. [5 points] Let's get back to the $n=9$ rowers scenario. To simplify the logistics, the organizers wanted to pre-decide what the matches are going to be, even before the contest began. That is, the teams for the $i$ th match are pre-decided, and do not depend upon the outcome of the first $i-1$ matches. In other words the match deciding strategy is *non-adaptive*. Show that even in this *non-adaptive* case, you can find the strongest rower using the outcome of 2 pre-decided matches! 
 
 
 
 ### Q4: Image Compression *(40 points)*
 
 This question is about image compression. We will implement the transform coding ideas and use it to build a simple image compression scheme. Here are the instructions for this question:
-- We have provided the code for this question both in the SCL HW repo as `EE274_HW4_ImageCompressor.ipynb` as well as a [Google Colab notebook](https://colab.research.google.com/drive/1YRy6-2cj73a1gPdrVm2L2PUNiwag3FaV?usp=sharing). 
+- We have provided the code for this question both in the SCL HW repo as `EE274_HW4_ImageCompressor.ipynb` as well as a [Google Colab notebook](https://drive.google.com/file/d/1ZxHsqbc1CtwxNMd34UY8nIX63LA3j3cy/view?usp=sharing). 
 - We have tested the code on the Colab notebook, and we recommend working on the Colab notebook for this question. You should make a copy of the Colab notebook and work on the copy. 
 - The question has both coding and written parts. The written parts should be answered in the Colab notebook itself. You will need to run this notebook on Google Colab to answer some of the written parts.
 - After working on the Colab notebook, you should download the notebook as a `.ipynb` file and submit it on Gradescope by replacing the existing `EE274_HW4_ImageCompressor.ipynb` file. This will be graded manually.
