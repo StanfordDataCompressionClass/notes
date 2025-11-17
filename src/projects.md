@@ -10,7 +10,7 @@ Following are the due dates for different components of the project. All (except
 |----------------------------------------------------|-----------|------------------------------------------------|----------------------------------|
 | [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/31                       |
 | [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 2025/11/20                       |
-| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + 5 min QnA                 | 2025/12/04 (last class) |
+| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + QnA                 | 2025/12/04 (last class) |
 | [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | 2025/12/12 (no late days)        |
 
 
