@@ -11,7 +11,7 @@ Following are the due dates for different components of the project. All (except
 | [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/31                       |
 | [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 2025/11/20                       |
 | [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + 5 min QnA                 | 2025/12/04 (last class) |
-| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | TBD                      |
+| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | 2025/12/12 (no late days)        |
 
 
 ## Project Expectations
@@ -64,27 +64,27 @@ For the project milestone, please submit a 2/3 page write-up on the technique/me
 
 ### III. Final presentation
 
-**2025/12/04 Thu Time TBD, Location TBD**
+**2025/12/04 Thu 1:30 pm - 4:30 pm PT, Packard Atrium**
 
-**Slides due: TBD**
+**Poster due: 2025/12/04, Thu, midnight PT**
 
-The Final presentation will be during the last class (note we will have a longer last class slot!). **The presentation will involve lightning talks: (short 5min talk + 5min QnA).**
+The Final presentation will be during the last class (note we will have a longer last class slot!). **The presentation will be held as a poster session.**
 
 Attendance is mandatory for the presentation. <!--In case you are not able to make it after 5:50pm on `12/06`, please inform us beforehand, and we will try to schedule your presentation earlier.--> You will work with your mentor on making sure the presentation is interesting and useful to your classmates :). 
 
 **Guidelines**:
 
-- You need to submit your slide-deck by TBD<!--2pm PT on Wednesday (12/06)--> using [gradescope](https://www.gradescope.com/courses/1140353). Please submit a PDF of the slides. **No late days allowed for this submission!**
+- You need to submit your poster file by midnight PT on Thursday (12/04)--> using Gradescope. Please submit a PDF of the poster. **No late days allowed for this submission!**
 <!-- - We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Lossless coders we saw in class and their optimizations, Group 2: Advanced lossless coders and Group 3: Compression and applications. You can check your groups in available [spreadsheet - see the presentations tab](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing). -->
-- You will have 5 minutes for your presentation, and 5 minutes for QnA. Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk. 
-- You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
-- You can use any presentation tool you like. We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.
-- We plan to have some drinks and snacks for everyone during the presentation. We also plan to have pizza for dinner during the presentation. :)
+- You will have 5 minutes for your presentation<!-- , and 5 minutes for QnA . Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk-->. 
+- <!--You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. -->Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
+- You can use any poster template you like. <!--We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.-->
+- We plan to have some drinks and snacks for everyone during the presentation. We also plan to have pizza during the presentation. :)
 - We will be making the projects public after the class ends. If you do not wish your project to be made publically available, please let us know.
 
 ### IV. Final report and code 
 
-**Due: TBD**
+**Due: 2025/12/12 (NO LATE DAYS)**
 
 - The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
 
