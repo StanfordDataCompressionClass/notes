@@ -9,7 +9,7 @@ Following are the due dates for different components of the project. All (except
 |                                                    | Weightage | Description                                    | Due Date <br/> (midnight PT)     |
 |----------------------------------------------------|-----------|------------------------------------------------|----------------------------------|
 | [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/31                       |
-| [Milestone Report](#ii-project-milestone)          | 5%        | Upto two pages progress report + code (if any) | 2025/11/20                       |
+| [Milestone Report](#ii-project-milestone)          | 5%        | Upto three pages progress report + code (if any) | 2025/11/20                       |
 | [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + QnA                 | 2025/12/04 (last class) |
 | [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | 2025/12/12 (no late days)        |
 
@@ -51,7 +51,7 @@ For deliverable, we will follow a similar template as our friends from [CS231N](
 **Due: 2025/11/20, Thu, midnight PT**
 
 
-For the project milestone, please submit a 2/3 page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). If possible, you can use GitHub markdown (.md) file as your milestone report, put the .md it on your code repo, and provide us a link to that. That way you will find it easy to later modify it to get the final report. The milestone should roughly include the following sections:
+For the project milestone, please submit a 2-3 page write-up on the technique/method you chose and link to your in-progress code as a GitHub repo (if any). If possible, you can use GitHub markdown (.md) file as your milestone report, put the .md it on your code repo, and provide us a link to that. That way you will find it easy to later modify it to get the final report. The milestone should roughly include the following sections:
 
 - Introduction: what is the problem, why is it interesting?
 
