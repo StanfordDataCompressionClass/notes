@@ -8,7 +8,7 @@ authors = ["Shubham Chandak", "Pulkit Tandon", "Kedar Tatwawadi", "Tsachy Weissm
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
 
-[preprocessor.katex]
+#[preprocessor.katex]
 
 [preprocessor.admonish]
 command = "mdbook-admonish"
