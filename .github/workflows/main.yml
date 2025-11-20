@@ -25,7 +25,6 @@ jobs:
           cargo install mdbook-mermaid
           cargo install mdbook-katex
           cargo install mdbook-admonish
-          mdbook-admonish install
           mdbook build
 
       # Deploy to GitHub Pages
