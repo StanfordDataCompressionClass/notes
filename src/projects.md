@@ -6,12 +6,12 @@ The project is an important part of the course (and constitutes `30%` of the cou
 
 Following are the due dates for different components of the project. All (except final presentation) will be due on Gradescope. More details for each component will be provided in the subsequent sections.
 
-|                                                    | Weightage | Description                                    | Due Date <br/> (midnight PT)     |
-|----------------------------------------------------|-----------|------------------------------------------------|----------------------------------|
-| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                              | 2025/10/31                       |
+|                                                    | Weightage | Description                                      | Due Date <br/> (midnight PT)     |
+|----------------------------------------------------|-----------|--------------------------------------------------|----------------------------------|
+| [Proposal](#i-project-proposal)                    | 5%        | One page proposal                                | 2025/10/31                       |
 | [Milestone Report](#ii-project-milestone)          | 5%        | Upto three pages progress report + code (if any) | 2025/11/20                       |
-| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + QnA                 | 2025/12/04 (last class) |
-| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission            | 2025/12/12 (no late days)        |
+| [Final Presentation](#iii-final-presentation)      | 5%        | 5 min presentation + QnA                         | 2025/12/04 (last class)          |
+| [Final Report and Code](#iv-final-report-and-code) | 15%       | Detailed report and code submission              | 2025/12/12 (no late days)        |
 
 
 ## Project Expectations
