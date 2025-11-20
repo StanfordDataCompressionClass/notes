@@ -136,8 +136,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-<h1 id="practical-tips-on-lossless-compression"><a class="header" href="#practical-tips-on-lossless-compression">Practical tips on lossless compression</a></h1>
+                        <h1 id="practical-tips-on-lossless-compression"><a class="header" href="#practical-tips-on-lossless-compression">Practical tips on lossless compression</a></h1>
 <p>Over the last several chapters, we have covered the theory and algorithms behind lossless compression. We understood the fundamental limits (entropy and entropy rate), looked at various prefix-free codes and entropy coders like Huffman coding, Arithmetic coding and ANS. We also saw how to deal with non-IID sources using context-based coding and universal compression algorithms like LZ77. Each of these ideas was optimal in some sense. In this chapter, we will look into how you could use this knowledge in practice when you are faced with a real world compression problem.</p>
 <p>The first question you want to ask of yourself is:</p>
 <blockquote>
@@ -233,7 +232,7 @@
 <li>BWT based compressors (bzip2, bsc) - faster compression (than LZMA), slower decompression. We didn't cover BWT in these notes, but it is a reversible transformation that makes the data compressible by creating repetitive patterns.</li>
 </ul>
 </li>
-<li>For even more resource intensive - try context based arithmetic coding with <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>th order, PPMd, etc. (these don't always beat LZ/BWT - check for your data!)</li>
+<li>For even more resource intensive - try context based arithmetic coding with $k$th order, PPMd, etc. (these don't always beat LZ/BWT - check for your data!)</li>
 <li>CMIX/NNCP/LLM - if you want to understand the limits, rarely useful in practice due to extreme resource requirements.</li>
 </ul>
 <h4 id="using-zstd-and-using-it-well"><a class="header" href="#using-zstd-and-using-it-well">Using zstd and using it well</a></h4>
