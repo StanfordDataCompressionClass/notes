@@ -86,7 +86,7 @@ Attendance is mandatory for the presentation. <!--In case you are not able to ma
 
 **Due: 2025/12/12 (NO LATE DAYS)**
 
-- The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. 
+- The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. We will link the project reports on this website to showcase the course projects.
 
 - You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon. 
 
