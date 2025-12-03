@@ -76,21 +76,50 @@ Attendance is mandatory for the presentation. <!--In case you are not able to ma
 
 - You need to submit your poster file by midnight PT on Thursday (12/04)--> using Gradescope. Please submit a PDF of the poster. **No late days allowed for this submission!**
 <!-- - We have divided you into three groups. We have tried to keep projects within a group closer to each other, specifically following group numbers correspond roughly to following areas -- Group 1: Lossless coders we saw in class and their optimizations, Group 2: Advanced lossless coders and Group 3: Compression and applications. You can check your groups in available [spreadsheet - see the presentations tab](https://docs.google.com/spreadsheets/d/1XhgCN3_LAaIHleKRIPZWmBJVAEO5Wgl-X0BCQ9tVcrQ/edit?usp=sharing). -->
-- You will have 5 minutes for your presentation<!-- , and 5 minutes for QnA . Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk-->. 
-- <!--You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. -->Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
-- You can use any poster template you like. <!--We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.-->
+- Please put up your posters before 1:30 pm. 
+
+- You will have 5 minutes for your presentation. <!-- , and 5 minutes for QnA . Here are some [guidelines](https://www.beautiful.ai/blog/lightning-talks-and-ignite-talks-a-beginners-guide) on how to give a good lightning talk. You can assume you are presenting to peers who have taken the class and are aware of the basic terminology. -->Please use these 5 minutes to concisely convey what you have been working on with such an audience in mind, e.g. you don't have to explain entropy coding basics and/or image compression basics. You can use the allotted time to explain the algorithm you are working on, why is it exciting, what did you learn and show the results so-far. Main idea is to ensure you are able to convey the key ideas of your project to your peers.
+
+- You can use any poster template you like, including [this template](https://github.com/RylanSchaeffer/Stanford-LaTeX-Poster-Template?tab=readme-ov-file). We recommend a size of 24"x36" (either landscape or portrait). Other sizes are acceptable but make sure your poster is not too big or too small. Note that the EE printing service uses 36" paper, so the largest small dimension for a poster is 36 inches.<!--We recommend using [Google Slides](https://www.google.com/slides/about/) or [PowerPoint](https://products.office.com/en-us/powerpoint). You can also use [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) if you are comfortable with it.-->
+
 - We plan to have some drinks and snacks for everyone during the presentation. We also plan to have pizza during the presentation. :)
+
 - We will be making the projects public after the class ends. If you do not wish your project to be made publically available, please let us know.
+
+**Evaluation Criteria (Rough Guideline):**
+- **Presentation** (2 points): How well the presentation is prepared, and whether it fits within the 5 minute limit
+
+- **Project progress** (2 points): The amount of progress demonstrated
+
+- **Poster quality** (1 point): How effectively the poster delivers the project
 
 ### IV. Final report and code 
 
 **Due: 2025/12/12 (NO LATE DAYS)**
 
-- The final submission involves a 4-5 page report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. We will link the project reports on this website to showcase the course projects.
+- The final submission involves a report on your project idea. It should introduce the problem, describe in detail the technical details, and also briefly talk about results and other implementation details. We will link the project reports on this website to showcase the course projects.
 
-- You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon. 
+- You should use [this template](https://www.overleaf.com/latex/templates/neurips-2024/tpsbbrdqcmsh) for the final report. The report should be up to 6 pages excluding references, and you may include an unlimited appendix.
+
+- You also need to submit a link to your code repository. The expectation is to submit a well documented and well tested code which is reproducible, and something someone else (or even you) can build upon.
+
 
 Your mentor will work with you on setting expectations, and helping you review the report/code before the submission.
+
+**Evaluation Criteria (Rough Guideline):**
+- Introduction (1 point)
+
+- Literature Review (3 points)
+
+- Methods (2 points)
+
+- Results+Analysis (4 points)
+
+- Conclusions (1 point)
+
+- Code Functionality (3 points)
+
+- Code Quality (+Testing) (1 point)
 
 ## Project Suggestions
 
