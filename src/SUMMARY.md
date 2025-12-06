@@ -33,6 +33,7 @@
     - [HW3](homeworks/HW3.md)
     - [HW3 Solution](homeworks/HW3_sol.md)
     - [HW4](homeworks/HW4.md)
+    - [HW4 Solution](homeworks/HW4_sol.md)
 
 ---
 - [Project](projects.md)
