@@ -37,6 +37,7 @@
 
 ---
 - [Project](projects.md)
+    - [Past Projects](past_projects.md)
 ---
 - [SCL Tutorial](scl_tutorial/SCL_tutorial.md)
   - [SCL Basics](scl_tutorial/basics.md)
