@@ -457,7 +457,7 @@ class ArithmeticDecoder:
     def decode_symbol(self, L, H, Z):
         rng = H - L
         search_list = L + (self.P.cumul * rng)
-        symbol_ind = np.searchsorted(search_list, Z)
+        symbol_ind = np.searchsorted(search_list, Z, side="right") - 1
         return self.P.alphabet[symbol_ind]
 
     def decode_block(self, Z, n):
@@ -534,8 +534,8 @@ With some simple arithmetic, it can be shown that the two conditions together ca
 
 $$ [\hat{Z}, \hat{Z} + 2^{-k}) \in [L,H)$$
 
-which gives us a simple bound on $k$:
-$$ k \leq \left\lceil {log_2 \frac{1}{(H-L)}} \right \rceil + 1 $$
+which gives us a simple choice of $k$:
+$$ k = \left\lceil {log_2 \frac{1}{(H-L)}} \right \rceil + 1 $$
 
 <span style="color:purple;"> **Quiz-4:** Explain where the condition $ [\hat{Z}, \hat{Z} + 2^{-k}) \in [L,H)$ comes from. As a hint, think about a $k$-bit binary value like $b = 0.b_1b_2b_3\dots b_k$ - what can you say about a value $c=0.b_1b_2b_3\dots b_k c_1c_2\dots$? What is the maximum possible value of $c-b$? </span>
 
@@ -578,11 +578,14 @@ class ArithmeticDecoder:
 
         # start decoding
         L,H = 0.0, 1.0
+        decoded = []
         for _ in range(n): #main decoding loop
             s = self.decode_symbol(L, H, Z)
+            decoded.append(s)
             L,H = self.shrink_range(L,H,s)
 
         # add code to remove additional bits read
+        return decoded
 ```
 
 One point to note in the decoding is that, as the decoder might have read in more bits that what the encoder wrote, after decoding all the symbols, the decoder needs to backtrack a bit (otherwise the program processing the next stream is going to falter!). Since the decoder will know the decoded sequence and hence the value of $k$, it can easily backtrack the extra bits read.
@@ -733,4 +736,3 @@ NOTE -> Speed numbers from: [Charles Bloom's blog](http://cbloomrants.blogspot.c
 
 
 In the next lecture we see how we can achieve compression performance similar to Arithmetic coding, but speeds closer to that of Huffman coding. 
-
