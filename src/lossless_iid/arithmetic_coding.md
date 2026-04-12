@@ -242,7 +242,7 @@ The Arithmetic encoding works in the following two steps:
 Before we discuss the steps in detail, let's discuss some desirable properties to gain further intuition. Consider the range `[0,1)` divided up into subintervals (known to both encoder and decoder). You want to convey a particular subinterval to a friend. For example you wanted to convey the interval `[0.3, 0.8)`. One way to do this is to just send over any point within this interval, for example `0.5`. As you can see, this can be done quite cheaply. Whereas if you wanted to convey the interval `[0.3, 0.30001)`, you would need to send over a much more precise value, for example `0.300005`. Thus the first piece of intuition is that: 
 - **Intuition 1: Bigger intervals need fewer bits to communicate**.
 
-But recall from previous chatpers that a good coding scheme should assign shorter codewords to more probable sequences. Thus we would like to have the following property:
+But recall from previous chapters that a good coding scheme should assign shorter codewords to more probable sequences. Thus we would like to have the following property:
 - **Intuition 2: More probable sequences should correspond to bigger intervals**.
 
 The simplest logic is to have the size of the interval be proportional to the probability of the sequence, which is surprisingly what we will do!
@@ -277,7 +277,7 @@ cumul_array = [0.0, 0.3, 0.8, 1.0]
 One comment on the interval size is that the interval size is proportional to the probability of the symbol. (i.e. `C(i+1) - C(i) = P(i)`). We will see that a similar relationship holds as we encode more symbols.
 
 2. `x_input[1] = A` 
-Let's now see how the interval updates as we encode the second symbol. As you can see from the image below, we continue subdiving the interval `L,H`, based on the cumulative probability of the next symbol. 
+Let's now see how the interval updates as we encode the second symbol. As you can see from the image below, we continue subdividing the interval `L,H`, based on the cumulative probability of the next symbol. 
 
 ![img](https://user-images.githubusercontent.com/1708665/195671847-0d550641-7da3-4127-8e92-dd4f251d7f3b.jpg)
 
@@ -309,7 +309,7 @@ ENCODE: B -> [L,H) = [0.42900,0.44400)
 ```
 Thus, the final interval is: `x_input -> [0.429, 0.444)`
 
-For completeness, here is a pesudo-code of the **STEP I** or Arithmetic coding. Note that in the literature *interval* and *range* are terms used interchangeably to describe `[L,H)`. 
+For completeness, here is a pseudo-code of the **STEP I** or Arithmetic coding. Note that in the literature *interval* and *range* are terms used interchangeably to describe `[L,H)`. 
 
 ```py
 class ArithmeticEncoder:
@@ -487,7 +487,7 @@ How can we fix this? </span>
 
 The solution to the problem is quite simple. Instead of communicating the entire binary expansion of $Z$, we truncate the expansion to $k$ bits and communicate this truncated binary string. Let's call the the floating point value corresponding to the truncated binary string as $\hat{Z}$. 
 
-Note that we have to be careful regarding how we choose $k$, if $k$ is too small the $\hat{Z}$ might be steer out of the interval `[L,H)`, which will be a problem for the decoding. Also, choosing $k$ too large will hamper our compression performance. 
+Note that we have to be careful regarding how we choose $k$, if $k$ is too small the $\hat{Z}$ might fall outside the interval `[L,H)`, which will be a problem for the decoding. Also, choosing $k$ too large will hamper our compression performance. 
 
 ![h:550](https://user-images.githubusercontent.com/1708665/195694952-5a4772a0-7e17-4b67-a1c8-17526c9a1d66.jpg)
 
@@ -660,7 +660,7 @@ Rescaled: L=0.7160, H=0.7760, bitarray='01'
 Rescaled: L=0.4320, H=0.5520, bitarray='011'
 ```
 
-Notice that after rescaling our intervals are `L=0.4320, H=0.5520` are much larger that what we started with: `0.429, 0.444`. This can be understood from the fact that, flushing out a `0` is equivalent to setting `L,H` as: `L,H = 2*L,2*H`; while flushing out a `1` is equivalend to `L,H = (L - 0.5)*2, (H - 0.5)*2`. i.e. we are expanding out either the left half (`[0,0.5)`) of the number line or the right half (`[0.5, 1)`) of the number line by `2x`. This is also illustrated in the figure below (credit: [YouTube](https://www.youtube.com/watch?v=t8_198HHSfI)):
+Notice that after rescaling our intervals are `L=0.4320, H=0.5520` are much larger that what we started with: `0.429, 0.444`. This can be understood from the fact that, flushing out a `0` is equivalent to setting `L,H` as: `L,H = 2*L,2*H`; while flushing out a `1` is equivalent to `L,H = (L - 0.5)*2, (H - 0.5)*2`. i.e. we are expanding out either the left half (`[0,0.5)`) of the number line or the right half (`[0.5, 1)`) of the number line by `2x`. This is also illustrated in the figure below (credit: [YouTube](https://www.youtube.com/watch?v=t8_198HHSfI)):
 
 ![img](images/arith_rescaling.png)
 
@@ -695,13 +695,13 @@ L = 0.499 = 0.111..b,
 H = 0.501 = 0.100..b
 ```
 
-In this case, we cannot premptively flush-out bits and rescale the range `[L,H)`. This *mid-range rescaling* issues is handled in different ways, by either:
+In this case, we cannot preemptively flush out bits and rescale the range `[L,H)`. This *mid-range rescaling* issue is handled in different ways, by either:
 
 1. If `L=0.499, H = 0.501`, we can setting`H = 0.4999999...` for example, and then apply the usual re-scaling. In this case, we are losing a bit of compression, as we are reducing the interval size when it is not needed. The [range coder variant](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/range_coder.py) implemented in the SCL uses this simple approach.
 
 2. An optimal way to handle the *mid-range rescaling* is to expand the middle interval `[0.25, 0.75)` by 2x `L,H <- 2L - 0.5, 2H - 0.5`. This is a bit non-trivial, but is well explained in [this YouTube series](https://www.youtube.com/playlist?list=PLE125425EC837021F) of lectures on Arithmetic coding. Note that this optimal rescaling is also implemented as part of the [Arithmetic coder in the SCL](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/scl/compressors/arithmetic_coding.py)
 
-3. In practice, it is more efficient to flush out bytes or even words instead of bits. i.e if `L,H` start with the same 8 bits, only then those 8 bits are flushed out. These variants of Arithmetic coding are traditional called *range coding*. One variant of the *range coder* is impplemented in the SCL and can be [accessed here](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/range_coder.py). 
+3. In practice, it is more efficient to flush out bytes or even words instead of bits. i.e if `L,H` start with the same 8 bits, only then those 8 bits are flushed out. These variants of Arithmetic coding are traditionally called *range coding*. One variant of the *range coder* is implemented in the SCL and can be [accessed here](https://github.com/kedartatwawadi/stanford_compression_library/blob/main/compressors/range_coder.py). 
 
 We encourage the reader to study the implementations of both the Arithmetic coder and the Range coder in the SCL to get a better understanding of these practical issues. The implementations are written in a simple and clear manner, and are well commented to enable easy understanding. The code also links to various resources which can be used to understand the implementation better.
 
@@ -733,4 +733,3 @@ NOTE -> Speed numbers from: [Charles Bloom's blog](http://cbloomrants.blogspot.c
 
 
 In the next lecture we see how we can achieve compression performance similar to Arithmetic coding, but speeds closer to that of Huffman coding. 
-
