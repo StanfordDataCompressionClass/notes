@@ -133,7 +133,7 @@ $$
 i.e. if $q(X) = p(X)$!
 
 Alright! This proves our property as
-$$ \mathbb{E}_P \log_2 \frac{q(X)}{p(X)} \geq 0 \rightarrow H(X) \leq \mathbb{E}_P \log_2 \frac{1}{q(X)} $$
+$$ \mathbb{E}_P \log_2 \frac{p(X)}{q(X)} \geq 0 \rightarrow H(X) \leq \mathbb{E}_P \log_2 \frac{1}{q(X)} $$
 
 Let's pause a bit and think about what this property is telling: 
 -  Essentially we are telling that $H(X)$ is the solution to the minimization problem: 
@@ -146,7 +146,7 @@ for any two distributions $p, q$. The quantity on the right is also known as the
 ~~~admonish example title="KL-Divergence"
 Let $P = \{ p_1, p_2, \ldots, p_k\}$ and $Q = \{ q_1, q_2, \ldots, q_k\}$ be two given probability distributions. Then the KL-Divergence is defined as:
 
-$$ D_{KL}(p||q) = \sum_{i=k} p_i \log_2 \frac{p_i}{q_i} $$
+$$ D_{KL}(p||q) = \sum_{i=1}^k p_i \log_2 \frac{p_i}{q_i} $$
 
 The following property holds for $D_{KL}(p||q)$:
 
@@ -345,7 +345,6 @@ Although we were able to show that $H(X)$ is the fundamental limit on average co
 
 In the next lecture, we are doing to discuss **Huffman Code**, which is the answer to the question: 
 > Given a random variable with instances sampled i.i.d with probability distribution $P = \{p_1, p_2, \ldots, p_k\}$, what is the best prefix free code for this source?
-
 
 
 
